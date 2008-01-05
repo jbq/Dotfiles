@@ -1,0 +1,60 @@
+#! /bin/sh -e
+
+WRKSRC=$(make -V WRKSRC)
+
+BLOCKS=$(sed -ne 's/#*include.block.\(.*\)=[^ ]*$/\1/p'< ${WRKSRC}/blocks.properties)
+
+# Normalize block name for use as make variable
+nblock() {
+    echo $1 | tr "[:lower:]" "[:upper:]" | tr '-' '_'
+}
+
+print_required_blocks() {
+    local BLOCK REQUIRED_BLOCK REQUIRED_BLOCKS
+    BLOCK=$1
+
+    REQUIRED_BLOCKS=$(sed -ne "s/^.*\"$BLOCK\" depends on //p" \
+        ${WRKSRC}/blocks.properties | sed -e 's/"\([^"]*\)"[^"]*/\1 /g')
+    for REQUIRED_BLOCK in $REQUIRED_BLOCKS ; do
+        echo "BLOCKS+=	$REQUIRED_BLOCK"
+        print_required_blocks $REQUIRED_BLOCK
+    done
+}
+
+tests() {
+    local BLOCK NBLOCK
+
+    for BLOCK in $BLOCKS ; do
+        NBLOCK=$(nblock $BLOCK)
+        echo ".if defined(WITH_${NBLOCK})"
+        echo "BLOCKS+=	$BLOCK"
+        print_required_blocks $BLOCK | sort | uniq
+        echo ".endif"
+        echo
+    done
+}
+
+options() {
+    local BLOCK NBLOCK DEFAULT_OFF DEFAULT_VALUE
+
+    for BLOCK in $BLOCKS ; do
+        NBLOCK=$(nblock $BLOCK)
+        DEFAULT_OFF=$(egrep "^include.block.$BLOCK=" < ${WRKSRC}/blocks.properties || true)
+        test $DEFAULT_OFF && DEFAULT_VALUE=off || DEFAULT_VALUE=on
+        echo "OPTIONS+=	$NBLOCK	'Enable the $BLOCK block'	$DEFAULT_VALUE"
+    done
+}
+
+#test -n "$1" && $1 || (echo "Usage: make-blocks {options|tests}" ; exit 1)
+case $1 in
+    options)
+    options
+    ;;
+    tests)
+    tests
+    ;;
+    *)
+    echo "Usage: make-blocks {options|tests}"
+    exit 1
+    ;;
+esac

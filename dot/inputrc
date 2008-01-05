@@ -1,0 +1,39 @@
+################################################################################
+# File:          .inputrc
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define readline(3) behaviour
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:	 $Id: inputrc 381 2003-11-20 10:11:03Z jbq $
+################################################################################
+
+# Flash instead of beep
+set bell-style visible
+
+# Do not ring the bell if completion is ambiguous, show completions!
+#set show-all-if-ambiguous on
+
+# Show file type in completion list
+#set visible-stats on
+
+# Do not wrap a long line
+set horizontal-scroll-mode on
+
+# Prepend a star when modifying a history line
+#set mark-modified-lines on
+
+# Accept meta key
+#set input-meta on
+#set convert-meta off
+#set output-meta on
+
+# Meta key does not work :-(
+C-B: backward-word
+C-F: forward-word
+
+# Search in history (C-S is used to block terminal)
+#C-X: forward-search-history
+
+# Append a trailing slash when completing symlinks to directories
+set mark-symlinked-directories on
+
+"\e[3~": delete-char

@@ -1,0 +1,18 @@
+################################################################################
+# File:          .dot/mutt/muttrc.local
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define mutt behaviour
+# Date Created:  2001-01-01 00:00:00
+# CVS Id:        $Id: muttrc.local 406 2003-12-23 19:34:33Z jbq $
+################################################################################
+
+# First define folder
+set folder="~/var/files/mail"
+
+# Override common settings for IMAP use
+set mbox=+INBOX
+mailboxes +INBOX
+set spoolfile=+INBOX
+
+source ~/usr/dot/mutt/muttrc.common
+set mbox_type=Maildir 

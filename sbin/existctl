@@ -1,0 +1,87 @@
+#! /usr/bin/env python
+
+################################################################################
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Control eXist process
+# Date Created:  2004-08-30 17:00:54
+# Revision:      $Id: existctl,v 1.6 2004/09/10 08:12:35 jbquenot Exp $
+################################################################################
+# Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+################################################################################
+#
+# Files handled by this script (pid file, log files) must reside in a writable
+# directory, ie the directory must be owned by the user running the program.
+
+import caraldi, getopt, os, sys
+
+args = {
+    "LOG_FILE": "exist.log",
+    "APP_NAME": "exist",
+    "APP_HOME": os.environ['EXIST_HOME'],
+    "PID_FILE": "exist.pid",
+    "COMMAND":  os.environ['EXIST_HOME'] + "/bin/startup.sh",
+}
+script_debug=0
+
+def usage():
+    print >> sys.stderr, "Usage: %s {start|stop|restart}" % sys.argv[0]
+
+if __name__ == '__main__':
+    opts, lineargs = getopt.getopt(sys.argv[1:], 'h', ['help', "script-debug"])
+
+    # Set all unrecognized options as JAVA_OPTIONS
+    os.environ['JAVA_OPTIONS'] = " ".join(lineargs[0:-2])
+    args['cmdargs'] = [lineargs[-1]]
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit(1)
+        if o in ("--script-debug"):
+            script_debug = 1
+
+    if len(args['cmdargs']) != 1:
+        usage()
+        sys.exit(1)
+
+    ctl = caraldi.DaemonCtl(args)
+
+    if (script_debug):
+        ctl.logger.setLevel(caraldi.DefaultLogger.DEBUG)
+
+    if args['cmdargs'][0] == "start":
+        ctl.start()
+
+    elif args['cmdargs'][0] == "stop":
+        ctl.stop()
+
+    elif args['cmdargs'][0] == "restart":
+        ctl.stop()
+        ctl.start()
+
+    else:
+        usage()
+        sys.exit(1)

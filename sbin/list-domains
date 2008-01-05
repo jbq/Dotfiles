@@ -1,0 +1,1 @@
+ldapsearch -LLL -s base 'objectClass=organization' o | egrep '^o:' | cut -d: -f2

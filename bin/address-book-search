@@ -1,0 +1,3 @@
+#! /bin/sh
+
+lynx -source "http://opensourceconsulting.info/address-book/searchAsText.do?name=$1&login=test&password=test"

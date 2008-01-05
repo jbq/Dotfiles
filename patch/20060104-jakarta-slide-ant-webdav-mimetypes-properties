@@ -1,0 +1,10 @@
+--- /local-home/jbq/mimetypes.properties	Wed Jan  4 16:48:51 2006
++++ src/org/apache/webdav/ant/mimetypes.properties	Wed Jan  4 16:25:11 2006
+@@ -32,7 +32,6 @@
+ jpe=image/jpeg
+ jpeg=image/jpeg
+ jpg=image/jpeg
+-jpg=image/pjpeg
+ js=application/x-javascript
+ latex=application/x-latex
+ man=application/x-troff-man

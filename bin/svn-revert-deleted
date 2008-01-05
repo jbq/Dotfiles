@@ -1,0 +1,3 @@
+#! /bin/sh
+
+svn revert $(cat | sed -ne 's/^D //p' | xargs)

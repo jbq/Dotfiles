@@ -1,0 +1,10 @@
+#! /bin/sh
+
+for dir in ~/.gnome2/epiphany/mozilla/epiphany ~/.galeon/mozilla/galeon ; do (
+	test -d $dir || continue
+	cd $dir
+	test -f prefs.js || continue
+	sed -e 's/^\(user_pref("signon.SignonFileName", "\).*");$/\1mozilla.s");/' < prefs.js > prefs.js.$$
+	mv -f prefs.js.$$ prefs.js
+    echo Updated $dir/prefs.js
+) done

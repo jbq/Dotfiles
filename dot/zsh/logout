@@ -1,0 +1,32 @@
+################################################################################
+# File:          .bash_logout
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Logout from shell
+# Date Created:  2003-09-22 21:34:59
+# Revision:      $Id: logout 406 2003-12-23 19:34:33Z jbq $
+################################################################################
+
+OK=1
+
+#if test -f ~/var/disk.img ; then
+#    echo -n "Confirm logout? [y] "
+#    read yesno
+#    if test "$yesno" = "y" -o "$yesno" = "" ; then
+#        test -f $USER_DOTFILES/private/logout && . $USER_DOTFILES/private/logout
+#
+#    #    for script in $CRYPTFILES/dot/rc.d/*.sh(N) ; do
+#    #        sh $script stop || true
+#    #    done
+#
+#        if test -e /dev/md0.bde -o -e /dev/mapper/disk.img ; then
+#            if ! umount-disk.sh $CRYPTFILES ; then
+#                echo -e "\aCould not unmount disk"
+#                OK=0
+#            fi
+#        fi
+#    fi
+#fi
+
+test "$OK" = "1" && clear
+
+# vim:ft=sh

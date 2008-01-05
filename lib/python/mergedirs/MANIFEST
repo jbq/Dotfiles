@@ -1,0 +1,6 @@
+mergedirs
+setup.py
+version
+caraldi/__init__.py
+caraldi/util.py
+caraldi/text.py

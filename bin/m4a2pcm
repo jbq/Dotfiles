@@ -1,0 +1,38 @@
+#! /usr/bin/env python
+
+import caraldi
+import re, os, sys
+
+def assertSuccess(status):
+    if status != 0:
+        sys.exit(status)
+class m4a(caraldi.DirStat):
+    def visitFile(self, path, stat):
+        if re.search("\.m4a$", path):
+            print "Processing %s" % path
+            basename = re.sub("\.m4a$", "", path)
+            raw = basename + ".pcm"
+
+            #
+            # From the mplayer man page:
+            #   NOTE:  The  suboption  parser (used for example for -ao pcm suboptions)
+            #   supports a special kind of string-escaping intended for use with exter-
+            #   nal GUIs.
+            #   It has the following format:
+            #   %n%string_of_length_n
+            #   EXAMPLES:
+            #   mplayer -ao pcm:file=%10%C:test.wav test.avi
+            #   Or in a script:
+            #   mplayer -ao pcm:file=%`expr length "$NAME"`%"$NAME" test.avi
+            #
+            #   Does not work with comma: ,
+            #
+            #   $ mplayer -ao pcm:file=%4%aze, somefile.m4a
+            #   Could not parse arguments at the position indicated below:
+            #   file=%4%aze
+            #
+            #args=["mplayer", "-ao", "pcm:file=%%%u%%%s" % (len(raw), raw), path]
+            args=["faad", "-o", raw, "-f2", path]
+            assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
+
+m4a(".")

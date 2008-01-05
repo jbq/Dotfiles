@@ -1,0 +1,76 @@
+#! /bin/sh -e
+
+#
+# TODO
+# * remove previous symlink if it exists
+# * warning if a file is found at symlink location
+# * check that $DOTFILES/secret is a valid link before continuing with secret
+#   section
+#
+
+cd "$HOME"
+
+confirm() {
+    echo -n "$1 [$2] "
+    read ans
+    test -z "$ans" && ans=$2
+
+    if test "$ans" = "Y" -o "$ans" = "y" -o "$ans" = "yes" -o "$ans" = "YES" ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if confirm "Setup standard dotfiles?" "n" ; then
+#    dotinstall .bash_profile bash/profile
+#    dotinstall .bashrc bash/rc
+#    dotinstall .bash_logout bash/logout
+    dotinstall .mailcap mailcap
+    dotinstall .zprofile zsh/profile
+    dotinstall .zshrc zsh/rc
+    dotinstall .zlogout zsh/logout
+    dotinstall .vim vim
+    dotinstall .vimrc vim/vimrc
+    dotinstall .inputrc inputrc
+    dotinstall .screenrc screenrc
+# TODO if multiple arguments, interactively offer a choice
+#    dotinstall .ssh/id_dsa.pub ssh/id_dsa.pub
+#    dotinstall .ssh/id_rsa.pub ssh/id_rsa.pub
+    dotinstall .muttrc mutt/muttrc.imap
+    dotinstall .muttngrc mutt/muttngrc
+    dotinstall .muttprintrc muttprintrc
+# TODO if multiple arguments, interactively offer a choice
+#    dotinstall .muttrc mutt/muttrc.local
+    #dotinstall .slrnrc slrn/slrnrc
+    #dotinstall .slrn slrn
+    #dotinstall .m2/settings.xml mvn-settings.xml
+    dotinstall .devilspie devilspie
+fi
+
+if confirm "Setup dotfiles for use with an X server?" "n" ; then
+    dotinstall .gvimrc vim/gvimrc
+    dotinstall .urlview urlview
+    dotinstall .xinitrc xinitrc
+    dotinstall .mplayer/config mplayer.conf
+#    dotinstall .gnome2/nautilus-scripts nautilus-scripts
+    dotinstall .dia/sheets dia/sheets
+    dotinstall .dia/shapes dia/shapes
+    dotinstall .fluxbox fluxbox
+    dotinstall .Xdefaults Xdefaults
+fi
+
+if confirm "Setup secret files?" "n" ; then
+# TODO if multiple arguments, interactively offer a choice
+#    dotinstall .ssh/id_rsa secret/ssh/id_rsa
+#    dotinstall .ssh/id_dsa secret/ssh/id_dsa
+    dotinstall .ssh/config private/ssh/config
+#    dotinstall .gq secret/gq
+#    dotinstall .gnome2_private/Evolution secret/Evolution
+#    dotinstall .ncftp/bookmarks secret/ncftp/bookmarks
+#    dotinstall .gnome2/epiphany/mozilla/epiphany/mozilla.s secret/mozilla.s
+#    dotinstall .galeon/mozilla/galeon/mozilla.s secret/mozilla.s
+    dotinstall .subversion private/subversion
+    test -r ~/usr/dot/private/rc.d/subversion.sh && ~/usr/dot/private/rc.d/subversion.sh
+    dotinstall .offlineimaprc private/offlineimaprc
+fi

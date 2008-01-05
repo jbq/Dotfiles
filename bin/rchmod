@@ -1,0 +1,131 @@
+#! /usr/bin/env python
+#
+# $Id$
+#
+# Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Purpose:       Normalize permissions on files recursively
+# Date Created:  2004-05-25 14:46:24
+#
+# Depending on the who argument, the files mode are set to 644, 664 or 666 and
+# modes for directories are set to 755, 775 or 777.  If the execute bit on files
+# is to be kept, add a -x option.
+
+import sys, os.path, getopt, caraldi, re, stat
+
+class ChmodStat(caraldi.DirStat):
+    def __init__(self, dir, who, exclude):
+        caraldi.DirStat.__init__(self)
+        self.who = who
+        self.ignore = exclude
+        self.walk(dir)
+
+    def getMode(self):
+        mode = 0
+
+        # Everybody can read by default
+        mode += stat.S_IRUSR
+        mode += stat.S_IRGRP
+        mode += stat.S_IROTH
+
+        # Enable selected write bits
+        if re.search("[ua]", self.who):
+            mode += stat.S_IWUSR
+        if re.search("[ga]", self.who):
+            mode += stat.S_IWGRP
+        if re.search("[oa]", self.who):
+            mode += stat.S_IWOTH
+
+        return mode
+
+    def executeBits(self):
+        return 1 + 1 * 8 + 1 * 8 * 8
+
+    def isExecuteSet(self, mode):
+        return mode & 00111
+
+    def visitLink(self, file, finfo):
+        pass
+
+    def visitFile(self, file, finfo):
+        mode = self.getMode()
+
+        if keep_execute and self.isExecuteSet(stat.S_IMODE(finfo.st_mode)):
+            mode += self.executeBits()
+
+        if verbose:
+            print "%o %s" % (mode, file)
+
+        os.chmod(file, mode)
+
+    def visitDirectory(self, file, finfo):
+        mode = self.getMode()
+        mode += self.executeBits()
+
+        if verbose:
+            print "%o %s" % (mode, file)
+
+        os.chmod(file, mode)
+
+def incorrect_who(who):
+    return len(who) == 0 or (re.search("a", who) and len(who) > 1) or not(re.search("u?g?o?", who))
+
+def usage():
+    print "Usage: %s [-x] who [path1] [path2] [...]" % os.path.basename(sys.argv[0])
+    print "who is 'a' or a combination of 'u', 'g' and 'o' in that order"
+    sys.exit(1)
+
+if __name__ == "__main__":
+    opts, args = getopt.getopt (sys.argv[1:], 'xve:', ['keep-execute', 'verbose', 'exclude='])
+
+    keep_execute = 0
+    verbose = 0
+    exclude = []
+
+    # Fetch options
+    for o, a in opts:
+        if o in ("-x", "--keep-execute"):
+            keep_execute = 1
+        elif o in ("-v", "--verbose"):
+            verbose = 1
+        elif o in ("-e", "--exclude"):
+            exclude.append(a)
+
+    if len(args) < 1:
+        usage()
+
+    who = args[0]
+
+    if incorrect_who(who):
+        usage()
+
+    paths = ["."]
+
+    if (len(args) >= 2):
+        paths = args[1:]
+
+    for path in paths:
+        ChmodStat(path, who, exclude)

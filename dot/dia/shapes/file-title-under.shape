@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns="http://www.daa.com.au/~james/dia-shape-ns" xmlns:svg="http://www.w3.org/2000/svg">
+  <name>Jean-Baptiste Quenot - File with title under</name>
+  <icon>file-title-under.png</icon>
+  <connections>
+    <point x="5.3316" y="2.3516"/>
+    <point x="6.3816" y="2.3516"/>
+    <point x="6.7316" y="2.7016"/>
+    <point x="6.7316" y="4.1016"/>
+    <point x="5.3316" y="4.1016"/>
+    <point x="5.8566" y="2.3516"/>
+    <point x="6.5566" y="2.5266"/>
+    <point x="6.7316" y="3.4016"/>
+    <point x="6.0316" y="4.1016"/>
+    <point x="6.3816" y="2.3516"/>
+    <point x="6.3816" y="2.7016"/>
+    <point x="6.7316" y="2.7016"/>
+    <point x="6.7316" y="2.7016"/>
+    <point x="6.3816" y="2.5266"/>
+    <point x="6.5566" y="2.7016"/>
+    <point x="6.7316" y="2.7016"/>
+  </connections>
+  <aspectratio type="fixed"/>
+  <textbox x1="6.03133" y1="4.1532" x2="6.03133" y2="4.1532" align="center" resize="no"/>
+  <svg:svg>
+    <svg:polygon style="fill: #ffffff" points="5.3316,2.3516 6.3816,2.3516 6.7316,2.7016 6.7316,4.1016 5.3316,4.1016 "/>
+    <svg:polygon style="fill: none; fill-opacity:0; stroke-width: 0.1; stroke: #000000" points="5.3316,2.3516 6.3816,2.3516 6.7316,2.7016 6.7316,4.1016 5.3316,4.1016 "/>
+    <svg:polyline style="fill: none; fill-opacity:0; stroke-width: 0.1; stroke: #000000" points="6.3816,2.3516 6.3816,2.7016 6.7316,2.7016 6.7316,2.7016 "/>
+  </svg:svg>
+</shape>

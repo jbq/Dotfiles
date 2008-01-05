@@ -1,0 +1,725 @@
+Index: wicket/src/test/java/wicket/SharedResourceUrlTest.java
+===================================================================
+--- wicket/src/test/java/wicket/SharedResourceUrlTest.java	(revision 505219)
++++ wicket/src/test/java/wicket/SharedResourceUrlTest.java	(working copy)
+@@ -14,58 +14,58 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-package wicket;
+-
+-import wicket.protocol.http.WebRequestCycle;
+-import wicket.util.value.ValueMap;
+-
+-/**
+- * @author jcompagner
+- */
+-public class SharedResourceUrlTest extends WicketTestCase
+-{
+-
+-	/**
+-	 * Construct.
+-	 * @param name
+-	 */
+-	public SharedResourceUrlTest(String name)
+-	{
+-		super(name);
+-	}
+-	
+-	/**
+-	 * @throws Exception
+-	 */
+-	public void testResourceReferenceUrl() throws Exception
+-	{
+-		application.setupRequestAndResponse();
+-		WebRequestCycle cycle = application.createRequestCycle();
+-		
+-		ResourceReference rr = new ResourceReference("test");
+-		CharSequence url = cycle.urlFor(rr);
+-		assertEquals("resources/wicket.Application/test", url);
+-
+-		rr = new ResourceReference(SharedResourceUrlTest.class,"test");
+-		url = cycle.urlFor(rr);
+-		assertEquals("resources/wicket.SharedResourceUrlTest/test", url);
+-}
+-	
+-	/**
+-	 * @throws Exception
+-	 */
+-	public void testResourceReferenceWithParamsUrl() throws Exception
+-	{
+-		application.setupRequestAndResponse();
+-		WebRequestCycle cycle = application.createRequestCycle();
+-		
+-		ResourceReference rr = new ResourceReference("test");
+-		CharSequence url = cycle.urlFor(rr,new ValueMap("param=value",""));
+-		assertEquals("resources/wicket.Application/test?param=value", url);
+-
+-		rr = new ResourceReference(SharedResourceUrlTest.class,"test");
+-		url = cycle.urlFor(rr,new ValueMap("param=value",""));
+-		assertEquals("resources/wicket.SharedResourceUrlTest/test?param=value", url);
+-	}	
+-
+-}
++package wicket;
++
++import wicket.protocol.http.WebRequestCycle;
++import wicket.util.value.ValueMap;
++
++/**
++ * @author jcompagner
++ */
++public class SharedResourceUrlTest extends WicketTestCase
++{
++
++	/**
++	 * Construct.
++	 * @param name
++	 */
++	public SharedResourceUrlTest(String name)
++	{
++		super(name);
++	}
++	
++	/**
++	 * @throws Exception
++	 */
++	public void testResourceReferenceUrl() throws Exception
++	{
++		application.setupRequestAndResponse();
++		WebRequestCycle cycle = application.createRequestCycle();
++		
++		ResourceReference rr = new ResourceReference("test");
++		CharSequence url = cycle.urlFor(rr);
++		assertEquals("resources/wicket.Application/test", url);
++
++		rr = new ResourceReference(SharedResourceUrlTest.class,"test");
++		url = cycle.urlFor(rr);
++		assertEquals("resources/wicket.SharedResourceUrlTest/test", url);
++}
++	
++	/**
++	 * @throws Exception
++	 */
++	public void testResourceReferenceWithParamsUrl() throws Exception
++	{
++		application.setupRequestAndResponse();
++		WebRequestCycle cycle = application.createRequestCycle();
++		
++		ResourceReference rr = new ResourceReference("test");
++		CharSequence url = cycle.urlFor(rr,new ValueMap("param=value",""));
++		assertEquals("resources/wicket.Application/test?param=value", url);
++
++		rr = new ResourceReference(SharedResourceUrlTest.class,"test");
++		url = cycle.urlFor(rr,new ValueMap("param=value",""));
++		assertEquals("resources/wicket.SharedResourceUrlTest/test?param=value", url);
++	}	
++
++}
+Index: wicket/src/test/java/wicket/markup/html/basic/SimplePageTest.java
+===================================================================
+--- wicket/src/test/java/wicket/markup/html/basic/SimplePageTest.java	(revision 505219)
++++ wicket/src/test/java/wicket/markup/html/basic/SimplePageTest.java	(working copy)
+@@ -366,10 +366,6 @@
+ 
+ 	    Panel panel = (Panel)application.getLastRenderedPage().get("myPanel");
+ 	    assertNotNull(panel);
+-		// we need to setup request/response before calling setvisible
+-		application.setupRequestAndResponse();
+-		application.createRequestCycle();
+-
+ 	    panel.setVisible(true);
+ 		application.processRequestCycle(panel);
+ 		String document = application.getServletResponse().getDocument();
+Index: wicket/src/test/java/wicket/DisabledComponentTest.java
+===================================================================
+--- wicket/src/test/java/wicket/DisabledComponentTest.java	(revision 505219)
++++ wicket/src/test/java/wicket/DisabledComponentTest.java	(working copy)
+@@ -14,48 +14,50 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-package wicket;
+-
+-import wicket.markup.html.link.Link;
+-
+-/**
+- * @author jcompagner
+- */
+-public class DisabledComponentTest extends WicketTestCase
+-{
+-
+-	/**
+-	 * Construct.
+-	 * @param name
+-	 */
+-	public DisabledComponentTest(String name)
+-	{
+-		super(name);
+-	}
+-
+-	/**
+-	 * @throws Exception
+-	 */
+-	public void testEnabled() throws Exception
+-	{
+-		executeTest(DisabledComponentPage1.class, "DisabledComponentPage1a_result.html");
+-		Link link = ((DisabledComponentPage1)application.getLastRenderedPage()).link;
+-		executedListener(DisabledComponentPage2.class, link, "DisabledComponentPage2_result.html");
+-	}
+-	
+-	/**
+-	 * @throws Exception
+-	 */
+-	public void testDisabled() throws Exception
+-	{
+-		executeTest(DisabledComponentPage1.class, "DisabledComponentPage1a_result.html");
+-		Link link = ((DisabledComponentPage1)application.getLastRenderedPage()).link;
+-		// we need to setup request/response before calling setenabled
+-		application.setupRequestAndResponse();
+-		application.createRequestCycle();
++package wicket;
++
++import org.apache.commons.logging.Log;
++import org.apache.commons.logging.LogFactory;
++
++import wicket.markup.html.link.Link;
++
++/**
++ * @author jcompagner
++ */
++public class DisabledComponentTest extends WicketTestCase
++{
++	private Log log = LogFactory.getLog(DisabledComponentTest.class);
++	/**
++	 * Construct.
++	 * @param name
++	 */
++	public DisabledComponentTest(String name)
++	{
++		super(name);
++	}
++
++	/**
++	 * @throws Exception
++	 */
++	public void testEnabled() throws Exception
++	{
++		executeTest(DisabledComponentPage1.class, "DisabledComponentPage1a_result.html");
++		Link link = ((DisabledComponentPage1)application.getLastRenderedPage()).link;
++		executedListener(DisabledComponentPage2.class, link, "DisabledComponentPage2_result.html");
++	}
++	
++	/**
++	 * @throws Exception
++	 */
++	public void testDisabled() throws Exception
++	{
++		executeTest(DisabledComponentPage1.class, "DisabledComponentPage1a_result.html");
++		Link link = ((DisabledComponentPage1)application.getLastRenderedPage()).link;
++		log.debug("pageSettings.versionPagesByDefault = " + application.getPageSettings().getVersionPagesByDefault());
++		log.debug("link.versioned = " + link.isVersioned());
+ 		link.setEnabled(false);
+-		executedListener(DisabledComponentPage1.class, link, "DisabledComponentPage1b_result.html");
+-	}
+-	
+-}
+-
++		executedListener(DisabledComponentPage1.class, link, "DisabledComponentPage1b_result.html");
++	}
++	
++}
++
+Index: wicket/src/test/java/wicket/ajax/AjaxTimerBehaviorTest.java
+===================================================================
+--- wicket/src/test/java/wicket/ajax/AjaxTimerBehaviorTest.java	(revision 505219)
++++ wicket/src/test/java/wicket/ajax/AjaxTimerBehaviorTest.java	(working copy)
+@@ -14,135 +14,135 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-package wicket.ajax;
+-
+-import java.util.regex.Matcher;
+-import java.util.regex.Pattern;
+-
+-import org.apache.commons.logging.Log;
+-import org.apache.commons.logging.LogFactory;
+-
+-import wicket.MockPageWithLinkAndComponent;
+-import wicket.MockPageWithOneComponent;
+-import wicket.Page;
+-import wicket.WicketTestCase;
+-import wicket.ajax.markup.html.AjaxLink;
+-import wicket.markup.html.WebComponent;
+-import wicket.markup.html.WebMarkupContainer;
+-import wicket.markup.html.basic.Label;
+-import wicket.protocol.http.WebRequestCycle;
++package wicket.ajax;
++
++import java.util.regex.Matcher;
++import java.util.regex.Pattern;
++
++import org.apache.commons.logging.Log;
++import org.apache.commons.logging.LogFactory;
++
++import wicket.MockPageWithLinkAndComponent;
++import wicket.MockPageWithOneComponent;
++import wicket.Page;
++import wicket.WicketTestCase;
++import wicket.ajax.markup.html.AjaxLink;
++import wicket.markup.html.WebComponent;
++import wicket.markup.html.WebMarkupContainer;
++import wicket.markup.html.basic.Label;
++import wicket.protocol.http.WebRequestCycle;
+ import wicket.util.string.Strings;
+-import wicket.util.tester.ITestPageSource;
+-import wicket.util.time.Duration;
+-
+-/**
+- * Tests that an AbstractAjaxTimerBehavior injects itself into the markup once
+- * and only once. Also tests the callback URL to make sure the timer reinjects
+- * itself
+- * 
+- * @author Jim McLaughlin
+- */
+-public class AjaxTimerBehaviorTest extends WicketTestCase
+-{
+-	private static final Log log = LogFactory.getLog(AjaxTimerBehaviorTest.class);
+-
+-	/**
+-	 * Construct.
+-	 * 
+-	 * @param name
+-	 */
+-	public AjaxTimerBehaviorTest(String name)
+-	{
+-		super(name);
+-	}
+-
+-
+-	/**
+-	 * Tests timer behavior in a component added to an AjaxRequestTarget
+-	 */
+-	public void testAddToAjaxUpdate()
+-	{
+-		Duration dur = Duration.seconds(20);
+-		final MyAjaxSelfUpdatingTimerBehavior timer = new MyAjaxSelfUpdatingTimerBehavior(dur);
+-		final MockPageWithLinkAndComponent page = new MockPageWithLinkAndComponent();
+-
+-		page.add(new WebComponent(MockPageWithLinkAndComponent.COMPONENT_ID)
+-				.setOutputMarkupId(true));
+-
+-
+-		page.add(new AjaxLink(MockPageWithLinkAndComponent.LINK_ID)
+-		{
+-			private static final long serialVersionUID = 1L;
+-
+-			public void onClick(AjaxRequestTarget target)
+-			{
+-				WebMarkupContainer wmc = new WebMarkupContainer(
+-						MockPageWithLinkAndComponent.COMPONENT_ID);
+-				wmc.setOutputMarkupId(true);
+-				wmc.add(timer);
+-				page.replace(wmc);
+-				target.addComponent(wmc);
+-			}
+-		});
+-
+-		application.startPage(new ITestPageSource()
+-		{
+-			private static final long serialVersionUID = 1L;
+-
+-			public Page getTestPage()
+-			{
+-				return page;
+-			}
+-		});
+-
++import wicket.util.tester.ITestPageSource;
++import wicket.util.time.Duration;
++
++/**
++ * Tests that an AbstractAjaxTimerBehavior injects itself into the markup once
++ * and only once. Also tests the callback URL to make sure the timer reinjects
++ * itself
++ * 
++ * @author Jim McLaughlin
++ */
++public class AjaxTimerBehaviorTest extends WicketTestCase
++{
++	private static final Log log = LogFactory.getLog(AjaxTimerBehaviorTest.class);
++
++	/**
++	 * Construct.
++	 * 
++	 * @param name
++	 */
++	public AjaxTimerBehaviorTest(String name)
++	{
++		super(name);
++	}
++
++
++	/**
++	 * Tests timer behavior in a component added to an AjaxRequestTarget
++	 */
++	public void testAddToAjaxUpdate()
++	{
++		Duration dur = Duration.seconds(20);
++		final MyAjaxSelfUpdatingTimerBehavior timer = new MyAjaxSelfUpdatingTimerBehavior(dur);
++		final MockPageWithLinkAndComponent page = new MockPageWithLinkAndComponent();
++
++		page.add(new WebComponent(MockPageWithLinkAndComponent.COMPONENT_ID)
++				.setOutputMarkupId(true));
++
++
++		page.add(new AjaxLink(MockPageWithLinkAndComponent.LINK_ID)
++		{
++			private static final long serialVersionUID = 1L;
++
++			public void onClick(AjaxRequestTarget target)
++			{
++				WebMarkupContainer wmc = new WebMarkupContainer(
++						MockPageWithLinkAndComponent.COMPONENT_ID);
++				wmc.setOutputMarkupId(true);
++				wmc.add(timer);
++				page.replace(wmc);
++				target.addComponent(wmc);
++			}
++		});
++
++		application.startPage(new ITestPageSource()
++		{
++			private static final long serialVersionUID = 1L;
++
++			public Page getTestPage()
++			{
++				return page;
++			}
++		});
++
+ 		application.clickLink(MockPageWithLinkAndComponent.LINK_ID);
+ 
+-		validate(timer, false);
+-
+-	}
+-
+-
+-	/**
+-	 * tests timer behavior in a WebPage.
+-	 */
+-	public void testAddToWebPage()
+-	{
+-		Duration dur = Duration.seconds(20);
+-		final MyAjaxSelfUpdatingTimerBehavior timer = new MyAjaxSelfUpdatingTimerBehavior(dur);
+-		final MockPageWithOneComponent page = new MockPageWithOneComponent();
+-		Label label = new Label(MockPageWithOneComponent.COMPONENT_ID, "Hello");
+-		page.add(label);
+-		label.setOutputMarkupId(true);
+-		label.add(timer);
+-
+-		application.startPage(new ITestPageSource()
+-		{
+-			private static final long serialVersionUID = 1L;
+-
+-			public Page getTestPage()
+-			{
+-				return page;
+-			}
+-		});
++		validate(timer, false);
+ 
+-		validate(timer, true);
+-
+-	}
+-
+-	/**
+-	 * Validates the reponse, then makes sure the timer injects itself again
+-	 * when called.
+-	 * 
++	}
++
++
++	/**
++	 * tests timer behavior in a WebPage.
++	 */
++	public void testAddToWebPage()
++	{
++		Duration dur = Duration.seconds(20);
++		final MyAjaxSelfUpdatingTimerBehavior timer = new MyAjaxSelfUpdatingTimerBehavior(dur);
++		final MockPageWithOneComponent page = new MockPageWithOneComponent();
++		Label label = new Label(MockPageWithOneComponent.COMPONENT_ID, "Hello");
++		page.add(label);
++		label.setOutputMarkupId(true);
++		label.add(timer);
++
++		application.startPage(new ITestPageSource()
++		{
++			private static final long serialVersionUID = 1L;
++
++			public Page getTestPage()
++			{
++				return page;
++			}
++		});
++
++		validate(timer, true);
++
++	}
++
++	/**
++	 * Validates the reponse, then makes sure the timer injects itself again
++	 * when called.
++	 * 
+ 	 * @param timer
+-	 * @param inBodyOnLoad 
+-	 */
+-	private void validate(MyAjaxSelfUpdatingTimerBehavior timer, boolean inBodyOnLoad)
+-	{
+-		String document = application.getServletResponse().getDocument();
+-
++	 * @param inBodyOnLoad 
++	 */
++	private void validate(MyAjaxSelfUpdatingTimerBehavior timer, boolean inBodyOnLoad)
++	{
++		String document = application.getServletResponse().getDocument();
++
+ 		String updateScript = timer.getUpdateScript();
+-		String bodyOnLoadUpdateScript = "<body onload=\"" + Strings.replaceAll(updateScript, "\"", "\\\"")+ "\">";
+-
++		String bodyOnLoadUpdateScript = "<body onload=\"" + Strings.replaceAll(updateScript, "\"", "\\\"")+ "\">";
++
+ 		if (inBodyOnLoad) 
+ 		{
+ 			validateTimerScript(document, bodyOnLoadUpdateScript);
+@@ -150,101 +150,101 @@
+ 		else 
+ 		{
+ 			validateTimerScript(document, updateScript);
+-		}
+-
+-
+-		application.setupRequestAndResponse();
+-		WebRequestCycle cycle = application.createRequestCycle();
+-		String url = timer.getCallbackUrl().toString();
+-		application.getServletRequest().setRequestToRedirectString(url);
+-
+-		application.processRequestCycle(cycle);
+-
+-		// Validate the document
+-		document = application.getServletResponse().getDocument();
+-		validateTimerScript(document, updateScript);
+-	}
+-
+-	/**
+-	 * Checks that the timer javascript is in the document once and only once
+-	 * 
+-	 * @param document
+-	 *            the response from the Application
+-	 * @param updateScript
+-	 *            the timer script
+-	 */
+-	private void validateTimerScript(String document, String updateScript)
++		}
++
++
++		application.setupRequestAndResponse();
++		WebRequestCycle cycle = application.createRequestCycle();
++		String url = timer.getCallbackUrl().toString();
++		application.getServletRequest().setRequestToRedirectString(url);
++
++		application.processRequestCycle(cycle);
++
++		// Validate the document
++		document = application.getServletResponse().getDocument();
++		validateTimerScript(document, updateScript);
++	}
++
++	/**
++	 * Checks that the timer javascript is in the document once and only once
++	 * 
++	 * @param document
++	 *            the response from the Application
++	 * @param updateScript
++	 *            the timer script
++	 */
++	private void validateTimerScript(String document, String updateScript)
+ 	{
+ 		log.debug(document);
+ 		String quotedRegex;
+-		quotedRegex = quote(updateScript);
+-		Pattern pat = Pattern.compile(quotedRegex, Pattern.DOTALL);
+-		Matcher mat = pat.matcher(document);
+-
+-		int count = 0;
+-		while (mat.find())
+-		{
+-			++count;
+-		}
+-		// make sure there is only one match
+-		assertEquals("There should be 1 and only 1 script in the markup for this behavior,"
+-				+ "but " + count + " were found", 1, count);
+-	}
+-
+-	// quick fix for JDK 5 method
+-    private static final String quote(String s) {
+-        int slashEIndex = s.indexOf("\\E");
+-        if (slashEIndex == -1)
+-            return "\\Q" + s + "\\E";
+-
+-        StringBuffer sb = new StringBuffer(s.length() * 2);
+-        sb.append("\\Q");
+-        slashEIndex = 0;
+-        int current = 0;
+-        while ((slashEIndex = s.indexOf("\\E", current)) != -1) {
+-            sb.append(s.substring(current, slashEIndex));
+-            current = slashEIndex + 2;
+-            sb.append("\\E\\\\E\\Q");
+-        }
+-        sb.append(s.substring(current, s.length()));
+-        sb.append("\\E");
+-        return sb.toString();
+-    }
+-
+-	static class MyAjaxSelfUpdatingTimerBehavior extends AjaxSelfUpdatingTimerBehavior
+-	{
+-
+-		/**
+-		 * 
+-		 */
+-		private static final long serialVersionUID = 1L;
+-		private Duration duration;
+-		String updateScript;
+-
+-		/**
+-		 * Construct.
+-		 * @param updateInterval
+-		 */
+-		public MyAjaxSelfUpdatingTimerBehavior(Duration updateInterval)
+-		{
+-			super(updateInterval);
+-			this.duration = updateInterval;
+-		}
+-
+-		protected void onComponentRendered()
+-		{
+-			super.onComponentRendered();
+-			updateScript = getJsTimeoutCall(duration);
+-		}
+-
+-		/**
+-		 * @return Update script
+-		 */
+-		public String getUpdateScript()
+-		{
+-			return updateScript;
+-		}
+-
+-
+-	}
+-}
++		quotedRegex = quote(updateScript);
++		Pattern pat = Pattern.compile(quotedRegex, Pattern.DOTALL);
++		Matcher mat = pat.matcher(document);
++
++		int count = 0;
++		while (mat.find())
++		{
++			++count;
++		}
++		// make sure there is only one match
++		assertEquals("There should be 1 and only 1 script in the markup for this behavior,"
++				+ "but " + count + " were found", 1, count);
++	}
++
++	// quick fix for JDK 5 method
++    private static final String quote(String s) {
++        int slashEIndex = s.indexOf("\\E");
++        if (slashEIndex == -1)
++            return "\\Q" + s + "\\E";
++
++        StringBuffer sb = new StringBuffer(s.length() * 2);
++        sb.append("\\Q");
++        slashEIndex = 0;
++        int current = 0;
++        while ((slashEIndex = s.indexOf("\\E", current)) != -1) {
++            sb.append(s.substring(current, slashEIndex));
++            current = slashEIndex + 2;
++            sb.append("\\E\\\\E\\Q");
++        }
++        sb.append(s.substring(current, s.length()));
++        sb.append("\\E");
++        return sb.toString();
++    }
++
++	static class MyAjaxSelfUpdatingTimerBehavior extends AjaxSelfUpdatingTimerBehavior
++	{
++
++		/**
++		 * 
++		 */
++		private static final long serialVersionUID = 1L;
++		private Duration duration;
++		String updateScript;
++
++		/**
++		 * Construct.
++		 * @param updateInterval
++		 */
++		public MyAjaxSelfUpdatingTimerBehavior(Duration updateInterval)
++		{
++			super(updateInterval);
++			this.duration = updateInterval;
++		}
++
++		protected void onComponentRendered()
++		{
++			super.onComponentRendered();
++			updateScript = getJsTimeoutCall(duration);
++		}
++
++		/**
++		 * @return Update script
++		 */
++		public String getUpdateScript()
++		{
++			return updateScript;
++		}
++
++
++	}
++}
+Index: wicket/src/test/java/wicket/util/tester/FormTesterTest.java
+===================================================================
+--- wicket/src/test/java/wicket/util/tester/FormTesterTest.java	(revision 505219)
++++ wicket/src/test/java/wicket/util/tester/FormTesterTest.java	(working copy)
+@@ -74,8 +74,6 @@
+ 		MockFormFileUploadPage page = (MockFormFileUploadPage)application.getLastRenderedPage();
+ 		MockDomainObjectFileUpload domainObject = page.getDomainObject();
+ 
+-		application.createRequestCycle();
+-
+ 		assertNull(page.getFileUpload());
+ 		assertNotNull(domainObject);
+ 		assertNull(domainObject.getText());
+Index: wicket/src/main/java/wicket/protocol/http/MockWebApplication.java
+===================================================================
+--- wicket/src/main/java/wicket/protocol/http/MockWebApplication.java	(revision 505219)
++++ wicket/src/main/java/wicket/protocol/http/MockWebApplication.java	(working copy)
+@@ -374,6 +374,15 @@
+ 		{
+ 			throw (RuntimeException)((ExceptionErrorPage)getLastRenderedPage()).getThrowable();
+ 		}
++
++		/*
++		 * Create a new request cycle as the client code may be using
++		 * tester.getComponent() and call component.setVisible(),
++		 * component.replace() or any method that can potentially require a
++		 * RequestCycle. Most of the time a RequestCycle is needed for page
++		 * versioning, unless component.visible is false
++		 */
++		createRequestCycle();
+ 	}
+ 
+ 	private void generateLastRenderedPage(WebRequestCycle cycle)

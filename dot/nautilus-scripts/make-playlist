@@ -1,0 +1,14 @@
+#! /bin/sh
+
+doit() {
+    for uri in $NAUTILUS_SCRIPT_SELECTED_URIS ; do
+        dir=${uri#file://}
+
+        if test -d $dir ; then
+            ( cd $dir && zvt make-playlist )
+        fi
+    done
+}
+
+#doit | zvt -
+doit >> /tmp/make-playlist.log 2>&1

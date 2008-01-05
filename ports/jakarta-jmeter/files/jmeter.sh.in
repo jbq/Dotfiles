@@ -1,0 +1,4 @@
+#!/bin/sh
+# $FreeBSD: ports/www/jakarta-jmeter/files/jmeter.sh.in,v 1.1 2005/04/28 19:57:29 hq Exp $
+
+JAVA_VERSION="%%JAVA_VERSION%%" "%%LOCALBASE%%/bin/java" -jar "%%DATADIR%%/bin/ApacheJMeter.jar" "$@"

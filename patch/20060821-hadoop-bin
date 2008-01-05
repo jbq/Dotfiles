@@ -1,0 +1,131 @@
+diff -ru hadoop-0.5.0/bin/hadoop deploy/bin/hadoop
+--- hadoop-0.5.0/bin/hadoop	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/hadoop	2006-08-21 17:17:05.000000000 +0200
+@@ -19,7 +19,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ # if no args specified, show usage
+ if [ $# = 0 ]; then
+diff -ru hadoop-0.5.0/bin/hadoop-daemon.sh deploy/bin/hadoop-daemon.sh
+--- hadoop-0.5.0/bin/hadoop-daemon.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/hadoop-daemon.sh	2006-08-21 17:08:45.000000000 +0200
+@@ -22,7 +22,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ # get arguments
+ startStop=$1
+diff -ru hadoop-0.5.0/bin/hadoop-daemons.sh deploy/bin/hadoop-daemons.sh
+--- hadoop-0.5.0/bin/hadoop-daemons.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/hadoop-daemons.sh	2006-08-21 17:13:16.000000000 +0200
+@@ -13,6 +13,6 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source $bin/hadoop-config.sh
++. $bin/hadoop-config.sh
+ 
+ exec "$bin/slaves.sh" --config $HADOOP_CONF_DIR cd "$HADOOP_HOME" \; "$bin/hadoop-daemon.sh" --config $HADOOP_CONF_DIR "$@"
+diff -ru hadoop-0.5.0/bin/rcc deploy/bin/rcc
+--- hadoop-0.5.0/bin/rcc	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/rcc	2006-08-21 17:17:05.000000000 +0200
+@@ -14,7 +14,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ if [ -f "${HADOOP_CONF_DIR}/hadoop-env.sh" ]; then
+   . "${HADOOP_CONF_DIR}/hadoop-env.sh"
+diff -ru hadoop-0.5.0/bin/slaves.sh deploy/bin/slaves.sh
+--- hadoop-0.5.0/bin/slaves.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/slaves.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -22,7 +22,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ if [ -f "${HADOOP_CONF_DIR}/hadoop-env.sh" ]; then
+   . "${HADOOP_CONF_DIR}/hadoop-env.sh"
+diff -ru hadoop-0.5.0/bin/start-all.sh deploy/bin/start-all.sh
+--- hadoop-0.5.0/bin/start-all.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/start-all.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ # start dfs daemons
+ "$bin"/start-dfs.sh --config $HADOOP_CONF_DIR
+diff -ru hadoop-0.5.0/bin/start-dfs.sh deploy/bin/start-dfs.sh
+--- hadoop-0.5.0/bin/start-dfs.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/start-dfs.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ # start dfs daemons
+ # start namenode after datanodes, to minimize time namenode is up w/o data
+diff -ru hadoop-0.5.0/bin/start-mapred.sh deploy/bin/start-mapred.sh
+--- hadoop-0.5.0/bin/start-mapred.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/start-mapred.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ # start mapred daemons
+ # start jobtracker first to minimize connection errors at startup
+diff -ru hadoop-0.5.0/bin/stop-all.sh deploy/bin/stop-all.sh
+--- hadoop-0.5.0/bin/stop-all.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/stop-all.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ "$bin"/stop-mapred.sh --config $HADOOP_CONF_DIR
+ "$bin"/stop-dfs.sh --config $HADOOP_CONF_DIR
+diff -ru hadoop-0.5.0/bin/stop-dfs.sh deploy/bin/stop-dfs.sh
+--- hadoop-0.5.0/bin/stop-dfs.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/stop-dfs.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ "$bin"/hadoop-daemon.sh --config $HADOOP_CONF_DIR stop namenode
+ "$bin"/hadoop-daemons.sh --config $HADOOP_CONF_DIR stop datanode
+diff -ru hadoop-0.5.0/bin/stop-mapred.sh deploy/bin/stop-mapred.sh
+--- hadoop-0.5.0/bin/stop-mapred.sh	2006-08-21 16:11:02.000000000 +0200
++++ deploy/bin/stop-mapred.sh	2006-08-21 17:17:05.000000000 +0200
+@@ -5,7 +5,7 @@
+ bin=`dirname "$0"`
+ bin=`cd "$bin"; pwd`
+ 
+-source "$bin"/hadoop-config.sh
++. "$bin"/hadoop-config.sh
+ 
+ "$bin"/hadoop-daemon.sh --config $HADOOP_CONF_DIR stop jobtracker
+ "$bin"/hadoop-daemons.sh --config $HADOOP_CONF_DIR stop tasktracker

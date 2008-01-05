@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<!--+
+    | File:           ///
+    | Author:         Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+    | Date Created:   ///
+    | Last Modified:  ///
+    | Revision:       $Id: docbk.xml 467 2004-02-09 09:15:21Z jbq $
+    +-->
+
+<article lang='fr'>
+  <articleinfo>
+    <title></title>
+
+    <author>
+      <surname>Quenot</surname>
+      <firstname>Jean-Baptiste</firstname>
+      <affiliation>
+        <orgname>Anyware Technologies</orgname>
+      </affiliation>
+      <email>jbq@anyware-tech.com</email>
+    </author>
+
+    <copyright>
+      <year>2006</year>
+    </copyright>
+
+    <pubdate></pubdate>
+
+    <abstract>
+      <para></para>
+    </abstract>
+
+    <biblioid>$Source$</biblioid>
+    <releaseinfo>$Revision$</releaseinfo>
+  </articleinfo>
+
+  <para></para>
+</article>

@@ -1,0 +1,36 @@
+#! /bin/sh -e
+
+HOST=$1
+
+# Tester si un programme est disponible
+have () {
+    which $1 >/dev/null 2>&1
+}
+
+# Alerte si un programme n'est pas disponible
+check () {
+    for program in $* ; do
+        if ! have $program ; then
+            echo "Impossible de trouver le programme $program"
+            echo "Veuillez ajuster la variable d'environnement PATH"
+            exit 1
+        fi
+    done
+}
+
+test -z $HOST && exit 1
+
+check python rsync
+
+export RSYNC_RSH=ssh
+test -d $HOME/usr || mkdir $HOME/usr
+echo Synchronizing usr/bin
+rsync -avz --exclude=.svn ${HOST}usr/bin $HOME/usr
+echo "Synchronizing usr/dot (without private)"
+rsync -avz --exclude=secret --exclude=private --exclude=.svn ${HOST}usr/dot $HOME/usr
+echo "Synchronizing usr/dot/private (without gaim)"
+rsync -avz --exclude=gaim --exclude=.svn ${HOST}usr/dot/private $HOME/usr/dot
+
+export USER_DOTFILES=${HOME}/usr/dot
+export PATH=$PATH:${HOME}/usr/bin
+dotfiles

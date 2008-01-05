@@ -1,0 +1,273 @@
+#!/usr/bin/env python
+"""
+   Retrieve a subtree of lexicographically greater Object IDs starting from
+   user specifed SNMP Object ID from arbitrary SNMP agent.
+
+   Since MIB parser is not yet implemented in Python, this script takes and
+   reports Object IDs in dotted numeric representation only.
+
+   Copyright 1999-2003 by Ilya Etingof <ilya@glas.net>. See LICENSE for
+   details.
+"""
+values = {}
+def lookupOid(oid):
+    for (loid) in values:
+        if (loid.find(oid) != -1):
+            return values[loid]
+
+import sys, getopt, re
+from pysnmp.proto import v1, v2c, error
+from pysnmp.mapping.udp import role
+import pysnmp.proto.api.generic
+import pysnmpap.cli.ucd
+
+# Initialize help messages
+options =           'Options:\n'
+options = options + '  -p <port>      port to communicate with at the agent. Default is 161.\n'
+options = options + '  -r <retries>   number of retries to be used in requests. Default is 5.\n'
+options = options + '  -t <timeout>   timeout between retries. Default is 1.\n'
+options = options + '  -v <version>   SNMP version to use [1, 2c]. Default is 1 (version one).\n'
+options = options + '  -R             report variables types on output.\n'
+options = options + '  -C <app-opts>  application specific options\n'
+options = options + '                 p:  print the number of variables found\n'
+options = options + '                 i:  include given OID in the search range\n'
+options = options + '                 c:  do not check returned OIDs are increasing'
+#usage = usage + ' ' + v2c.GetRequest().cliUcdGetUsage() + '\n' + options
+
+# Initialize defaults
+port = 161; retries = 5; timeout = 1; version = '1'
+reportTypeFlag = prtNumFlag = inclOidFlag = None
+chkIncOidFlag = 1
+
+def usage():
+    print 'Usage: %s [options] <host> <community> <drive> <warn> <crit>' % sys.argv[0]
+    print options
+    print v2c.GetRequest().cliUcdGetUsage()
+
+# Parse possible options
+try:
+    (opts, args) = getopt.getopt(sys.argv[1:], 'hp:r:t:v:RC:',\
+                                 ['help', 'port=', 'retries=', \
+                                  'timeout=', 'version=', 'report-type', \
+                                  'app-opts'])
+except getopt.error, why:
+    print 'getopt error: %s\n%s' % (why, usage)
+    sys.exit(-1)
+
+try:
+    for opt in opts:
+        if opt[0] == '-h' or opt[0] == '--help':
+            print usage
+            sys.exit(0)
+        
+        if opt[0] == '-p' or opt[0] == '--port':
+            port = int(opt[1])
+
+        if opt[0] == '-r' or opt[0] == '--retries':
+            retries = int(opt[1])
+
+        if opt[0] == '-t' or opt[0] == '--timeout':
+            timeout = int(opt[1])
+
+        if opt[0] == '-v' or opt[0] == '--version':
+            version = opt[1]
+
+        if opt[0] == '-R' or opt[0] == '--report-type':
+            reportTypeFlag = 1
+
+        if opt[0] == '-C' or opt[0] == '--app-opts':
+            for c in list(opt[1]):
+                if c == 'p': prtNumFlag = 1
+                if c == 'i': inclOidFlag = 1
+                if c == 'c': chkIncOidFlag = 0
+
+except ValueError, why:
+    print 'Bad parameter \'%s\' for option %s: %s\n%s' \
+          % (opt[1], opt[0], why, usage)
+    sys.exit(-1)
+
+if len(args) < 1:
+    print 'Insufficient number of arguments supplied'
+    usage()
+    sys.exit(-1)
+
+# Create SNMP manager object
+host = args[0]
+client = role.manager((host, port))
+
+# Pass it a few options
+client.timeout = timeout
+client.retries = retries
+
+# Choose protocol version specific module
+try:
+    snmp = eval('v' + version)
+
+except (NameError, AttributeError):
+    print 'Unsupported SNMP protocol version: %s\n%s' % (version, usage)
+    sys.exit(-1)
+
+# Create and initialize SNMP GET/GETNEXT request objects
+getNextReq = snmp.GetNextRequest();
+
+# Disk information
+cliargs = []
+cliargs.append("-c " + args[1])
+cliargs.append('25.2.3.1')
+print ("cliargs=%s"%cliargs)
+#print("Cliargs is %s" % cliargs)
+drive = args[2]
+warn = int(args[3])
+crit = int(args[4])
+#print("Drive is %s" % (drive))
+getNextReq.cliUcdSetArgs(cliargs)
+
+if inclOidFlag:
+    getReq = snmp.GetRequest();
+    getReq.cliUcdSetArgs(args[1:])
+
+# Store tables headers
+headVars = map(lambda x: x[0], getNextReq.apiGenGetPdu().apiGenGetVarBind())
+
+# Create a response message framework
+rsp = snmp.Response()
+
+# A counter for printed vars
+prtOidCount = 0
+
+# Traverse agent MIB
+while 1:
+    # Verify against out-of-order messages
+    def cb_fun(answer, src):
+        # Decode message
+        rsp.decode(answer)
+        
+        # Make sure response matches request
+        if req.match(rsp):
+            return 1
+
+    # Switch from/to Get/GetNext reqs if requested
+    if inclOidFlag:
+        req = getReq
+        inclOidFlag = None
+    else:
+        req = getNextReq
+        
+    # Encode SNMP request message and try to send it to SNMP agent and
+    # receive a response
+    (answer, src) = client.send_and_receive(req.encode(), (None, 0), cb_fun)
+
+    # Fetch Object ID's and associated values
+    vars = rsp.apiGenGetPdu().apiGenGetVarBind()
+
+    # Error handling makes sense only when walking
+    if req is getNextReq:
+        # Check for remote SNMP agent failure
+        if rsp.apiGenGetPdu().apiGenGetErrorStatus():
+            errorIndex = rsp.apiGenGetPdu().apiGenGetErrorIndex() - 1
+            # SNMP agent (v.1) reports 'no such name' when walk is over
+            if rsp.apiGenGetPdu().apiGenGetErrorStatus() == 2:
+                # One of the tables exceeded
+                for l in vars, headVars:
+                    if errorIndex in range(len(l)):
+                        del l[errorIndex]
+                    else:
+                        raise error.ProtoError('Vad ErrorIndex vs VarBind in %s' \
+                                               % rsp)
+            else:
+                errorStatus = str(rsp['pdu'].values()[0]['error_status'])
+                if errorIndex in range(len(vars)):
+                    raise error.ProtoError(errorStatus + ' at ' + \
+                                           str(vars[errorIndex][0]))
+                raise error.ProtoError(errorStatus)
+
+        # Exclude completed var-binds
+        while 1:
+            for idx in range(len(headVars)):
+                if not snmp.ObjectIdentifier(headVars[idx]).isaprefix(vars[idx][0]) or isinstance(vars[idx][1], v2c.EndOfMibView):
+                    # One of the tables exceeded
+                    for l in vars, headVars:
+                        del l[idx]
+                    break
+            else:
+                break
+
+        # Make sure OIDs are increasing
+        if chkIncOidFlag:
+            bOids = filter(lambda (x, y): \
+                           snmp.ObjectIdentifier(x) > snmp.ObjectIdentifier(y),
+                           map(None,
+                               map(lambda x: x[0],
+                                   req.apiGenGetPdu().apiGenGetVarBind()),
+                               map(lambda x: x[0],
+                                   rsp.apiGenGetPdu().apiGenGetVarBind())))
+            if len(bOids):
+                print 'Error: OID not increasing: ', str(bOids)
+                break
+
+    if len(headVars) == 0:
+        break
+
+    # Print out results
+    for (oid, val) in vars:
+        #print oid, ' ---> ',
+        if reportTypeFlag:
+            #print val
+            values[oid] = val
+        else:
+            #print repr(val.getTerminal().get())
+            values[oid] = val.getTerminal().get()
+
+        prtOidCount = prtOidCount + 1
+    
+    # Update request ID
+    req.apiGenGetPdu()['request_id'].inc(1)
+
+    # Load get-next'ed vars into new req
+    req.apiGenGetPdu().apiGenSetVarBind(vars)
+
+if prtNumFlag:
+    print 'Variables found: %d' % prtOidCount
+
+
+#print values
+
+drives={}
+
+for (oid) in values:
+    if (oid.find('25.2.3.1.3') != -1):
+        #print("oid="+oid)
+        drives[values[oid]]=oid[-1]
+
+#print(drives)
+
+for ldrive in drives:
+    #print("ldrive="+ldrive)
+    if (ldrive.find(drive) != -1):
+        gdrive = drives[ldrive]
+
+used = lookupOid('25.2.3.1.6.' + gdrive)
+size = lookupOid('25.2.3.1.5.' + gdrive)
+blocksize = lookupOid('25.2.3.1.4.' + gdrive)
+#print("Storage used for %s %u" % (drive, used))
+#print("Disk size for %s %u" % (drive, size))
+#print("Block size for %s %u" % (drive, lookupOid('25.2.3.1.4.' + gdrive)))
+
+percent_used = used * 100 / size
+#print("Percent used is %u" % percent_used)
+#print("Warn/Crit is %u/%u" % (warn, crit))
+
+sused = float(used) * float(blocksize) / 1024. / 1024. / 1024.
+ssize = float(size) * float(blocksize) / 1024. / 1024. / 1024.
+
+if (percent_used >= warn and percent_used < crit):
+    print("DISK WARNING - %s %u%% used (%2.2fGo out of %2.2fGo)" % (drive, percent_used, sused, ssize))
+    sys.exit(1)
+elif (percent_used >= crit):
+    print("DISK CRITICAL - %s %u%% used (%2.2fGo out of %2.2fGo)" % (drive, percent_used, sused, ssize))
+    sys.exit(2)
+else:
+    print("DISK OK - %s %u%% used (%2.2fGo out of %2.2fGo)" % (drive, percent_used, sused, ssize))
+    sys.exit(0)
+
+# vim:sw=4:ts=4:et

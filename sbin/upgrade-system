@@ -1,0 +1,92 @@
+#! /bin/sh -e
+#
+# File:          upgrade-system
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Upgrade FreeBSD base operating system
+# Date Created:  2002-11-01 14:47:51
+# Revision:      $Id$
+#
+# Note: you can specify multiple options to the KERNCONF variable in
+# /etc/make.conf to build several kernels
+#
+# Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+prompt() {
+    echo -n "Continue? (yes/no) "
+    read answer
+    if test "$answer" != "yes" ; then
+        echo Aborted
+        exit 1
+    fi
+}
+
+KERNCONF="$(make -V KERNCONF)"
+INSTALLKERNEL=${KERNCONF% *}
+if test -z "$KERNCONF"; then
+    echo "Warning: No KERNCONF specified in make(1) environment, building GENERIC only"
+    KERNCONF=GENERIC
+    sleep 1
+fi
+
+cd /usr/src
+
+echo Building the world
+make cleanworld
+make -j4 buildworld
+
+echo "Building the $KERNCONF kernel(s)"
+make buildkernel
+
+echo World and kernels built, press Ctrl-C to abort installation of GENERIC kernel
+prompt
+
+echo "Installing the $INSTALLKERNEL kernel"
+make installkernel
+
+echo "Kernel installed, reboot now in single-user mode or press Ctrl-C to abort installation of base system"
+prompt
+
+echo Checking /etc
+mergemaster -p
+
+echo Installing the world
+make installworld
+
+echo Merging /etc
+mergemaster
+
+if test -x /usr/local/bin/exctags; then
+    echo Replacing old ctags with newer one
+    cd /usr/bin
+    test -e ctags.orig && rm ctags.orig
+    mv ctags ctags.orig
+    ln -s /usr/local/bin/exctags ctags
+fi
+
+# LDAP accounts have /bin/bash as user's shell
+test -x /bin/bash || echo Warning: /bin/bash not found
+
+test -x /usr/local/bin/vmware && echo Warning: VMWare *must* be reinstalled with new kernel

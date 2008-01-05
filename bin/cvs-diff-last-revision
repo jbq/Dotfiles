@@ -1,0 +1,5 @@
+#! /bin/sh
+
+for f in $* ; do
+    cvs diff -u -r$(cvs-second-to-last-revision $f) -r$(cvs-last-revision $f) $f
+done

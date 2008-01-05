@@ -1,0 +1,32 @@
+#! /bin/sh
+
+################################################################################
+# File:          keepup-adsl
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define environment for keeping up pptp with ``keepup''
+# Date Created:  2001-01-01 00:00:00
+# Revision:      $Id: keepup-pptp-adsl 1020 2004-10-22 08:28:57Z jbq $
+################################################################################
+
+#! /bin/sh
+
+# keepup's check command: ping primary dns ip
+export KEEPUP_CHECK='ping -c5 -t10 $(route get default | grep gateway: | sed -e s/^.\*:\ //)'
+
+# keepup's start command: start pptp
+export KEEPUP_START="pptp-control start"
+
+# keepup's up again command: reload ipnat rules, reload ipf rules, restart name server
+export KEEPUP_UP_AGAIN="ipnat -CF -f /etc/ipnat.rules && ipf -Fa -f /etc/ipf.rules && ndc restart"
+
+# keepup's start command: stop pptp
+export KEEPUP_STOP="pptp-control stop"
+
+# keepup's syslog tag name: this script
+export KEEPUP_TAG="$(basename $0)"
+
+# keepup's interval between checks, in seconds
+export KEEPUP_SLEEP="20"
+
+# launch keepup
+exec keepup

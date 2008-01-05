@@ -1,0 +1,5 @@
+#! /bin/sh -e
+
+for f in $(find . -name "$1") ; do
+	grep -l "$2" $f >/dev/null || echo $f
+done

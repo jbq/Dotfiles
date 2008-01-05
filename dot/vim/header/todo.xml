@@ -1,0 +1,16 @@
+
+  <todo id=''>
+    <title></title>
+
+    <description></description>
+
+    <datecreated>
+      <date></date>
+      <time></time>
+    </datecreated>
+
+    <datedue>
+      <date></date>
+      <time></time>
+    </datedue>
+  </todo>

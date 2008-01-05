@@ -1,0 +1,1 @@
+diff --ignore-matching-lines=\$FreeBSD --exclude=.svn --exclude=work --exclude=admin -ruN /usr/ports/www/jakarta-jmeter .

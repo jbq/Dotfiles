@@ -1,0 +1,8 @@
+*.pyc
+merge-*.xml
+src-*.html
+*.log
+._*
+.DAV
+.xvpics
+.thumbnails

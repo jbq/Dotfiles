@@ -1,0 +1,28 @@
+#! /bin/sh
+
+################################################################################
+# File:          redo
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Redo a command until it returns success
+# Date Created:  2002-07-24 00:48:55
+# CVS Id:        $Id$
+################################################################################
+
+# Cannot setup this program as a shell function
+# because SIGTSTP is ignored
+#
+# TODO breaks if command-line has argument with spaces
+
+MAXTRIES=infinite
+TRIES=0
+
+while [ 1 ]; do
+    sh -c "$*" && exit 0
+    TRIES=$(expr $TRIES + 1)
+    test $TRIES = $MAXTRIES && exit 1
+    sleep 1
+done
+
+# Another approach
+#
+# until ls aze ; do sleep 1 ; done

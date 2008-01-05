@@ -1,0 +1,6 @@
+bin/efax-gtk
+bin/efax-0.9a
+bin/efix-0.9a
+etc/efax-gtkrc
+share/applications/efax-gtk.desktop
+@dirrmtry share/applications

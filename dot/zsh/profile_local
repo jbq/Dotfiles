@@ -1,0 +1,80 @@
+################################################################################
+# File:          profile_local
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define site dependant initial environment
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: profile_local 1016 2004-10-22 07:51:40Z jbq $
+################################################################################
+
+UNAME="$(uname -s)"
+HOSTNAME="$(hostname)"
+
+test -f $USER_DOTFILES/private/profile.$HOSTNAME && source $USER_DOTFILES/private/profile.$HOSTNAME
+test -f $USER_DOTFILES/profile.$HOSTNAME && source $USER_DOTFILES/profile.$HOSTNAME
+
+# Don't use fr_FR.ISO8859-15 on FreeBSD (causes problems with JDK)
+# Don't use UTF-8, even with uxterm (Unicode XTerm): Problems with irc, par,
+# dead keys, Eterm.  Revert to latin1 but not fr_FR@euro that causes Eterm to
+# hang
+
+# If gdm is running, don't set the locale
+if ! pgrep gdm > /dev/null ; then
+    if test "$UNAME" = "FreeBSD" ; then
+        # Mutt-NG requires ncurses with wide-character support to work properly in utf-8
+        LOCALE="fr_FR.UTF-8"
+        #LOCALE="fr_FR.ISO8859-1"
+    elif test "$UNAME" = "Linux" ; then
+        LOCALE="fr_FR.UTF-8"
+    fi
+
+    if test -n "$LOCALE" ; then
+        export LC_CTYPE=$LOCALE
+        export LC_TIME=$LOCALE
+    fi
+fi
+
+if ! type java >/dev/null 2>&1 ; then
+if ! test "$UNAME" = "FreeBSD" ; then
+    if test -z $JAVA_HOME ; then
+        JDK_LIST=(
+            /usr/local/linux-sun-jdk*(/N)
+            /usr/local/jdk*(/N)
+            /usr/java/jdk*(/N)
+            /usr/java/j2sdk*(/N)
+            /opt/sun-jdk*(/N)
+            /opt/blackdown-jdk*(/N)
+            /usr/local/j2sdk*(/N)
+        )
+
+        for JDK in $JDK_LIST ; do
+            if test -x $JDK/bin/java; then
+                export JAVA_HOME="$JDK"
+            fi
+        done
+
+        # Put that JDK first in path so that it overrides /usr/bin/java on
+        # Debian (alternatives system)
+        export PATH="$JAVA_HOME/bin:$PATH"
+    else
+        export PATH="$JAVA_HOME/bin:$PATH"
+    fi
+fi
+fi
+
+test "$UNAME" = "FreeBSD" && export LSCOLORS="gxfxcxdxbxegedabagacad"
+
+if test $UNAME = Linux ; then
+    # Turn off the PC speaker
+    if test -r /proc/modules && grep pcspkr /proc/modules >/dev/null ; then
+        echo "Warning: pcspkr is activated.  Run sudo rmmod pcspkr"
+    fi
+fi
+
+# ACS in UTF-8 do not work in gnome-terminal, test with mutt-ng sidebar
+#export NCURSES_NO_UTF8_ACS=1
+
+. $USER_DOTFILES/profile
+
+#export ANT_OPTS="-Djava.io.tmpdir=/usr/local/var/tmp -Xmx512m"
+
+# vim:ft=sh

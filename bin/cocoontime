@@ -1,0 +1,87 @@
+#! /usr/bin/env python
+#
+# $Id$
+#
+# Copyright (c) 2005, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import sys, re
+def pipecompare(e1, e2):
+    if e1.has_key('time') and e2.has_key('time'):
+        return e2['time'] - e1['time']
+    else:
+        return 0
+pipe_re = "^PARAM: '0' VALUE: '(.*)'$"
+time_re = "^([0-9]+) +\[.+\] +.*$"
+pipes=[]
+oldtime = None
+pipenum = 0
+newtime = None
+while 1:
+    try:
+        line = sys.stdin.readline()
+        if not(line):
+            break
+        line = line.rstrip()
+
+        if re.search(time_re, line) and not(re.search("janitor", line, re.IGNORECASE)):
+            #print "time line=%s"%line
+            #print "newtime=%s"%newtime
+            #print "pipe=%s"%pipe
+            newtimestring = re.sub(time_re, r"\1", line)
+            # We already processed a pipe and it has no associated time
+            if pipenum:
+                newtime = newtimestring
+            else:
+                # Happens only once
+                oldtime = newtimestring
+        elif re.search(pipe_re, line):
+            if pipenum and not(pipes[pipenum-1].has_key('time')):
+                pipes[pipenum-1]['time'] = int(newtime) - int(oldtime)
+                oldtime = newtime
+            pipenum=pipenum+1
+            print >>sys.stderr, "%s"%line
+            pipename = re.sub(pipe_re, r"\1", line)
+            pipes.append({})
+            pipes[pipenum-1]['name'] = pipename
+    except KeyboardInterrupt:
+        # Update time for last executed pipeline
+        pipes[pipenum-1]['time'] = int(newtime) - int(oldtime)
+
+        total = 0
+        for pipe in pipes:
+            if pipe.has_key('time'):
+                total = total + pipe['time']
+                print "%-60.60s%s" % (pipe['name'], pipe['time'])
+        print
+        print "%-58.58s  %s" % ("TOTAL", total)
+        print
+
+        pipes.sort(pipecompare)
+        for pipe in pipes:
+            if pipe.has_key('time'):
+                print "%-60.60s%s" % (pipe['name'], pipe['time'])
+
+        sys.exit(0)

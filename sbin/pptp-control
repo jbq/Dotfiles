@@ -1,0 +1,30 @@
+#! /bin/sh
+
+################################################################################
+# File:          pptp-control
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Control pptp
+# Date Created:  2001-01-01 00:00:00
+# Revision:      $Id: pptp-control 362 2003-11-14 16:48:03Z jbq $
+################################################################################
+
+#! /bin/sh
+
+case "$1" in
+  start)
+		pptp modem nerim-netissimo >> /dev/null 2>> /dev/null &
+		;;
+  stop)
+		killall pptp >> /dev/null 2>> /dev/null && sleep 2
+		rm -rf /var/run/pptp/ >> /dev/null 2>> /dev/null
+		;;
+
+  restart)
+		$0 stop
+		$0 start
+		;;
+  *)
+		echo "Usage: pptp {start|stop|restart}"
+		exit 1
+		;;
+esac

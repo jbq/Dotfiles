@@ -1,0 +1,22 @@
+#! /bin/sh -e
+
+PLAYLIST=playlist.m3u
+
+echo -n > $PLAYLIST
+
+#for i in $(find . -type d || exit 1); do
+#echo $i
+#	test -e $i/00000000.mp3 || touch $i/00000000.mp3 || exit 1
+#	id3v2 -a "--------------------" -t $(basename $i) $i/00000000.mp3 || exit 1
+#done
+
+DIR="$1"
+test -d "$DIR" || DIR="$(pwd)"
+
+if test $(uname) = FreeBSD ; then
+    # FreeBSD
+    find -L -E -s "$DIR" -iregex '^.*\.(m4a|ogg|mpeg|mpg|mp3|wav|avi|asf|divx)$' >> $PLAYLIST
+else
+    # Linux
+    find "$DIR" -follow -iregex '^.*\.\(m4a|ogg|mpeg\|mpg\|mp3\|wav\|avi\|asf\|divx\)$' > $PLAYLIST
+fi

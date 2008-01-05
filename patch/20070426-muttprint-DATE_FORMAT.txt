@@ -1,0 +1,27 @@
+--- muttprint	Thu Apr 26 11:42:16 2007
++++ muttprint.mine	Thu Apr 26 11:58:04 2007
+@@ -1684,6 +1684,8 @@
+ 
+ sub convertDate ($) {
+ 	my $date = shift;
++	my $result;
++	my $string;
+ 
+ 	#
+ 	# Check if the module is installed
+@@ -1694,9 +1696,12 @@
+ 			"the module \"Date::Parse\" on your system. Please install it or ".
+ 			"use the setting \"DATE=original\" in your ~/.muttprintrc.\n";
+ 	}
+-	
+-	return native2utf_string(strftime($Config{DATE_FORMAT}, localtime(str2time($date))));
+-
++	$string = strftime($Config{DATE_FORMAT}, localtime(str2time($date)));
++	$result = native2utf_string($string);
++	if ($result eq "") {
++		fatalError "Error in charset conversion.\nCheck that DATE_FORMAT is expressed using the native encoding\n";
++	}
++	return $result;
+ }
+ 
+ sub modifyPS ($) {

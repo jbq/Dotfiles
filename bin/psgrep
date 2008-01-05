@@ -1,0 +1,32 @@
+#! /bin/sh
+
+################################################################################
+# File:          psgrep
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Search pattern in process list
+# Date Created:  2002-07-24 00:48:28
+# CVS Id:        $Id$
+################################################################################
+
+usage() {
+    echo Usage: `basename $0` pattern
+    exit
+}
+
+PATTERN=$1
+
+test -z "$PATTERN" && usage
+
+export COLUMNS=10000
+PS="ps ax -o pid,user,time,command"
+
+#echo "  PID USER    COMMAND"
+echo "  PID USER         TIME COMMAND"
+
+export COLUMNS=10000
+
+$PS | grep -v grep | grep $PATTERN
+
+#
+# The script returns egrep's EXIT_SUCCESS or EXIT_FAILURE
+#

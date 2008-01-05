@@ -1,0 +1,22 @@
+################################################################################
+# File:          .bash_profile
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define initial environment and execute commands at login
+# Date Created:  2002-01-29 15:07:46
+# CVS Id:        $Id: profile 1016 2004-10-22 07:51:40Z jbq $
+################################################################################
+
+export USER_DOTFILES="$HOME/usr/dot"
+
+# Do not trust /etc/profile, do not source!
+# test -f /etc/profile && . /etc/profile
+# You may copy/paste some parts of /etc/profile if relevant ;)
+
+. "$USER_DOTFILES/profile_generic"
+. "$USER_DOTFILES/bash/profile_local"
+. "$USER_DOTFILES/bash/profile_login"
+
+# source the bash init file
+# (only for the login shell)
+# not needed with bash3
+#. ~/.bashrc

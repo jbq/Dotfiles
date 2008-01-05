@@ -1,0 +1,3 @@
+#! /bin/sh
+
+mencoder -oac copy -ovc copy -forceidx "$1" -o "$2" $*

@@ -1,0 +1,7 @@
+#! /bin/sh
+
+# Thanks to Sébastien Michel
+# http://michoux.born2frag.org/config/colorize.sh.html
+
+# When using vim instead of gvim, resulting colors depend on terminal color settings
+gvim -u NONE --cmd 'syntax on | set encoding=utf8' +'runtime syntax/2html.vim' +x +q $*

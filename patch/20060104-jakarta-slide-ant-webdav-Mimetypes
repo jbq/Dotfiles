@@ -1,0 +1,11 @@
+--- /local-home/jbq/Mimetypes.java	Wed Jan  4 16:49:11 2006
++++ src/org/apache/webdav/ant/Mimetypes.java	Wed Jan  4 14:34:28 2006
+@@ -47,7 +47,7 @@
+    }
+    
+    public static String getMimeTypeForExtension(String extension, String defaultType) {
+-      String mime = (String)mimetypes.get(extension);
++      String mime = (String)mimetypes.get(extension.toLowerCase());
+       if (mime == null) mime = defaultType;
+       return mime;
+    }

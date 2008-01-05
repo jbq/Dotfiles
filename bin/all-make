@@ -1,0 +1,22 @@
+#! /bin/sh
+
+################################################################################
+# File:          all-make
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Build all Makefiles found in current directory and below
+# Date Created:  2002-11-01 15:31:55
+# CVS Id:        $Id$
+################################################################################
+
+# Do not follow symlinks because Makefiles processed several times if link
+# points to a subdir
+
+test `uname -s` = FreeBSD && alias find="find -s"
+
+for i in $(find . -name Makefile); do
+    echo -e $(basename $0): '\033[1;31m'Entering $(dirname $i)'\033[0;m';
+
+    # Execute in a sub-shell to prevent propagating the effect of "cd"
+    ( cd $(dirname $i) && make $* )
+    test $? != 0 && exit 1
+done

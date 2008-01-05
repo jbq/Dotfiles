@@ -1,0 +1,16 @@
+#! /usr/bin/env python
+
+import caraldi, sys
+
+# Thanks to this article:
+# CLI Magic: Convert file names to a different encoding with convmv
+# http://enterprise.linux.com/enterprise/06/11/27/1549236.shtml?tid=47&tid=89
+class Rename(caraldi.DirStat):
+    def visitFile(self, path, stat):
+        caraldi.execute(['convmv', '--notest', '-f', 'utf-8', '-t', 'utf-8', '--nfc', path])
+
+if len(sys.argv) == 1:
+    Rename(".")
+else:
+    for dir in sys.argv[1:]:
+        Rename(dir)

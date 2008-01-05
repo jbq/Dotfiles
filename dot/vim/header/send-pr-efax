@@ -1,0 +1,72 @@
+SEND-PR: -*- send-pr -*-
+SEND-PR: Lines starting with `SEND-PR' will be removed automatically, as
+SEND-PR: will all comments (text enclosed in `<' and `>').
+SEND-PR:
+SEND-PR: Please consult the following URL if you are not sure how to
+SEND-PR: fill out a problem report:
+SEND-PR: http://www.freebsd.org/doc/en/articles/problem-reports/
+SEND-PR:
+SEND-PR: Note that the Synopsis field is mandatory.
+SEND-PR:
+SEND-PR: Please note that (unless you state otherwise) if your report 
+SEND-PR: includes a patch then it will be taken under the same license as 
+SEND-PR: the one on the file(s) you want to change.
+SEND-PR:
+SEND-PR: BE ADVISED THAT FREEBSD PROBLEM REPORTS ARE PUBLIC INFORMATION AND
+SEND-PR: WILL BE PUBLISHED AS-IS ON THE PROJECT'S MAILING LISTS AND WEB SITES.
+SEND-PR: DO NOT SUBMIT ANY INFORMATION YOU DO NOT WANT MADE PUBLIC.
+SEND-PR:
+SEND-PR: If you wish to submit a problem report confidentially, then contact
+SEND-PR: the FreeBSD bugmaster (bugmaster@FreeBSD.org) to arrange for a
+SEND-PR: relevant developer to be contacted.
+SEND-PR:
+SEND-PR: For sensitive security issues, consider contacting the FreeBSD
+SEND-PR: security officer team (security-officer@freebsd.org) directly.
+SEND-PR:
+SEND-PR: Choose from the following categories:
+SEND-PR:
+SEND-PR: advocacy  alpha     amd64     bin       conf      docs      
+SEND-PR: gnu       i386      ia64      java      kern      misc      
+SEND-PR: ports     powerpc   sparc64   standards threads   usb       
+SEND-PR: www       
+SEND-PR:
+To: FreeBSD-gnats-submit@freebsd.org
+From: Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+X-send-pr-version: 3.113
+X-GNATS-Notify: 
+
+
+>Submitter-Id:	current-users
+>Originator:	Jean-Baptiste Quenot
+>Confidential:	no
+>Synopsis:	Maintainer update: comms/efax-gtk 3.0.6
+>Severity:	non-critical
+>Priority:	low
+>Category:	ports
+>Class:		maintainer-update
+>Release:	FreeBSD 5.4-STABLE i386
+>Environment:
+System: FreeBSD vision.anyware 5.4-STABLE FreeBSD 5.4-STABLE #0: Wed Oct 5 09:32:29 CEST 2005 jbq@vision.anyware:/usr/src/sys/i386/compile/VISION i386
+>Description:
+This is an update of comms/efax-gtk to version 3.0.6.  Thanks in advance!
+>Fix:
+diff -ruN --ignore-matching-lines=$FreeBSD --exclude=work --exclude=admin --exclude=.svn /usr/ports/comms/efax-gtk/Makefile /local-home/jbq/usr/ports/efax-gtk/Makefile
+--- /usr/ports/comms/efax-gtk/Makefile	Thu Oct  6 00:00:25 2005
++++ /local-home/jbq/usr/ports/efax-gtk/Makefile	Mon Oct 17 09:36:10 2005
+@@ -6,7 +6,7 @@
+ #
+ 
+ PORTNAME=		efax-gtk
+-PORTVERSION=		3.0.5
++PORTVERSION=		3.0.6
+ CATEGORIES=		comms
+ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE}
+ MASTER_SITE_SUBDIR=	${PORTNAME}
+diff -ruN --ignore-matching-lines=$FreeBSD --exclude=work --exclude=admin --exclude=.svn /usr/ports/comms/efax-gtk/distinfo /local-home/jbq/usr/ports/efax-gtk/distinfo
+--- /usr/ports/comms/efax-gtk/distinfo	Thu Oct  6 00:00:25 2005
++++ /local-home/jbq/usr/ports/efax-gtk/distinfo	Mon Oct 17 09:36:24 2005
+@@ -1,2 +1,2 @@
+-MD5 (efax-gtk-3.0.5.src.tgz) = 36e49c6f7de2c3e8e419d20a72e7365b                
+-SIZE (efax-gtk-3.0.5.src.tgz) = 805098                                         
++MD5 (efax-gtk-3.0.6.src.tgz) = e2320281240e6e805182497d1279be42
++SIZE (efax-gtk-3.0.6.src.tgz) = 893306

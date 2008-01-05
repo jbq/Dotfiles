@@ -1,0 +1,159 @@
+/*******************************************************************************
+* Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+* Date Created:  2004-12-24 13:07:57
+* Revision:      $Id$
+*******************************************************************************/
+
+@import url(embedded_xml.css);
+@import url(embedded_dtd.css);
+@import url(docbook.css);
+@import url(additions.css);
+
+body {
+    background-color: #404040;
+    margin: 0px;
+    font-size: 14px;
+    color: #D0D0D0;
+}
+h1 {
+    font-size: 24px;
+    color: #D0D0D0;
+}
+ul {
+}
+
+a {
+    color: white;
+}
+
+a img {
+    border: 2px solid inherit;
+}
+
+a:visited {
+    color: #D0D0D0;
+}
+
+.menu {
+    background-color: #9999FF;
+    width: 150px;
+    margin: 7px;
+}
+.menu p a {
+    color: White;
+}
+.menu p {
+    color: White;
+}
+ul.toc li a {
+    color: White;
+}
+
+p {
+}
+h2 {
+    font-size: 14px;
+    color: #D0D0D0;
+    padding-bottom: .5em;
+}
+
+.home h2 {
+    margin-top: 0;
+}
+
+.caption {
+    background-color: white;
+    color: #404040;
+    padding: .5em;
+    margin: 1em 0;
+    width: 60%;
+    border: 1px solid black;
+}
+
+.caption h2 {
+    color: black;
+}
+
+.caption a {
+    color: black;
+}
+
+.event .description {
+    background-color: #D0D0D0;
+    padding: 2px;
+    -moz-border-radius: 0 0 5px 5px;
+}
+.event {
+    margin-bottom: 10px;
+    border: 1px solid black;
+    color: black;
+    -moz-border-radius: 5px;
+}
+
+.event a {
+    color: black;
+}
+
+.event a:visited {
+    color: #303030;
+}
+
+.event .title {
+    -moz-border-radius: 5px 5px 0 0;
+    background-color: #B0B0B0;
+    padding: 2px;
+    font-weight: bold;
+    border: 0px solid black;
+    border-bottom: 1px solid black;
+}
+
+li.on {
+    list-style-image: url(/icons/bullet-on.gif);
+}
+
+li {
+    list-style-image: url(/icons/bullet-off.gif);
+    margin: 10px 0px;
+}
+
+td {
+    vertical-align: top;
+    padding: 5px 10px;
+}
+td h2 {
+    text-align: center;
+}
+td div.icon {
+    text-align: center;
+}
+td div.icon img {
+    border-width: 0px;
+}
+td.thumbnail {
+    vertical-align: bottom;
+}
+
+body pre {
+    color: #D0D0D0;
+}
+
+.disabled {
+    color: #E0E0FF;
+}
+
+.links {
+    word-spacing: 2em;
+    margin: 1.5em;
+}
+
+.links a {
+    word-spacing: normal;
+}
+
+.links span {
+    word-spacing: normal;
+}
+
+table.home td {
+    padding: 1.5em;
+}

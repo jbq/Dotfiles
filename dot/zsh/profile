@@ -1,0 +1,12 @@
+################################################################################
+# Author:        Jean-Baptiste Quenot
+# Purpose:       zsh environment
+# Date Created:  2004-07-06 23:40:06
+# CVS Id:        $Id: profile 1016 2004-10-22 07:51:40Z jbq $
+################################################################################
+
+export USER_DOTFILES=$HOME/usr/dot
+
+. $USER_DOTFILES/profile_generic
+. $USER_DOTFILES/zsh/profile_local
+. $USER_DOTFILES/zsh/profile_login

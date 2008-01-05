@@ -1,0 +1,21 @@
+#! /bin/sh -e
+
+MODULE=$1
+
+if test -z "$MODULE" ; then
+    echo "Usage: `basename $0` MODULE"
+    exit 1
+fi
+
+TMPDIR=/tmp
+DIR=$TMPDIR/$MODULE-$$
+
+mkdir $DIR
+#svn -q export http://svn.caraldi.com/trunk/Mk/$MODULE $DIR/$MODULE
+svn -q export http://svn.caraldi.com/trunk/ports/$MODULE $DIR/$MODULE
+rm -rf $DIR/$MODULE/admin
+rm -rf $DIR/$MODULE/work
+(cd $DIR ; shar $(find $MODULE)) > $MODULE.shar
+tar zcf $MODULE.tgz -C $DIR $MODULE
+md5 $MODULE.tgz > $MODULE-md5.txt
+rm -rf $DIR

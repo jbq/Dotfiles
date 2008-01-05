@@ -1,0 +1,47 @@
+#! /bin/sh
+
+set -e
+
+WRKSRC=$(make -V WRKSRC)
+INSTDIR=$(make -V INSTDIR)
+COPYDIRS=$(make -V COPYDIRS)
+
+makeit ()
+{
+    list_files_examples | xargs -I - echo %%PORTDOCS%%%%EXAMPLESDIR%%/-
+    list_files | xargs -I % echo $INSTDIR/%
+    echo $INSTDIR/VERSION
+    echo "@unexec rm -f %D/$INSTDIR/catalog 2>&1 >/dev/null || true"
+    list_dirs | xargs -I % echo @dirrm $INSTDIR/%
+    echo @dirrm $INSTDIR
+    echo "@unexec test -d %D/share/xsl && rmdir %D/share/xsl 2>/dev/null || true"
+    list_dirs_examples | xargs -I - echo %%PORTDOCS%%@dirrm %%EXAMPLESDIR%%/-
+    echo %%PORTDOCS%%@dirrm %%EXAMPLESDIR%%
+}
+
+list_files()
+{
+    for dir in $COPYDIRS ; do
+        ( cd $WRKSRC ; find -s $dir -type f -or -type l )
+    done
+}
+
+list_dirs()
+{
+    for dir in $COPYDIRS ; do
+        ( cd $WRKSRC ; find -s -d $dir -type d )
+    done
+}
+
+list_files_examples()
+{
+    find $WRKSRC/example -type f -name '.*' -delete
+    ( cd $WRKSRC/example ; find -s * -type f -or -type l )
+}
+
+list_dirs_examples()
+{
+    ( cd $WRKSRC/example ; find -s -d * -type d )
+}
+
+makeit > pkg-plist

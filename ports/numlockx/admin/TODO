@@ -1,0 +1,4 @@
+* Modeline not in the bottom: Oliver Eikemeir says:
+  The last line of a non-slave ports Makefile must be one of: include
+  <bsd.port.mk> include <bsd.port.post.mk>
+* Man page

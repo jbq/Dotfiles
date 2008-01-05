@@ -1,0 +1,274 @@
+#! /usr/bin/env python
+
+import random, os.path
+
+#import basic pygame modules
+import pygame
+from pygame.locals import *
+
+#see if we can load more than standard BMP
+if not pygame.image.get_extended():
+    raise SystemExit, "Sorry, extended image module required"
+
+SCREENRECT     = Rect(0, 0, 640, 480)
+
+def load_image(file):
+    "loads an image, prepares it for play"
+    file = os.path.join(os.environ['HOME'] + '/usr/share/bagarre', file)
+    try:
+        surface = pygame.image.load(file)
+    except pygame.error:
+        raise SystemExit, 'Could not load image "%s" %s'%(file, pygame.get_error())
+    return surface
+
+def load_images(*files):
+    imgs = []
+    for file in files:
+        imgs.append(load_image(file))
+    return imgs
+
+def load_sound(file):
+    if not pygame.mixer: return dummysound()
+    file = os.path.join(os.environ['HOME'] + '/usr/share/bagarre', file)
+    try:
+        sound = pygame.mixer.Sound(file)
+        return sound
+    except pygame.error:
+        print 'Warning, unable to load,', file
+    return dummysound()
+
+class Bagarre:
+    #game constants
+    BALL_RELOAD   = 80     #frames between new balls
+    MAX_LIVES       = 5
+    NB_BALLS_TO_EXIT       = 10
+
+    level = 1
+    remainingLives = MAX_LIVES - 1
+    nbBalls = 0
+
+    def updateDecor(self):
+        Decor.image = self.decors[self.level - 1]
+        Decor.image.set_alpha(100)
+        self.currentDecor = Decor()
+
+    def nextlevel(self):
+        self.nbBalls = 0
+        self.currentPlayer.kill()
+        self.level = (self.level + 1) % len(self.players)
+        Player.images = [pygame.transform.flip(self.players[self.level - 1], 1, 0), self.players[self.level - 1]]
+        self.currentDecor.kill()
+        self.updateDecor()
+        Ball.image = self.balls[self.level -1]
+        self.currentPlayer = Player()
+
+    def __init__(self, winstyle = 0):
+        # Initialize pygame
+        pygame.init()
+
+        if pygame.mixer and not pygame.mixer.get_init():
+            print 'Warning, no sound'
+            pygame.mixer = None
+
+        # Set the display mode
+        winstyle = FULLSCREEN
+        bestdepth = pygame.display.mode_ok(SCREENRECT.size, winstyle, 32)
+        screen = pygame.display.set_mode(SCREENRECT.size, winstyle, bestdepth)
+        all = pygame.sprite.RenderUpdates()
+        backgroundSprites = pygame.sprite.RenderUpdates()
+        ballsLayer = pygame.sprite.RenderUpdates()
+
+        #Load images, assign to sprite classes
+        #(do this before the classes are used, after screen setup)
+        self.players = [load_image('jb.png').convert_alpha(), load_image('la_dame.png').convert_alpha()]
+
+        #decorate the game window
+    #    icon = pygame.transform.scale(Alien.images[0], (32, 32))
+    #    pygame.display.set_icon(icon)
+    #    pygame.display.set_caption('Pygame Aliens')
+        pygame.mouse.set_visible(0)
+
+        #create the background, tile the bgd image
+        background = pygame.Surface(SCREENRECT.size)
+        background.fill(Color("white"))
+        screen.blit(background, (0,0))
+
+        pygame.display.flip()
+
+        #Create Some Starting Values
+        clock = pygame.time.Clock()
+
+        #initialize our starting sprites
+        Player.containers = all
+        Player.images = [pygame.transform.flip(self.players[self.level - 1], 1, 0), self.players[self.level - 1]]
+        self.currentPlayer = Player()
+
+        Decor.containers = backgroundSprites
+        self.decors = [load_image('arc-en-ciel.gif').convert(), load_image('je_suis_devenue_grande.gif').convert()]
+        self.updateDecor()
+
+        Ball.containers = ballsLayer, all
+        self.balls = [load_image("dauphin.png").convert_alpha(), load_image("soleil.png").convert_alpha()]
+        Ball.image = self.balls[self.level -1]
+        ballreload = self.BALL_RELOAD
+
+        img = load_image('explosion1.gif').convert()
+        Explosion.images = [img, pygame.transform.flip(img, 1, 1)]
+        Explosion.containers = all
+
+        boom_sound = load_sound('boom.wav')
+
+        while 1:
+
+            #get input
+            for event in pygame.event.get():
+                if event.type == QUIT or \
+                    (event.type == KEYDOWN and event.key == K_ESCAPE):
+                        return
+            keystate = pygame.key.get_pressed()
+
+            if self.nbBalls == self.NB_BALLS_TO_EXIT:
+                # TODO display an exit door
+                self.nextlevel()
+
+            if ballreload:
+                ballreload = ballreload - 1
+            else:
+                Ball()
+                self.nbBalls = self.nbBalls + 1
+                ballreload = self.BALL_RELOAD
+
+            # clear/erase the last drawn sprites
+            #all.clear(self.currentDecor, background)
+            #all.clear(screen, self.currentDecor)
+            backgroundSprites.clear(screen, background)
+            all.clear(screen, background)
+
+            #update all the sprites
+            #backgroundSprites.update()
+            all.update()
+
+            #handle player input
+            direction = keystate[K_RIGHT] - keystate[K_LEFT]
+            self.currentPlayer.move(direction)
+
+            ballsCollide = pygame.sprite.spritecollide(self.currentPlayer, ballsLayer, 0)
+
+            if ballsCollide:
+                boom_sound.play()
+                Explosion(self.currentPlayer)
+
+                for ball in ballsCollide:
+                    ball.kill()
+
+                self.currentPlayer.kill()
+                self.remainingLives = self.remainingLives-1
+                self.nbBalls = 0
+                if self.remainingLives == -1:
+                    break
+                else:
+                    self.currentPlayer = Player()
+                # Switch to next level
+                #self.nextlevel()
+
+            #draw the scene
+            # RenderUpdates.draw() returns a list of rectangles to paint
+            dirty1 = backgroundSprites.draw(screen)
+            dirty2 = all.draw(screen)
+            pygame.display.update(dirty1 + dirty2)
+
+            #cap the framerate
+            clock.tick(40)
+
+class dummysound:
+    def play(self): pass
+
+
+# each type of game object gets an init and an
+# update function. the update function is called
+# once per frame, and it is when each object should
+# change it's current position and state. the Player
+# object actually gets a "move" function instead of
+# update, since it is passed extra information about
+# the keyboard
+
+class Explosion(pygame.sprite.Sprite):
+    defaultlife = 12
+    animcycle = 3
+    images = []
+    def __init__(self, actor):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.image = self.images[0]
+        self.rect = self.image.get_rect()
+        self.life = self.defaultlife
+        self.rect.center = actor.rect.center
+
+    def update(self):
+        self.life = self.life - 1
+        self.image = self.images[self.life/self.animcycle%2]
+        if self.life <= 0: self.kill()
+
+class Player(pygame.sprite.Sprite):
+    speed = 10
+    bounce = 24
+    gun_offset = -11
+    images = []
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.image = self.images[0]
+        self.rect = self.image.get_rect()
+        self.reloading = 0
+        self.rect.centerx = SCREENRECT.centerx
+        self.rect.bottom = SCREENRECT.bottom - 1
+        self.origtop = self.rect.top
+        self.facing = -1
+
+    def move(self, direction):
+        if direction: self.facing = direction
+        self.rect.move_ip(direction*self.speed, 0)
+        self.rect = self.rect.clamp(SCREENRECT)
+        if direction < 0:
+            self.image = self.images[0]
+        elif direction > 0:
+            self.image = self.images[1]
+        self.rect.top = self.origtop - (self.rect.left/self.bounce%2)
+
+    def gunpos(self):
+        pos = self.facing*self.gun_offset + self.rect.centerx
+        return pos, self.rect.top
+
+class Decor(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.rect = self.image.get_rect()
+        self.reloading = 0
+        self.rect.centerx = SCREENRECT.centerx
+        self.rect.bottom = SCREENRECT.bottom - 1
+        self.origtop = self.rect.top
+        self.facing = -1
+
+class Ball(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.rect = self.image.get_rect()
+        self.reloading = 0
+        self.rect.centerx = random.random() * SCREENRECT.width
+        self.rect.top = SCREENRECT.top
+        self.origtop = self.rect.top
+        self.facing = -1
+        self.nbloops = 0
+    #pygame.Surface(SCREENRECT.size)
+    #self.currentDecor.set_alpha(100)
+    #for x in range(0, SCREENRECT.width, rainbowimage.get_width()):
+    #    self.currentDecor.blit(rainbowimage, (x, 0))
+    #screen.blit(self.currentDecor, (0,0))
+    def update(self):
+        self.nbloops = self.nbloops + 1
+        #self.rect.top = self.rect.top + 0.5 * self.nbloops
+        self.rect.top = self.rect.top + 2
+        if self.rect.top > SCREENRECT.bottom:
+            self.kill()
+
+#call the "main" function if running this script
+if __name__ == '__main__': Bagarre()
+

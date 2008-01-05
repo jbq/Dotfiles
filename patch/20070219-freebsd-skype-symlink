@@ -1,0 +1,14 @@
+--- Makefile.orig	Fri Mar  4 10:15:16 2005
++++ Makefile	Fri Mar  4 10:17:25 2005
+@@ -52,6 +52,11 @@
+ 	${INSTALL_DATA} ${WRKSRC}/lang/*.qm ${DATADIR}/lang/
+ 	${INSTALL_DATA} ${WRKSRC}/sound/*.wav ${DATADIR}/sound/
+ 	${INSTALL_DATA} ${WRKSRC}/LICENSE ${DATADIR}/
++.if defined(WITH_SYMLINK_BASE)
++	# skype expects data under hard-coded path /usr/share/skype so create a
++	# symlink in the base system if needed
++	${TEST} -h /usr/share/skype || ${LN} -s ${PREFIX}/share/skype /usr/share/skype
++.endif
+ 
+ post-install:
+ 	@${ECHO} "##########################################################################"

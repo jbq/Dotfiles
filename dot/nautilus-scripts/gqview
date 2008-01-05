@@ -1,0 +1,14 @@
+#! /bin/sh
+
+doit() {
+    for uri in $NAUTILUS_SCRIPT_SELECTED_URIS ; do
+        dir=${uri#file://}
+
+        if test -d $dir ; then
+            gqview $dir
+        fi
+    done
+}
+
+#doit | zvt -
+test -n "$NAUTILUS_SCRIPT_SELECTED_URIS" && doit || gqview

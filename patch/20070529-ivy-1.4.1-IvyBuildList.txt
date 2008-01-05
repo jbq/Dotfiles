@@ -1,0 +1,50 @@
+@@ -47,6 +42,8 @@
+     private boolean _excludeRoot = false;
+     private String _leaf = "*";
+     private boolean _excludeLeaf = false;
++    private List sortedModules;
++    private Map buildFiles;
+ 
+ 
+     public void addFileset(FileSet buildFiles) {
+@@ -106,7 +103,7 @@
+ 
+         Path path = new Path(getProject());
+ 
+-        Map buildFiles = new HashMap(); // Map (ModuleDescriptor -> File buildFile)
++        buildFiles = new HashMap(); // Map (ModuleDescriptor -> File buildFile)
+         Collection mds = new ArrayList();
+         List independent = new ArrayList();
+         ModuleDescriptor rootModuleDescriptor = null;
+@@ -168,7 +165,7 @@
+             mds = filterModulesFromLeaf(mds, leafModuleDescriptor);
+         }
+ 
+-        List sortedModules = ivy.sortModuleDescriptors(mds);
++        sortedModules = ivy.sortModuleDescriptors(mds);
+ 
+         for (ListIterator iter = independent.listIterator(); iter.hasNext();) {
+             File buildFile = (File)iter.next();
+@@ -349,6 +346,22 @@
+ 
+     public void setReverse(boolean reverse) {
+         _reverse = reverse;
++    }
++
++    /**
++     * Get access to all module descriptors (of type {@link ModuleDescriptor}) parsed during {@link #execute()}
++     * @return
++     */
++    public List<ModuleDescriptor> getSortedModules() {
++        return sortedModules;
++    }
++
++    /**
++     * Get access to all build files encountered during {@link #execute()} as a Map.  The keys of the Map are of type {@link ModuleDescriptor}, see {@link #getSortedModules()} to get access to the module descriptors.
++     * @return
++     */
++    public Map getBuildFiles() {
++        return buildFiles;
+     }
+ 
+ }

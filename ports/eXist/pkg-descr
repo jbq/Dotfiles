@@ -1,0 +1,10 @@
+eXist is an Open Source native XML database featuring efficient, index-based
+XQuery  processing, automatic indexing, extensions for full-text search,
+XUpdate  support and tight integration with existing XML development tools.
+
+XQuery support in eXist makes it possible to write entire web applications with
+just XQuery and XSLT.  Additional features: Java binding, fulltext-search
+functions, modules in XQuery and Java, extension modules for HTTP support,
+database manipulation and XSL transformations.
+
+WWW: http://exist.sourceforge.net/

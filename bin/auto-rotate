@@ -1,0 +1,37 @@
+#! /usr/bin/env python
+
+import os, sys, re
+
+def get_info(file):
+    identify = os.popen("""identify -format "%%w %%h %%[EXIF:Orientation]" %s""" % file)
+    info = identify.read().rstrip().split(" ")
+    #os.spawnv(os.P_WAIT, "/usr/bin/env", ["env", "identify", "-format", "%[EXIF:Orientation]", file])
+    identify.close()
+    return info
+
+def auto_rotate(dir):
+    dirs = os.listdir(dir)
+    dirs.sort()
+    for file in dirs:
+        if not(file.endswith(".jpg") or file.endswith(".JPG")):
+            continue
+        info = get_info(file)
+
+        width = info[0]
+        height = info[1]
+        orientation = info[2]
+
+        # check image dimensions to verify if rotate is needed
+        if (width < height) or orientation == "1":
+            continue
+
+        if orientation == "8":
+            os.system("mogrify -rotate -90 %s" % file)
+            print "%s -90" % file
+        elif orientation == "6":
+            os.system("mogrify -rotate +90 %s" % file)
+            print "%s +90" % file
+        else:
+            print >> sys.stderr, "Unknown orientation: '%s'" % orientation
+
+auto_rotate(os.getcwd())

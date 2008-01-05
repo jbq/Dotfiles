@@ -1,0 +1,11 @@
+Source: cleanbackups
+Section: text
+Priority: optional
+Maintainer: Jean-Baptiste Quenot <jbq@caraldi.com>
+Build-Depends: debhelper (>= 5.0.37.2), cdbs (>= 0.4.43), python-support (>= 0.6.4)
+Standards-Version: 3.7.2
+
+Package: python-cleanbackups
+Architecture: any
+Depends: ${python:Depends}
+Description: clean-backups is a program that allows to clean backups :-)

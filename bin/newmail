@@ -1,0 +1,28 @@
+#! /usr/bin/env python
+
+import email.Header, email.Parser, sys, popen2
+
+content = sys.stdin.read()
+headers = email.Parser.Parser().parsestr(content, 1)
+
+for header in headers.keys():
+    value = ''
+    for phrase in email.Header.decode_header(headers[header]):
+        value = value + " " + phrase[0]
+    headers.replace_header(header, value)
+
+msg="""Date: %(Date)s
+From: %(From)s
+To: %(To)s
+Subject: %(Subject)s""" % headers
+
+(child_stdout, child_stdin) = popen2.popen2('LC_CTYPE="fr_FR.UTF-8" sendxmpp caraldi@gmail.com')
+child_stdin.write(msg)
+child_stdin.close()
+
+file = open("/home/jbq/newmail.log", "a")
+print >> file, msg
+print >> file, "------------------------------------------------------------------------"
+file.close()
+
+print content

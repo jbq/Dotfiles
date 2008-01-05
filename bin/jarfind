@@ -1,0 +1,122 @@
+#! /usr/bin/env python
+#
+# $Id$
+#
+# Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# TODO do not depend on logging, redefine constants
+# TODO usage()
+# TODO KeyboardInterrupt hangs the "jar" command, eating CPU indefinitely
+# TODO use python zip module instead of jar command (suggested by Philippe Gassmann)
+#
+# Warning: this script requires package 'logging' from
+# http://www.red-dove.com/python_logging.html or bundled with Python starting
+# from version 2.3
+
+import os, sys, caraldi, re, getopt, select, logging
+
+class JarStat(caraldi.DirStat):
+    def visitDirectory(self, file, stat):
+        pass
+
+    def visitFile(self, file, stat):
+        if (re.search("\.[jw]ar$", file)):
+            self.grepJarContents(file, classNames)
+
+    def grepJarContents(self, file, classNames):
+        if verboseFiles:
+            print >> sys.stderr, "Looking in", file
+        fileAdvertised = 0
+        command = "jar tf '" + file + "'"
+        pipe = os.popen(command);
+        if len(classNames):
+            regexp = classNames[0]
+            for className in classNames[1:]:
+                regexp = regexp + "|" + className
+        else:
+            regexp = ""
+        regexp = "^(.*)(" + regexp + ")(.*)$"
+        logger.debug("regexp = " + regexp)
+
+        while 1:
+            line = pipe.readline()
+            if (line == ''):
+                break;
+            if (re.search(regexp, line)):
+                if not(fileAdvertised) and not(verboseFiles):
+                    print >> sys.stderr, "Looking in", file
+                    fileAdvertised = 1
+                if (outputToTerminal):
+                    print re.sub(regexp, r"\1" + '[1;31m' + r"\2" + '[0;m' + r"\3", line.rstrip())
+                else:
+                    print re.sub(regexp, r"\1\2\3", line.rstrip())
+            # Flush stdout to detect quickly broken pipes when writing to a pipe
+            # like jarfind ... | less
+            sys.stdout.flush()
+
+if __name__ == "__main__":
+    opts, args = getopt.getopt (sys.argv[1:], 'vdn:', ['verbose', 'name=', 'debug'])
+
+    # Init options
+    classNames = []
+    verboseFiles=0
+
+    logger = caraldi.getLogger(sys.argv[0])
+
+    # Fetch options
+    for o, a in opts:
+        if o in ("-v", "--verbose"):
+            verboseFiles=1
+        elif o in ("-n", "--name"):
+            classNames.append(a)
+        elif o in ("-d", "--debug"):
+            logger.setLevel(logging.DEBUG)
+
+    # Fetch arguments
+    dirs = args
+    if dirs == []:
+        dirs = ["."]
+
+    # Get terminal
+    outputToTerminal = 1
+
+    try:
+        os.ttyname(sys.stdout.fileno())
+    except OSError:
+        outputToTerminal = 0
+
+    EXIT_SUCCESS = 0
+    EXIT_FAILURE = 1
+
+    try:
+        for dir in dirs:
+            logger.debug('jarfind %s -name %s' % (str(dirs), classNames))
+            JarStat(dir)
+    except IOError:
+        # Broken pipe when writing to a pipe like jarfind ... | less
+        sys.exit(EXIT_FAILURE)
+    except KeyboardInterrupt:
+        sys.exit(EXIT_SUCCESS)

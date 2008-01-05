@@ -1,0 +1,76 @@
+#! /bin/sh
+
+################################################################################
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Create packing list for Resin
+# Date Created:  2004-01-23 15:49:30
+# Revision:      $Id: confstyle 130 2003-09-09 13:26:36Z jbq $
+################################################################################
+
+#
+# This script creates pkg-plist in current directory.  It may be invoked as
+# "sh admin/make-plist".  It assumes that Resin is already extracted by
+# "make extract", as the list of files depends on every file that is getting
+# installed.
+#
+
+set -e
+
+WRKSRC=$(make -V WRKSRC)
+COPYDIRS=$(make -V COPYDIRS)
+
+makeit ()
+{
+    echo '@comment $FreeBSD: ports/www/resin3/pkg-plist,v 1.11 2005/12/20 22:38:35 edwin Exp $'
+    list_files | xargs -I - echo %%APP_NAME%%/-
+
+    # libexec shared objects exist after make install only
+    echo %%APP_NAME%%/libexec/libresin_os.so
+
+    echo etc/%%APP_NAME%%/app-default.xml
+    echo etc/rc.d/%%APP_NAME%%.sh
+    echo sbin/%%APP_NAME%%ctl
+    echo %%MOD_DIR%%/mod_caucho.so
+    # Executed when *package* is installed, not the port
+    echo %%APACHE%%@exec %%APXS%% -e -a -n caucho %f
+    echo %%APACHE%%@unexec %%APXS%% -e -A -n caucho %f
+
+    list_dirs | xargs -I - echo @dirrm %%APP_NAME%%/-
+    # libexec does not yet exist, it is created by make install
+    echo @dirrm %%APP_NAME%%/libexec
+    echo @dirrm %%APP_NAME%%
+
+    # Inspired from misc/screen
+    echo "@unexec if cmp -s %D/etc/%%APP_NAME%%/resin.xml %D/etc/%%APP_NAME%%/resin.xml-dist; \
+then rm -f %D/etc/%%APP_NAME%%/resin.xml ; \
+else echo If permanently deleting this package, \
+%D/etc/%%APP_NAME%%/resin.xml must be removed manually; fi"
+    echo etc/%%APP_NAME%%/resin.xml-dist
+    echo @dirrm etc/%%APP_NAME%%
+    echo "@exec if test -f %B/resin.xml ; \
+then echo Keeping %B/resin.xml intact from previous installation; \
+else cp %F %B/resin.xml; fi"
+}
+
+list_files()
+{
+    for dir in $COPYDIRS ; do
+        # libexec does not yet exist, it is created by make install
+        test "$dir" = "libexec" && continue
+        ( cd $WRKSRC && find -s $dir -type f -or -type l )
+    done
+}
+
+list_dirs()
+{
+    for dir in $COPYDIRS ; do
+        # libexec does not yet exist, it is created by make install
+        test "$dir" = "libexec" && continue
+        # Remove all empty dirs
+        ( cd $WRKSRC && find -s $dir -type d -empty -delete )
+        # List all directories
+        ( cd $WRKSRC && find -s -d $dir -type d )
+    done
+}
+
+makeit > pkg-plist

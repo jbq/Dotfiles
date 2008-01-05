@@ -1,0 +1,15 @@
+#! /bin/sh
+
+find . -name '._*' -exec echo rm -f '"'\{\}'"' \;
+find . -name ':2eDS_Store' -exec echo rm -f '"'\{\}'"' \;
+find . -name '.DS_Store' -exec echo rm -f '"'\{\}'"' \;
+find . -name '.Parent' -exec echo rm -f '"'\{\}'"' \;
+find . -name 'Icon' -exec echo rm -f '"'\{\}'"' \;
+find . -name '.AppleDouble' -exec echo rm -rf '"'\{\}'"' \;
+find . -name '.AppleDesktop' -exec echo rm -rf '"'\{\}'"' \;
+find . -name '.thumbnails' -exec echo rm -rf '"'\{\}'"' \;
+find . -name '.xvpics' -exec echo rm -rf '"'\{\}'"' \;
+find . -name 'TheVolumeSettingsFolder' -exec echo rm -rf '"'\{\}'"' \;
+find . -name 'Network Trash Folder' -exec echo rm -rf '"'\{\}'"' \;
+find . -name 'TheFindByContentFolder' -exec echo rm -rf '"'\{\}'"' \;
+find . -name 'Temporary Items' -exec echo rm -rf '"'\{\}'"' \;

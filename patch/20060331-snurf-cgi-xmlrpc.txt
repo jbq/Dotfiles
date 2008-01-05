@@ -1,0 +1,39 @@
+diff -ru snurf-0.2.1/src/cgi/xmlrpc.py /usr/local/lib/python2.4/site-packages/snurf/cgi/xmlrpc.py
+--- snurf-0.2.1/src/cgi/xmlrpc.py	Mon Dec 20 23:10:55 2004
++++ /usr/local/lib/python2.4/site-packages/snurf/cgi/xmlrpc.py	Fri Mar 31 17:40:03 2006
+@@ -8,7 +8,7 @@
+ # :License: See <http://bdash.net.nz/svn/snurf/trunk/COPYING.txt> for details.
+ 
+ import SimpleXMLRPCServer, snurfConfig, snurf, xmlrpclib
+-import os, tempfile, datetime, time, sha, snurf.util
++import sys, os, tempfile, datetime, time, sha, snurf.util
+ 
+ def escape(s):
+     for c in (' ', '\t', '\n'):
+@@ -207,18 +207,15 @@
+     blogger = Blogger()
+     metaWeblog = MetaWeblog()
+     mt = MT()
+-
+-class CGIXMLRPCRequestHandler(SimpleXMLRPCServer.CGIXMLRPCRequestHandler):
+-    def _dispatch(*args):
++    def _dispatch(self, method, params):
++        #print >>sys.stderr, "Calling", method
+         try:
+-            return SimpleXMLRPCServer.CGIXMLRPCRequestHandler._dispatch(*args)
+-        except:
+-            snurf.util.notifyOfError('An error occurred while handling an XML-RPC request',
+-                                     repr(args))
+-            raise
++            return eval("self." + method + "(*params)")
++        except Exception, e:
++            snurf.util.notifyOfError('An error occurred while handling an XML-RPC request', e)
++            raise e
+ 
+ def main():
+-    h = CGIXMLRPCRequestHandler()
+-    h.register_introspection_functions()
++    h = SimpleXMLRPCServer.CGIXMLRPCRequestHandler()
+     h.register_instance(RootObject())
+     h.handle_request()
+Only in /usr/local/lib/python2.4/site-packages/snurf/cgi: xmlrpc.pyc

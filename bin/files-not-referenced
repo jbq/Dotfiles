@@ -1,0 +1,6 @@
+#! /bin/sh
+
+# First argument is path to dependent files
+# Second argument is the file containing references  to dependent files
+
+find $1 -name "*.*" | xargs -I% echo "grep % $2 > /dev/null || echo %"

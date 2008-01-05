@@ -1,0 +1,105 @@
+#! /usr/bin/env python
+
+################################################################################
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Control Jetty process
+# Date Created:  2004-08-30 17:00:54
+# Revision:      $Id: existctl,v 1.6 2004/09/10 08:12:35 jbquenot Exp $
+################################################################################
+# Copyright (c) 2004-2006, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+################################################################################
+#
+# Launch jetty directly from start.jar, using a jetty-config.xml in current
+# directory.  Requires to set JETTY_HOME in the environment.
+#
+# Note: Files handled by this script (pid file, log files) must reside in a
+# writable directory, ie the directory must be owned by the user running the
+# program.
+#
+
+import caraldi, getopt, os, sys
+
+args = {
+    "LOG_FILE": "jetty.log",
+    "APP_HOME": os.environ['JETTY_HOME'],
+    "APP_NAME": "jetty",
+    "PID_FILE": "jetty.pid",
+    "COMMAND":  "/usr/bin/env",
+    "ARGS":     ["java", "-Djetty.home=%s" % os.environ['JETTY_HOME'], "-jar", "%s/start.jar" % os.environ['JETTY_HOME'], "%s/etc/jetty.xml" % os.environ['JETTY_HOME']]
+}
+script_debug=0
+
+def usage():
+    print >> sys.stderr, """Usage: %s [OPTIONS] {start|stop|restart}
+
+Where OPTIONS include:
+
+    -h | --help
+
+        Display usage (this very information)""" % sys.argv[0]
+
+if __name__ == '__main__':
+    opts, lineargs = getopt.getopt(sys.argv[1:], 'dhn', ['debug', 'help', "script-debug"])
+
+    if lineargs:
+        args['cmdargs'] = [lineargs[-1]]
+    args['ARGS'] = args['ARGS'][0:-1] + lineargs[0:-1] + [args['ARGS'][-1]]
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit(1)
+        elif o in ("-d", "--debug"):
+            args['ARGS'] = [args['ARGS'][0]] + ['-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n'] + args['ARGS'][1:]
+        elif o in ("--script-debug"):
+            script_debug = 1
+
+    if (os.path.exists("jetty-config.xml")):
+        print "Using", os.path.abspath("jetty-config.xml")
+        args['ARGS'] = args['ARGS'] + [os.path.abspath("jetty-config.xml")]
+
+    if not(args.has_key('cmdargs')) or len(args['cmdargs']) != 1:
+        usage()
+        sys.exit(1)
+
+    ctl = caraldi.DaemonCtl(args)
+
+    if (script_debug):
+        ctl.logger.setLevel(caraldi.DefaultLogger.DEBUG)
+
+    if args['cmdargs'][0] == "start":
+        ctl.start()
+
+    elif args['cmdargs'][0] == "stop":
+        ctl.stop()
+
+    elif args['cmdargs'][0] == "restart":
+        ctl.stop()
+        ctl.start()
+
+    else:
+        usage()
+        sys.exit(1)

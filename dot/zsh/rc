@@ -1,0 +1,15 @@
+################################################################################
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       ZSH configuration
+# Date Created:  2004-07-06 17:54:01
+# Revision:      $Id: rc 1001 2004-10-15 20:04:56Z jbq $
+################################################################################
+
+export USER_DOTFILES=$HOME/usr/dot
+#. $USER_DOTFILES/zsh/profile
+. $USER_DOTFILES/zsh/rc_generic
+. $USER_DOTFILES/zsh/rc_local
+
+for file in $USER_DOTFILES/private/*.profile ; do
+	test -f $file && . $file
+done

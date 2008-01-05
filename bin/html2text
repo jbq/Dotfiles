@@ -1,0 +1,15 @@
+#! /bin/sh
+file=$1
+if [ "$file" = "" ]; then
+	echo Usage: $(basename $0) "<document>"
+	exit 1
+fi
+
+# lynx puts URL references
+#lynx -dump $file > ${file%.*}.txt
+
+# links does not understand iso latin 1
+#links -dump $file > ${file%.*}.txt
+
+# w3m is OK
+w3m -dump $file -cols 73 > ${file%.*}.txt

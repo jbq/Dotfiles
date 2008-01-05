@@ -1,0 +1,425 @@
+#! /usr/bin/env python
+#
+# $Id$
+#
+# Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Purpose:       Merge two directories
+# Date Created:  2003-11-18 17:10:55
+#
+# Usage: mergedirs masterdir slavedir
+#
+# Allows one to merge two directories containing a set of slightly different
+# files.  The directory into which the changes are propagated is called the
+# slave directory.  The directory serving as reference for merging is called the
+# master directory.
+#
+# For each file in the master directory that is also present in the slave
+# directory, mergedirs invokes an external editor for displaying and merging the
+# differences between a file in masterdir and its variant in slavedir.  Except
+# if files are identical.
+#
+# When a file is only present in masterdir but not in slavedir, you will be
+# prompted to confirm copying the file to slavedir.
+#
+# When a file is only present in slavedir but not in masterdir, you will be
+# prompted to confirm deleting the file from slavedir.
+#
+# To exclude dirs from processing, use repeated command-line options -e or
+# --exclude, eg `mergedirs -e work -e tmp masterdir slavedir'.  Globbing can be
+# used, eg `mergedirs -e slide-*.jar'.
+#
+# TODO for text files, let the user provide the junk patterns (eg '$Id')
+#
+# TODO when creating a directory, CVS add this directory.  With subversion, add
+# directory when leaving this directory
+#
+# TODO After displaying summary, propose to commit or discard changes, by
+# renaming merged-${slavedir} to slavedir
+#
+# TODO when whole dir is missing, prompt only one time for whole dir, for copy
+# and delete (with special confirmation)
+#
+# * replace options autoOverwriteBinary and autoDeclineBinary with
+# binary=overwrite, binary=decline
+
+import caraldi, caraldi.text, re, os, os.path, sys, shutil, filecmp, stat, getopt, time, zipfile
+
+stats = {'copy': 0, 'delete': 0, 'merge': 0}
+
+def hasSVN(slavef):
+    return os.path.exists(os.path.join(os.path.dirname(slavef), '.svn'))
+
+def hasCVS(slavef):
+    return os.path.exists(os.path.join(os.path.dirname(slavef), 'CVS'))
+
+def safe(s):
+    return s.replace("'", "\'")
+
+def copy(masterf, slavef, isBinary=0):
+    fileExists = os.path.exists(slavef)
+    if not(prefs['dryRun']):
+        shutil.copyfile(masterf, slavef)
+
+        if not(fileExists):
+            if hasSVN(slavef):
+                os.system("svn add %s" % slavef)
+            elif hasCVS(slavef):
+                if isBinary:
+                    # Add file to CVS with binary option
+                    os.system("cd '%s' ; cvs add -kb '%s'" % (safe(os.path.dirname(slavef)), safe(os.path.basename(slavef))))
+                else:
+                    os.system("cd '%s' ; cvs add '%s'" % (safe(os.path.dirname(slavef)), safe(os.path.basename(slavef))))
+
+    stats['copy'] = stats['copy'] + 1
+
+def delete(file):
+    if not(prefs['dryRun']):
+        if hasSVN(file):
+            os.system("svn rm %s || rm -f %s" % (file, file))
+        elif hasCVS(file) and not(re.search('/?\.#[^/]+$', file)):
+            # Remove file from CVS and unlink file
+            os.system("cd '%s' ; cvs rm -f '%s'" % (safe(os.path.dirname(file)), re.sub(" ", "\\ ", safe(os.path.basename(file)))))
+        else:
+            os.unlink(file)
+
+    stats['delete'] = stats['delete'] + 1
+
+def linejunk(s):
+    if re.search("\$(Id|Header|Revision|FreeBSD)", s):
+        return 1
+
+    return 0
+
+def indepthfilecmp(fna, fnb):
+    fa = open(fna)
+    fb = open(fnb)
+    diff = 0
+
+    # Here we don't use readlines() and difflib.ndiff to keep acceptable
+    # performance.  Stop reading as soon as lines differ.
+    while 1:
+        la = fa.readline()
+        lb = fb.readline()
+
+        if not(la and lb):
+            if (la or lb):
+                diff = 1
+            break
+
+        # Strip *after* checking empty string or empty line is the same as EOF!
+        la = la.rstrip()
+        lb = lb.rstrip()
+
+        if not(linejunk(la)) and (la != lb):
+            diff = 1
+            break
+
+    fa.close()
+    fb.close()
+
+#    for line in difflib.ndiff(a, b):
+#        if not(re.search("^[\? ] ", line)) and not linejunk(line):
+#            return 1
+#
+    return diff
+
+def lastmodified(file):
+    return os.lstat(file)[stat.ST_MTIME]
+
+def lastmodifiedformat(file):
+    return time.ctime(lastmodified(file))
+
+class DiffStat(caraldi.DirStat):
+    logger = caraldi.util.getLogger()
+    def __init__(self, master, slave, patterns, fullPathPatterns):
+        caraldi.DirStat.__init__(self)
+        if prefs['nonRecursive']:
+            self.nonRecursive = 1
+        self.master = master
+        self.slave = slave
+        self.patterns = patterns
+        self.fullPathPatterns = fullPathPatterns
+        self.walk(master)
+
+    def confirm(self, msg=None, defaultAnswer='n'):
+        print
+        if prefs['confirmationDefaultsToYes']:
+            defaultAnswer = "y"
+        if (msg):
+            # Don't use print because it outputs a newline.  And don't end the
+            # print statement with a comma, else the next print statement
+            # outputs a space
+            sys.stdout.write(msg + "? [%s] " % defaultAnswer)
+
+        answer = sys.stdin.readline().rstrip()
+
+        if answer == '':
+            answer = defaultAnswer
+
+        if answer == 'y':
+            return 1
+        return 0
+
+    def visitDirectory(self, dir, stat):
+        pass
+
+    def archivesReallyDiffer(self, archiveType, masterf, slavef):
+        # Need to compare masterf against slavef and slavef against masterf
+        # because some files could be present in slavef but not in masterf
+        # TODO do not compare already compared entries by creating a dictionary
+        # of entries to perform quicker
+        return caraldi.zipEntriesDiffer(masterf, slavef)
+
+    def visitFile(self, masterf, statinfo):
+        relpath = re.sub('^' + self.master + '/', '', masterf)
+        slavef = caraldi.join(self.slave, relpath)
+
+        if os.path.isfile(slavef):
+            # Destination file exists
+            if not(filecmp.cmp(masterf, slavef)):
+                # Master and slave files differ
+                isBinary = not(caraldi.text.istextfile(slavef))
+                # Currently only ZIP archives are supported
+                archiveType = None
+                if zipfile.is_zipfile(slavef):
+                    archiveType = "zip"
+
+                if archiveType:
+                    DiffStat.logger.debug("%s is an archive, will look more in depth" % relpath)
+                elif isBinary:
+                    DiffStat.logger.debug("%s is a binary file" % relpath)
+
+                if not(isBinary):
+                    if indepthfilecmp(masterf, slavef):
+                        if not(prefs['autoOverwriteText']) and self.confirm('File %55.55s last modified %s\nFile %55.55s last modified %s\nDiff %s' % (masterf, lastmodifiedformat(masterf), slavef, lastmodifiedformat(slavef), relpath)):
+                            # Open an interactive editor
+                            datebefore = lastmodified(slavef)
+                            err = os.system('gvimdiff -f ' + masterf + ' ' + slavef)
+                            if (err):
+                                err = os.system('vimdiff -f ' + masterf + ' ' + slavef)
+                            if (err):
+                                os.system('diff ' + masterf + ' ' + slavef)
+				err=0
+                            if (err):
+                                err = os.system('vim -d -f ' + masterf + ' ' + slavef)
+                            if (err):
+                                print('No diff editor found, giving up.')
+                                sys.exit(1)
+                            dateafter = lastmodified(slavef)
+                            if (dateafter > datebefore):
+                                stats['merge'] = stats['merge'] + 1
+                            else: # File was not modified
+                                if self.confirm("%s hasn't been modified.  Overwrite with %s" % (slavef, masterf)):
+                                    copy(masterf, slavef)
+                        else: # Don't want to diff
+                            if prefs['autoOverwriteText'] or self.confirm("Overwrite %s" % slavef):
+                                copy(masterf, slavef)
+                                if prefs['autoOverwriteText']:
+                                    print "%s overwritten" % slavef
+                    else:
+                        # Files are not *really* different
+                        #print("Not really different: " + relpath)
+                        pass
+                else: # Don't want to diff or binary file
+                    reallyDiffer = 1
+                    if archiveType:
+                        reallyDiffer = self.archivesReallyDiffer(archiveType, masterf, slavef)
+                    if isBinary and reallyDiffer:
+                        if prefs['autoDeclineBinary']:
+                            print("Skipping binary file %s" % (masterf))
+                            pass
+                        elif prefs['autoOverwriteBinary'] or self.confirm("Overwrite %s" % slavef):
+                            copy(masterf, slavef, isBinary)
+                            if prefs['autoOverwriteBinary']:
+                                print "%s overwritten" % slavef
+                    elif isBinary:
+                        DiffStat.logger.debug("Files do not really differ after thorough examination")
+            else:
+                # Files are identical
+                pass
+        else:
+            # Destination file does not exist
+            if not(prefs['noCopy']) and (prefs['autoCopy'] or self.confirm('Copy %s' % (relpath))):
+                slaved = os.path.dirname(slavef)
+
+                # Create all necessary directories if needed
+                if not(os.path.exists(slaved)):
+                    os.makedirs(slaved)
+
+                # Copy the file
+                copy(masterf, slavef)
+
+                if prefs['autoCopy']:
+                    print "%s created" % slavef
+
+class ReverseDiffStat(DiffStat):
+    def __init__(self, master, slave, patterns, fullPathPatterns):
+        caraldi.DirStat.__init__(self)
+        if prefs['nonRecursive']:
+            self.nonRecursive = 1
+        self.master = master
+        self.slave = slave
+        self.patterns = patterns
+        self.fullPathPatterns = fullPathPatterns
+        self.walk(master)
+
+    def visitFile(self, masterf, statinfo):
+        relpath = re.sub('^' + self.master, '', masterf)
+        slavef = self.slave + relpath
+
+        if not(os.path.isfile(slavef)):
+            print
+            if prefs['autoDelete'] or self.confirm('File %55.55s last modified %s\nDelete %s' % (masterf, lastmodifiedformat(masterf), masterf)):
+                delete(masterf)
+                if prefs['autoDelete']:
+                    print "%s deleted" % masterf
+
+def usage():
+    print 'Usage:', os.path.basename(sys.argv[0]), 'master-dir slave-dir'
+    print
+    print '''Options:
+      -h  --help                   Displays this help message.
+
+      -e  --exclude                Excludes a single path component anywhere
+                                   in the path. ".*.sw*", ".svn", "CVS",
+                                   "svn-commit.tmp" and "svn-commit.[0-9].tmp"
+                                   are always excluded.  The specified pattern
+                                   can contain wildcards or other globbing
+                                   expressions.
+
+      -E  --exclude-path           Excludes a path.  The specified pattern
+                                   can contain wildcards or other globbing
+                                   expressions.
+
+      -n  --non-recursive          Do not recurse into subdirectories
+
+      -y  --yes                    On a yes/no prompt, the default answer is
+                                   no.  With this option set, the default answer
+                                   is "yes".  USE WITH CARE, THIS OPTION WILL
+                                   DELETE FILES IF YOU HIT ENTER TOO MUCH!
+
+          --dry-run                Do not perform actual operation (CURRENTLY
+                                   ONLY SUPPORTED FOR THE COPY OPERATION!!!)
+
+          --auto                   Answers yes to every question.  USE WITH CARE,
+                                   THIS OPTION WILL DELETE FILES WITHOUT WARNING!
+
+          --auto-overwrite         Overwrites files without user interaction.
+
+          --auto-copy              Copy missing files without confirmation.
+
+          --auto-overwrite-binary  Overwrites binary files without user
+                                   interaction.
+
+          --auto-decline-binary    Decline to overwrite binary files without user
+                                   interaction.
+
+          --no-copy                Do not copy any missing files in the slave
+                                   directory.
+      '''
+    sys.exit(1)
+
+def doexit():
+    print
+    print '%i file(s) merged, %i copied and %i deleted' % (stats['merge'], stats['copy'], stats['delete'])
+
+if __name__ == '__main__':
+    opts, args = getopt.getopt (sys.argv[1:], 'he:E:yn', ['dry-run', 'help', 'exclude=', 'exclude-path=', 'auto', 'auto-copy', 'auto-overwrite', 'auto-overwrite-binary', 'auto-decline-binary', 'yes', 'no-copy', 'non-recursive'])
+
+    # Init options
+    #exclude = []
+    #exclude = ['.svn', 'work', 'CVS', 'admin', 'README.html']
+    patterns = ['-.svn', '-CVS', '-.*.sw*', '-svn-commit.tmp', '-svn-commit.[0-9].tmp']
+    fullPathPatterns = []
+    prefs = {}
+    prefs['autoOverwriteBinary'] = 0
+    prefs['autoDeclineBinary'] = 0
+    prefs['autoOverwriteText'] = 0
+    prefs['autoCopy'] = 0
+    prefs['autoDelete'] = 0
+    prefs['confirmationDefaultsToYes'] = 0
+    prefs['nonRecursive'] = 0
+    prefs['noCopy'] = 0
+    prefs['dryRun'] = 0
+
+    # Fetch options
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+        elif o in ("-e", "--exclude"):
+            patterns.append("-"+a)
+        elif o in ("-E", "--exclude-path"):
+            fullPathPatterns.append("-"+a)
+        elif o in ("-n", "--non-recursive"):
+            prefs['nonRecursive'] = 1
+        # Must appear before other auto-* knobs
+        elif o in ("--auto"):
+            prefs['autoOverwriteBinary'] = 1
+            prefs['autoOverwriteText'] = 1
+            prefs['autoCopy'] = 1
+            prefs['autoDelete'] = 1
+        elif o in ("--dry-run"):
+            prefs['dryRun'] = 1
+        elif o in ("--auto-copy"):
+            prefs['autoCopy'] = 1
+        elif o in ("--auto-overwrite"):
+            prefs['autoOverwriteBinary'] = 1
+            prefs['autoOverwriteText'] = 1
+        elif o in ("--auto-overwrite-binary"):
+            prefs['autoOverwriteBinary'] = 1
+        elif o in ("--auto-decline-binary"):
+            prefs['autoDeclineBinary'] = 1
+        elif o in ("-y", "--yes"):
+            prefs['confirmationDefaultsToYes'] = 1
+        elif o in ("--no-copy"):
+            prefs['noCopy'] = 1
+
+    if len(args) != 2:
+        usage()
+
+    master = args[0]
+    slave = args[1]
+
+    for dir in (master, slave):
+        if not(os.path.isdir(dir)):
+            print dir, 'is not a directory'
+            usage()
+
+    if master == slave:
+        usage()
+
+    try:
+        DiffStat(master, slave, patterns, fullPathPatterns)
+        print
+        ReverseDiffStat(slave, master, patterns, fullPathPatterns)
+        #if stats['delete'] == 0:
+        #    print 'No file to delete'
+    except KeyboardInterrupt:
+        print
+        print 'Giving up.'
+
+    doexit()

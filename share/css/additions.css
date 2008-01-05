@@ -1,0 +1,139 @@
+/*******************************************************************************
+* Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+* Date Created:  2004-02-26 11:13:16
+* Revision:      $Id$
+*******************************************************************************/
+
+.webpath {
+    font-size: 10px;
+    font-family: sans-serif;
+}
+
+.webalternates {
+    font-size: 10px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.idea {
+    color: green;
+}
+
+.menu {
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * Override align='center' settings needed for PDF output
+ */
+.mediaobject {
+    text-align: left;
+}
+
+/*
+ * Address book
+ */
+
+/*
+ * A person's commonName or an organization's name
+ */
+h2.name {
+    margin-top: 0px;
+}
+
+/*
+ * Detailed information about a person or an organization, formatted in a table,
+ * one row per detail
+ */
+.details td {
+    padding-right: 15px;
+    vertical-align: top;
+}
+
+.details pre {
+    margin: 0px;
+}
+
+.input {
+    padding: 15px;
+    border: 2px red dotted;
+}
+
+.field {
+    padding-bottom: 10px;
+}
+
+.field .label {
+    font-weight: bold;
+    padding-right: 15px;
+    /* In the case where label is not in a paragraph nor in a table cell */
+    font-family: sans-serif;
+}
+
+.field .value {
+}
+
+.please {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.total {
+    font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.summary {
+    font-weight: bold;
+}
+
+.ldapObject {
+    border-top: 2px dotted red;
+    margin-bottom: 20px;
+}
+
+/*.description {
+    font-size: .9em;
+    font-style: italic;
+    color: green;
+}*/
+
+.actions {
+    float: right;
+}
+
+.actions form {
+    margin-top: 0px;
+}
+
+.wikiActions {
+    padding: 5px 5px;
+    margin: 10px 0px;
+    background-color: #eeeeee;
+}
+
+.wikiActions form {
+    padding: 0px;
+    margin: 0px;
+}
+
+.wikiHeading {
+    padding: 5px 5px;
+    margin: 10px 0px;
+    background-color: #eeeeee;
+}
+
+div.important {
+    border: solid 1px #7099C5;
+    background-color: #f0f0ff;
+    padding: .5em;
+}

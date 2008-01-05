@@ -1,0 +1,8 @@
+SRC=$1
+DST=$2
+
+mkdir /tmp/$$
+mv $DST /tmp/$$
+svn revert $SRC
+svn mv $SRC $DST
+mv /tmp/$$/* $DST

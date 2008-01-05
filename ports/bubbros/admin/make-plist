@@ -1,0 +1,5 @@
+echo bin/bubbros
+find -s -d /usr/local/share/bubbros -type f | sed -e 's|/usr/local/share/bubbros|%%DATADIR%%|'
+find -s -d /usr/local/share/bubbros -type d | sed -e 's|/usr/local/share/bubbros|@dirrm %%DATADIR%%|'
+find -s -d /usr/local/share/doc/bubbros -type f | sed -e 's|/usr/local/share/doc/bubbros|%%PORTDOCS%%%%DOCSDIR%%|'
+echo "%%PORTDOCS%%@dirrm %%DOCSDIR%%"

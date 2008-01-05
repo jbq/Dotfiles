@@ -1,0 +1,1 @@
+diff -ruN --exclude=.svn --exclude=admin --exclude=.*.swp --exclude=work --exclude=README.html /usr/ports/comms/efax-gtk .

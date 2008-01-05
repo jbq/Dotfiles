@@ -1,0 +1,7 @@
+(debug)
+(if (matches (application_name) "Kopete") (begin (pin "TRUE") (geometry "+0+0")))
+(if (begin (is (application_name) "Galeon") (matches (window_role) "galeon-window-.*")) (begin (set_workspace 3) (geometry "+1280+0")))
+(if (matches (application_name) "Skype") (pin "TRUE"))
+(if (is (application_name) "muttng") (begin (pin "TRUE") (geometry "+0+0") (maximize)))
+(if (is (application_name) "Vim") (begin (set_workspace 2) (geometry "+1280+0") (maximize)))
+(if (is (application_name) "Liferea") (pin "TRUE"))

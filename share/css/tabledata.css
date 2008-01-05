@@ -1,0 +1,181 @@
+th {
+    background-color: #CCCCCC;
+    border-bottom: 1px solid black;
+}
+
+td.title {
+    font-weight: bold;
+}
+
+body {
+    margin: 0px;
+    font-size: 12pt;
+    font-family: sans-serif;
+}
+
+.datedue span.today {
+    color: Red;
+    font-weight: bold;
+}
+
+td {
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid black;
+}
+
+span.tomorrow {
+    color: Red;
+    font-weight: bold;
+}
+
+td.timespent {
+    text-align: right;
+}
+
+.todolist ul {
+    padding-left: 1em;
+    margin: 0
+}
+
+.history ul {
+    margin-top: 0
+}
+
+.history .uid {
+    font-weight: bold;
+}
+
+.history .session {
+    margin-left: 1em;
+}
+
+.history .sessions .date {
+    font-style: italic;
+}
+
+ul.phone {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.phone li {
+    font-family: monospace;
+}
+
+ul.location {
+    list-style: none;
+    padding-left: 0;
+}
+
+/*
+ * color0 and color1 are default styles, thus placed above others
+ */
+tbody tr.color0 {
+    background-color: #CCCCCC;
+}
+
+tbody tr.color1 {
+    background-color: #EFEFEF;
+}
+
+tbody tr.near-future {
+    background-color: #CCCCFF;
+}
+
+tbody tr.tomorrow {
+    background-color: #BBBBFF;
+}
+
+tbody tr.high {
+    border: .3em solid black;
+}
+
+/**
+ * Past should override color0 and color1, thus placed beneath
+ */
+tbody tr.past {
+    /*background-color: #86ba92;*/
+    background-color: #99ee99;
+}
+
+/*
+ * Today should override past, thus placed beneath
+ * Tomorrow should override color0 and color1, thus placed beneath
+ */
+tbody tr.today {
+    background-color: #FFBBBB;
+}
+
+tr.today {
+    background-color: Red;
+}
+
+.high-priority {
+    color: red;
+}
+
+.low-priority:before {
+    content: "(";
+}
+
+.low-priority:after {
+    content: ")";
+}
+
+.low-priority {
+    color: gray;
+}
+
+tbody tr.high-priority {
+    background-color: #FFBBBB;
+}
+
+/*
+ * <pre class='literallayout'> smaller font please
+ */
+pre {
+    font-size: .8em;
+}
+
+@media screen {
+    tr.color0 td a:link {
+        color: black;
+        background-color: #EFEFEF;
+        text-decoration: none;
+    }
+    tr.color0 td a:visited {
+        color: black;
+        background-color: #EFEFEF;
+        text-decoration: none;
+    }
+    tr.color1 td a:link {
+        color: black;
+        background-color: #CCCCCC;
+        text-decoration: none;
+    }
+    tr.color1 td a:visited {
+        color: black;
+        background-color: #CCCCCC;
+        text-decoration: none;
+    }
+}
+
+@media print {
+    td a:link {
+        color: black;
+        text-decoration: none;
+    }
+    td a:visited {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+.session {
+    margin-top: .6em;
+}
+
+.hidden {
+    text-decoration: line-through;
+}

@@ -1,0 +1,32 @@
+#! /bin/sh -e
+
+################################################################################
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Backup directory
+# Date Created:  2004-09-07 12:21:37
+# Revision:      $Id$
+################################################################################
+
+DST=$1
+shift
+SRC=$*
+FIRST_SRC_DIR=$1
+#echo "DST="$DST
+#echo "SRC="$SRC
+test -z "$SRC" && exit 1
+test -z "$DST" && exit 1
+LOGFILE=/tmp/`basename $0`.$$
+
+DESTFILE=$DST/$(basename $FIRST_SRC_DIR)-$(date "+%Y%m%d").tar.bz2
+
+if ! tar cf - $SRC 2>$LOGFILE | bzip2 > $DESTFILE ; then
+    # Remove target file if an error occured
+    rm -f $DESTFILE
+    # Dump error messages to stderr
+    cat $LOGFILE 1>&2
+    rm $LOGFILE
+    # Abort with error code
+    false
+fi
+
+rm $LOGFILE

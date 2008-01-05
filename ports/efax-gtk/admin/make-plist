@@ -1,0 +1,3 @@
+PREFIX=/opt-efax-gtk
+make clean install PREFIX=$PREFIX
+find $PREFIX -type f | sed -e "s|^$PREFIX/||" | grep -v man > pkg-plist

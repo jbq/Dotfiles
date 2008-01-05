@@ -1,0 +1,87 @@
+#! /bin/sh
+
+################################################################################
+# File:          keepup
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Maintain a service up and running
+# Date Created:  2001-01-01 00:00:00
+# Revision:      $Id: keepup 288 2003-10-10 07:44:17Z jbq $
+################################################################################
+
+VERBOSE_LOG=0
+#VERBOSE_LOG=1
+OUTPUT=/dev/null
+#OUTPUT=/tmp/keepup.log
+
+log () {
+	logger -p local1.notice -t $KEEPUP_TAG $*
+}
+
+log_info () {
+	logger -p local1.info -t $KEEPUP_TAG $*
+}
+
+stepped_sleep () {
+	i=0
+	#while (( $i < $KEEPUP_SLEEP )); do
+	while [ "$i" != "$KEEPUP_SLEEP" ]; do
+		i=$(expr $i + 1)
+		sleep 1
+	done
+}
+
+keepup_failed () {
+	test "$KEEPUP_FAILED" = "1" || log Service is down
+	echo $KEEPUP_STOP >> $OUTPUT 2>> $OUTPUT
+	eval $KEEPUP_STOP >> $OUTPUT 2>> $OUTPUT || log $KEEPUP_STOP: Error $?
+	stepped_sleep $KEEPUP_SLEEP
+	#test "$KEEPUP_FAILED" = "1" || log Service is down, starting
+	echo $KEEPUP_START >> $OUTPUT 2>> $OUTPUT || log $KEEPUP_START: Error $?
+	eval $KEEPUP_START >> $OUTPUT 2>> $OUTPUT
+	KEEPUP_FAILED=1
+}
+
+keepup_ok () {
+	if test "$KEEPUP_FAILED" = "1"; then
+		if test -n "$KEEPUP_UP_AGAIN"; then
+			log Service is up again
+			echo $KEEPUP_UP_AGAIN >> $OUTPUT 2>> $OUTPUT
+			eval $KEEPUP_UP_AGAIN >> $OUTPUT 2>> $OUTPUT || log $KEEPUP_UP_AGAIN: Error $?
+		else
+			log Service is up again
+		fi
+		KEEPUP_FAILED=0
+	fi
+}
+
+quit () {
+	log Shutting down
+	exit 0
+}
+
+# Start up
+if \
+	[ "$KEEPUP_TAG" = "" ] || \
+	[ "$KEEPUP_CHECK" = "" ] || \
+	[ "$KEEPUP_START" = "" ] || \
+	[ "$KEEPUP_STOP" = "" ] ; then
+	exit 1
+fi
+trap "log_info Shutting down ; exit 0" SIGTERM
+log_info Starting up
+
+# Enter loop
+while [ 1 ]; do
+	if [ "$VERBOSE_LOG" = "1" ]; then
+		log Checking
+	fi
+	echo $KEEPUP_CHECK >> $OUTPUT 2>> $OUTPUT
+	eval $KEEPUP_CHECK >> $OUTPUT 2>> $OUTPUT && keepup_ok || keepup_failed
+	
+	# Sleep n times for one second so that
+	# traps are executed after one second
+	if [ "$VERBOSE_LOG" = "1" ]; then
+		log Sleeping
+	fi
+	stepped_sleep
+done

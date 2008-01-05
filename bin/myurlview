@@ -1,0 +1,18 @@
+#! /bin/sh -e
+
+FILE=/tmp/mutt-$$-urlview
+
+# write the message to a file
+cat > $FILE
+
+# detect encoding
+egrep '^Content-Transfer-Encoding: quoted-printable$' < $FILE >/dev/null 2>/dev/null && QP=1 || QP=0
+
+if [ $QP = 1 ]; then
+	qpdecode < $FILE | urlview
+else
+	urlview < $FILE
+fi
+
+# delete file
+rm -f $FILE

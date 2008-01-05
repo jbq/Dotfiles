@@ -1,0 +1,294 @@
+################################################################################
+# File:          rc_local
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define site dependent shell aliases
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: rc_local 1086 2004-11-10 21:10:05Z jbq $
+################################################################################
+
+UNAME=$(uname -s)
+
+# Remove extra info (Cygwin)
+UNAME=${UNAME%%_*}
+
+test "$UNAME" = "FreeBSD" && alias ls='ls -G'
+# On Linux, use color only if standard output is connected to a terminal
+test "$UNAME" = "Linux" && alias ls='ls --color=auto'
+
+if test "$UNAME" = "Darwin" ; then
+    if test "$(which ls)" = "/bin/ls" ; then
+        # BSD ls
+        alias ls='ls -G'
+    else
+        # GNU ls in /sw/bin or /usr/local/bin
+        alias ls='ls --color'
+    fi
+fi
+
+have() {
+    type $* >&/dev/null
+}
+
+# FreeBSD specific aliases
+if [ "$UNAME" = "FreeBSD" ]; then
+	have ncftp3 && alias ncftp='ncftp3'
+	have wish8.3 && alias wish='wish8.3'
+	have tclsh8.3 && alias tclsh='tclsh8.3'
+	have dagrab && alias dagrab='dagrab -d /dev/acd1'
+#	have cdda2wav && alias cdda2wav='cdda2wav -D /dev/acd1'
+#	have cdcontrol && alias cdcontrol='cdcontrol -f /dev/acd1'
+	alias adduser='adduser -silent'
+#	alias mergemaster='mergemaster -c -i'
+elif [ "$UNAME" = "Darwin" ]; then
+	alias startx='startx -- -quartz'
+elif [ "$UNAME" = "Linux" ]; then
+	alias dselect="dselect --expert"
+fi
+
+have gimp-1.3 && alias gimp='gimp-1.3'
+have gimp-remote-1.3 && alias gimp-remote='gimp-remote-1.3'
+have gnome-open && alias open='gnome-open'
+have gpg && alias gpg='gpg --keyserver hkp://pgp.mit.edu --default-recipient-self --lock-never --no-secmem-warning'
+have apg && alias apg="apg -MNC -x8"
+have cvs && alias cvsdiff="cvs diff -u"
+have svn && alias svndiff="svn diff"
+
+# General aliases
+have tiff2ps && alias tiff2ps="tiff2ps -w 8.2 -h 10.94"
+
+have java	&& alias jfor='java org.jfor.jfor.main.CmdLineConverter'
+have wine	&& alias wine='wine --managed --winver win98'
+have w3m	&& alias w3m='w3m -cookie' # Gimme cookies :)
+have bc		&& alias bc='bc -q' # Shut up, bc!
+have screen	&& alias s=screen
+have cvs	&& alias cvs='cvs -q'
+have BitchX	&& alias bx='BitchX'
+have cvs2cl	&& alias cvs2cl="cvs2cl -t -b"
+have pgrep	&& alias pgrep="pgrep -l"
+
+# Custom commands
+alias mutt-lists="muttng -F $USER_DOTFILES/mutt/lists"
+
+# I often mistype commands :)
+alias amke='make'
+alias c='cd'
+alias cim='vim'
+alias d='cd'
+alias dc='cd'
+alias ehco='echo'
+alias ecoh='echo'
+alias gcim='gvim'
+alias givm='gvim'
+alias greo='grep'
+alias grpe='grep'
+alias gqview='gqview +t'
+alias hlat='halt'
+alias lll='ll'
+alias lcoate='locate'
+alias lzqq='less'
+alias les='less'
+alias mak='make'
+alias maek='make'
+alias mkae='make'
+alias mut='mutt'
+alias poing='ping'
+alias pnig='ping'
+alias psgre='psgrep'
+alias rehash='hash -r'
+alias qgview='gqview'
+alias satrtx='startx'
+alias statrx='startx'
+alias starxt='startx'
+alias strartx='startx'
+alias stratx='startx'
+alias starftx='startx'
+alias sratrx='startx'
+alias strtax='startx'
+alias styartx='startx'
+alias tai='tail'
+alias tali='tail'
+alias tial='tail'
+alias utt='mutt'
+alias vmi='vim'
+alias gvmi='gvim'
+alias vp='cp'
+alias nt='ant'
+alias anr='ant'
+alias anrt='ant'
+alias nat='ant'
+alias psg='psgrep'
+alias v=vir
+
+# aliases
+flop () {
+    drive=$1
+    FLOPPY=
+    test -d /$drive && FLOPPY=/$drive
+    test -d /mnt/$drive && FLOPPY=/mnt/$drive
+
+    # Removable devices may need to be reloaded on FreeBSD 5.x
+    #test "${OSTYPE%%.*}" = "freebsd5" && sudo /etc/rc.d/devfs restart
+
+    if sudo mount $FLOPPY 2> /dev/null ; then
+        echo $drive mounted
+	for script in $FLOPPY/*.sh ; do
+		sh $script start
+	done
+    else
+	for script in $FLOPPY/*.sh ; do
+		sh $script stop
+	done
+        if sudo umount $FLOPPY 2> /dev/null ; then
+            echo $drive unmounted
+        else
+            echo Cannot mount nor unmount $drive.  Please insert $drive if not
+            echo present, and close all files opened on the media if already inserted.
+        fi
+    fi
+}
+alias flip=flop
+
+have mysql && alias mysql='mysql -uroot -p'
+have mysqladmin && alias mysqladmin='mysqladmin -uroot -p'
+have mysqldump && alias mysqldump='mysqldump -uroot -p'
+
+# If current shell is not a login shell or an ssh connection...
+# ssh output must be empty at startup -- see rsync(1) DIAGNOSTICS for details
+# test "$0" = "${0#-}" -a ! -n "$SSH_CLIENT" && cat /etc/motd
+
+red () {
+	echo '[1;31m'$1'[0;m'
+}
+
+green () {
+	echo '[1;32m'$1'[0;m'
+}
+
+blue () {
+	echo '[1;34m'$1'[0;m'
+}
+
+# On Linux, screen refuses to accept backspace when launched with TERM=xterm-color
+# On FreeBSD, screen refuses to accept backspace when launched with TERM=xterm
+# Falling back to vt220 for use with Eterm
+have screen && alias screen='TERM=vt220 screen'
+# Falling back to 'linux' for use with Gnome Terminal
+# Causes problems on Linux in mutt and vim
+#alias screen='TERM=linux screen'
+
+#have screen && complete -F _screen -o default s
+
+# On Linux, disable bitmapped fonts for onscreen rendering
+have xset && (
+    if test -n "$DISPLAY" -a "$UNAME" = "Linux" ; then
+        xset -fp "/usr/lib/X11/fonts/Type1" 2>/dev/null
+        xset fp rehash
+    fi
+)
+
+if have mixer ; then
+    test -f /dev/dsp1.0 && alias mixer='mixer -f /dev/dsp1.0'
+    test -f /dev/dsp0.0 && alias mixer='mixer -f /dev/dsp0.0'
+fi
+#have portupgrade && alias portupgrade='portupgrade -p'
+have man && alias man='PAGER=view-manpage man'
+have svn && alias svncommit='svn commit -m Updated'
+have cvs && alias cvscommit='cvs commit -m Updated'
+
+#files=( /mnt/usbkey/inbox/info-*(.N) )
+#if (( $#files )) ; then
+#    if test -n "$DISPLAY" ; then
+#        for file in $(ls /mnt/usbkey/inbox/info-* 2>/dev/null) ; do
+#            basefile=${file##*/}
+#            zenity --text-info --filename $file --title ${basefile#info-} --width 560 --height 200 &
+#        done
+#    fi
+#fi
+
+#if test $(id -u) = 0 ; then
+#	export PS1=$'%{\e[1;31m%}[%N:%y:%{\e[1;34m%}%n@%m%{\e[1;31m%}:%3~] %{\e[0;m%}'
+#else
+#	export PS1=$'%{\e[1;32m%}[%N:%y:%{\e[1;34m%}%n@%m%{\e[1;32m%}:%3~] %{\e[0;m%}'
+#fi
+
+# Thanks to Phil! Gregory
+# http://aperiodic.net/phil/prompt/
+. $USER_DOTFILES/zsh/prompt.txt
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=** r:|=**'
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -U compinit
+compinit
+# End of lines added by compinstall
+
+#zmodload -i zsh/parameter
+#
+#didaprecmd()
+#{
+#  psvar[1]=$#jobstates;
+#  if [[ $psvar[1] -eq 0 ]] then
+#    psvar[1]=()
+#  elif [[ $psvar[1] -eq 1 ]] then
+#    psvar[1]="$psvar[1] job"
+#  else
+#    psvar[1]="$psvar[1] jobs"
+#  fi
+#  [[ -n $TTY && $TERM == (xterm*|dtterm|rxvt|screen*) ]] &&
+#    {
+#      print -nP "\e]1;%m:%.\x07"
+#      print -nP "\e]2;%(1v. %1v |.)${WINTITLE:+ $WINTITLE |} %n@%m - %~ | %y"
+#      [[ $TERM == screen* ]] && print -n .
+#      print -n "\x07"
+#    } > $TTY
+#}
+#
+#TRAPCLD() { [[ -o interactive && -n $TTY ]] && didaprecmd }
+
+if test -r $HOME/.ssh/known_hosts ; then
+	hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+	zstyle ':completion:*:hosts' hosts $hosts 
+fi
+
+# Add some useful readline bindings to the vi mode: best of both worlds :)
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+bindkey "^K" vi-kill-eol
+#bindkey "^R" vi-history-search-backward
+bindkey "^R" history-incremental-search-backward
+
+autoload -U zkbd
+
+[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
+source ~/.zkbd/$TERM-$VENDOR-$OSTYPE
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-history
+
+alias c21="cd $HOME/var/repos/cocoon/branches/BRANCH_2_1_X"
+alias c22="cd $HOME/var/repos/cocoon/trunk"
+alias w="cd $HOME/var/repos/wicket/trunk"
+alias ws="cd $HOME/var/repos/wicket-stuff/trunk"
+
+alias tf='tail -f'
+
+# cd completion will never select the parent directory
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+# Ogg Vorbis
+alias ripit="ripit --noconfig -d /dev/acd0 -o . -c 1"
+alias pr="vim ~/var/files/private/www/webhome.caraldi.com/xml/projectinfo.xml"
+
+alias bubbrosc='python /usr/local/share/bubbros/display/Client.py -d pygame --fullscreen=yes'
+
+# Enable zsh completion cache
+zstyle ':completion:*' use-cache 
+
+# vim:ft=zsh

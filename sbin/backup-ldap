@@ -1,0 +1,26 @@
+#! /bin/sh
+
+################################################################################
+# File:          backup-ldap
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Backup LDAP directory
+# Date Created:  2003-07-09 18:57:11
+# Revision:      $Id: backup-ldap 286 2003-10-10 07:39:30Z jbq $
+################################################################################
+
+set -e
+
+DST=/usr/local/var/backups/ldap
+
+# Login as root to fetch passwords as well
+opts='-w gqZE987K -x'
+binddn='cn=Manager,dc=caraldi,dc=com'
+
+for DOMAIN in `list-domains` ; do
+    DC1=`echo $DOMAIN | cut -d. -f1`
+    DC2=`echo $DOMAIN | cut -d. -f2`
+    basedn="dc=$DC1,dc=$DC2"
+    LDAPSEARCH="ldapsearch $opts -D $binddn -b $basedn objectclass=*"
+    #echo $LDAPSEARCH
+    $LDAPSEARCH | bzip2 > $DST/${DC1}_${DC2}-$(date "+%Y%m%d").bz2
+done

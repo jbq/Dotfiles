@@ -1,0 +1,76 @@
+/*
+ * FILE : embedded_dtd.css
+ *
+ * CREATED : 23 March 2000
+ *
+ * LAST MODIFIED : 30 April 2001
+ *
+ * AUTHOR : Warren Hedley (w.hedley@auckland.ac.nz)
+ *          Department of Engineering Science
+ *          The University of Auckland
+ *
+ * CHANGES :
+ *  18/01/2001 - WJH - changes font-size from "medium" to "12pt" -- ie had
+ *                     medium > 12pt, causing embedded XML to be too wide.
+ *  30/04/2001 - WJH - removed font-size from p.embedded-dtd style.
+ *  30/04/2001 - WJH - reformatted and added background-color attributes to
+ *                     pass the W3C CSS Validator with no warnings.
+ *
+ * DESCRIPTION : This stylesheet is used by HTML pages that contain embedded
+ *   DTDs as generated from pml documents.
+ */
+
+/**
+ * The root element for embedded XML should be <p class="embedded-xml">. Using
+ * a <p> element allows the user to combine the rules specified here with
+ * rules from other stylesheets, such as margins, font-size, or borders for
+ * <p> elements.
+**/
+pre.embedded-dtd, pre.embedded-dtd * {
+  font-family        : monospace;
+  font-weight        : bold;
+  font-style         : normal;
+  text-align         : left;
+}
+
+p.embedded-dtd, p.embedded-dtd * {
+  font-family        : monospace;
+  font-weight        : bold;
+  font-style         : normal;
+  text-align         : left;
+}
+
+/* element declarations */
+code.dtd {
+  color              : #005000;
+}
+
+code.dtd-quoted, code.dtd-pi-quoted {
+  color              : red;
+}
+
+code.dtd-keyword {
+  color              : blue;
+}
+
+code.dtd-typedef {
+  color              : black;
+}
+
+code.dtd-entityref {
+  color              : #00D000;
+}
+
+code.dtd-comment {
+  font-weight        : normal;
+  font-style         : italic;
+  color              : #36648b;
+}
+
+code.dtd-pi {
+  color              : #006600;
+}
+
+code.dtd-square-brackets {
+  color              : red;
+}

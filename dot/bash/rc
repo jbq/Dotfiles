@@ -1,0 +1,34 @@
+################################################################################
+# File:          rc
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Bash initialization script
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: rc 1055 2004-11-02 09:30:20Z jbq $
+################################################################################
+
+# Define it again because SSH commands outside login does not source
+# .bash_profile
+export USER_DOTFILES="$HOME/usr/dot"
+
+. "$USER_DOTFILES/bash/rc_generic"
+. "$USER_DOTFILES/bash/rc_local"
+
+for file in \
+	$USER_DOTFILES/private/profile \
+	$USER_DOTFILES/private/profile_jouve \
+	; do
+	test -f $file && . $file
+done
+
+for completion in \
+    /usr/local/etc/bash_completion \
+    /etc/bash_completion \
+    /sw/etc/bash_completion \
+    $USER_DOTFILES/bash/bash_completion \
+    ; do
+
+    if test -f $completion ; then
+        . $completion
+        break
+    fi
+done

@@ -1,0 +1,26 @@
+#! /usr/bin/env python
+
+import re, popen2, os
+
+def revert_deleted(file):
+    print "Reverting deletion of %s" % file
+    os.system("cd %s ; cvs add %s" % (os.path.dirname(file), os.path.basename(file)))
+
+def revert_added(file):
+    print "Reverting addition of %s" % file
+    os.system("cd %s ; cvs rm -f %s" % (os.path.dirname(file), os.path.basename(file)))
+
+pout, pin = popen2.popen2("cvs -q up -C")
+
+while 1:
+    line = pout.readline()
+
+    if not(line):
+        break;
+
+    file = line.rstrip()
+
+    if re.search('^R ', file):
+        revert_deleted(re.sub('^R (.*)$', r'\1', file))
+    elif re.search('^A ', file):
+        revert_added(re.sub('^A (.*)$', r'\1', file))

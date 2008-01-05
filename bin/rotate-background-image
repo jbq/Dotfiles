@@ -1,0 +1,39 @@
+#! /bin/sh
+
+GNUSTEP_USER_ROOT=${GNUSTEP_USER_ROOT:-$(HOME)/GNUstep}
+IMGDIR="$GNUSTEP_USER_ROOT/Library/WindowMaker/Backgrounds"
+
+STATEFILE=$IMGDIR/.state
+RANDOMFILE=$IMGDIR/Random.jpeg
+
+rm -f $RANDOMFILE
+
+IMAGES=$(ls -1 $IMGDIR/*.* 2> /dev/null)
+
+if [ "$IMAGES" = "" ]; then
+	echo No image found
+	exit 1
+fi
+
+NBFILES=$(echo $IMAGES | tr ' ' '\n' | wc -l | sed -e 's/^ *//')
+
+if ! [ -e $STATEFILE ]
+then
+	echo 1 > $STATEFILE
+fi
+
+STATE=`cat $STATEFILE`
+IMG=$(echo $IMAGES | tr ' ' '\n' | sed -ne "$STATE p")
+echo "Current Image is #$STATE: `basename $IMG`"
+STATE=`expr \( $STATE % $NBFILES \) + 1`
+IMG=$(echo $IMAGES | tr ' ' '\n' | sed -ne "$STATE p")
+if [ "$IMG" = "" ]
+then
+	echo Error
+	exit 1
+fi
+echo $STATE > $STATEFILE
+echo "New Image is #$STATE: `basename $IMG`"
+
+ln -s $IMG $RANDOMFILE
+#wmsetbg $RANDOMFILE

@@ -1,0 +1,9 @@
+################################################################################
+# File:          urlview
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Specify command to launch on URL found in mail body
+# Date Created:  2003-01-29 21:40:32
+# CVS Id:        $Id: urlview 446 2004-01-28 15:38:32Z jbq $
+################################################################################
+
+COMMAND gnome-open

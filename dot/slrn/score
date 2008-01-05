@@ -1,0 +1,224 @@
+[*]
+	Score:: 100
+		From: quenot
+		References: quenot
+
+[fr.petites-annonces.immobilier]
+	Score:: 100
+		Subject: loue
+		Subject: location
+
+	Score: 100
+		Subject: offre
+
+	Score: 100
+		Subject: maison
+
+	Score: 500
+		Subject: toulouse
+
+	Score: 100
+		Subject: garonne
+
+	Score: 100
+		Subject: 31
+
+	Score: -1000
+		Subject: demande
+
+	Score: -1000
+		Subject: paris
+
+
+[fr.petites-annonces.informatique.materiel]
+	Score: 100
+		Subject: hp
+
+	Score: 100
+		Subject: imprimante
+
+	Score: 100
+		Subject: 1200
+
+	Score: 100
+		Subject: laserjet
+
+[fr.emplois.offres]
+	Score: 100
+		Subject: open ?source
+
+	Score: 100
+		Subject: consultant
+
+	Score:: 100
+		Subject: télétravail
+		Subject: teletravail
+
+	Score: 100
+		Subject: logiciel
+
+	Score:: -100
+		Subject: commerciaux
+		Subject: commercial
+
+	Score: 100
+		Subject: informaticien
+
+	Score: -100
+		Subject: delphi
+
+	Score: -100
+		Subject: cold ?fusion
+
+	Score: -100
+		Subject: siebel
+
+	Score: -100
+		Subject: microsoft
+
+	Score: -100
+		Subject: solaris
+
+	Score: -100
+		Subject: support
+
+	Score: -100
+		Subject: sap
+
+	Score: -100
+		Subject: \.net
+
+	Score: -100
+		Subject: asp
+
+	Score: -100
+		Subject: vb
+
+	Score: -100
+		Subject: technicien
+
+	Score: 100
+		Subject: expert
+
+	Score: 100
+		Subject: programmeur
+
+	Score: 100
+		Subject: objet
+
+	Score:: 100
+		Subject: specialiste
+		Subject: spécialiste
+
+	Score: 100
+		Subject: architecte
+
+	Score:: 100
+		Subject: concepteur
+		Subject: conception
+
+	Score: 100
+		Subject: business
+
+	Score: 100
+		Subject: ntic
+
+	Score: 100
+		Subject: technolog
+
+	Score: 100
+		Subject: nouvelles
+
+	Score: 100
+		Subject: chefs? de projet
+
+	Score:: 100
+		Subject: ingénieur
+		Subject: ingenieur
+
+	Score:: 100
+		Subject: développeur
+		Subject: developpeur
+		Subject: developer
+		Subject: developpement
+		Subject: développement
+
+	Score: 100
+		Subject: j2ee
+
+	Score: 100
+		Subject: java
+
+	Score: 100
+		Subject: c++
+
+	Score: 100
+		Subject: php
+
+	Score: 100
+		Subject: jsp
+
+	Score: 100
+		Subject: web
+
+	Score: 100
+		Subject: linux
+
+	Score: 100
+		Subject: mac
+
+	Score: 100
+		Subject: os x
+
+#	Score:: 100
+#		Subject: \[INDPDT
+#		Subject: \[CDI
+#		Subject: \[STAGE
+
+	Score: -100
+		Subject: \[STAGE
+
+	Score: 100
+		Subject: mysql
+
+	Score: 100
+		Subject: bsd
+
+	Score: 100
+		Subject: freebsd
+
+#	Score: 100
+#		Subject: unix
+
+	Score: 100
+		Subject: xml
+
+	Score: 100
+		Subject: xsl
+
+	Score: 100
+		Subject: strut
+
+	Score: 100
+		Subject: internet
+
+	Score: 100
+		Subject: intranet
+
+	Score:: 100
+#		Subject: 77[\]/]
+#		Subject: 78[\]/]
+#		Subject: 92[\]/]
+#		Subject: 93[\]/]
+#		Subject: 94[\]/]
+#		Subject: 75[\]/]
+#		Subject: RP[\]/]
+		Subject: 13[\]/]
+		Subject: 31[\]/]
+		Subject: 34[\]/]
+		Subject: 64[\]/]
+		Subject: 81[\]/]
+		Subject: 82[\]/]
+		Subject: 84[\]/]
+		Subject: CH[\]/]
+		Subject: ES[\]/]

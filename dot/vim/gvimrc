@@ -1,0 +1,126 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" File:          .gvimrc
+" Author:        Jean-Baptiste Quenot
+" Purpose:       Define behaviour of ViM in GTK mode
+" CVS Id:        $Id: gvimrc 884 2004-08-31 20:52:45Z jbq $
+" Date Created:  2000-07-01 00:00:00
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"set columns=100
+"set lines=46
+
+" Use Unicode
+set keymap=accents
+
+" background and foreground colors
+highlight Normal guibg=black
+highlight Normal guifg=lightgray
+
+"highlight Visual guibg=bg
+
+" I don't want non-text items to be bold
+"highlight NonText gui=NONE
+
+" set text font
+if has ("gui_win32")
+    "set guifont=Courier_New:h9
+	set guifont=Lucida_Console:h10:cANSI
+else
+    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso8859-1
+    " same font with euro sign (latin 9 character set)
+    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso8859-15
+    "set guifont=-adobe-courier-medium-r-normal-*-*-100-*-*-m-*-iso10646-1
+    "au EncodingChanged * set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso10646-1
+
+    " GTK
+    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso10646-1
+    " GTK2
+    set guifont=Monospace\ 10
+endif
+
+" no toolbar please
+set guioptions-=T
+
+" Remove the Syntax menu
+if v:lang == "C"
+    unmenu Syntax
+    unmenu! Syntax
+elseif v:lang == "fr_FR"
+    unmenu Syntaxe
+    unmenu! Syntaxe
+endif
+
+source $HOME/usr/dot/private/gvimrc
+
+inoremenu &Insert.DocBook.Application.DocBook <application>DocBook</application>
+inoremenu &Insert.DocBook.Application.Cron <application>cron</application>
+inoremenu &Insert.DocBook.Product\ Name.Flash <productname>Flash</productname>
+inoremenu &Insert.DocBook.Product\ Name.FreeBSD <productname>FreeBSD</productname>
+inoremenu &Insert.DocBook.Product\ Name.Java <productname>Java</productname>
+inoremenu &Insert.DocBook.Product\ Name.Linux <productname>Linux</productname>
+inoremenu &Insert.DocBook.Product\ Name.Netscape <productname>Netscape</productname>
+inoremenu &Insert.DocBook.Product\ Name.Resin <productname>Resin</productname>
+
+inoremenu &Insert.DocBook.Foreign\ Phrase.Bot <foreignphrase>bot</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Bots <foreignphrase>bots</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Cookie <foreignphrase>cookie</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Frame <foreignphrase>frame</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Frameset <foreignphrase>frameset</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Hardware <foreignphrase>hardware</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Offline <foreignphrase>offline</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Online <foreignphrase>online</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Pool <foreignphrase>pool</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Properties <foreignphrase>properties</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Query\ string <foreignphrase>query string</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Servlet <foreignphrase>servlet</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Servlets <foreignphrase>servlets</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Template <foreignphrase>template</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Templates <foreignphrase>templates</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.User <foreignphrase>user</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Users <foreignphrase>users</foreignphrase>
+inoremenu &Insert.DocBook.Foreign\ Phrase.Virtual\ Host <foreignphrase>virtual host</foreignphrase>
+
+inoremenu &Insert.DocBook.Acronyms.API <acronym>API</acronym>
+inoremenu &Insert.DocBook.Acronyms.CSS <acronym>CSS</acronym>
+inoremenu &Insert.DocBook.Acronyms.DNS <acronym>DNS</acronym>
+inoremenu &Insert.DocBook.Acronyms.DOM <acronym>DOM</acronym>
+inoremenu &Insert.DocBook.Acronyms.HTML <acronym>HTML</acronym>
+inoremenu &Insert.DocBook.Acronyms.HTTP <acronym>HTTP</acronym>
+inoremenu &Insert.DocBook.Acronyms.JSP <acronym>JSP</acronym>
+inoremenu &Insert.DocBook.Acronyms.SAX <acronym>SAX</acronym>
+inoremenu &Insert.DocBook.Acronyms.SQL <acronym>SQL</acronym>
+inoremenu &Insert.DocBook.Acronyms.URL <acronym>URL</acronym>
+inoremenu &Insert.DocBook.Acronyms.XML <acronym>XML</acronym>
+inoremenu &Insert.DocBook.Acronyms.XSL <acronym>XSL</acronym>
+
+inoremenu &Insert.Java.Author\ Jean-Baptiste\ Quenot\ Caraldi Jean-Baptiste Quenot <tt>&lt;<a href="mailto:jbq@caraldi.com">jbq@caraldi.com</a>&gt;</tt>
+inoremenu &Insert.Java.Author\ Jean-Baptiste\ Quenot\ Anyware Jean-Baptiste Quenot <tt>&lt;<a href="mailto:jbq@anyware-tech.com">jbq@anyware-tech.com</a>&gt;</tt>
+inoremenu &Insert.Text.Author\ Jean-Baptiste\ Quenot\ Caraldi Jean-Baptiste Quenot <jbq@caraldi.com>
+inoremenu &Insert.Text.Author\ Jean-Baptiste\ Quenot\ Anyware Jean-Baptiste Quenot <jbq@anyware-tech.com>
+inoremenu &Insert.Java.CVS\ Version @version $Id: gvimrc 884 2004-08-31 20:52:45Z jbq $
+" noremenu &DocBook.View\ Document :make view<cr>
+" inoremenu &DocBook.View\ Document <C-O>:make view<cr>
+
+" Insert Menu
+inoremenu &Insert.HTML.Head <esc>^i<head><cr><esc>$a<cr></head>
+inoremenu &Insert.HTML.Skeleton <esc>ggi<?xml version='1.0'?><cr><html><cr><head><cr><title></title><cr></head><cr><body><cr><cr></body><cr></html><esc>kkkkka
+inoremenu &Insert.HTML.Doctype\ Strict <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"<cr>"http://www.w3.org/TR/html4/strict.dtd">
+
+inoremenu &Insert.XML.XML\ Declaration <?xml version='1.0'?><cr>
+inoremenu &Insert.XML.XML\ Declaration\ Latin <?xml version='1.0' encoding='iso-8859-1'?><cr>
+inoremenu &Insert.XML.Stylesheet\ PI <?xml-stylesheet href="" type="text/xsl"?><cr>
+inoremenu &Insert.XML.XSL\ Element <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version='1.0'><cr><cr></xsl:stylesheet><C-O>k
+inoremenu &Insert.XML.Sitemap\ Element <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"><cr><map:pipelines><cr><map:pipeline><cr></map:pipeline><cr></map:pipelines><cr></map:sitemap>
+inoremenu &Insert.XML.Default\ Copy\ Template <C-O>:r ~/usr/dot/vim/header/default-copy-template.xml<CR>
+nnoremenu &Insert.Project\ Info.Session :r ~/usr/dot/vim/header/session.xml<cr>
+nnoremenu &Insert.Project\ Info.Todo :r ~/usr/dot/vim/header/todo.xml<cr>
+nnoremenu &Insert.Header.JSP :0r ~/usr/dot/vim/header/jspstyle<cr>
+nnoremenu &Insert.Header.XML :0r ~/usr/dot/vim/header/xmlstyle<cr>
+
+inoremenu &Insert.Script\ Header./bin/sh #! /bin/sh<cr><cr>
+inoremenu &Insert.Script\ Header./bin/bash #! /bin/bash<cr><cr>
+inoremenu &Insert.Script\ Header./usr/bin/bash #! /usr/bin/bash<cr><cr>
+inoremenu &Insert.Script\ Header./usr/local/bin/bash #! /usr/local/bin/bash<cr><cr>
+inoremenu &Insert.Script\ Header./usr/bin/perl #! /usr/bin/perl<cr><cr>
+inoremenu &Insert.Script\ Header./usr/local/bin/perl #! /usr/local/bin/perl<cr><cr>
+" inoremenu &Insert.Date <Esc>:r!export LC_ALL=fr_FR.ISO_8859-1 && date "+\%A \%d \%B \%Y"<cr>i

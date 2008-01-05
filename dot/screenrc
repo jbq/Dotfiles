@@ -1,0 +1,37 @@
+################################################################################
+# File:          .screenrc
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Screen configuration
+# Date Created:  2002-11-27 12:34:18
+# CVS Id:        $Id: screenrc 1037 2004-10-26 08:02:08Z jbq $
+################################################################################
+
+startup_message off
+escape o
+defscrollback 10000
+
+# Override -$SHELL setting by Gentoo
+#shell $SHELL
+
+# From http://www.guckes.net/setup/screenrc
+# shell:  Default process started in screen's windows.
+# Makes it possible to use a different shell inside screen
+# than is set as the default login shell.  Halleluja! :-)
+shell /usr/bin/zsh
+
+# Fix backspace key when connecting by SSH from remote Linux host
+# Note that Linux swaps Backspace and Delete
+# I don't want that setting for FreeBSD!
+#bindkey -k kD stuff "^H"
+
+#caption always "%3n %t%? (%u)%?%?: %h%?"
+
+#hardstatus off
+#hardstatus string "%h%n (%t)"
+#termcapinfo xterm*|rxvt hs:ts=\E]2;:fs=^G:ds=\E]2;TITLEDISABLED^G
+
+#shelltitle "%t"
+
+#hardstatus alwayslastline "%{+b}%{kY} %-w%{Wb}%n %t%{-}%+w  %= %{wr} %c:%s | %d/%m/%Y"
+#hardstatus alwayslastline "%{+b}%{kY} %-w%{Wb}%n %t%{-}%+w  %= %{wr}"
+#hardstatus alwayslastline "%{+b}%{kY} %-w%{Wb}%n %t%{-}%+w  %= %{wr} %c"

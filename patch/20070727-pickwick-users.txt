@@ -1,0 +1,132 @@
+Index: src/main/java/org/wicketstuff/pickwick/PickwickSessionFactory.java
+===================================================================
+--- src/main/java/org/wicketstuff/pickwick/PickwickSessionFactory.java	(revision 0)
++++ src/main/java/org/wicketstuff/pickwick/PickwickSessionFactory.java	(revision 0)
+@@ -0,0 +1,24 @@
++package org.wicketstuff.pickwick;
++
++import org.apache.wicket.Application;
++import org.apache.wicket.Request;
++import org.wicketstuff.pickwick.auth.PickwickSession;
++import org.wicketstuff.pickwick.auth.User;
++
++public abstract class PickwickSessionFactory {
++	public PickwickSession newPickwickSession(PickwickApplication application, Request request) {
++		PickwickSession session = new PickwickSession(application, request);
++		String username = getUsername();
++		session.setUser(application.getUserStorage().getUser(username));
++		return session;
++		/*PickwickSession session = new PickwickSession(this, request);
++		User user = auth.getUser(((WebRequest)request).getHttpServletRequest());
++		if (user == null) {
++			// Requires a login page
++			throw new RestartResponseAtInterceptPageException(settings.getLoginPage());
++		}
++		session.setUser(user);
++		return session;*/
++	}
++	protected abstract String getUsername();
++}
+
+Property changes on: src/main/java/org/wicketstuff/pickwick/PickwickSessionFactory.java
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Index: src/main/java/org/wicketstuff/pickwick/UserStorage.java
+===================================================================
+--- src/main/java/org/wicketstuff/pickwick/UserStorage.java	(revision 0)
++++ src/main/java/org/wicketstuff/pickwick/UserStorage.java	(revision 0)
+@@ -0,0 +1,12 @@
++package org.wicketstuff.pickwick;
++
++import org.wicketstuff.pickwick.auth.User;
++
++public class UserStorage {
++
++	public User getUser(String username) {
++		// TODO Auto-generated method stub
++		return null;
++	}
++
++}
+
+Property changes on: src/main/java/org/wicketstuff/pickwick/UserStorage.java
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Index: src/main/java/org/wicketstuff/pickwick/backend/Settings.java
+===================================================================
+--- src/main/java/org/wicketstuff/pickwick/backend/Settings.java	(revision 2708)
++++ src/main/java/org/wicketstuff/pickwick/backend/Settings.java	(working copy)
+@@ -14,7 +14,7 @@
+  * @author <a href="mailto:jbq@apache.org">Jean-Baptiste Quenot</a>
+  */
+ @ImplementedBy(DefaultSettings.class)
+-public interface Settings extends Serializable{
++public interface Settings extends Serializable {
+ 	/**
+ 	 * @return base URL of the application for use in the RSS feed, see {@link FeedGenerator}
+ 	 */
+@@ -26,9 +26,9 @@
+ 	File getImageDirectoryRoot();
+ 
+ 	/**
+-	 * @return class name of authentication module
++	 * @return class name of session factory
+ 	 */
+-	String getAuthenticationModule();
++	String getSessionFactory();
+ 	
+ 	/**
+ 	 * @return UserMangement implementation used on the application
+Index: src/main/java/org/wicketstuff/pickwick/PickwickApplication.java
+===================================================================
+--- src/main/java/org/wicketstuff/pickwick/PickwickApplication.java	(revision 2709)
++++ src/main/java/org/wicketstuff/pickwick/PickwickApplication.java	(working copy)
+@@ -16,6 +16,7 @@
+ import org.apache.wicket.Request;
+ import org.apache.wicket.RequestCycle;
+ import org.apache.wicket.Response;
++import org.apache.wicket.RestartResponseAtInterceptPageException;
+ import org.apache.wicket.Session;
+ import org.apache.wicket.WicketRuntimeException;
+ import org.apache.wicket.protocol.http.WebApplication;
+@@ -33,6 +34,7 @@
+ import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
+ import org.wicketstuff.pickwick.auth.AuthenticationModule;
+ import org.wicketstuff.pickwick.auth.PickwickSession;
++import org.wicketstuff.pickwick.auth.User;
+ import org.wicketstuff.pickwick.backend.ImageUtils;
+ import org.wicketstuff.pickwick.backend.Settings;
+ import org.wicketstuff.pickwick.backend.converter.ImageConverter;
+@@ -48,6 +50,10 @@
+  */
+ public class PickwickApplication extends WebApplication {
+ 	@Inject
++	UserStorage userStorage;
++	@Inject
++	PickwickSessionFactory sessionFactory;
++	@Inject
+ 	private AuthenticationModule auth;
+ 
+ 	@Inject
+@@ -224,8 +230,10 @@
+ 	
+ 	@Override
+ 	public Session newSession(Request request, Response response) {
+-		PickwickSession session = new PickwickSession(this, request);
+-		session.setUser(auth.getUser(((WebRequest)request).getHttpServletRequest()));
+-		return session;
++		return sessionFactory.newPickwickSession(this, request);
+ 	}
++
++	public UserStorage getUserStorage() {
++		return userStorage;
++	}
+ }

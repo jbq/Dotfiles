@@ -1,0 +1,314 @@
+/*******************************************************************************
+* File:          docbook.css
+* Author:        Jean-Baptiste Quenot
+* Purpose:       Define styles for DocBook HTML
+* Date Created:  2002-02-01 11:00:50
+* Revision:      $Id$
+*                $FreeBSD: doc/share/misc/docbook.css,v 1.4 2001/07/11 12:46:50 nik Exp $
+*******************************************************************************/
+
+BODY ADDRESS {
+	line-height: 1.3;
+	margin: .6em 0;
+}
+
+BODY BLOCKQUOTE {
+	margin-top: .75em;
+	line-height: 1.5;
+	margin-bottom: .75em;
+}
+
+HTML BODY {
+	margin: 1em 8% 1em 10%;
+	line-height: 1.2;
+    font-family: sans-serif;
+}
+
+.LEGALNOTICE {
+	font-size: small;
+	font-variant: small-caps;
+}
+
+BODY DIV {
+	margin: 0;
+}
+
+DL {
+	margin: .8em 0;
+	line-height: 1.2;
+}
+
+BODY FORM {
+	margin: .6em 0;
+}
+
+H1, H2, H3, H4, H5, H6,
+DIV.EXAMPLE P B,
+.QUESTION,
+DIV.TABLE P B,
+div.figure p b,
+DIV.AFFILIATION,
+DIV.PROCEDURE P B {
+	color: #990000;
+}
+
+BODY H1 {
+	margin: .8em 0 0 -4%;
+	line-height: 1.3;
+}
+
+BODY H2 {
+	margin: .8em 0 0 -4%;
+	line-height: 1.3;
+}
+
+BODY H3 {
+	margin: .8em 0 0 -3%;
+	line-height: 1.3;
+}
+
+BODY H4 {
+	margin: .8em 0 0 -3%;
+	line-height: 1.3;
+}
+
+BODY H5 {
+	margin: .8em 0 0 -2%;
+	line-height: 1.3;
+}
+
+BODY H6 {
+	margin: .8em 0 0 -1%;
+	line-height: 1.3;
+}
+
+BODY HR {
+	margin: .6em
+}
+
+BODY IMG.NAVHEADER {
+	margin: 0 0 0 -4%;
+}
+
+OL {
+	margin: 0 0 0 5%;
+	line-height: 1.2;
+}
+
+BODY P {
+	margin: .6em 0;
+	line-height: 1.2;
+}
+
+.qandaset .question p {
+    margin: 0;
+}
+
+BODY PRE {
+	margin: .75em 0;
+	line-height: 1.0;
+	color: #461b7e;
+}
+
+BODY TD {
+	line-height: 1.2
+}
+
+BODY TH {
+	line-height: 1.2;
+}
+
+UL, BODY DIR, BODY MENU {
+	margin: 0 0 0 5%;
+	line-height: 1.2;
+}
+
+HTML {
+	margin: 0; 
+	padding: 0;
+}
+
+
+.FILENAME, .CLASSNAME {
+	color: #007a00;
+}
+
+BODY H1, BODY H2, BODY H3, BODY H4, BODY H5, BODY H6 {
+	margin-left: 0
+} 
+
+.GUIMENU, .GUIMENUITEM, .GUISUBMENU,
+.GUILABEL, .INTERFACE, .GUIBUTTON,
+.SHORTCUT, .SHORTCUT .KEYCAP {
+	background-color: #F0F0F0;
+}
+
+.ACCEL {
+	background-color: #F0F0F0;
+	text-decoration: underline;
+} 
+
+.figure, .table {
+	padding: 1em 0;
+}
+
+.term {
+	font-weight: bold;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+.blue {
+	color: blue;
+}
+
+.cyan {
+	color: aqua;
+}
+
+.magenta {
+	color: fuchsia;
+}
+
+.yellow {
+	color: yellow;
+}
+/*
+.fileinfo {
+	font-size: 10px;
+}
+*/
+.abstract p {
+	font-style: italic;
+	font-family: serif;
+}
+
+.biblioentry .title {
+	font-family: serif;
+}
+/*
+.informaltable td {
+	padding: 0 10 0 0;
+	margin: 0 0 0 0;
+}
+*/
+.revhistory table {
+	font-size: .8em;
+}
+.revhistory table th {
+	background-color: #CCCCCC;
+	border: 0px;
+	border-bottom: 1px;
+	border-style: solid;
+}
+.revremark {
+	font-weight: bold;
+	border: 0px;
+	border-bottom: 1px;
+	border-style: solid;
+}
+/*
+td {
+	padding: .5em;
+}
+*/
+/* removed example 2002-07-24 because title is also gray! */
+.screen, .programlisting {
+	background-color: #F0F0F0;
+	padding: .5em;
+}
+/*
+.question p {
+	margin: .01em 0;
+	line-height: 1.2;
+}
+
+.cmdsynopsis {
+	margin: .75em 0;
+	line-height: 1.0;
+	color: #461b7e;
+}*/
+
+td, th, p {
+	font-family: sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+.idea {
+    color: green;
+}
+
+.menu {
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * Override align='center' settings needed for PDF output
+ */
+.mediaobject {
+	text-align: left;
+}
+
+.titlepage .mediaobject {
+    float: left;
+    margin-right: 15px;
+}
+
+p.contact {
+    border: 2px red dotted;
+}
+
+div.othercredit p {
+    margin: 0px;
+}
+
+/*
+ * Thanks to http://xml.apache.org/fop/skin/page.css
+ */
+.note {
+    border: solid 1px #7099C5;
+    background-color: #f0f0ff;
+}
+.note p {
+    padding: 5px;
+    margin: 0px;
+}
+.note .title {
+    background-color: #7099C5;
+    color: #ffffff;
+    margin: 0px;
+    padding: 2px 5px;
+}
+
+.warning {
+    border: solid 1px #D00000;
+    /*background-color: #fff0f0;*/
+    background-color: #FFFF99;
+}
+.warning p {
+    padding: 5px;
+    margin: 0px;
+}
+.warning .title {
+    background-color: #D00000;
+    color: #fff0f0;
+    margin: 0px;
+    padding: 2px 5px;
+}
+
+.literallayout p {
+    font-family: monospace;
+    background-color: #FFFF99;
+    padding: 1em;
+}

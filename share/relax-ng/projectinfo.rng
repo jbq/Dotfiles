@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+
+<!--+
+    | Author:         Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+    | Purpose:        Relax-NG Schema for ProjectInfo
+    | Date Created:   2004-08-24 16:49:00
+    | Revision:       $Id: schema-projectinfo.rng,v 1.3 2005/08/08 16:27:07 jbq Exp $
+    +-->
+
+<grammar datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+  xmlns="http://relaxng.org/ns/structure/1.0"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <start>
+    <element name="projectinfo">
+      <optional>
+        <attribute name="lang">
+          <data type="string"/>
+        </attribute>
+      </optional>
+
+      <optional>
+        <attribute name="xsi:noNamespaceSchemaLocation">
+          <data type="string"/>
+        </attribute>
+      </optional>
+
+      <optional>
+        <ref name='dpid'/>
+      </optional>
+
+      <optional>
+        <ref name='bugzilla'/>
+      </optional>
+
+      <zeroOrMore>
+        <ref name="todo"/>
+      </zeroOrMore>
+    </element>
+  </start>
+
+  <define name='priority'>
+    <attribute name="priority">
+      <choice>
+        <value>high</value>
+        <value>normal</value>
+        <value>low</value>
+      </choice>
+    </attribute>
+  </define>
+
+  <define name="todo">
+    <element name="todo">
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+      <optional>
+        <ref name='uid'/>
+      </optional>
+      <optional>
+        <ref name='dpid'/>
+      </optional>
+      <optional>
+        <ref name='priority'/>
+      </optional>
+      <optional>
+        <attribute name="status">
+          <choice>
+            <value>open</value>
+            <value>closed</value>
+          </choice>
+        </attribute>
+      </optional>
+      <ref name='title'/>
+      <interleave>
+        <optional>
+          <ref name="datecreated"/>
+        </optional>
+        <optional>
+          <ref name="description"/>
+        </optional>
+        <optional>
+          <ref name="datedue"/>
+        </optional>
+        <optional>
+          <ref name="sessions"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+
+  <define name="sessions">
+    <element name="sessions">
+      <zeroOrMore>
+        <ref name="session"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="session">
+    <element name="session">
+      <optional>
+        <ref name='dpid'/>
+      </optional>
+      <optional>
+        <ref name='uid'/>
+      </optional>
+      <ref name="dateIntervalInHistoryOrDate"/>
+      <choice>
+        <element name="body">
+          <interleave>
+            <element name="ul">
+              <text/>
+            </element>
+          </interleave>
+        </element>
+        <zeroOrMore>
+          <ref name="item"/>
+        </zeroOrMore>
+      </choice>
+    </element>
+  </define>
+
+  <define name='uid'>
+    <attribute name='uid'>
+      <data type="string"/>
+    </attribute>
+  </define>
+
+  <define name='dpid'>
+    <attribute name='dpid'>
+      <data type="integer"/>
+    </attribute>
+  </define>
+
+  <define name='bugzilla'>
+    <attribute name='bugzilla'>
+      <data type="string"/>
+    </attribute>
+  </define>
+
+  <define name="item">
+    <element name="item">
+      <optional>
+        <ref name="priority"/>
+      </optional>
+      <optional>
+        <ref name='uid'/>
+      </optional>
+      <optional>
+        <attribute name="role">
+          <data type="string"/>
+        </attribute>
+      </optional>
+      <ref name='mixedContent'/>
+    </element>
+  </define>
+
+  <define name='mixedContent'>
+    <interleave>
+      <optional>
+        <text/>
+      </optional>
+
+      <zeroOrMore>
+        <element name='literal'>
+          <text/>
+        </element>
+      </zeroOrMore>
+
+      <zeroOrMore>
+        <element name='personname'>
+          <text/>
+        </element>
+      </zeroOrMore>
+
+      <zeroOrMore>
+        <element name='literallayout'>
+          <text/>
+        </element>
+      </zeroOrMore>
+
+      <zeroOrMore>
+        <element name='ulink'>
+          <attribute name='url'>
+            <data type="string"/>
+          </attribute>
+          <text/>
+        </element>
+      </zeroOrMore>
+    </interleave>
+  </define>
+
+  <define name="datedue">
+    <element name="datedue">
+      <ref name='dateIntervalOrDate'/>
+    </element>
+  </define>
+
+  <define name="datecreated">
+    <element name="datecreated">
+      <ref name='datetime'/>
+    </element>
+  </define>
+
+  <define name="date">
+    <element name="date">
+      <text/>
+    </element>
+  </define>
+
+  <define name="datetime">
+    <ref name="date"/>
+
+    <optional>
+      <ref name="time"/>
+    </optional>
+  </define>
+
+  <define name="time">
+    <element name="time">
+      <text/>
+    </element>
+  </define>
+
+  <define name="dateIntervalInHistory">
+    <element name="from">
+      <ref name="dateTimeInHistory"/>
+    </element>
+
+    <element name="to">
+      <ref name="dateTimeInHistory"/>
+    </element>
+  </define>
+
+  <define name="dateInterval">
+    <element name="from">
+      <ref name="datetime"/>
+    </element>
+
+    <element name="to">
+      <ref name="datetime"/>
+    </element>
+  </define>
+
+  <define name="dateIntervalOrDate">
+    <choice>
+      <ref name="dateInterval"/>
+      <ref name="date"/>
+    </choice>
+  </define>
+
+  <define name="dateIntervalInHistoryOrDate">
+    <choice>
+      <ref name="dateIntervalInHistory"/>
+      <ref name="date"/>
+    </choice>
+  </define>
+
+  <!--+
+      | dateTimeInHistory allows to omit the date part, considering that a
+      | repeating series of sessions could refer to the same date
+      +-->
+  <define name="dateTimeInHistory">
+    <choice>
+      <!-- either date and time -->
+      <group>
+        <ref name="date"/>
+        <ref name="time"/>
+      </group>
+
+      <!-- or just date -->
+      <ref name="date"/>
+
+      <!-- or just time -->
+      <ref name="time"/>
+    </choice>
+  </define>
+
+  <define name="description">
+    <element name="description">
+      <ref name='mixedContent'/>
+      <zeroOrMore>
+        <ref name="item"/>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="title">
+    <element name="title">
+      <text/>
+    </element>
+  </define>
+</grammar>

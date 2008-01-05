@@ -1,0 +1,18 @@
+#! /bin/sh -e
+#
+# gvim --remote-silent raises window, we don't want that, so use the
+# --remote-send snippet from Vim documentation, but first check that Vim is
+# running, else invoke gvim directly.  We also move ask Vim to change to current
+# directory before opening the file.
+#
+# In --remote-silent mode, our custom error messages are cleared, this is
+# annoying, happily --remote-send does not clear error messages.
+#
+
+if pgrep -u $USER vim >/dev/null ; then
+    # Change directory
+    gvim --remote-send "<C-\><C-N>:cd $PWD<CR>"
+    exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
+else
+    exec gvim $*
+fi

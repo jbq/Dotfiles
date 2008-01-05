@@ -1,0 +1,1 @@
+shar $(find . ! -path '*.svn*' ! -path '*admin*' ! -name efax-gtk.shar ) > efax-gtk.shar

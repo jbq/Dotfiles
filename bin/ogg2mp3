@@ -1,0 +1,30 @@
+#! /usr/bin/env python
+
+import caraldi
+import re, os, sys
+
+def assertSuccess(status):
+    if status != 0:
+        sys.exit(status)
+class ogg2mp3(caraldi.DirStat):
+    def visitFile(self, path, stat):
+        if re.search("\.ogg$", path):
+            print "Processing %s" % path
+            basename = re.sub("\.mp3$", "", path)
+            wav = "%s.wav" % basename
+            dest = "%s.mp3" % basename
+
+            args=["oggdec", "-o", wav, path]
+            assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
+            args=["lame", "-r", wav, dest]
+            assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
+            os.unlink(wav)
+            #args=["id3ren", "-copytagfrom=%s" % path, "-copyall", dest]
+            #assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        ogg2mp3(".")
+    else:
+        for dir in sys.argv[1:]:
+            ogg2mp3(dir)

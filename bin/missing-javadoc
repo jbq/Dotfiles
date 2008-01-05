@@ -1,0 +1,5 @@
+#! /bin/sh
+
+find * -name "*.java" | egrep -v 'CVS|\.svn' | xargs grep -li "change this" | xargs grep -l $USER
+find * -name "*.java" | egrep -v 'CVS|\.svn' | xargs grep -l "<p></p>" | xargs grep -l $USER
+find * -name '*.java' | egrep -v 'jsp|CVS|\.svn' | xargs printfilenameifnotcontains author

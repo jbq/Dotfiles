@@ -1,0 +1,8 @@
+#! /bin/sh
+
+echo
+echo
+date
+echo
+
+rsync -rtL -vz --delete /usr/local/var/last-backups/ esiee.org:var/backups

@@ -1,0 +1,119 @@
+Index: components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSourceFactory.java
+===================================================================
+--- components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSourceFactory.java	(revision 375548)
++++ components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSourceFactory.java	(working copy)
+@@ -22,6 +22,9 @@
+ import java.util.Map;
+ 
+ import org.apache.avalon.framework.logger.AbstractLogEnabled;
++import org.apache.avalon.framework.parameters.ParameterException;
++import org.apache.avalon.framework.parameters.Parameterizable;
++import org.apache.avalon.framework.parameters.Parameters;
+ import org.apache.avalon.framework.thread.ThreadSafe;
+ import org.apache.excalibur.source.Source;
+ import org.apache.excalibur.source.SourceFactory;
+@@ -37,16 +40,29 @@
+  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
+  * @version $Id: URLSourceFactory.java,v 1.4 2004/02/28 11:47:24 cziegeler Exp $
+  */
+-public class URLSourceFactory extends AbstractLogEnabled implements SourceFactory, ThreadSafe
++public class URLSourceFactory extends AbstractLogEnabled implements Parameterizable, SourceFactory, ThreadSafe
+ {
++	Parameters parameters;
+ 
+-    /**
++	/**
++	 * Accept configuration parameters:
++	 * <ul>
++	 * <li><tt>connect-timeout</tt> used for <tt>setConnectTimeout()</tt></li>
++	 * <li><tt>read-timeout</tt> used for <tt>setReadTimeout()</tt></li>
++	 * </ul>
++	 */
++	public void parameterize(Parameters par) throws ParameterException {
++		this.parameters = par;
++	}
++
++	/**
+      * Create an URL-based source. This class actually creates an {@link URLSource}, but if another
+      * implementation is needed, subclasses can override this method.
+      */
+     protected Source createURLSource(URL url, Map parameters) throws MalformedURLException, IOException
+     {
+         URLSource result = new URLSource();
++        result.parameterize(this.parameters);
+         result.init(url, parameters);
+         return result;
+     }
+Index: components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSource.java
+===================================================================
+--- components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSource.java	(revision 375548)
++++ components/sourceresolve/src/java/org/apache/excalibur/source/impl/URLSource.java	(working copy)
+@@ -26,6 +26,8 @@
+ import java.util.Iterator;
+ import java.util.Map;
+ 
++import org.apache.avalon.framework.parameters.ParameterException;
++import org.apache.avalon.framework.parameters.Parameters;
+ import org.apache.excalibur.source.Source;
+ import org.apache.excalibur.source.SourceException;
+ import org.apache.excalibur.source.SourceParameters;
+@@ -42,6 +44,9 @@
+  */
+ public class URLSource extends AbstractSource implements Source
+ {
++    private static final String CONNECT_TIMEOUT = "connect-timeout";
++    private static final String READ_TIMEOUT = "read-timeout";
++    int connectTimeout, readTimeout;
+ 
+     /** The URL of the source */
+     protected URL m_url;
+@@ -68,6 +73,8 @@
+ 
+     /** The content type (if known) */
+     protected String m_mimeType;
++    
++    Parameters avalonParameters;
+ 
+     /**
+      * Constructor
+@@ -107,6 +114,11 @@
+             if (encoding != null && !"".equals(encoding))
+                 m_encoding = encoding;
+         }
++        
++        if (null != avalonParameters) {
++            connectTimeout = avalonParameters.getParameterAsInteger(CONNECT_TIMEOUT, -1);
++            readTimeout = avalonParameters.getParameterAsInteger(READ_TIMEOUT, -1);
++        }
+ 
+         if (null != m_parameters && m_parameters.hasParameters() && !m_isPost)
+         {
+@@ -139,6 +151,17 @@
+         }
+     }
+ 
++	/**
++	 * Accept configuration parameters:
++	 * <ul>
++	 * <li><tt>connect-timeout</tt> used for <tt>setConnectTimeout()</tt></li>
++	 * <li><tt>read-timeout</tt> used for <tt>setReadTimeout()</tt></li>
++	 * </ul>
++	 */
++    public void parameterize(Parameters par) {
++		this.avalonParameters = par;
++	}
++
+     /**
+      * Get the last modification date and content length of the source.
+      * Any exceptions are ignored.
+@@ -160,6 +183,10 @@
+                     if (m_url.getProtocol().startsWith("http") && userInfo != null){
+                         m_connection.setRequestProperty("Authorization", "Basic " + SourceUtil.encodeBASE64(userInfo));
+                     }
++                    if (connectTimeout != -1)
++                        m_connection.setConnectTimeout(connectTimeout);
++                    if (readTimeout != -1)
++                        m_connection.setReadTimeout(readTimeout);
+                 }
+                 setLastModified(m_connection.getLastModified());
+                 m_mimeType = m_connection.getContentType();

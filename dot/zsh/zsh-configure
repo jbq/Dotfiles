@@ -1,0 +1,1 @@
+LDFLAGS="-lncursesw" CFLAGS="-I/usr/include/ncursesw" ./configure --prefix=/usr/local

@@ -1,0 +1,105 @@
+################################################################################
+# File:          profile_generic
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define initial environment
+# Date Created:  2002-01-29 15:08:15
+# CVS Id:        $Id: profile_generic 1081 2004-11-05 23:15:46Z jbq $
+################################################################################
+
+UNAME=$(uname -s)
+export HOSTNAME=$(hostname)
+
+# Remove extra info (Cygwin)
+UNAME=${UNAME%%_*}
+
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+unset PATH
+
+for dir in \
+/bin \
+/usr/bin \
+/usr/local/bin \
+/usr/X11R6/bin \
+/usr/games \
+"$HOME/bin" \
+"$HOME/usr/bin" \
+"$HOME/usr/bin" \
+"$HOME/var/XEP" ; do
+    if test -d "$dir" ; then
+        export PATH="$dir:$PATH"
+        #echo Added $dir to PATH
+    fi
+done
+
+# Daemons should be started with an empty environment for secure and sane
+# operation.  Do not include rc.d dirs here!
+#test -d /etc/rc.d && export PATH="/etc/rc.d:$PATH"
+#test -d /usr/local/etc/rc.d && export PATH="/usr/local/etc/rc.d:$PATH"
+test -d /home/vpopmail && export PATH="/home/vpopmail/bin:$PATH"
+
+# Test for Fink
+# Changes PATH CLASSPATH PERL5LIB and other variables
+test -d /sw/bin && . /sw/bin/init.sh
+
+# Add path to applications installed in /usr/local
+# For Linux especially ;-)
+# Note: Darwin find does not understand maxdepth so use ls
+#for dir in $(find /usr/local -type d -maxdepth 1); do
+test -d /usr/local && DIRS=(/usr/local/*(/N))
+test -d /opt && DIRS=($DIRS /opt/*(/N))
+for dir in $DIRS ; do
+    # Forget about all JDKs installed (handled differently)
+    # Ignore MinGW32: breaks port builds
+    echo $dir | egrep 'jdk|jre|j2sdk|mingw32' > /dev/null && continue
+    test -d $dir/bin && export PATH="$PATH:$dir/bin"
+done
+
+# If user belongs to group id 0 (wheel on FreeBSD, root on Linux), add superuser
+# directories to PATH.
+#
+# On Darwin OS, use NetInfo to achieve that.
+
+groups () {
+    if test "$UNAME" = "Darwin" ; then
+        nireport / /groups name name gid users | sed -e 's/	/:/g'
+    elif test "$UNAME" = "Linux" ; then
+        getent group
+    else
+        /usr/sbin/pw groupshow -a
+    fi
+}
+
+passwords() {
+    if test "$UNAME" = "Linux" ; then
+        getent passwd
+    else
+        /usr/sbin/pw usershow -a
+    fi
+}
+
+#	if groups | cut -d: -f3,4 | egrep "0:[^:]*$(id -un)[^:]*" >& /dev/null; then
+    test -d /sbin			&& export PATH="/sbin:$PATH"
+    test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
+    test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
+    test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
+    test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
+#	fi
+
+# with zsh:
+# $ which nonexistent 2>/dev/null
+# nonexistent not found
+export EDITOR=$(which vim 2>/dev/null | grep -v "not found" || which vi 2>/dev/null | grep -v "not found")
+export VISUAL=$EDITOR
+export FCEDIT=$EDITOR
+export PAGER="$(which less)"
+
+export SHELL="${SHELL:-${BASH:-/bin/bash}}"
+export PS1='[\u@\h]:\w\$ '
+export PS2='[\#(\!)]:> '
+#export REALNAME="$(passwords | egrep "^${USER}:" | cut -d':' -f8 | cut -d',' -f1)"
+#export IRCNICK="${USER}"
+#export IRCNAME="${REALNAME}"
+# export CDPATH=".:/usr/local:/usr/local/share"
+
+# vi:ft=sh

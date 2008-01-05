@@ -1,0 +1,22 @@
+TODO
+
+* resin2ctl: pass options as args to "java" command
+* install.sh: use MAKE_ENV variables
+* mod_caucho.so conflicts between ports if WITH_APACHE[2]
+* clean */WEB-INF/work and empty dirs when deinstalling
+
+
+LONG TERM
+
+* deinstall fails (files not deleted WEB-INF/work, cache, log, etc)
+* disable srun port if run standalone
+* disable httpd port if run with Apache
+* xml declaration in resin.conf
+* what does exactly <log id='/log' href='stderr:' against -stdout and -stderr?
+* why resin/log always created?
+* cache in /var/spool?  see squid
+* path for 'xsl' and 'lib' dirs cannot be changed???
+* 'doc' dir always re-created
+* local DTD error => put http :)
+* $Id: in comment is an invalid XML name
+* docbook support

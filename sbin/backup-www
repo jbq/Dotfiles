@@ -1,0 +1,28 @@
+#! /bin/sh
+
+################################################################################
+# File:          backup-www
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Backup websites
+# Date Created:  2003-07-09 18:57:11
+# Revision:      $Id: backup-www 286 2003-10-10 07:39:30Z jbq $
+################################################################################
+
+set -e
+
+SRC=/usr/local/www/data.users
+DST=/usr/local/var/backups/www
+
+for dir in $SRC/*; do
+    test -d $dir || continue
+    dirname=$(basename $dir)
+
+    # backup www and cgi dirs
+    tar -cO -f - $dir/www $dir/cgi-bin 2>/dev/null \
+    | bzip2 > $DST/$dirname-$(date "+%Y%m%d").tar.bz2
+done
+
+    # adjust file permissions
+    #find $SRC -group www | xargs -I % chmod g+w "%"
+
+#find /usr/local/svn -group www | xargs -L1 -I % chmod g+w "%"

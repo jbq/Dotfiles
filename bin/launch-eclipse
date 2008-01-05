@@ -1,0 +1,20 @@
+#! /bin/sh -e
+
+################################ User Settings #################################
+# Location of eclipse for manual user installation (optional)
+ECLIPSE_HOME=$(realpath ${ECLIPSE_HOME:-$HOME/usr/eclipse})
+
+# Location of your workspace
+WORKSPACE_DIR=$ECLIPSE_HOME/workspace
+
+OPTIONS="-vmargs -Xmx256m"
+################################################################################
+
+# Go to eclipse directory and launch
+# If it fails, run eclipse from PATH
+if test -x $ECLIPSE_HOME/eclipse ; then
+    cd $ECLIPSE_HOME
+    ./eclipse -data $WORKSPACE_DIR $OPTIONS $*
+else
+    eclipse -data $WORKSPACE_DIR $OPTIONS $*
+fi

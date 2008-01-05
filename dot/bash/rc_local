@@ -1,0 +1,204 @@
+################################################################################
+# File:          rc_local
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define site dependent shell aliases
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: rc_local 936 2004-09-29 17:59:22Z jbq $
+################################################################################
+
+UNAME=$(uname -s)
+
+# Remove extra info (Cygwin)
+UNAME=${UNAME%%_*}
+
+test "$UNAME" = "FreeBSD" && alias ls='ls -G'
+# On Linux, use color only if standard output is connected to a terminal
+test "$UNAME" = "Linux" && alias ls='ls --color=auto'
+
+if test "$UNAME" = "Darwin" ; then
+    if test "$(which ls)" = "/bin/ls" ; then
+        # BSD ls
+        alias ls='ls -G'
+    else
+        # GNU ls in /sw/bin or /usr/local/bin
+        alias ls='ls --color'
+    fi
+fi
+
+have() {
+    type $* >&/dev/null
+}
+
+# FreeBSD specific aliases
+if [ "$UNAME" = "FreeBSD" ]; then
+	have ncftp3 && alias ncftp='ncftp3'
+	have wish8.3 && alias wish='wish8.3'
+	have tclsh8.3 && alias tclsh='tclsh8.3'
+	have acroread5 && alias acroread='acroread5'
+	have dagrab && alias dagrab='dagrab -d /dev/acd1'
+	have cdda2wav && alias cdda2wav='cdda2wav -D /dev/acd1'
+	have cdcontrol && alias cdcontrol='cdcontrol -f /dev/acd1'
+	alias adduser='adduser -silent'
+#	alias mergemaster='mergemaster -c -i'
+elif [ "$UNAME" = "Darwin" ]; then
+	alias startx='startx -- -quartz'
+elif [ "$UNAME" = "Linux" ]; then
+	alias dselect="dselect --expert"
+fi
+
+have gimp-1.3 && alias gimp='gimp-1.3'
+have gimp-remote-1.3 && alias gimp-remote='gimp-remote-1.3'
+have gnome-open && alias open='gnome-open'
+have gpg && alias gpg='gpg --keyserver hkp://pgp.mit.edu --default-recipient-self --lock-never --no-secmem-warning'
+
+# General aliases
+have java && alias jfor='java org.jfor.jfor.main.CmdLineConverter'
+have wine && alias wine='wine --managed --winver win98'
+have w3m && alias w3m='w3m -cookie' # Gimme cookies :)
+have bc && alias bc='bc -q' # Shut up, bc!
+have screen && alias s=screen
+have gnut && alias gnut='gnut -i 62.212.102.95'
+have cvs && alias cvs='cvs -q'
+have BitchX && alias bx='BitchX'
+#have xmllint && alias xmllint='xmllint --noout --valid'
+
+# Custom commands
+alias mutt-lists="mutt -F $USER_DOTFILES/mutt/lists"
+
+# I often mistype commands :)
+alias amke='make'
+alias c='cd'
+alias cim='vim'
+alias d='cd'
+alias dc='cd'
+alias ehco='echo'
+alias ecoh='echo'
+alias gcim='gvim'
+alias givm='gvim'
+alias greo='grep'
+alias grpe='grep'
+alias gqview='gqview +t'
+alias hlat='halt'
+alias lll='ll'
+alias lcoate='locate'
+alias lzqq='less'
+alias les='less'
+alias mak='make'
+alias maek='make'
+alias mkae='make'
+alias mut='mutt'
+alias poing='ping'
+alias pnig='ping'
+alias psgre='psgrep'
+alias rehash='hash -r'
+alias qgview='gqview'
+alias satrtx='startx'
+alias statrx='startx'
+alias starxt='startx'
+alias strartx='startx'
+alias stratx='startx'
+alias starftx='startx'
+alias sratrx='startx'
+alias strtax='startx'
+alias styartx='startx'
+alias tai='tail'
+alias tali='tail'
+alias tial='tail'
+alias utt='mutt'
+alias vmi='vim'
+alias gvmi='gvim'
+alias vp='cp'
+alias nt='ant'
+alias anr='ant'
+alias anrt='ant'
+alias nat='ant'
+
+# aliases
+flop () {
+    drive=$1
+    test -d /$drive && FLOPPY=/$drive
+    test -d /mnt/$drive && FLOPPY=/mnt/$drive
+
+    # Removable devices may need to be reloaded
+    sudo /etc/rc.d/devfs restart
+
+    if mount $FLOPPY 2> /dev/null ; then
+        echo $drive mounted
+    else
+        if umount $FLOPPY 2> /dev/null ; then
+            echo $drive unmounted
+        else
+            echo Cannot mount nor unmount $drive.  Please insert $drive if not
+            echo present, and close all files opened on the media if already inserted.
+        fi
+    fi
+}
+alias flip=flop
+
+have mysql && alias mysql='mysql -uroot -p'
+have mysqladmin && alias mysqladmin='mysqladmin -uroot -p'
+have mysqldump && alias mysqldump='mysqldump -uroot -p'
+
+# If current shell is not a login shell or an ssh connection...
+# ssh output must be empty at startup -- see rsync(1) DIAGNOSTICS for details
+# test "$0" = "${0#-}" -a ! -n "$SSH_CLIENT" && cat /etc/motd
+
+red () {
+	echo '[1;31m'$1'[0;m'
+}
+
+green () {
+	echo '[1;32m'$1'[0;m'
+}
+
+blue () {
+	echo '[1;34m'$1'[0;m'
+}
+
+#USERPROMPT="$(green [\\s:\\l:)$(blue \\u@\\h)$(green :\\w]) \\$ "
+#ROOTPROMPT="$(red [\\s:\\l:)$(blue \\u@\\h)$(red :\\w]) \\$ "
+USERPROMPT="$(green [\\s:\\l:)$(blue \\u@\\h)$(green :\\w]) "
+ROOTPROMPT="$(red [\\s:\\l:)$(blue \\u@\\h)$(red :\\w]) "
+test $(id -u) = 0 && export PS1=$ROOTPROMPT || \
+    export PS1=$USERPROMPT
+
+#ulimit -c 0
+
+#alias tomcat-restart='sudo /usr/local/etc/rc.d/tomcat.sh stop ; sleep 1 ; sudo /usr/local/etc/rc.d/tomcat.sh start'
+
+# On Linux, screen refuses to accept backspace when launched with TERM=xterm-color
+# On FreeBSD, screen refuses to accept backspace when launched with TERM=xterm
+# Falling back to vt220 for use with Eterm
+have screen && alias screen='TERM=vt220 screen'
+# Falling back to 'linux' for use with Gnome Terminal
+# Causes problems on Linux in mutt and vim
+#alias screen='TERM=linux screen'
+
+have screen && complete -F _screen -o default s
+
+# On Linux, disable bitmapped fonts for onscreen rendering
+have xset && (
+    if test -n "$DISPLAY" -a "$UNAME" = "Linux" ; then
+        xset -fp "/usr/lib/X11/fonts/Type1" 2>/dev/null
+        xset fp rehash
+    fi
+)
+
+if have mixer ; then
+    test -f /dev/dsp1.0 && alias mixer='mixer -f /dev/dsp1.0'
+    test -f /dev/dsp0.0 && alias mixer='mixer -f /dev/dsp0.0'
+fi
+#have portupgrade && alias portupgrade='portupgrade -p'
+have man && alias man='PAGER=view-manpage man'
+have svn && alias svncommit='svn commit -m Updated'
+have cvs && alias cvscommit='cvs commit -m Updated'
+have gvim && alias gvim='gvim --remote-silent'
+
+if test -n "$DISPLAY" ; then
+    for file in $(ls /mnt/usbkey/inbox/info-* 2> /dev/null) ; do
+        basefile=${file##*/}
+        zenity --text-info --filename $file --title ${basefile#info-} --width 560 --height 200 &
+    done
+fi
+
+# vim:ft=sh

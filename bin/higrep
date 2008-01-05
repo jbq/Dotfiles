@@ -1,0 +1,21 @@
+#! /bin/sh
+
+################################################################################
+# File:          higrep
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Highlight pattern in grep'ed input
+# Date Created:  2002-07-24 00:47:52
+# CVS Id:        $Id$
+# Bugs:          The -i option is not propagated to sed
+# TODO:          rewrite with python
+################################################################################
+
+HI='\033[1;31m'
+NOHI='\033[0;m'
+HIWORD=$(echo -e $HI'\\1'$NOHI)
+#sed -E -e "s/($1)/$HIWORD/g"
+
+# Check if first arg is an option
+test -z "${1%%-*}" && PATTERN=$2 || PATTERN=$1
+
+grep $* | /usr/bin/sed -e "s/\($PATTERN\)/$HIWORD/g"

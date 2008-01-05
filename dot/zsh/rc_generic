@@ -1,0 +1,18 @@
+################################################################################
+# File:          rc_generic
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define shell aliases
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: rc_generic 377 2003-11-18 16:14:39Z jbq $
+################################################################################
+
+# Helpful aliases..
+alias log='tail /var/log/messages'
+alias cl='clear; logout'
+alias ll='ls -lh'
+alias l='ll'
+alias dc='cd'
+alias bx='BitchX'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'

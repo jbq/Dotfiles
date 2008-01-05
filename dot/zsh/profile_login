@@ -1,0 +1,33 @@
+################################################################################
+# File:          profile_login
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Execute commands at login
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: profile_login 794 2004-07-12 19:32:36Z jbq $
+################################################################################
+
+UNAME=$(uname -s)
+UNAME=${UNAME%%_*}
+test "$HOME" = "" -a "$UNAME" = "CYGWIN" && export HOME="/cygdrive/u"
+
+#if test -f ~/var/disk.img ; then
+#    echo -n "Confirm login? [y] "
+#    read yesno
+#    if test "$yesno" = "y" -o "$yesno" = "" ; then
+#        export CRYPTFILES=$HOME/var/files
+#        # Got an encrypted partition, mount it upon login
+#        if test -f ~/var/disk.img -a ! -e /dev/md0.bde -a ! -e /dev/mapper/disk.img ; then
+#            mount-disk.sh $CRYPTFILES
+#        fi
+#
+#        # for script in $USER_DOTFILES/secret/rc.d/*.sh(N) ; do
+#        #     sh $script start
+#        # done
+#    fi
+#fi
+
+type screen >& /dev/null && screen -list | grep -v '^No Sockets found' | sed -e '$d'
+
+test -f $USER_DOTFILES/private/profile && . $USER_DOTFILES/private/profile
+
+# vim:ft=sh

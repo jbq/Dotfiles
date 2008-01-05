@@ -1,0 +1,157 @@
+/*******************************************************************************
+* File:          caraldi.css
+* Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+* Date Created:  2002-02-01 11:00:50
+* Revision:      $Id$
+*******************************************************************************/
+
+@import url(embedded_xml.css);
+@import url(embedded_dtd.css);
+@import url(docbook.css);
+@import url(additions.css);
+
+body {
+    background-color: #CCCCFF;
+    margin: 0px;
+    font-size: 14px;
+    color: #3333ff;
+}
+h1 {
+    color: #006666;
+    font-size: 24px;
+}
+ul {
+    color: #3333FF;
+    /*font-size: 12px;*/
+}
+
+a {
+    color: #3333FF;
+}
+
+a img {
+    border-width: 2px;
+    border-style: solid;
+}
+
+a:visited {
+    color: #9922EE;
+}
+
+.menu {
+    background-color: #9999FF;
+    width: 150px;
+    margin: 7px;
+}
+.menu p a {
+    color: White;
+}
+.menu p {
+    color: White;
+}
+ul.toc li a {
+    color: White;
+}
+
+p {
+    color: #3333ff;
+}
+h2 a {
+    color: #006666;
+}
+h2 {
+    margin-top: 15px;
+    color: #006666;
+    font-size: 14px;
+}
+
+.caption {
+    background-color: #FFFFA0;
+    padding: .5em;
+    margin: 1em 0;
+    width: 60%;
+    border-bottom: 1px;
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    border-style: solid;
+}
+
+.event-text {
+    background-color: #FFFFA0;
+    padding: 2px;
+}
+.event {
+    margin-bottom: 10px;
+    border-bottom: 1px;
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    border-style: solid;
+}
+.event-header {
+    border-bottom: 1px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    background-color: #DFDF80;
+    padding: 2px;
+    font-weight: bold;
+}
+
+li.on {
+    list-style-image: url(/icons/bullet-on.gif);
+}
+
+li {
+    list-style-image: url(/icons/bullet-off.gif);
+    margin: 10px 0px;
+}
+
+td {
+    vertical-align: top;
+    padding: 5px 10px;
+}
+td h2 {
+    text-align: center;
+}
+td div.icon {
+    text-align: center;
+}
+.icon img {
+    border-width: 0px;
+}
+td.thumbnail {
+    vertical-align: bottom;
+}
+
+.disabled {
+    color: #E0E0FF;
+}
+
+.links {
+    word-spacing: 2em;
+}
+
+.links a {
+    word-spacing: normal;
+}
+
+.links span {
+    word-spacing: normal;
+}
+
+.top10 td {
+    padding: .1em;
+    font-size: 9pt;
+}
+
+.top10 td.date {
+    padding-right: 1em;
+    text-align: right;
+    font-weight: bold;
+}
+
+.top10 td.title {
+}

@@ -1,0 +1,122 @@
+#! /usr/bin/env python
+#
+# Copyright (c) 2007, Jean-Baptiste Quenot <jbq@caraldi.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * The name of the contributors may not be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import getopt, sys, caraldi, os, re
+
+class IvyDevelRepoCleanup(caraldi.DirStat):
+    DEVEL = 0
+    INTEGRATION = 1
+    VERSION_RE = "^(.+)-[0-9]+-dev"
+    DEVEL_RE = VERSION_RE + "-[0-9]{14}$"
+    INTEGRATION_RE = VERSION_RE + "$"
+
+    def __init__(self, dir, prefs):
+        self.prefs = prefs
+        self.dirs = []
+        caraldi.DirStat.__init__(self)
+        caraldi.DirStat.walk(self, dir)
+        for dir in caraldi.uniq(self.dirs):
+            subdirs = os.listdir(dir)
+            subdirs.sort()
+            self.cleanup(dir, subdirs)
+
+    def visitFile(self, file, stat):
+        if (os.path.basename(file) == "ivy.xml"):
+            self.dirs.append(os.path.dirname(os.path.dirname(file)))
+
+    def visitDirectory(self, file, stat):
+        pass
+
+    def cleanup(self, maindir, dirs):
+        # Reverse the list, to keep the most recent
+        dirs.reverse()
+
+        tobekept = []
+        toberemoved = []
+        for dir in dirs:
+            if self.similarentryexists(dir, tobekept):
+                toberemoved.append(dir)
+                print "rm -rf %s/%s" % (maindir, dir)
+            else:
+                tobekept.append(dir)
+
+    def similarentryexists(self, entry, dirs):
+        version = re.sub(self.VERSION_RE + ".*$", r"\1", entry)
+        for dir in dirs:
+            if self.revformat(entry) == self.revformat(dir):
+                if dir.find(version) == 0:
+                    return True
+        return False
+
+    def revformat(self, name):
+        if re.match(self.DEVEL_RE, name):
+            return self.DEVEL
+        if re.match(self.INTEGRATION_RE, name):
+            return self.INTEGRATION
+        print >> sys.stderr, "Unknown format: " + name
+        return -1
+
+
+if __name__ == "__main__":
+    # TODO cmd-line options
+    prefs = {}
+    prefs['maxcount'] = 28
+    prefs['dryrun'] = 0
+    prefs['debug'] = 0
+    prefs['skipIdentical'] = 0
+
+    # Get options
+    opts, args = getopt.getopt (sys.argv[1:], 'dc:', ['debug', 'count=', 'dry-run'])
+
+    # Copy options
+    for o, a in opts:
+        if o in ("-c", "--count"):
+            prefs['maxcount'] = int(a)
+        elif o in ("-d", "--debug"):
+            prefs['debug'] = 1
+        elif o in ("--dry-run"):
+            prefs['dryrun'] = 1
+
+    dir = os.getcwd()
+    if (len(args) == 1):
+        dir = args[0]
+    elif (len(args) > 1):
+        print 'Usage:', os.path.basename(sys.argv[0]), '/path/to/development/repo'
+        print
+        print 'Options:'
+        print ' --count NUM    -c NUM    where NUM is the maximal count of artifacts'
+        print ' --debug        -d        for debug-level logging'
+        sys.exit(1)
+
+    logger = caraldi.getLogger(sys.argv[0])
+
+    if prefs['debug']:
+        logger.setLevel(logging.DEBUG)
+
+    logger.debug("prefs = %s" % prefs)
+
+    IvyDevelRepoCleanup(dir, prefs)

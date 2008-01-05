@@ -1,0 +1,157 @@
+#! /usr/bin/env python
+
+################################################################################
+# File:          sync.hosts
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Backup a set of files
+# Date Created:  2004-08-06 09:06:31
+# Revision:      $Id$
+################################################################################
+
+# TODO
+#
+# * Delete empty directories.  A folder with only '.svn' inside is considered
+# empty
+#
+# * Handle directories in catalog
+
+import sys, os, caraldi, socket, stat, shutil, glob, re, logging, getopt
+
+class CleanDir(caraldi.DirStat):
+    logger = caraldi.getLogger(__name__)
+    def __init__(self):
+        caraldi.DirStat.__init__(self)
+        # TODO set logging level
+        self.patterns = ['-.svn']
+
+    def visitFile(self, file, stat):
+        #print("rm -f %s" % file)
+        print("svn rm %s || rm -f %s" % (file, file))
+
+    def visitDirectory(self, dir, stat):
+        #print("Clean dir %s" % dir)
+        list = os.listdir(dir)
+        if ".svn" in list:
+            list.remove(".svn")
+        if not(len(list)):
+            print("svn rm %s || rmdir %s" % (dir, dir))
+
+def readCatalog(catalog):
+    files = []
+    catalogInput = open(catalog, 'r')
+
+    while 1:
+        # Read catalog one line at a time
+        line = catalogInput.readline()
+
+        # Stop if end of file
+        if not(line):
+            break
+
+        # Remove trailing line separator
+        line = line.rstrip()
+
+        # Skip if blank line or comment
+        if len(line) == 0 or line[0] == '#':
+            continue
+
+        regexp = "^(.+)\(([\./]+)\)$"
+        globpattern = line
+        # Default qualifiers are: file and directory
+        qualifiers = "./"
+
+        if re.match(regexp, line):
+            globpattern = re.sub(regexp, "\\1", line)
+            qualifiers = re.sub(regexp, "\\2", line)
+
+        glob_files = glob.glob(globpattern)
+        logger.debug("line = %s " % line)
+        logger.debug("globpattern = %s " % globpattern)
+        logger.debug("qualifiers = %s " % qualifiers)
+        logger.debug("glob_files = %s " % glob_files)
+
+        for file in glob_files:
+            # filter files obtained from glob against qualifiers
+            if os.path.isfile(file):
+                if qualifiers.find(".") == -1:
+                    # Skip if file does not match qualifiers
+                    logger.debug("%s is not a file, rejected by qualifiers" % file)
+                    continue
+            elif os.path.isdir(file):
+                if qualifiers.find("/") == -1:
+                    # Skip if folder does not match qualifiers
+                    logger.debug("%s is not a directory, rejected by qualifiers" % file)
+                    continue
+                else:
+                    logger.warn("Ignoring folder %s" % file)
+                    continue
+
+            # Skip if file does not exist
+            if not(os.path.exists(file)):
+                logger.warn("%s does not exist" % file)
+                continue
+
+            files.append(file)
+
+    return files
+
+if __name__ == "__main__":
+    debug = 0
+    opts, args = getopt.getopt (sys.argv[1:], 'dh:', ['debug', 'host='])
+
+    logger = caraldi.getLogger(sys.argv[0])
+    host = socket.gethostname()
+
+    # Fetch options
+    for o, a in opts:
+        if o in ("-d", "--debug"):
+            logger.setLevel(logging.DEBUG)
+            debug = 1
+        elif o in ("-h", "--host"):
+            host = a
+
+    #dir = os.environ['HOME'] + '/usr/system'
+    dir = args[0]
+    print
+    print "# %s" % host
+    print
+
+    catalog = caraldi.join(dir, 'include-' + host)
+    hostdir = caraldi.join(dir, host)
+
+    print "# Reading files in %s" % catalog
+    print
+
+    files = readCatalog(catalog)
+    existingFiles = []
+    for file in files:
+        print "# Copying %s" % file
+
+        dstpath = caraldi.join(hostdir, os.path.dirname(file))
+
+        # Create intermediate folders
+        if not(os.path.exists(dstpath)):
+            os.makedirs(dstpath)
+            logger.info("Creating %s" % dstpath)
+
+        dstfile = caraldi.join(hostdir, file)
+
+        #if stat.S_ISDIR(fileMode):
+        #    # Copy directory
+        #    shutil.copytree(file, dstfile)
+        #else:
+        # Copy file
+        shutil.copyfile(file, dstfile)
+        existingFiles.append(file)
+
+    if (debug):
+        CleanDir.logger.setLevel(caraldi.DefaultLogger.DEBUG)
+        caraldi.DirStat.logger.setLevel(caraldi.DefaultLogger.DEBUG)
+
+    # Delete files in destination path that are not included in the catalog
+    dirstat = CleanDir()
+    logger.debug("Ignoring files %s" % existingFiles)
+    dirstat.fullPathPatterns = []
+    for f in existingFiles:
+        dirstat.fullPathPatterns.append("-"+f)
+    dirstat.walk(hostdir)

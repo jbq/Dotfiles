@@ -1,0 +1,15 @@
+#! /bin/sh
+
+################################################################################
+# File:          hi
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Highlight pattern in standard input
+# Date Created:  2002-07-24 00:47:52
+# CVS Id:        $Id$
+################################################################################
+
+HI='\033[1;31m'
+NOHI='\033[0;m'
+HIWORD=$(echo -e $HI'\\1'$NOHI)
+#sed -E -e "s/($1)/$HIWORD/g"
+sed -e "s/\($1\)/$HIWORD/g"

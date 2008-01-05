@@ -1,0 +1,33 @@
+################################################################################
+# File:          profile_login
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Execute commands at login
+# Date Created:  2002-01-29 15:14:16
+# CVS Id:        $Id: profile_login 377 2003-11-18 16:14:39Z jbq $
+################################################################################
+
+UNAME=$(uname -s)
+UNAME=${UNAME%%_*}
+#test "$UNAME" = "CYGWIN" && LOGIN=0 || LOGIN=$(echo $(who | grep $USER | wc -l))
+test "$HOME" = "" -a "$UNAME" = "CYGWIN" && export HOME="/cygdrive/u"
+
+#if [ "$LOGIN" = "1" ]; then
+#	if test "$USER" = "quenotj"; then
+#		if test "$HOSTNAME" = "watt.intra.caraldi.com"; then
+#			sync.watt >> /tmp/sync.watt.log 2>&1 &
+#			sync.hosts >> /tmp/sync.hosts.log 2>&1 &
+#			sync.dotfiles >> /tmp/sync.dotfiles.log 2>&1 &
+#			mixer -f /dev/dsp1.0 vol 75 cd 75 pcm 100 >& /dev/null
+#			important-messages
+#		fi
+#	fi
+#
+#	# Mount my USB key
+#	grep usbkey /etc/fstab >&/dev/null && mount /mnt/usbkey
+#fi
+
+type screen >& /dev/null && screen -list | grep -v '^No Sockets found' | sed -e '$d'
+
+# source the bash init file
+# (only for the login shell)
+. ~/.bashrc

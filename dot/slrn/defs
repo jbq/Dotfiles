@@ -1,0 +1,7 @@
+define resize_screen_hook ()
+{
+	% Show 10 index lines
+	set_article_window_size (SCREEN_HEIGHT-10-4);
+}
+
+% vim:ft=slang

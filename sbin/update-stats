@@ -1,0 +1,26 @@
+#! /bin/sh
+
+################################################################################
+# File:          update-stats
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Produce statistics from website's access log
+# Date Created:  2003-10-10 09:35:24
+# Revision:      $Id: update-stats 286 2003-10-10 07:39:30Z jbq $
+################################################################################
+
+set -e
+
+SRCDIR=/usr/local/www/data.users
+
+for DOMAIN in $SRCDIR/*; do
+    DOMAIN=$(basename $DOMAIN)
+    LOGFILE=$SRCDIR/$DOMAIN/var/log/httpd-access.log.0
+
+    if test -r $LOGFILE ; then
+        grep -v newsyslog $LOGFILE >/dev/null && \
+        ( webalizer -D $SRCDIR/$DOMAIN/var/www/webalizer.hosts -N 10 -p -n $DOMAIN \
+            -r $DOMAIN -s caraldi.com -s localhost -o $SRCDIR/$DOMAIN/var/www \
+            $LOGFILE >/dev/null 2>&1 \
+            || echo Failed to update stats for $DOMAIN ) || continue
+    fi
+done

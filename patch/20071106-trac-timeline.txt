@@ -1,0 +1,11 @@
+--- /usr/share/python-support/trac/trac/Timeline.py.orig	2007-11-06 10:15:16.000000000 +0100
++++ /usr/share/python-support/trac/trac/Timeline.py	2007-11-06 10:17:23.000000000 +0100
+@@ -181,6 +181,8 @@
+                         event['author.email'] = author
+                     elif email_map.has_key(author):
+                         event['author.email'] = email_map[author]
++                    else:
++                        event['author.email'] = author
+                 event['date'] = http_date(date)
+ 
+             req.hdf['timeline.events.%s' % idx] = event

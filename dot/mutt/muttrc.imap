@@ -1,0 +1,18 @@
+################################################################################
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Define mutt behaviour
+# Date Created:  2001-01-01 00:00:00
+# CVS Id:        $Id: muttrc.imap 442 2004-01-28 15:32:50Z jbq $
+################################################################################
+
+# First define folder
+set folder="imaps://imap.gmail.com/"
+
+# Override common settings for IMAP use
+set mbox=imaps://imap.gmail.com/
+#mailboxes imaps://imap.gmail.com/
+set spoolfile=imaps://imap.gmail.com/
+set timeout=15
+
+source ~/usr/dot/private/muttrc.imap
+source ~/usr/dot/mutt/muttrc.common

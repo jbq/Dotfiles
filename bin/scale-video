@@ -1,0 +1,12 @@
+#! /usr/bin/env python
+
+import sys, os
+
+ffmpeg = "ffmpeg"
+
+for video in sys.argv[1:]:
+    basename = video[:-4]
+    flv = "%s.flv" % basename
+    os.system("%s -y -i %s -ar 11025 -ab 32k %s" % (ffmpeg, video, flv))
+    avi = "%s.avi" % basename
+    os.system("%s -y -i %s -sameq -ar 22050 %s" % (ffmpeg, video, avi))

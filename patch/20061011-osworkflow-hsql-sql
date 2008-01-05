@@ -1,0 +1,11 @@
+--- src/etc/deployment/jdbc/hsql.sql.orig	Wed Oct 11 18:58:20 2006
++++ src/etc/deployment/jdbc/hsql.sql	Wed Oct 11 18:58:48 2006
+@@ -21,7 +21,7 @@
+ 
+ CREATE TABLE OS_WFENTRY
+ (
+-    ID int,
++    ID bigint,
+     NAME varchar(128),
+     STATE smallint,
+     primary key (ID)

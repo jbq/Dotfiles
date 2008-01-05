@@ -1,0 +1,22 @@
+#! /bin/sh
+
+################################################################################
+# File:          backup-cvs
+# Author:        Jean-Baptiste Quenot
+# Purpose:       Backup CVS repositories
+# Date Created:  2003-07-09 18:57:11
+# Revision:      $Id: backup-cvs 286 2003-10-10 07:39:30Z jbq $
+################################################################################
+
+set -e
+
+SRC=/usr/local/cvs
+DST=/usr/local/var/backups/cvs
+
+for dir in $SRC/*; do
+    test -d $dir || continue
+    dirname=$(basename $dir)
+
+    tar -cO -f - $dir 2>/dev/null \
+    | bzip2 > $DST/$dirname-$(date "+%Y%m%d").tar.bz2
+done

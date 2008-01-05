@@ -1,0 +1,46 @@
+#! /bin/sh -e
+
+ADMINLOGIN="root"
+
+db=$3
+priv=$4
+if [ "$1" = "" ] || [ "$2" = "" ] || [ "$db" = "" ]
+then
+	echo "Usage: `basename $0` <user> <password|-> <db> [SELECT|USAGE|ADMIN]"
+	exit 1
+fi
+	
+echo -n Password:
+noecho on
+read ADMINPASSWORD
+noecho off
+echo
+test -n "$ADMINPASSWORD" && ADMINPASSWORD="-p$ADMINPASSWORD"
+
+if ! [ "$2" = "-" ]
+then
+	echo "+ Inserting $1 in mysql.user"
+	mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="insert user (host,user,password) values \
+	('localhost','$1',password('$2'));" mysql >/dev/null 2>/dev/null
+fi
+
+echo "+ Inserting $1 in mysql.db"
+mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="insert db (host,db,user) values \
+('localhost','$db','$1');" mysql >/dev/null 2>/dev/null
+
+if test "$priv" = "USAGE" -o "$priv" = "usage"; then
+	echo "+ Updating $1 in mysql.db with USAGE privileges"
+	mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="update db set select_priv='y', insert_priv='y', update_priv='y',
+	delete_priv='y' where user='$1';" mysql >/dev/null 2>/dev/null
+elif test "$priv" = "SELECT" -o "$priv" = "select"; then
+    echo "+ Updating $1 in mysql.db with SELECT privileges"
+    mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="update db set select_priv='y', insert_priv='n', update_priv='n',
+    delete_priv='n' where user='$1';" mysql >/dev/null 2>/dev/null
+elif test "$priv" = "ADMIN" -o "$priv" = "admin"; then
+    echo "+ Updating $1 in mysql.db with $priv privileges"
+    mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="update db set select_priv='y', insert_priv='y', update_priv='y',
+    delete_priv='y', create_priv='y', drop_priv='y' where user='$1';" mysql >/dev/null 2>/dev/null
+fi
+
+echo "+ Flushing privileges";
+mysql -u$ADMINLOGIN $ADMINPASSWORD --exec="flush privileges;" mysql >/dev/null 2>/dev/null

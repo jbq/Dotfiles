@@ -1,0 +1,41 @@
+#!/bin/sh
+
+################################################################################
+# File:          less
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Better less
+# Date Created:  2002-07-24 00:47:04
+# CVS Id:        $Id$
+################################################################################
+
+# Shell script to start Vim with less.vim.
+# Read stdin if no arguments were given.
+
+# Set PATH for vim (needed by programs like mergemaster that alter PATH)
+# /sw/bin on Fink Darwin
+PATH=/sw/bin:/usr/local/bin:/usr/bin:/bin
+
+OPTIONS="set readonly | set noswf | set bg=dark | set nofoldenable | set nolist"
+
+for MACRO in /usr/share/vim/vim*/macros/less.vim \
+    /usr/share/vim/macros/less.vim \
+    /usr/local/share/vim/vim*/macros/less.vim \
+    /usr/share/doc/vim/macros/less.vim; do
+    test -f $MACRO && break
+done
+
+if test $(basename $0) = "view-manpage"; then
+    col -b | vim -u NONE -R -n -m -c "so $MACRO" -c "set ft=man | $OPTIONS" -
+elif test $# = 0; then
+    vim -c "so $MACRO" -c "$OPTIONS" -
+else
+    for f in "$*"; do
+        if test -e "$f" ; then
+            test -n "$files" && files="$files $f" || files="$f"
+        else
+            echo "$f": No such file or directory
+        fi
+    done
+
+    test -n "$files" && vim -u NONE -R -n -m -c "so $MACRO" --cmd 'set noswf' -c "$OPTIONS" "$files"
+fi

@@ -1,0 +1,2379 @@
+eXist/LICENSE
+eXist/README
+eXist/backup.properties
+eXist/bin/backup.bat
+eXist/bin/backup.sh
+eXist/bin/client.bat
+eXist/bin/client.sh
+eXist/bin/cpappend.bat
+eXist/bin/query.py
+eXist/bin/rpclite.pl
+eXist/bin/run.bat
+eXist/bin/run.sh
+eXist/bin/server.bat
+eXist/bin/server.sh
+eXist/bin/shutdown.bat
+eXist/bin/shutdown.sh
+eXist/bin/startup.bat
+eXist/bin/startup.sh
+eXist/bin/xmlrpc.pl
+eXist/build.bat
+eXist/build.properties
+eXist/build.sh
+eXist/build.xml
+eXist/client.properties
+eXist/conf.xml
+eXist/examples-setup.xml
+eXist/examples.jar
+eXist/exist-optional.jar
+eXist/exist.jar
+eXist/lib/core/antlr.jar
+eXist/lib/core/commons-pool-1.1.jar
+eXist/lib/core/excalibur-cli-1.0.jar
+eXist/lib/core/jEdit-syntax.jar
+eXist/lib/core/jakarta-oro-2.0.8.jar
+eXist/lib/core/javax.servlet.jar
+eXist/lib/core/libJavaReadline.so
+eXist/lib/core/libreadline-java.jar
+eXist/lib/core/log4j-1.2.8.jar
+eXist/lib/core/xml-commons-resolver-1.1.jar
+eXist/lib/core/xmldb.jar
+eXist/lib/core/xmlrpc-1.2-patched.jar
+eXist/lib/endorsed/jakarta-bcel-20040329.jar
+eXist/lib/endorsed/jakarta-regexp-1.3.jar
+eXist/lib/endorsed/xalan-2.6.0.jar
+eXist/lib/endorsed/xercesImpl-2.6.2.jar
+eXist/lib/endorsed/xml-apis.jar
+eXist/lib/optional/README.cocoon
+eXist/lib/optional/avalon-framework-api-4.1.5.jar
+eXist/lib/optional/avalon-framework-impl-4.1.5.jar
+eXist/lib/optional/axis-1.1.jar
+eXist/lib/optional/axis-ant.jar
+eXist/lib/optional/axis-jaxrpc-1.1.jar
+eXist/lib/optional/axis-saaj-1.1.jar
+eXist/lib/optional/castor-0.9.5-xml.jar
+eXist/lib/optional/cocoon-2.1.5.1-deprecated.jar
+eXist/lib/optional/cocoon-2.1.5.1.jar
+eXist/lib/optional/cocoon-databases-block.jar
+eXist/lib/optional/cocoon-xmldb-block.jar
+eXist/lib/optional/cocoon-xsp-block.jar
+eXist/lib/optional/commons-collections-3.0.jar
+eXist/lib/optional/commons-discovery-0.2.jar
+eXist/lib/optional/commons-fileupload-1.0.jar
+eXist/lib/optional/commons-httpclient-2.0-final.jar
+eXist/lib/optional/commons-jexl-1.0-beta-1-20040113.jar
+eXist/lib/optional/commons-jxpath-20030909.jar
+eXist/lib/optional/commons-lang-2.0.jar
+eXist/lib/optional/commons-logging-1.0.3.jar
+eXist/lib/optional/excalibur-component-1.2.jar
+eXist/lib/optional/excalibur-datasource-1.1.1.jar
+eXist/lib/optional/excalibur-event-api-1.1.jar
+eXist/lib/optional/excalibur-event-impl-1.1.jar
+eXist/lib/optional/excalibur-i18n-1.1.jar
+eXist/lib/optional/excalibur-instrument-1.0.jar
+eXist/lib/optional/excalibur-instrument-manager-1.0.jar
+eXist/lib/optional/excalibur-instrument-manager-interfaces-1.0.jar
+eXist/lib/optional/excalibur-io-1.1.jar
+eXist/lib/optional/excalibur-logger-1.1.jar
+eXist/lib/optional/excalibur-monitor-1.0.2.jar
+eXist/lib/optional/excalibur-naming-1.0.jar
+eXist/lib/optional/excalibur-pool-1.2.jar
+eXist/lib/optional/excalibur-sourceresolve-1.1.jar
+eXist/lib/optional/excalibur-store-1.0.jar
+eXist/lib/optional/excalibur-util-1.0.jar
+eXist/lib/optional/excalibur-xmlutil-1.0.jar
+eXist/lib/optional/isorelax.jar
+eXist/lib/optional/jcs-1.0-dev-20040516.jar
+eXist/lib/optional/jdtcore-2.1.3.jar
+eXist/lib/optional/logkit-1.2.2.jar
+eXist/lib/optional/msv.jar
+eXist/lib/optional/util.concurrent-1.3.3.jar
+eXist/lib/optional/wsdl4j-1.4.jar
+eXist/lib/optional/xsdlib.jar
+eXist/log/.DO_NOT_DELETE
+eXist/log4j.xml
+eXist/samples/biblio.rdf
+eXist/samples/examples.xml
+eXist/samples/http/client.sh
+eXist/samples/http/get.sh
+eXist/samples/http/httpclient.pl
+eXist/samples/http/put.py
+eXist/samples/http/query.sh
+eXist/samples/http/search.pl
+eXist/samples/http/upload.sh
+eXist/samples/mods/01c73f2b05650de2e6124d9d113f40be.xml
+eXist/samples/mods/0216b628b9bdafadb3bea01bb004a97e.xml
+eXist/samples/mods/0d016e459e3d11d8b38c17a3076b4f5f.xml
+eXist/samples/mods/15edb0d6a6226904a06a1c722f45c254.xml
+eXist/samples/mods/1bc61942b4cfe0d9c7cbcf01354100ff.xml
+eXist/samples/mods/367d023a407d983c87a6fc69d9bbdedc.xml
+eXist/samples/mods/3ce658042e6e3a11a5d0282c3535f356.xml
+eXist/samples/mods/469523cc93747bf924d8e0b958751b80.xml
+eXist/samples/mods/488781fa2936f68db0019dc5c129c6e0.xml
+eXist/samples/mods/4ddc8d34bfbf1d68831f865a38a7e8e4.xml
+eXist/samples/mods/516ed5d3441f8e7ee8c288943ec02645.xml
+eXist/samples/mods/5226ddd6d6771ced637c765eed7b4f25.xml
+eXist/samples/mods/6a01f5fa08b4a1f6cb6ce183a49a3fb3.xml
+eXist/samples/mods/6d50002e19010956a0c0d7b9de5a1bbf.xml
+eXist/samples/mods/6f8722149f877ed67cf87cc436eed91c.xml
+eXist/samples/mods/97a3be1167805cc60c01ec703c069e7d.xml
+eXist/samples/mods/b117894858ceada1366e79c2908f0d3b.xml
+eXist/samples/mods/e0612d926ca7eb7ba70d97225540a80b.xml
+eXist/samples/mods/f6c36a2b2920ebe5a7ca4f11b9676dc1.xml
+eXist/samples/mods/fafee1880d1bce01d2bd8da45621a2e1.xml
+eXist/samples/org/exist/examples/http/PostExample.java
+eXist/samples/org/exist/examples/http/PutExample.java
+eXist/samples/org/exist/examples/soap/GetDocument.java
+eXist/samples/org/exist/examples/soap/QueryExample.java
+eXist/samples/org/exist/examples/soap/XUpdateExample.java
+eXist/samples/org/exist/examples/triggers/ExampleTrigger.java
+eXist/samples/org/exist/examples/triggers/collection.xconf
+eXist/samples/org/exist/examples/triggers/stx/address.stx
+eXist/samples/org/exist/examples/triggers/stx/collection.xconf
+eXist/samples/org/exist/examples/triggers/stx/data.xml
+eXist/samples/org/exist/examples/xmldb/MultipleDatabases.java
+eXist/samples/org/exist/examples/xmldb/NestedExample.java
+eXist/samples/org/exist/examples/xmldb/Put.java
+eXist/samples/org/exist/examples/xmldb/Retrieve.java
+eXist/samples/org/exist/examples/xmldb/XQueryExample.java
+eXist/samples/org/exist/examples/xmlrpc/Retrieve.java
+eXist/samples/org/exist/examples/xmlrpc/Store.java
+eXist/samples/org/exist/examples/xquery/EchoFunction.java
+eXist/samples/org/exist/examples/xquery/ExampleModule.java
+eXist/samples/org/exist/examples/xquery/echo.xq
+eXist/samples/shakespeare/.test.xml.swp
+eXist/samples/shakespeare/hamlet.xml
+eXist/samples/shakespeare/macbeth.xml
+eXist/samples/shakespeare/play.dtd
+eXist/samples/shakespeare/r_and_j.xml
+eXist/samples/shakespeare/shakes.css
+eXist/samples/shakespeare/shakes.xsl
+eXist/samples/soap/getdoc.pl
+eXist/samples/soap/query.pl
+eXist/samples/soap/rmdoc.pl
+eXist/samples/soap/store.pl
+eXist/samples/xinclude/db2html.xsl
+eXist/samples/xinclude/disclaimer.xml
+eXist/samples/xinclude/sidebar.xml
+eXist/samples/xinclude/xinclude.xml
+eXist/samples/xinclude/xmlsource.xsl
+eXist/samples/xmlrpc/collection.rb
+eXist/samples/xmlrpc/find.rb
+eXist/samples/xmlrpc/retrieve.pl
+eXist/samples/xmlrpc/retrieve.rb
+eXist/samples/xmlrpc/search.pl
+eXist/samples/xmlrpc/search2.pl
+eXist/samples/xquery/books.xq
+eXist/samples/xquery/collations.xq
+eXist/samples/xquery/date.xq
+eXist/samples/xquery/display-collections.xq
+eXist/samples/xquery/exceptions.xq
+eXist/samples/xquery/fibo.xq
+eXist/samples/xquery/functions.xq
+eXist/samples/xquery/global_var.xq
+eXist/samples/xquery/groupby.xq
+eXist/samples/xquery/java.xq
+eXist/samples/xquery/max.xq
+eXist/samples/xquery/table.xq
+eXist/samples/xquery/xupdate.xq
+eXist/src/CatalogManager.properties
+eXist/src/Doxyfile
+eXist/src/org/dbxml/core/DBException.java
+eXist/src/org/dbxml/core/data/Value.java
+eXist/src/org/dbxml/core/data/package.html
+eXist/src/org/dbxml/core/filer/BTree.java
+eXist/src/org/dbxml/core/filer/BTreeCallback.java
+eXist/src/org/dbxml/core/filer/BTreeException.java
+eXist/src/org/dbxml/core/filer/Paged.java
+eXist/src/org/dbxml/core/filer/package.html
+eXist/src/org/dbxml/core/indexer/IndexQuery.java
+eXist/src/org/dbxml/core/indexer/package.html
+eXist/src/org/dbxml/xml/Symbols.java
+eXist/src/org/exist/EXistException.java
+eXist/src/org/exist/Indexer.java
+eXist/src/org/exist/JettyStart.java
+eXist/src/org/exist/Server.java
+eXist/src/org/exist/ServerShutdown.java
+eXist/src/org/exist/ant/AbstractXMLDBTask.java
+eXist/src/org/exist/ant/BackupTask.java
+eXist/src/org/exist/ant/RestoreTask.java
+eXist/src/org/exist/ant/XMLDBQueryTask.java
+eXist/src/org/exist/ant/XMLDBRemoveTask.java
+eXist/src/org/exist/ant/XMLDBShutdownTask.java
+eXist/src/org/exist/ant/XMLDBStoreTask.java
+eXist/src/org/exist/ant/antlib.xml
+eXist/src/org/exist/ant/package.html
+eXist/src/org/exist/backup/Backup.java
+eXist/src/org/exist/backup/BackupDialog.java
+eXist/src/org/exist/backup/CreateBackupDialog.java
+eXist/src/org/exist/backup/Main.java
+eXist/src/org/exist/backup/Restore.java
+eXist/src/org/exist/backup/RestoreDialog.java
+eXist/src/org/exist/backup/package.html
+eXist/src/org/exist/bluej.pkg
+eXist/src/org/exist/client/ClientFrame.java
+eXist/src/org/exist/client/ClientTextArea.java
+eXist/src/org/exist/client/DocumentView.java
+eXist/src/org/exist/client/InteractiveClient.java
+eXist/src/org/exist/client/QueryDialog.java
+eXist/src/org/exist/client/ResourcePropertyDialog.java
+eXist/src/org/exist/client/UploadDialog.java
+eXist/src/org/exist/client/UserDialog.java
+eXist/src/org/exist/client/icons/Add24.gif
+eXist/src/org/exist/client/icons/Back16.gif
+eXist/src/org/exist/client/icons/Copy24.gif
+eXist/src/org/exist/client/icons/Cut24.gif
+eXist/src/org/exist/client/icons/Delete24.gif
+eXist/src/org/exist/client/icons/Export24.gif
+eXist/src/org/exist/client/icons/Find24.gif
+eXist/src/org/exist/client/icons/Forward16.gif
+eXist/src/org/exist/client/icons/Import24.gif
+eXist/src/org/exist/client/icons/New16.gif
+eXist/src/org/exist/client/icons/New24.gif
+eXist/src/org/exist/client/icons/NewDir.png
+eXist/src/org/exist/client/icons/Open24.gif
+eXist/src/org/exist/client/icons/Paste24.gif
+eXist/src/org/exist/client/icons/Preferences24.gif
+eXist/src/org/exist/client/icons/Refresh24.gif
+eXist/src/org/exist/client/icons/Save24.gif
+eXist/src/org/exist/client/icons/SaveAs24.gif
+eXist/src/org/exist/client/icons/Up24.gif
+eXist/src/org/exist/client/icons/keyring-small.png
+eXist/src/org/exist/cocoon/CocoonRequestWrapper.java
+eXist/src/org/exist/cocoon/CocoonResponseWrapper.java
+eXist/src/org/exist/cocoon/CocoonSessionWrapper.java
+eXist/src/org/exist/cocoon/ShutdownAction.java
+eXist/src/org/exist/cocoon/StatusGenerator.java
+eXist/src/org/exist/cocoon/XMLDBSessionLoginAction.java
+eXist/src/org/exist/cocoon/XMLDBTransformer.java
+eXist/src/org/exist/cocoon/XMLReaderWrapper.java
+eXist/src/org/exist/cocoon/XQueryGenerator.java
+eXist/src/org/exist/cocoon/XSPHelper.java
+eXist/src/org/exist/cocoon/package.html
+eXist/src/org/exist/collections/Collection.java
+eXist/src/org/exist/collections/CollectionCache.java
+eXist/src/org/exist/collections/CollectionConfiguration.java
+eXist/src/org/exist/collections/CollectionConfigurationException.java
+eXist/src/org/exist/collections/IndexInfo.java
+eXist/src/org/exist/collections/bluej.pkg
+eXist/src/org/exist/collections/triggers/Dumper.java
+eXist/src/org/exist/collections/triggers/FilteringTrigger.java
+eXist/src/org/exist/collections/triggers/STXTransformerTrigger.java
+eXist/src/org/exist/collections/triggers/Trigger.java
+eXist/src/org/exist/collections/triggers/TriggerException.java
+eXist/src/org/exist/dom/.ElementImpl.java.swp
+eXist/src/org/exist/dom/AVLTreeNodeSet.java
+eXist/src/org/exist/dom/AbstractNodeSet.java
+eXist/src/org/exist/dom/AbstractNodeSetBase.java
+eXist/src/org/exist/dom/ArraySet.java
+eXist/src/org/exist/dom/AttrImpl.java
+eXist/src/org/exist/dom/BinaryDocument.java
+eXist/src/org/exist/dom/CharacterDataImpl.java
+eXist/src/org/exist/dom/CommentImpl.java
+eXist/src/org/exist/dom/ContextItem.java
+eXist/src/org/exist/dom/DOMImplementation.java
+eXist/src/org/exist/dom/DocumentFragmentImpl.java
+eXist/src/org/exist/dom/DocumentImpl.java
+eXist/src/org/exist/dom/DocumentOrderComparator.java
+eXist/src/org/exist/dom/DocumentSet.java
+eXist/src/org/exist/dom/DocumentTypeImpl.java
+eXist/src/org/exist/dom/ElementImpl.java
+eXist/src/org/exist/dom/EmptyNodeSet.java
+eXist/src/org/exist/dom/ExtArrayNodeSet.java
+eXist/src/org/exist/dom/Match.java
+eXist/src/org/exist/dom/NamedNode.java
+eXist/src/org/exist/dom/NamedNodeMapImpl.java
+eXist/src/org/exist/dom/NodeImpl.java
+eXist/src/org/exist/dom/NodeIndexListener.java
+eXist/src/org/exist/dom/NodeListImpl.java
+eXist/src/org/exist/dom/NodeObjectPool.java
+eXist/src/org/exist/dom/NodeProxy.java
+eXist/src/org/exist/dom/NodeSet.java
+eXist/src/org/exist/dom/NullNodeIndexListener.java
+eXist/src/org/exist/dom/PoolableNodeObjectFactory.java
+eXist/src/org/exist/dom/ProcessingInstructionImpl.java
+eXist/src/org/exist/dom/QName.java
+eXist/src/org/exist/dom/QNamePool.java
+eXist/src/org/exist/dom/QNameable.java
+eXist/src/org/exist/dom/SingleNodeSet.java
+eXist/src/org/exist/dom/SortedNodeSet.java
+eXist/src/org/exist/dom/SymbolTable.java
+eXist/src/org/exist/dom/TextImpl.java
+eXist/src/org/exist/dom/VirtualNodeSet.java
+eXist/src/org/exist/dom/XMLUtil.java
+eXist/src/org/exist/dom/bluej.pkg
+eXist/src/org/exist/dom/package.html
+eXist/src/org/exist/exist.xsl
+eXist/src/org/exist/http/BadRequestException.java
+eXist/src/org/exist/http/HttpServer.java
+eXist/src/org/exist/http/HttpServerConnection.java
+eXist/src/org/exist/http/NotFoundException.java
+eXist/src/org/exist/http/RESTServer.java
+eXist/src/org/exist/http/Response.java
+eXist/src/org/exist/http/realm/XmldbRealm.java
+eXist/src/org/exist/http/servlets/Authenticator.java
+eXist/src/org/exist/http/servlets/BasicAuthenticator.java
+eXist/src/org/exist/http/servlets/DatabaseAdminServlet.java
+eXist/src/org/exist/http/servlets/DigestAuthenticator.java
+eXist/src/org/exist/http/servlets/EXistServlet.java
+eXist/src/org/exist/http/servlets/HttpRequestWrapper.java
+eXist/src/org/exist/http/servlets/HttpResponseWrapper.java
+eXist/src/org/exist/http/servlets/HttpSessionWrapper.java
+eXist/src/org/exist/http/servlets/RequestWrapper.java
+eXist/src/org/exist/http/servlets/ResponseWrapper.java
+eXist/src/org/exist/http/servlets/SessionWrapper.java
+eXist/src/org/exist/http/servlets/WebDAVServlet.java
+eXist/src/org/exist/http/servlets/XQueryServlet.java
+eXist/src/org/exist/http/test/RESTServiceTest.java
+eXist/src/org/exist/http/webdav/WebDAV.java
+eXist/src/org/exist/http/webdav/WebDAVMethod.java
+eXist/src/org/exist/http/webdav/WebDAVMethodFactory.java
+eXist/src/org/exist/http/webdav/WebDAVUtil.java
+eXist/src/org/exist/http/webdav/methods/AbstractWebDAVMethod.java
+eXist/src/org/exist/http/webdav/methods/Copy.java
+eXist/src/org/exist/http/webdav/methods/Delete.java
+eXist/src/org/exist/http/webdav/methods/Get.java
+eXist/src/org/exist/http/webdav/methods/Head.java
+eXist/src/org/exist/http/webdav/methods/Lock.java
+eXist/src/org/exist/http/webdav/methods/Mkcol.java
+eXist/src/org/exist/http/webdav/methods/Move.java
+eXist/src/org/exist/http/webdav/methods/Options.java
+eXist/src/org/exist/http/webdav/methods/Propfind.java
+eXist/src/org/exist/http/webdav/methods/Put.java
+eXist/src/org/exist/jsp/CollectionTag.java
+eXist/src/org/exist/jsp/CollectionTagInfo.java
+eXist/src/org/exist/memtree/AttributeImpl.java
+eXist/src/org/exist/memtree/CommentImpl.java
+eXist/src/org/exist/memtree/DocumentBuilderReceiver.java
+eXist/src/org/exist/memtree/DocumentImpl.java
+eXist/src/org/exist/memtree/ElementImpl.java
+eXist/src/org/exist/memtree/MemTreeBuilder.java
+eXist/src/org/exist/memtree/NamespaceNode.java
+eXist/src/org/exist/memtree/NodeFactory.java
+eXist/src/org/exist/memtree/NodeImpl.java
+eXist/src/org/exist/memtree/ProcessingInstructionImpl.java
+eXist/src/org/exist/memtree/ReferenceNode.java
+eXist/src/org/exist/memtree/TextImpl.java
+eXist/src/org/exist/memtree/package.html
+eXist/src/org/exist/memtree/test/DOMTest.java
+eXist/src/org/exist/schema/GenericSchemaService.java
+eXist/src/org/exist/schema/LocalSchemaService.java
+eXist/src/org/exist/schema/RemoteSchemaService.java
+eXist/src/org/exist/schema/SchemaAccess.java
+eXist/src/org/exist/schema/SchemaService.java
+eXist/src/org/exist/schema/internalaccess/InternalSchemaAccess.java
+eXist/src/org/exist/schema/test/GenericSchemaServiceTest.java
+eXist/src/org/exist/security/Group.java
+eXist/src/org/exist/security/MD5.java
+eXist/src/org/exist/security/Permission.java
+eXist/src/org/exist/security/PermissionDeniedException.java
+eXist/src/org/exist/security/SecurityManager.java
+eXist/src/org/exist/security/User.java
+eXist/src/org/exist/security/XmldbPrincipal.java
+eXist/src/org/exist/security/package.html
+eXist/src/org/exist/security/security.properties
+eXist/src/org/exist/soap/Admin.java
+eXist/src/org/exist/soap/AdminService.java
+eXist/src/org/exist/soap/AdminServiceLocator.java
+eXist/src/org/exist/soap/AdminSoapBindingImpl.java
+eXist/src/org/exist/soap/AdminSoapBindingSkeleton.java
+eXist/src/org/exist/soap/AdminSoapBindingStub.java
+eXist/src/org/exist/soap/Collection.java
+eXist/src/org/exist/soap/Query.java
+eXist/src/org/exist/soap/QueryResponse.java
+eXist/src/org/exist/soap/QueryResponseCollection.java
+eXist/src/org/exist/soap/QueryResponseDocument.java
+eXist/src/org/exist/soap/QueryService.java
+eXist/src/org/exist/soap/QueryServiceLocator.java
+eXist/src/org/exist/soap/QuerySoapBindingImpl.java
+eXist/src/org/exist/soap/QuerySoapBindingSkeleton.java
+eXist/src/org/exist/soap/QuerySoapBindingStub.java
+eXist/src/org/exist/soap/Session.java
+eXist/src/org/exist/soap/SessionManager.java
+eXist/src/org/exist/soap/admin.wsdl
+eXist/src/org/exist/soap/deployAdmin.wsdd
+eXist/src/org/exist/soap/deployQuery.wsdd
+eXist/src/org/exist/soap/query.wsdl
+eXist/src/org/exist/soap/undeployAdmin.wsdd
+eXist/src/org/exist/soap/undeployQuery.wsdd
+eXist/src/org/exist/source/AbstractSource.java
+eXist/src/org/exist/source/CocoonSource.java
+eXist/src/org/exist/source/FileSource.java
+eXist/src/org/exist/source/Source.java
+eXist/src/org/exist/source/StringSource.java
+eXist/src/org/exist/source/URLSource.java
+eXist/src/org/exist/start/Classpath.java
+eXist/src/org/exist/start/Main.java
+eXist/src/org/exist/start/Version.java
+eXist/src/org/exist/start/package.html
+eXist/src/org/exist/start/start.config
+eXist/src/org/exist/storage/BrokerFactory.java
+eXist/src/org/exist/storage/BrokerPool.java
+eXist/src/org/exist/storage/BufferStats.java
+eXist/src/org/exist/storage/DBBroker.java
+eXist/src/org/exist/storage/ElementIndex.java
+eXist/src/org/exist/storage/ElementValue.java
+eXist/src/org/exist/storage/IndexPaths.java
+eXist/src/org/exist/storage/IndexStats.java
+eXist/src/org/exist/storage/NativeBroker.java
+eXist/src/org/exist/storage/NativeElementIndex.java
+eXist/src/org/exist/storage/NativeTextEngine.java
+eXist/src/org/exist/storage/NodePath.java
+eXist/src/org/exist/storage/Signatures.java
+eXist/src/org/exist/storage/TermMatcher.java
+eXist/src/org/exist/storage/TextSearchEngine.java
+eXist/src/org/exist/storage/XQueryMonitor.java
+eXist/src/org/exist/storage/XQueryPool.java
+eXist/src/org/exist/storage/analysis/ParseException.java
+eXist/src/org/exist/storage/analysis/SimpleTokenizer.java
+eXist/src/org/exist/storage/analysis/TextToken.java
+eXist/src/org/exist/storage/analysis/Token.java
+eXist/src/org/exist/storage/analysis/Tokenizer.java
+eXist/src/org/exist/storage/analysis/bluej.pkg
+eXist/src/org/exist/storage/bluej.pkg
+eXist/src/org/exist/storage/cache/Cache.java
+eXist/src/org/exist/storage/cache/Cacheable.java
+eXist/src/org/exist/storage/cache/ClockCache.java
+eXist/src/org/exist/storage/cache/GClockCache.java
+eXist/src/org/exist/storage/cache/LRDCache.java
+eXist/src/org/exist/storage/cache/LRUCache.java
+eXist/src/org/exist/storage/cache/bluej.pkg
+eXist/src/org/exist/storage/cache/package.html
+eXist/src/org/exist/storage/io/AbstractVariableByteInput.java
+eXist/src/org/exist/storage/io/VariableByteArrayInput.java
+eXist/src/org/exist/storage/io/VariableByteInput.java
+eXist/src/org/exist/storage/io/VariableByteInputStream.java
+eXist/src/org/exist/storage/io/VariableByteOutputStream.java
+eXist/src/org/exist/storage/io/test/VariableByteStreamTest.java
+eXist/src/org/exist/storage/package.html
+eXist/src/org/exist/storage/report/Statistics.java
+eXist/src/org/exist/storage/report/XMLStatistics.java
+eXist/src/org/exist/storage/serializers/EXistOutputKeys.java
+eXist/src/org/exist/storage/serializers/NativeSerializer.java
+eXist/src/org/exist/storage/serializers/Serializer.java
+eXist/src/org/exist/storage/serializers/XIncludeFilter.java
+eXist/src/org/exist/storage/serializers/bluej.pkg
+eXist/src/org/exist/storage/serializers/package.html
+eXist/src/org/exist/storage/store/BFile.java
+eXist/src/org/exist/storage/store/BFileCallback.java
+eXist/src/org/exist/storage/store/CollectionStore.java
+eXist/src/org/exist/storage/store/DOMFile.java
+eXist/src/org/exist/storage/store/DOMFileIterator.java
+eXist/src/org/exist/storage/store/DOMTransaction.java
+eXist/src/org/exist/storage/store/FreeList.java
+eXist/src/org/exist/storage/store/FreeSpace.java
+eXist/src/org/exist/storage/store/ItemId.java
+eXist/src/org/exist/storage/store/NodeIterator.java
+eXist/src/org/exist/storage/store/StorageAddress.java
+eXist/src/org/exist/storage/store/bluej.pkg
+eXist/src/org/exist/storage/store/package.html
+eXist/src/org/exist/storage/sync/Sync.java
+eXist/src/org/exist/storage/sync/SyncDaemon.java
+eXist/src/org/exist/system.properties
+eXist/src/org/exist/util/ByteArray.java
+eXist/src/org/exist/util/ByteArrayPool.java
+eXist/src/org/exist/util/ByteConversion.java
+eXist/src/org/exist/util/CharArrayPool.java
+eXist/src/org/exist/util/Collations.java
+eXist/src/org/exist/util/CollectionScanner.java
+eXist/src/org/exist/util/Configuration.java
+eXist/src/org/exist/util/DatabaseConfigurationException.java
+eXist/src/org/exist/util/DirectoryScanner.java
+eXist/src/org/exist/util/FastByteBuffer.java
+eXist/src/org/exist/util/FastQSort.java
+eXist/src/org/exist/util/FastStringBuffer.java
+eXist/src/org/exist/util/FixedByteArray.java
+eXist/src/org/exist/util/Heap.java
+eXist/src/org/exist/util/IncludeXMLFilter.java
+eXist/src/org/exist/util/IndexCallback.java
+eXist/src/org/exist/util/Lock.java
+eXist/src/org/exist/util/LockException.java
+eXist/src/org/exist/util/Lockable.java
+eXist/src/org/exist/util/LongLinkedList.java
+eXist/src/org/exist/util/MultiReadReentrantLock.java
+eXist/src/org/exist/util/MutableStringTokenizer.java
+eXist/src/org/exist/util/Occurrences.java
+eXist/src/org/exist/util/OrderedLinkedList.java
+eXist/src/org/exist/util/OrderedLongLinkedList.java
+eXist/src/org/exist/util/PorterStemmer.java
+eXist/src/org/exist/util/ProgressBar.java
+eXist/src/org/exist/util/ProgressIndicator.java
+eXist/src/org/exist/util/ProgressListener.java
+eXist/src/org/exist/util/Range.java
+eXist/src/org/exist/util/ReadOnlyException.java
+eXist/src/org/exist/util/ReentrantReadWriteLock.java
+eXist/src/org/exist/util/SelectorUtils.java
+eXist/src/org/exist/util/SyntaxException.java
+eXist/src/org/exist/util/UTF8.java
+eXist/src/org/exist/util/XMLChar.java
+eXist/src/org/exist/util/XMLFilenameFilter.java
+eXist/src/org/exist/util/XMLReaderObjectFactory.java
+eXist/src/org/exist/util/XMLReaderPool.java
+eXist/src/org/exist/util/XMLString.java
+eXist/src/org/exist/util/hashtable/AbstractHashtable.java
+eXist/src/org/exist/util/hashtable/Int2ObjectHashMap.java
+eXist/src/org/exist/util/hashtable/Long2ObjectHashMap.java
+eXist/src/org/exist/util/hashtable/NamePool.java
+eXist/src/org/exist/util/hashtable/Object2IntHashMap.java
+eXist/src/org/exist/util/hashtable/Object2LongHashMap.java
+eXist/src/org/exist/util/hashtable/Object2LongIdentityHashMap.java
+eXist/src/org/exist/util/hashtable/Object2ObjectHashMap.java
+eXist/src/org/exist/util/hashtable/ObjectHashSet.java
+eXist/src/org/exist/util/hashtable/SequencedLongHashMap.java
+eXist/src/org/exist/util/hashtable/package.html
+eXist/src/org/exist/util/hashtable/test/HashtableTest.java
+eXist/src/org/exist/util/serializer/AttrList.java
+eXist/src/org/exist/util/serializer/DOMSerializer.java
+eXist/src/org/exist/util/serializer/DOMSerializerObjectFactory.java
+eXist/src/org/exist/util/serializer/DOMSerializerPool.java
+eXist/src/org/exist/util/serializer/DOMStreamer.java
+eXist/src/org/exist/util/serializer/DOMStreamerObjectFactory.java
+eXist/src/org/exist/util/serializer/DOMStreamerPool.java
+eXist/src/org/exist/util/serializer/ExtendedDOMSerializer.java
+eXist/src/org/exist/util/serializer/ExtendedDOMStreamer.java
+eXist/src/org/exist/util/serializer/Receiver.java
+eXist/src/org/exist/util/serializer/ReceiverToSAX.java
+eXist/src/org/exist/util/serializer/SAXSerializer.java
+eXist/src/org/exist/util/serializer/SAXSerializerObjectFactory.java
+eXist/src/org/exist/util/serializer/SAXSerializerPool.java
+eXist/src/org/exist/util/serializer/XMLIndenter.java
+eXist/src/org/exist/util/serializer/XMLWriter.java
+eXist/src/org/exist/util/serializer/encodings/ASCIICharSet.java
+eXist/src/org/exist/util/serializer/encodings/CharacterSet.java
+eXist/src/org/exist/util/serializer/encodings/KOI8RCharSet.java
+eXist/src/org/exist/util/serializer/encodings/Latin1CharSet.java
+eXist/src/org/exist/util/serializer/encodings/Latin2CharSet.java
+eXist/src/org/exist/util/serializer/encodings/UnicodeCharSet.java
+eXist/src/org/exist/util/serializer/package.html
+eXist/src/org/exist/util/test/DOMSerializerTest.java
+eXist/src/org/exist/util/test/XMLStringTest.java
+eXist/src/org/exist/xmldb/AbstractEXistResource.java
+eXist/src/org/exist/xmldb/CollectionImpl.java
+eXist/src/org/exist/xmldb/CollectionManagementServiceImpl.java
+eXist/src/org/exist/xmldb/CompiledExpression.java
+eXist/src/org/exist/xmldb/DatabaseImpl.java
+eXist/src/org/exist/xmldb/DatabaseInstanceManager.java
+eXist/src/org/exist/xmldb/DatabaseStatus.java
+eXist/src/org/exist/xmldb/EXistResource.java
+eXist/src/org/exist/xmldb/IndexQueryService.java
+eXist/src/org/exist/xmldb/LocalBinaryResource.java
+eXist/src/org/exist/xmldb/LocalCollection.java
+eXist/src/org/exist/xmldb/LocalCollectionManagementService.java
+eXist/src/org/exist/xmldb/LocalDatabaseInstanceManager.java
+eXist/src/org/exist/xmldb/LocalIndexQueryService.java
+eXist/src/org/exist/xmldb/LocalResourceSet.java
+eXist/src/org/exist/xmldb/LocalUserManagementService.java
+eXist/src/org/exist/xmldb/LocalXMLResource.java
+eXist/src/org/exist/xmldb/LocalXPathQueryService.java
+eXist/src/org/exist/xmldb/LocalXUpdateQueryService.java
+eXist/src/org/exist/xmldb/MapResourceSet.java
+eXist/src/org/exist/xmldb/RemoteBinaryResource.java
+eXist/src/org/exist/xmldb/RemoteCollection.java
+eXist/src/org/exist/xmldb/RemoteCollectionManagementService.java
+eXist/src/org/exist/xmldb/RemoteCompiledExpression.java
+eXist/src/org/exist/xmldb/RemoteDatabaseInstanceManager.java
+eXist/src/org/exist/xmldb/RemoteIndexQueryService.java
+eXist/src/org/exist/xmldb/RemoteResourceIterator.java
+eXist/src/org/exist/xmldb/RemoteResourceSet.java
+eXist/src/org/exist/xmldb/RemoteUserManagementService.java
+eXist/src/org/exist/xmldb/RemoteXMLResource.java
+eXist/src/org/exist/xmldb/RemoteXPathQueryService.java
+eXist/src/org/exist/xmldb/RemoteXUpdateQueryService.java
+eXist/src/org/exist/xmldb/ResourceSetHelper.java
+eXist/src/org/exist/xmldb/ShutdownListener.java
+eXist/src/org/exist/xmldb/UserManagementService.java
+eXist/src/org/exist/xmldb/XPathQueryServiceImpl.java
+eXist/src/org/exist/xmldb/XQueryService.java
+eXist/src/org/exist/xmldb/package.html
+eXist/src/org/exist/xmldb/test/CopyMoveTest.java
+eXist/src/org/exist/xmldb/test/CreateCollectionsTest.java
+eXist/src/org/exist/xmldb/test/DOMTest.java
+eXist/src/org/exist/xmldb/test/DOMTestJUnit.java
+eXist/src/org/exist/xmldb/test/IndexingTest.java
+eXist/src/org/exist/xmldb/test/LocalTests.java
+eXist/src/org/exist/xmldb/test/PerformanceTest.xml
+eXist/src/org/exist/xmldb/test/RemoteCollectionTest.java
+eXist/src/org/exist/xmldb/test/RemoteDBTest.java
+eXist/src/org/exist/xmldb/test/RemoteDatabaseImplTest.java
+eXist/src/org/exist/xmldb/test/RemoteTests.java
+eXist/src/org/exist/xmldb/test/ResourceSetTest.java
+eXist/src/org/exist/xmldb/test/ResourceTest.java
+eXist/src/org/exist/xmldb/test/ShutdownTest.java
+eXist/src/org/exist/xmldb/test/TestEXistXMLSerialize.java
+eXist/src/org/exist/xmldb/test/concurrent/Action.java
+eXist/src/org/exist/xmldb/test/concurrent/AllTests.java
+eXist/src/org/exist/xmldb/test/concurrent/AttributeUpdateAction.java
+eXist/src/org/exist/xmldb/test/concurrent/ComplexUpdateAction.java
+eXist/src/org/exist/xmldb/test/concurrent/ComplexUpdateTest.java
+eXist/src/org/exist/xmldb/test/concurrent/ConcurrentAttrUpdateTest.java
+eXist/src/org/exist/xmldb/test/concurrent/ConcurrentQueryTest.java
+eXist/src/org/exist/xmldb/test/concurrent/ConcurrentResourceTest.java
+eXist/src/org/exist/xmldb/test/concurrent/ConcurrentTestBase.java
+eXist/src/org/exist/xmldb/test/concurrent/ConcurrentXUpdateTest.java
+eXist/src/org/exist/xmldb/test/concurrent/DBUtils.java
+eXist/src/org/exist/xmldb/test/concurrent/RemoveAppendAction.java
+eXist/src/org/exist/xmldb/test/concurrent/ReplaceResourceAction.java
+eXist/src/org/exist/xmldb/test/concurrent/RetrieveResourceAction.java
+eXist/src/org/exist/xmldb/test/concurrent/XMLGenerator.java
+eXist/src/org/exist/xmldb/test/concurrent/XQueryAction.java
+eXist/src/org/exist/xmldb.xsl
+eXist/src/org/exist/xmldb2.xsl
+eXist/src/org/exist/xmlrpc/AuthenticatedHandler.java
+eXist/src/org/exist/xmlrpc/QueryResult.java
+eXist/src/org/exist/xmlrpc/RpcAPI.java
+eXist/src/org/exist/xmlrpc/RpcConnection.java
+eXist/src/org/exist/xmlrpc/RpcServer.java
+eXist/src/org/exist/xmlrpc/RpcServlet.java
+eXist/src/org/exist/xmlrpc/test/XmlRpcTest.java
+eXist/src/org/exist/xquery/AbstractExpression.java
+eXist/src/org/exist/xquery/AbstractInternalModule.java
+eXist/src/org/exist/xquery/AnyNodeTest.java
+eXist/src/org/exist/xquery/AtomicToString.java
+eXist/src/org/exist/xquery/Atomize.java
+eXist/src/org/exist/xquery/AttributeConstructor.java
+eXist/src/org/exist/xquery/BasicFunction.java
+eXist/src/org/exist/xquery/BinaryOp.java
+eXist/src/org/exist/xquery/BindingExpression.java
+eXist/src/org/exist/xquery/CachedResult.java
+eXist/src/org/exist/xquery/Cardinality.java
+eXist/src/org/exist/xquery/CastExpression.java
+eXist/src/org/exist/xquery/CastableExpression.java
+eXist/src/org/exist/xquery/ChildSelector.java
+eXist/src/org/exist/xquery/CombiningExpression.java
+eXist/src/org/exist/xquery/CommentConstructor.java
+eXist/src/org/exist/xquery/CompiledXQuery.java
+eXist/src/org/exist/xquery/ConditionalExpression.java
+eXist/src/org/exist/xquery/Constants.java
+eXist/src/org/exist/xquery/Dependency.java
+eXist/src/org/exist/xquery/DescendantOrSelfSelector.java
+eXist/src/org/exist/xquery/DescendantSelector.java
+eXist/src/org/exist/xquery/DocumentConstructor.java
+eXist/src/org/exist/xquery/DynamicAttributeConstructor.java
+eXist/src/org/exist/xquery/DynamicCardinalityCheck.java
+eXist/src/org/exist/xquery/DynamicCommentConstructor.java
+eXist/src/org/exist/xquery/DynamicPIConstructor.java
+eXist/src/org/exist/xquery/DynamicTextConstructor.java
+eXist/src/org/exist/xquery/DynamicTypeCheck.java
+eXist/src/org/exist/xquery/ElementConstructor.java
+eXist/src/org/exist/xquery/EnclosedExpr.java
+eXist/src/org/exist/xquery/Except.java
+eXist/src/org/exist/xquery/Expression.java
+eXist/src/org/exist/xquery/ExternalModule.java
+eXist/src/org/exist/xquery/ExternalModuleImpl.java
+eXist/src/org/exist/xquery/FilteredExpression.java
+eXist/src/org/exist/xquery/ForExpr.java
+eXist/src/org/exist/xquery/Function.java
+eXist/src/org/exist/xquery/FunctionCall.java
+eXist/src/org/exist/xquery/FunctionDef.java
+eXist/src/org/exist/xquery/FunctionFactory.java
+eXist/src/org/exist/xquery/FunctionId.java
+eXist/src/org/exist/xquery/FunctionSignature.java
+eXist/src/org/exist/xquery/GeneralComparison.java
+eXist/src/org/exist/xquery/InstanceOfExpression.java
+eXist/src/org/exist/xquery/InternalModule.java
+eXist/src/org/exist/xquery/Intersection.java
+eXist/src/org/exist/xquery/JavaCall.java
+eXist/src/org/exist/xquery/LetExpr.java
+eXist/src/org/exist/xquery/LiteralValue.java
+eXist/src/org/exist/xquery/LocalVariable.java
+eXist/src/org/exist/xquery/LocationStep.java
+eXist/src/org/exist/xquery/LogicalOp.java
+eXist/src/org/exist/xquery/Module.java
+eXist/src/org/exist/xquery/ModuleContext.java
+eXist/src/org/exist/xquery/NameTest.java
+eXist/src/org/exist/xquery/NamespaceConstructor.java
+eXist/src/org/exist/xquery/NodeComparison.java
+eXist/src/org/exist/xquery/NodeConstructor.java
+eXist/src/org/exist/xquery/NodeSelector.java
+eXist/src/org/exist/xquery/NodeTest.java
+eXist/src/org/exist/xquery/OpAnd.java
+eXist/src/org/exist/xquery/OpNumeric.java
+eXist/src/org/exist/xquery/OpOr.java
+eXist/src/org/exist/xquery/OrderSpec.java
+eXist/src/org/exist/xquery/PIConstructor.java
+eXist/src/org/exist/xquery/ParentSelector.java
+eXist/src/org/exist/xquery/PathExpr.java
+eXist/src/org/exist/xquery/Pragma.java
+eXist/src/org/exist/xquery/Predicate.java
+eXist/src/org/exist/xquery/QuantifiedExpression.java
+eXist/src/org/exist/xquery/RangeExpression.java
+eXist/src/org/exist/xquery/RootNode.java
+eXist/src/org/exist/xquery/SelfSelector.java
+eXist/src/org/exist/xquery/SequenceConstructor.java
+eXist/src/org/exist/xquery/SimpleStep.java
+eXist/src/org/exist/xquery/Step.java
+eXist/src/org/exist/xquery/TerminatedException.java
+eXist/src/org/exist/xquery/TextConstructor.java
+eXist/src/org/exist/xquery/TypeTest.java
+eXist/src/org/exist/xquery/UnaryExpr.java
+eXist/src/org/exist/xquery/Union.java
+eXist/src/org/exist/xquery/UntypedValueCheck.java
+eXist/src/org/exist/xquery/UserDefinedFunction.java
+eXist/src/org/exist/xquery/ValueComparison.java
+eXist/src/org/exist/xquery/Variable.java
+eXist/src/org/exist/xquery/VariableDeclaration.java
+eXist/src/org/exist/xquery/VariableReference.java
+eXist/src/org/exist/xquery/XPathException.java
+eXist/src/org/exist/xquery/XPathUtil.java
+eXist/src/org/exist/xquery/XQuery.java
+eXist/src/org/exist/xquery/XQueryContext.java
+eXist/src/org/exist/xquery/XQueryWatchDog.java
+eXist/src/org/exist/xquery/bluej.pkg
+eXist/src/org/exist/xquery/functions/CollatingFunction.java
+eXist/src/org/exist/xquery/functions/ExtCollection.java
+eXist/src/org/exist/xquery/functions/ExtDoctype.java
+eXist/src/org/exist/xquery/functions/ExtDocument.java
+eXist/src/org/exist/xquery/functions/ExtFulltext.java
+eXist/src/org/exist/xquery/functions/ExtNear.java
+eXist/src/org/exist/xquery/functions/ExtRegexp.java
+eXist/src/org/exist/xquery/functions/ExtRegexpOr.java
+eXist/src/org/exist/xquery/functions/ExtXCollection.java
+eXist/src/org/exist/xquery/functions/FunAbs.java
+eXist/src/org/exist/xquery/functions/FunAdjustDateTimeToTimezone.java
+eXist/src/org/exist/xquery/functions/FunAdjustDateToTimezone.java
+eXist/src/org/exist/xquery/functions/FunAdjustTimeToTimezone.java
+eXist/src/org/exist/xquery/functions/FunAvg.java
+eXist/src/org/exist/xquery/functions/FunBaseURI.java
+eXist/src/org/exist/xquery/functions/FunBoolean.java
+eXist/src/org/exist/xquery/functions/FunCeiling.java
+eXist/src/org/exist/xquery/functions/FunConcat.java
+eXist/src/org/exist/xquery/functions/FunContains.java
+eXist/src/org/exist/xquery/functions/FunCount.java
+eXist/src/org/exist/xquery/functions/FunCurrentDate.java
+eXist/src/org/exist/xquery/functions/FunCurrentDateTime.java
+eXist/src/org/exist/xquery/functions/FunCurrentTime.java
+eXist/src/org/exist/xquery/functions/FunData.java
+eXist/src/org/exist/xquery/functions/FunDeepEqual.java
+eXist/src/org/exist/xquery/functions/FunDistinctValues.java
+eXist/src/org/exist/xquery/functions/FunDoc.java
+eXist/src/org/exist/xquery/functions/FunDocumentURI.java
+eXist/src/org/exist/xquery/functions/FunEmpty.java
+eXist/src/org/exist/xquery/functions/FunEndsWith.java
+eXist/src/org/exist/xquery/functions/FunError.java
+eXist/src/org/exist/xquery/functions/FunExactlyOne.java
+eXist/src/org/exist/xquery/functions/FunExists.java
+eXist/src/org/exist/xquery/functions/FunFalse.java
+eXist/src/org/exist/xquery/functions/FunFloor.java
+eXist/src/org/exist/xquery/functions/FunGetDateComponent.java
+eXist/src/org/exist/xquery/functions/FunGetDateTimeComponent.java
+eXist/src/org/exist/xquery/functions/FunGetDaysFromDayTimeDuration.java
+eXist/src/org/exist/xquery/functions/FunGetHoursFromDayTimeDuration.java
+eXist/src/org/exist/xquery/functions/FunGetMinutesFromDayTimeDuration.java
+eXist/src/org/exist/xquery/functions/FunGetSecondsFromDayTimeDuration.java
+eXist/src/org/exist/xquery/functions/FunGetTimeComponent.java
+eXist/src/org/exist/xquery/functions/FunId.java
+eXist/src/org/exist/xquery/functions/FunIndexOf.java
+eXist/src/org/exist/xquery/functions/FunInsertBefore.java
+eXist/src/org/exist/xquery/functions/FunItemAt.java
+eXist/src/org/exist/xquery/functions/FunLang.java
+eXist/src/org/exist/xquery/functions/FunLast.java
+eXist/src/org/exist/xquery/functions/FunLocalName.java
+eXist/src/org/exist/xquery/functions/FunMatches.java
+eXist/src/org/exist/xquery/functions/FunMax.java
+eXist/src/org/exist/xquery/functions/FunMin.java
+eXist/src/org/exist/xquery/functions/FunName.java
+eXist/src/org/exist/xquery/functions/FunNamespaceURI.java
+eXist/src/org/exist/xquery/functions/FunNodeName.java
+eXist/src/org/exist/xquery/functions/FunNormalizeSpace.java
+eXist/src/org/exist/xquery/functions/FunNot.java
+eXist/src/org/exist/xquery/functions/FunNumber.java
+eXist/src/org/exist/xquery/functions/FunOneOrMore.java
+eXist/src/org/exist/xquery/functions/FunPosition.java
+eXist/src/org/exist/xquery/functions/FunRemove.java
+eXist/src/org/exist/xquery/functions/FunReplace.java
+eXist/src/org/exist/xquery/functions/FunReverse.java
+eXist/src/org/exist/xquery/functions/FunRoot.java
+eXist/src/org/exist/xquery/functions/FunRound.java
+eXist/src/org/exist/xquery/functions/FunStartsWith.java
+eXist/src/org/exist/xquery/functions/FunStrLength.java
+eXist/src/org/exist/xquery/functions/FunString.java
+eXist/src/org/exist/xquery/functions/FunStringJoin.java
+eXist/src/org/exist/xquery/functions/FunStringPad.java
+eXist/src/org/exist/xquery/functions/FunSubSequence.java
+eXist/src/org/exist/xquery/functions/FunSubstring.java
+eXist/src/org/exist/xquery/functions/FunSubstringAfter.java
+eXist/src/org/exist/xquery/functions/FunSubstringBefore.java
+eXist/src/org/exist/xquery/functions/FunSum.java
+eXist/src/org/exist/xquery/functions/FunTokenize.java
+eXist/src/org/exist/xquery/functions/FunTranslate.java
+eXist/src/org/exist/xquery/functions/FunTrueOrFalse.java
+eXist/src/org/exist/xquery/functions/FunUnordered.java
+eXist/src/org/exist/xquery/functions/FunUpperOrLowerCase.java
+eXist/src/org/exist/xquery/functions/FunZeroOrOne.java
+eXist/src/org/exist/xquery/functions/ModuleImpl.java
+eXist/src/org/exist/xquery/functions/bluej.pkg
+eXist/src/org/exist/xquery/functions/request/CreateSession.java
+eXist/src/org/exist/xquery/functions/request/EncodeURL.java
+eXist/src/org/exist/xquery/functions/request/GetRequestData.java
+eXist/src/org/exist/xquery/functions/request/GetSessionAttribute.java
+eXist/src/org/exist/xquery/functions/request/GetUploadedFile.java
+eXist/src/org/exist/xquery/functions/request/GetUploadedFileName.java
+eXist/src/org/exist/xquery/functions/request/InvalidateSession.java
+eXist/src/org/exist/xquery/functions/request/RedirectTo.java
+eXist/src/org/exist/xquery/functions/request/RequestModule.java
+eXist/src/org/exist/xquery/functions/request/RequestParameter.java
+eXist/src/org/exist/xquery/functions/request/RequestParameterNames.java
+eXist/src/org/exist/xquery/functions/request/RequestURI.java
+eXist/src/org/exist/xquery/functions/request/SessionAttributes.java
+eXist/src/org/exist/xquery/functions/request/SetCurrentUser.java
+eXist/src/org/exist/xquery/functions/request/SetSessionAttribute.java
+eXist/src/org/exist/xquery/functions/text/AbstractMatchFunction.java
+eXist/src/org/exist/xquery/functions/text/FuzzyIndexTerms.java
+eXist/src/org/exist/xquery/functions/text/FuzzyMatchAll.java
+eXist/src/org/exist/xquery/functions/text/FuzzyMatchAny.java
+eXist/src/org/exist/xquery/functions/text/FuzzyMatcher.java
+eXist/src/org/exist/xquery/functions/text/MatchCount.java
+eXist/src/org/exist/xquery/functions/text/TextModule.java
+eXist/src/org/exist/xquery/functions/text/TextRank.java
+eXist/src/org/exist/xquery/functions/transform/Transform.java
+eXist/src/org/exist/xquery/functions/transform/TransformModule.java
+eXist/src/org/exist/xquery/functions/util/BuiltinFunctions.java
+eXist/src/org/exist/xquery/functions/util/CatchFunction.java
+eXist/src/org/exist/xquery/functions/util/Collations.java
+eXist/src/org/exist/xquery/functions/util/CollectionName.java
+eXist/src/org/exist/xquery/functions/util/DescribeFunction.java
+eXist/src/org/exist/xquery/functions/util/DocumentNameOrId.java
+eXist/src/org/exist/xquery/functions/util/EvalFunction.java
+eXist/src/org/exist/xquery/functions/util/ExclusiveLockFunction.java
+eXist/src/org/exist/xquery/functions/util/ExistVersion.java
+eXist/src/org/exist/xquery/functions/util/LockFunction.java
+eXist/src/org/exist/xquery/functions/util/LogFunction.java
+eXist/src/org/exist/xquery/functions/util/MD5.java
+eXist/src/org/exist/xquery/functions/util/ModuleInfo.java
+eXist/src/org/exist/xquery/functions/util/SharedLockFunction.java
+eXist/src/org/exist/xquery/functions/util/SystemProperty.java
+eXist/src/org/exist/xquery/functions/util/UtilModule.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBAbstractCollectionManipulator.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBAuthenticate.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBChangeUser.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBChmodCollection.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBChmodResource.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBCollection.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBCollectionExists.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBCreateCollection.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBCreateUser.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBCreated.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBDeleteUser.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBGetChildCollections.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBGetChildResources.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBGetUserOrGroup.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBHasLock.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBIsAdmin.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBLoadFromPattern.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBModule.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBPermissions.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBPermissionsToString.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBRegisterDatabase.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBRemove.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBSetCollectionPermissions.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBSetResourcePermissions.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBSize.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBStore.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBUserAccess.java
+eXist/src/org/exist/xquery/functions/xmldb/XMLDBXUpdate.java
+eXist/src/org/exist/xquery/package.html
+eXist/src/org/exist/xquery/parser/XQuery.g
+eXist/src/org/exist/xquery/parser/XQueryAST.java
+eXist/src/org/exist/xquery/parser/XQueryLexer.java
+eXist/src/org/exist/xquery/parser/XQueryParser.java
+eXist/src/org/exist/xquery/parser/XQueryParserTokenTypes.java
+eXist/src/org/exist/xquery/parser/XQueryParserTokenTypes.txt
+eXist/src/org/exist/xquery/parser/XQueryTokenTypes.java
+eXist/src/org/exist/xquery/parser/XQueryTokenTypes.txt
+eXist/src/org/exist/xquery/parser/XQueryTree.g
+eXist/src/org/exist/xquery/parser/XQueryTreeParser.java
+eXist/src/org/exist/xquery/parser/XQueryTreeParserTokenTypes.java
+eXist/src/org/exist/xquery/parser/XQueryTreeParserTokenTypes.txt
+eXist/src/org/exist/xquery/parser/bluej.pkg
+eXist/src/org/exist/xquery/parser/package.html
+eXist/src/org/exist/xquery/test/AllTests.java
+eXist/src/org/exist/xquery/test/DeepEqualTest.java
+eXist/src/org/exist/xquery/test/JavaMethodsTest.java
+eXist/src/org/exist/xquery/test/LexerTest.java
+eXist/src/org/exist/xquery/test/SAXStorageTest.java
+eXist/src/org/exist/xquery/test/SeqOpTest.java
+eXist/src/org/exist/xquery/test/TabularXMLReader.java
+eXist/src/org/exist/xquery/test/XPathQueryTest.java
+eXist/src/org/exist/xquery/test/XQueryTest.java
+eXist/src/org/exist/xquery/test/XQueryUseCase.java
+eXist/src/org/exist/xquery/test/XQueryUseCasesTest.java
+eXist/src/org/exist/xquery/value/AbstractDateTimeValue.java
+eXist/src/org/exist/xquery/value/AbstractSequence.java
+eXist/src/org/exist/xquery/value/AnyURIValue.java
+eXist/src/org/exist/xquery/value/AtomicValue.java
+eXist/src/org/exist/xquery/value/BooleanValue.java
+eXist/src/org/exist/xquery/value/ComputableValue.java
+eXist/src/org/exist/xquery/value/DateTimeValue.java
+eXist/src/org/exist/xquery/value/DateValue.java
+eXist/src/org/exist/xquery/value/DayTimeDurationValue.java
+eXist/src/org/exist/xquery/value/DecimalValue.java
+eXist/src/org/exist/xquery/value/DoubleValue.java
+eXist/src/org/exist/xquery/value/DurationValue.java
+eXist/src/org/exist/xquery/value/EmptySequence.java
+eXist/src/org/exist/xquery/value/EmptySequenceIterator.java
+eXist/src/org/exist/xquery/value/FloatValue.java
+eXist/src/org/exist/xquery/value/IntegerValue.java
+eXist/src/org/exist/xquery/value/Item.java
+eXist/src/org/exist/xquery/value/JavaObjectValue.java
+eXist/src/org/exist/xquery/value/NodeValue.java
+eXist/src/org/exist/xquery/value/NumericValue.java
+eXist/src/org/exist/xquery/value/OrderedValueSequence.java
+eXist/src/org/exist/xquery/value/PreorderedValueSequence.java
+eXist/src/org/exist/xquery/value/QNameValue.java
+eXist/src/org/exist/xquery/value/Sequence.java
+eXist/src/org/exist/xquery/value/SequenceIterator.java
+eXist/src/org/exist/xquery/value/SequenceType.java
+eXist/src/org/exist/xquery/value/SingleItemIterator.java
+eXist/src/org/exist/xquery/value/StringValue.java
+eXist/src/org/exist/xquery/value/TimeValue.java
+eXist/src/org/exist/xquery/value/Type.java
+eXist/src/org/exist/xquery/value/UntypedAtomicValue.java
+eXist/src/org/exist/xquery/value/ValueSequence.java
+eXist/src/org/exist/xquery/value/YearMonthDurationValue.java
+eXist/src/org/exist/xupdate/Append.java
+eXist/src/org/exist/xupdate/Conditional.java
+eXist/src/org/exist/xupdate/Insert.java
+eXist/src/org/exist/xupdate/Modification.java
+eXist/src/org/exist/xupdate/Remove.java
+eXist/src/org/exist/xupdate/Rename.java
+eXist/src/org/exist/xupdate/Replace.java
+eXist/src/org/exist/xupdate/Update.java
+eXist/src/org/exist/xupdate/XUpdateProcessor.java
+eXist/src/org/exist/xupdate/bluej.pkg
+eXist/src/org/exist/xupdate/test/AllTests.java
+eXist/src/org/exist/xupdate/test/CompareDocuments.java
+eXist/src/org/exist/xupdate/test/XUpdateTest.java
+eXist/src/org/exist/xupdate/test/XUpdateTestCases.java
+eXist/src/org/exist/xupdate/test/input/address.xml
+eXist/src/org/exist/xupdate/test/input/address_big.xml
+eXist/src/org/exist/xupdate/test/modifications/append.xml
+eXist/src/org/exist/xupdate/test/modifications/append_attribute.xml
+eXist/src/org/exist/xupdate/test/modifications/append_child.xml
+eXist/src/org/exist/xupdate/test/modifications/conditional.xml
+eXist/src/org/exist/xupdate/test/modifications/insertafter.xml
+eXist/src/org/exist/xupdate/test/modifications/insertafter_big.xml
+eXist/src/org/exist/xupdate/test/modifications/insertbefore.xml
+eXist/src/org/exist/xupdate/test/modifications/remove.xml
+eXist/src/org/exist/xupdate/test/modifications/replace.xml
+eXist/src/org/exist/xupdate/test/modifications/update.xml
+eXist/src/org/exist/xupdate/test/modifications/variables.xml
+eXist/src/org/exist/xupdate/test/modifications/whitespace.xml
+eXist/src/org/exist/xupdate/test/results/append.xml
+eXist/src/org/exist/xupdate/test/results/append_attribute.xml
+eXist/src/org/exist/xupdate/test/results/append_child.xml
+eXist/src/org/exist/xupdate/test/results/conditional.xml
+eXist/src/org/exist/xupdate/test/results/insertafter.xml
+eXist/src/org/exist/xupdate/test/results/insertafter_big.xml
+eXist/src/org/exist/xupdate/test/results/insertbefore.xml
+eXist/src/org/exist/xupdate/test/results/remove.xml
+eXist/src/org/exist/xupdate/test/results/replace.xml
+eXist/src/org/exist/xupdate/test/results/update.xml
+eXist/src/org/exist/xupdate/test/results/variables.xml
+eXist/src/org/exist/xupdate/test/results/whitespace.xml
+eXist/start.jar
+eXist/thirdparty/jboss/README
+eXist/thirdparty/jboss/build.xml
+eXist/thirdparty/jboss/conf/eXist/jboss-service.xml
+eXist/thirdparty/jboss/conf/samples/jboss-service.xml
+eXist/thirdparty/jboss/lib/readme.jars
+eXist/thirdparty/jboss/src/org/exist/jboss/XmlDbService.java
+eXist/thirdparty/jboss/src/org/exist/jboss/XmlDbServiceMBean.java
+eXist/thirdparty/jboss/src/org/exist/jboss/exist/EXistService.java
+eXist/thirdparty/jboss/src/org/exist/jboss/exist/EXistServiceMBean.java
+eXist/thirdparty/jboss/src/samples/XmlDbClientService.java
+eXist/thirdparty/jboss/src/samples/XmlDbClientServiceMBean.java
+eXist/thirdparty/tomcat5/LICENSE
+eXist/thirdparty/tomcat5/bin/jmx.jar
+eXist/tools/jetty/LICENSE.TXT
+eXist/tools/jetty/etc/jetty.xml
+eXist/tools/jetty/etc/webdefault.xml
+eXist/tools/jetty/lib/jasper-compiler.jar
+eXist/tools/jetty/lib/jasper-runtime.jar
+eXist/tools/jetty/lib/org.mortbay.jetty.jar
+eXist/tools/lib/ant-antlr.jar
+eXist/tools/lib/ant-junit.jar
+eXist/tools/lib/ant-launcher.jar
+eXist/tools/lib/ant.jar
+eXist/tools/lib/junit.jar
+eXist/tools/wrapper/bin/exist.bat
+eXist/tools/wrapper/bin/exist.sh
+eXist/tools/wrapper/bin/exist.sh.in
+eXist/tools/wrapper/bin/install.bat
+eXist/tools/wrapper/bin/uninstall.bat
+eXist/tools/wrapper/bin/wrapper
+eXist/tools/wrapper/bin/wrapper.exe
+eXist/tools/wrapper/build.xml
+eXist/tools/wrapper/classes/org/exist/wrapper/Main.class
+eXist/tools/wrapper/conf/log4j.xml
+eXist/tools/wrapper/conf/wrapper.conf
+eXist/tools/wrapper/conf/wrapper.conf.in
+eXist/tools/wrapper/conf/wrapper.conf.install
+eXist/tools/wrapper/lib/libwrapper.so
+eXist/tools/wrapper/lib/wrapper.dll
+eXist/tools/wrapper/lib/wrapper.jar
+eXist/tools/wrapper/license.txt
+eXist/tools/wrapper/src/org/exist/wrapper/Main.java
+eXist/webapp/WEB-INF/catalog
+eXist/webapp/WEB-INF/classes/CatalogManager.properties
+eXist/webapp/WEB-INF/classes/log4j.xml
+eXist/webapp/WEB-INF/cocoon.xconf
+eXist/webapp/WEB-INF/conf.xml
+eXist/webapp/WEB-INF/data/.DO_NOT_DELETE
+eXist/webapp/WEB-INF/data/README
+eXist/webapp/WEB-INF/entities/mondial.dtd
+eXist/webapp/WEB-INF/entities/play.dtd
+eXist/webapp/WEB-INF/exist.tld
+eXist/webapp/WEB-INF/instrumentation.xconf
+eXist/webapp/WEB-INF/logkit.xconf
+eXist/webapp/WEB-INF/logs/.DO_NOT_DELETE
+eXist/webapp/WEB-INF/server-config.wsdd
+eXist/webapp/WEB-INF/user.roles
+eXist/webapp/WEB-INF/web.xml
+eXist/webapp/acronyms/logo.jpg
+eXist/webapp/acronyms/new.gif
+eXist/webapp/acronyms/query.xsp
+eXist/webapp/acronyms/resources/powered.gif
+eXist/webapp/acronyms/sidebar.xml
+eXist/webapp/acronyms/sitemap.xmap
+eXist/webapp/acronyms/style.css
+eXist/webapp/acronyms/styles/default-style.css
+eXist/webapp/acronyms/stylesheets/acronyms.xsl
+eXist/webapp/admin/admin.css
+eXist/webapp/admin/admin.xql
+eXist/webapp/admin/browse.xqm
+eXist/webapp/admin/dates.xqm
+eXist/webapp/admin/logo.jpg
+eXist/webapp/admin/setup.xqm
+eXist/webapp/admin/shutdown.xqm
+eXist/webapp/admin/status.xqm
+eXist/webapp/admin/users.xqm
+eXist/webapp/admin/view-source.xql
+eXist/webapp/admin/xml2html.xslt
+eXist/webapp/ant-tasks.xml
+eXist/webapp/api/allclasses-frame.html
+eXist/webapp/api/allclasses-noframe.html
+eXist/webapp/api/constant-values.html
+eXist/webapp/api/deprecated-list.html
+eXist/webapp/api/help-doc.html
+eXist/webapp/api/index.html
+eXist/webapp/api/org/dbxml/core/DBException.html
+eXist/webapp/api/org/dbxml/core/data/Value.html
+eXist/webapp/api/org/dbxml/core/data/package-frame.html
+eXist/webapp/api/org/dbxml/core/data/package-summary.html
+eXist/webapp/api/org/dbxml/core/filer/BTree.html
+eXist/webapp/api/org/dbxml/core/filer/BTreeCallback.html
+eXist/webapp/api/org/dbxml/core/filer/BTreeException.html
+eXist/webapp/api/org/dbxml/core/filer/Paged.FileHeader.html
+eXist/webapp/api/org/dbxml/core/filer/Paged.Page.html
+eXist/webapp/api/org/dbxml/core/filer/Paged.PageHeader.html
+eXist/webapp/api/org/dbxml/core/filer/Paged.html
+eXist/webapp/api/org/dbxml/core/filer/package-frame.html
+eXist/webapp/api/org/dbxml/core/filer/package-summary.html
+eXist/webapp/api/org/dbxml/core/indexer/IndexQuery.html
+eXist/webapp/api/org/dbxml/core/indexer/package-frame.html
+eXist/webapp/api/org/dbxml/core/indexer/package-summary.html
+eXist/webapp/api/org/dbxml/core/package-frame.html
+eXist/webapp/api/org/dbxml/core/package-summary.html
+eXist/webapp/api/org/dbxml/xml/Symbols.html
+eXist/webapp/api/org/dbxml/xml/package-frame.html
+eXist/webapp/api/org/dbxml/xml/package-summary.html
+eXist/webapp/api/org/exist/EXistException.html
+eXist/webapp/api/org/exist/Indexer.html
+eXist/webapp/api/org/exist/JettyStart.html
+eXist/webapp/api/org/exist/Server.html
+eXist/webapp/api/org/exist/ServerShutdown.html
+eXist/webapp/api/org/exist/ant/AbstractXMLDBTask.html
+eXist/webapp/api/org/exist/ant/BackupTask.html
+eXist/webapp/api/org/exist/ant/RestoreTask.html
+eXist/webapp/api/org/exist/ant/XMLDBQueryTask.html
+eXist/webapp/api/org/exist/ant/XMLDBRemoveTask.html
+eXist/webapp/api/org/exist/ant/XMLDBShutdownTask.html
+eXist/webapp/api/org/exist/ant/XMLDBStoreTask.html
+eXist/webapp/api/org/exist/ant/package-frame.html
+eXist/webapp/api/org/exist/ant/package-summary.html
+eXist/webapp/api/org/exist/backup/Backup.html
+eXist/webapp/api/org/exist/backup/BackupDialog.html
+eXist/webapp/api/org/exist/backup/CreateBackupDialog.html
+eXist/webapp/api/org/exist/backup/Main.html
+eXist/webapp/api/org/exist/backup/Restore.html
+eXist/webapp/api/org/exist/backup/RestoreDialog.html
+eXist/webapp/api/org/exist/backup/package-frame.html
+eXist/webapp/api/org/exist/backup/package-summary.html
+eXist/webapp/api/org/exist/client/ClientFrame.html
+eXist/webapp/api/org/exist/client/ClientTextArea.html
+eXist/webapp/api/org/exist/client/InteractiveClient.CollectionName.html
+eXist/webapp/api/org/exist/client/InteractiveClient.ProgressObserver.html
+eXist/webapp/api/org/exist/client/InteractiveClient.html
+eXist/webapp/api/org/exist/client/QueryDialog.html
+eXist/webapp/api/org/exist/client/ResourcePropertyDialog.html
+eXist/webapp/api/org/exist/client/package-frame.html
+eXist/webapp/api/org/exist/client/package-summary.html
+eXist/webapp/api/org/exist/cocoon/CocoonRequestWrapper.html
+eXist/webapp/api/org/exist/cocoon/CocoonResponseWrapper.html
+eXist/webapp/api/org/exist/cocoon/CocoonSessionWrapper.html
+eXist/webapp/api/org/exist/cocoon/ShutdownAction.html
+eXist/webapp/api/org/exist/cocoon/StatusGenerator.html
+eXist/webapp/api/org/exist/cocoon/XMLDBSessionLoginAction.html
+eXist/webapp/api/org/exist/cocoon/XMLDBTransformer.html
+eXist/webapp/api/org/exist/cocoon/XMLReaderWrapper.html
+eXist/webapp/api/org/exist/cocoon/XQueryGenerator.html
+eXist/webapp/api/org/exist/cocoon/XSPHelper.html
+eXist/webapp/api/org/exist/cocoon/package-frame.html
+eXist/webapp/api/org/exist/cocoon/package-summary.html
+eXist/webapp/api/org/exist/collections/Collection.html
+eXist/webapp/api/org/exist/collections/CollectionCache.html
+eXist/webapp/api/org/exist/collections/CollectionConfiguration.html
+eXist/webapp/api/org/exist/collections/CollectionConfigurationException.html
+eXist/webapp/api/org/exist/collections/IndexInfo.html
+eXist/webapp/api/org/exist/collections/package-frame.html
+eXist/webapp/api/org/exist/collections/package-summary.html
+eXist/webapp/api/org/exist/collections/triggers/Dumper.html
+eXist/webapp/api/org/exist/collections/triggers/FilteringTrigger.html
+eXist/webapp/api/org/exist/collections/triggers/STXTransformerTrigger.html
+eXist/webapp/api/org/exist/collections/triggers/Trigger.html
+eXist/webapp/api/org/exist/collections/triggers/TriggerException.html
+eXist/webapp/api/org/exist/collections/triggers/package-frame.html
+eXist/webapp/api/org/exist/collections/triggers/package-summary.html
+eXist/webapp/api/org/exist/dom/AVLTreeNodeSet.html
+eXist/webapp/api/org/exist/dom/AbstractNodeSet.html
+eXist/webapp/api/org/exist/dom/AbstractNodeSetBase.html
+eXist/webapp/api/org/exist/dom/ArraySet.html
+eXist/webapp/api/org/exist/dom/AttrImpl.html
+eXist/webapp/api/org/exist/dom/BinaryDocument.html
+eXist/webapp/api/org/exist/dom/CharacterDataImpl.html
+eXist/webapp/api/org/exist/dom/CommentImpl.html
+eXist/webapp/api/org/exist/dom/ContextItem.html
+eXist/webapp/api/org/exist/dom/DOMImplementation.html
+eXist/webapp/api/org/exist/dom/DocumentImpl.html
+eXist/webapp/api/org/exist/dom/DocumentOrderComparator.html
+eXist/webapp/api/org/exist/dom/DocumentSet.html
+eXist/webapp/api/org/exist/dom/DocumentTypeImpl.html
+eXist/webapp/api/org/exist/dom/ElementImpl.html
+eXist/webapp/api/org/exist/dom/EmptyNodeSet.html
+eXist/webapp/api/org/exist/dom/ExtArrayNodeSet.html
+eXist/webapp/api/org/exist/dom/Match.html
+eXist/webapp/api/org/exist/dom/NamedNode.html
+eXist/webapp/api/org/exist/dom/NamedNodeMapImpl.html
+eXist/webapp/api/org/exist/dom/NodeImpl.html
+eXist/webapp/api/org/exist/dom/NodeIndexListener.html
+eXist/webapp/api/org/exist/dom/NodeListImpl.html
+eXist/webapp/api/org/exist/dom/NodeObjectPool.html
+eXist/webapp/api/org/exist/dom/NodeProxy.NodeProxyComparator.html
+eXist/webapp/api/org/exist/dom/NodeProxy.html
+eXist/webapp/api/org/exist/dom/NodeSet.html
+eXist/webapp/api/org/exist/dom/NullNodeIndexListener.html
+eXist/webapp/api/org/exist/dom/PoolableNodeObjectFactory.html
+eXist/webapp/api/org/exist/dom/ProcessingInstructionImpl.html
+eXist/webapp/api/org/exist/dom/QName.html
+eXist/webapp/api/org/exist/dom/QNamePool.html
+eXist/webapp/api/org/exist/dom/QNameable.html
+eXist/webapp/api/org/exist/dom/SingleNodeSet.html
+eXist/webapp/api/org/exist/dom/SortedNodeSet.html
+eXist/webapp/api/org/exist/dom/SymbolTable.html
+eXist/webapp/api/org/exist/dom/TextImpl.html
+eXist/webapp/api/org/exist/dom/VirtualNodeSet.html
+eXist/webapp/api/org/exist/dom/XMLUtil.html
+eXist/webapp/api/org/exist/dom/package-frame.html
+eXist/webapp/api/org/exist/dom/package-summary.html
+eXist/webapp/api/org/exist/http/BadRequestException.html
+eXist/webapp/api/org/exist/http/HttpServer.html
+eXist/webapp/api/org/exist/http/HttpServerConnection.html
+eXist/webapp/api/org/exist/http/NotFoundException.html
+eXist/webapp/api/org/exist/http/RESTServer.html
+eXist/webapp/api/org/exist/http/Response.html
+eXist/webapp/api/org/exist/http/package-frame.html
+eXist/webapp/api/org/exist/http/package-summary.html
+eXist/webapp/api/org/exist/http/realm/XmldbRealm.html
+eXist/webapp/api/org/exist/http/realm/package-frame.html
+eXist/webapp/api/org/exist/http/realm/package-summary.html
+eXist/webapp/api/org/exist/http/servlets/Authenticator.html
+eXist/webapp/api/org/exist/http/servlets/BasicAuthenticator.html
+eXist/webapp/api/org/exist/http/servlets/DatabaseAdminServlet.html
+eXist/webapp/api/org/exist/http/servlets/DigestAuthenticator.html
+eXist/webapp/api/org/exist/http/servlets/EXistServlet.html
+eXist/webapp/api/org/exist/http/servlets/HttpRequestWrapper.html
+eXist/webapp/api/org/exist/http/servlets/HttpResponseWrapper.html
+eXist/webapp/api/org/exist/http/servlets/HttpSessionWrapper.html
+eXist/webapp/api/org/exist/http/servlets/RequestWrapper.html
+eXist/webapp/api/org/exist/http/servlets/ResponseWrapper.html
+eXist/webapp/api/org/exist/http/servlets/SessionWrapper.html
+eXist/webapp/api/org/exist/http/servlets/WebDAVServlet.html
+eXist/webapp/api/org/exist/http/servlets/XQueryServlet.html
+eXist/webapp/api/org/exist/http/servlets/package-frame.html
+eXist/webapp/api/org/exist/http/servlets/package-summary.html
+eXist/webapp/api/org/exist/http/test/RESTServiceTest.html
+eXist/webapp/api/org/exist/http/test/package-frame.html
+eXist/webapp/api/org/exist/http/test/package-summary.html
+eXist/webapp/api/org/exist/http/webdav/WebDAV.html
+eXist/webapp/api/org/exist/http/webdav/WebDAVMethod.html
+eXist/webapp/api/org/exist/http/webdav/WebDAVMethodFactory.html
+eXist/webapp/api/org/exist/http/webdav/WebDAVUtil.html
+eXist/webapp/api/org/exist/http/webdav/methods/AbstractWebDAVMethod.html
+eXist/webapp/api/org/exist/http/webdav/methods/Copy.html
+eXist/webapp/api/org/exist/http/webdav/methods/Delete.html
+eXist/webapp/api/org/exist/http/webdav/methods/Get.html
+eXist/webapp/api/org/exist/http/webdav/methods/Head.html
+eXist/webapp/api/org/exist/http/webdav/methods/Lock.html
+eXist/webapp/api/org/exist/http/webdav/methods/Mkcol.html
+eXist/webapp/api/org/exist/http/webdav/methods/Move.html
+eXist/webapp/api/org/exist/http/webdav/methods/Options.html
+eXist/webapp/api/org/exist/http/webdav/methods/Propfind.html
+eXist/webapp/api/org/exist/http/webdav/methods/Put.html
+eXist/webapp/api/org/exist/http/webdav/methods/package-frame.html
+eXist/webapp/api/org/exist/http/webdav/methods/package-summary.html
+eXist/webapp/api/org/exist/http/webdav/package-frame.html
+eXist/webapp/api/org/exist/http/webdav/package-summary.html
+eXist/webapp/api/org/exist/jsp/CollectionTag.html
+eXist/webapp/api/org/exist/jsp/CollectionTagInfo.html
+eXist/webapp/api/org/exist/jsp/package-frame.html
+eXist/webapp/api/org/exist/jsp/package-summary.html
+eXist/webapp/api/org/exist/memtree/AttributeImpl.html
+eXist/webapp/api/org/exist/memtree/CommentImpl.html
+eXist/webapp/api/org/exist/memtree/DocumentBuilderReceiver.html
+eXist/webapp/api/org/exist/memtree/DocumentImpl.html
+eXist/webapp/api/org/exist/memtree/ElementImpl.html
+eXist/webapp/api/org/exist/memtree/MemTreeBuilder.html
+eXist/webapp/api/org/exist/memtree/NamespaceNode.html
+eXist/webapp/api/org/exist/memtree/NodeFactory.html
+eXist/webapp/api/org/exist/memtree/NodeImpl.html
+eXist/webapp/api/org/exist/memtree/ProcessingInstructionImpl.html
+eXist/webapp/api/org/exist/memtree/ReferenceNode.html
+eXist/webapp/api/org/exist/memtree/TextImpl.html
+eXist/webapp/api/org/exist/memtree/package-frame.html
+eXist/webapp/api/org/exist/memtree/package-summary.html
+eXist/webapp/api/org/exist/memtree/test/DOMTest.html
+eXist/webapp/api/org/exist/memtree/test/package-frame.html
+eXist/webapp/api/org/exist/memtree/test/package-summary.html
+eXist/webapp/api/org/exist/package-frame.html
+eXist/webapp/api/org/exist/package-summary.html
+eXist/webapp/api/org/exist/schema/GenericSchemaService.html
+eXist/webapp/api/org/exist/schema/LocalSchemaService.html
+eXist/webapp/api/org/exist/schema/RemoteSchemaService.html
+eXist/webapp/api/org/exist/schema/SchemaAccess.html
+eXist/webapp/api/org/exist/schema/SchemaService.html
+eXist/webapp/api/org/exist/schema/internalaccess/InternalSchemaAccess.html
+eXist/webapp/api/org/exist/schema/internalaccess/package-frame.html
+eXist/webapp/api/org/exist/schema/internalaccess/package-summary.html
+eXist/webapp/api/org/exist/schema/package-frame.html
+eXist/webapp/api/org/exist/schema/package-summary.html
+eXist/webapp/api/org/exist/schema/test/GenericSchemaServiceTest.html
+eXist/webapp/api/org/exist/schema/test/package-frame.html
+eXist/webapp/api/org/exist/schema/test/package-summary.html
+eXist/webapp/api/org/exist/security/Group.html
+eXist/webapp/api/org/exist/security/MD5.html
+eXist/webapp/api/org/exist/security/Permission.html
+eXist/webapp/api/org/exist/security/PermissionDeniedException.html
+eXist/webapp/api/org/exist/security/SecurityManager.html
+eXist/webapp/api/org/exist/security/User.html
+eXist/webapp/api/org/exist/security/XmldbPrincipal.html
+eXist/webapp/api/org/exist/security/package-frame.html
+eXist/webapp/api/org/exist/security/package-summary.html
+eXist/webapp/api/org/exist/soap/Admin.html
+eXist/webapp/api/org/exist/soap/AdminService.html
+eXist/webapp/api/org/exist/soap/AdminServiceLocator.html
+eXist/webapp/api/org/exist/soap/AdminSoapBindingImpl.html
+eXist/webapp/api/org/exist/soap/AdminSoapBindingSkeleton.html
+eXist/webapp/api/org/exist/soap/AdminSoapBindingStub.html
+eXist/webapp/api/org/exist/soap/Collection.html
+eXist/webapp/api/org/exist/soap/Query.html
+eXist/webapp/api/org/exist/soap/QueryResponse.html
+eXist/webapp/api/org/exist/soap/QueryResponseCollection.html
+eXist/webapp/api/org/exist/soap/QueryResponseDocument.html
+eXist/webapp/api/org/exist/soap/QueryService.html
+eXist/webapp/api/org/exist/soap/QueryServiceLocator.html
+eXist/webapp/api/org/exist/soap/QuerySoapBindingImpl.html
+eXist/webapp/api/org/exist/soap/QuerySoapBindingSkeleton.html
+eXist/webapp/api/org/exist/soap/QuerySoapBindingStub.html
+eXist/webapp/api/org/exist/soap/Session.QueryResult.html
+eXist/webapp/api/org/exist/soap/Session.html
+eXist/webapp/api/org/exist/soap/SessionManager.html
+eXist/webapp/api/org/exist/soap/package-frame.html
+eXist/webapp/api/org/exist/soap/package-summary.html
+eXist/webapp/api/org/exist/source/AbstractSource.html
+eXist/webapp/api/org/exist/source/CocoonSource.html
+eXist/webapp/api/org/exist/source/FileSource.html
+eXist/webapp/api/org/exist/source/Source.html
+eXist/webapp/api/org/exist/source/StringSource.html
+eXist/webapp/api/org/exist/source/URLSource.html
+eXist/webapp/api/org/exist/source/package-frame.html
+eXist/webapp/api/org/exist/source/package-summary.html
+eXist/webapp/api/org/exist/start/Classpath.html
+eXist/webapp/api/org/exist/start/Main.html
+eXist/webapp/api/org/exist/start/Version.html
+eXist/webapp/api/org/exist/start/package-frame.html
+eXist/webapp/api/org/exist/start/package-summary.html
+eXist/webapp/api/org/exist/storage/BrokerFactory.html
+eXist/webapp/api/org/exist/storage/BrokerPool.html
+eXist/webapp/api/org/exist/storage/BufferStats.html
+eXist/webapp/api/org/exist/storage/DBBroker.html
+eXist/webapp/api/org/exist/storage/ElementIndex.html
+eXist/webapp/api/org/exist/storage/ElementValue.html
+eXist/webapp/api/org/exist/storage/IndexPaths.html
+eXist/webapp/api/org/exist/storage/IndexStats.html
+eXist/webapp/api/org/exist/storage/NativeBroker.NodeRef.html
+eXist/webapp/api/org/exist/storage/NativeBroker.html
+eXist/webapp/api/org/exist/storage/NativeElementIndex.html
+eXist/webapp/api/org/exist/storage/NativeTextEngine.html
+eXist/webapp/api/org/exist/storage/NodePath.html
+eXist/webapp/api/org/exist/storage/Signatures.html
+eXist/webapp/api/org/exist/storage/TermMatcher.html
+eXist/webapp/api/org/exist/storage/TextSearchEngine.html
+eXist/webapp/api/org/exist/storage/XQueryMonitor.html
+eXist/webapp/api/org/exist/storage/XQueryPool.html
+eXist/webapp/api/org/exist/storage/analysis/ParseException.html
+eXist/webapp/api/org/exist/storage/analysis/SimpleTokenizer.html
+eXist/webapp/api/org/exist/storage/analysis/TextToken.html
+eXist/webapp/api/org/exist/storage/analysis/Token.html
+eXist/webapp/api/org/exist/storage/analysis/Tokenizer.html
+eXist/webapp/api/org/exist/storage/analysis/package-frame.html
+eXist/webapp/api/org/exist/storage/analysis/package-summary.html
+eXist/webapp/api/org/exist/storage/cache/Cache.html
+eXist/webapp/api/org/exist/storage/cache/Cacheable.html
+eXist/webapp/api/org/exist/storage/cache/ClockCache.html
+eXist/webapp/api/org/exist/storage/cache/GClockCache.html
+eXist/webapp/api/org/exist/storage/cache/LRDCache.html
+eXist/webapp/api/org/exist/storage/cache/LRUCache.html
+eXist/webapp/api/org/exist/storage/cache/package-frame.html
+eXist/webapp/api/org/exist/storage/cache/package-summary.html
+eXist/webapp/api/org/exist/storage/io/AbstractVariableByteInput.html
+eXist/webapp/api/org/exist/storage/io/VariableByteArrayInput.html
+eXist/webapp/api/org/exist/storage/io/VariableByteInput.html
+eXist/webapp/api/org/exist/storage/io/VariableByteInputStream.html
+eXist/webapp/api/org/exist/storage/io/VariableByteOutputStream.html
+eXist/webapp/api/org/exist/storage/io/package-frame.html
+eXist/webapp/api/org/exist/storage/io/package-summary.html
+eXist/webapp/api/org/exist/storage/io/test/VariableByteStreamTest.html
+eXist/webapp/api/org/exist/storage/io/test/package-frame.html
+eXist/webapp/api/org/exist/storage/io/test/package-summary.html
+eXist/webapp/api/org/exist/storage/package-frame.html
+eXist/webapp/api/org/exist/storage/package-summary.html
+eXist/webapp/api/org/exist/storage/report/Statistics.html
+eXist/webapp/api/org/exist/storage/report/XMLStatistics.html
+eXist/webapp/api/org/exist/storage/report/package-frame.html
+eXist/webapp/api/org/exist/storage/report/package-summary.html
+eXist/webapp/api/org/exist/storage/serializers/EXistOutputKeys.html
+eXist/webapp/api/org/exist/storage/serializers/NativeSerializer.html
+eXist/webapp/api/org/exist/storage/serializers/Serializer.html
+eXist/webapp/api/org/exist/storage/serializers/XIncludeFilter.html
+eXist/webapp/api/org/exist/storage/serializers/package-frame.html
+eXist/webapp/api/org/exist/storage/serializers/package-summary.html
+eXist/webapp/api/org/exist/storage/store/BFile.PageInputStream.html
+eXist/webapp/api/org/exist/storage/store/BFile.html
+eXist/webapp/api/org/exist/storage/store/BFileCallback.html
+eXist/webapp/api/org/exist/storage/store/CollectionStore.html
+eXist/webapp/api/org/exist/storage/store/DOMFile.html
+eXist/webapp/api/org/exist/storage/store/DOMFileIterator.html
+eXist/webapp/api/org/exist/storage/store/DOMTransaction.html
+eXist/webapp/api/org/exist/storage/store/FreeList.html
+eXist/webapp/api/org/exist/storage/store/FreeSpace.html
+eXist/webapp/api/org/exist/storage/store/NodeIterator.html
+eXist/webapp/api/org/exist/storage/store/StorageAddress.html
+eXist/webapp/api/org/exist/storage/store/package-frame.html
+eXist/webapp/api/org/exist/storage/store/package-summary.html
+eXist/webapp/api/org/exist/storage/sync/Sync.html
+eXist/webapp/api/org/exist/storage/sync/SyncDaemon.html
+eXist/webapp/api/org/exist/storage/sync/package-frame.html
+eXist/webapp/api/org/exist/storage/sync/package-summary.html
+eXist/webapp/api/org/exist/util/ByteArray.html
+eXist/webapp/api/org/exist/util/ByteArrayPool.html
+eXist/webapp/api/org/exist/util/ByteConversion.html
+eXist/webapp/api/org/exist/util/CharArrayPool.html
+eXist/webapp/api/org/exist/util/Collations.html
+eXist/webapp/api/org/exist/util/CollectionScanner.html
+eXist/webapp/api/org/exist/util/Configuration.html
+eXist/webapp/api/org/exist/util/DatabaseConfigurationException.html
+eXist/webapp/api/org/exist/util/DirectoryScanner.html
+eXist/webapp/api/org/exist/util/FastByteBuffer.html
+eXist/webapp/api/org/exist/util/FastQSort.html
+eXist/webapp/api/org/exist/util/FastStringBuffer.html
+eXist/webapp/api/org/exist/util/FixedByteArray.html
+eXist/webapp/api/org/exist/util/Heap.html
+eXist/webapp/api/org/exist/util/IncludeXMLFilter.html
+eXist/webapp/api/org/exist/util/IndexCallback.html
+eXist/webapp/api/org/exist/util/Lock.html
+eXist/webapp/api/org/exist/util/LockException.html
+eXist/webapp/api/org/exist/util/Lockable.html
+eXist/webapp/api/org/exist/util/LongLinkedList.ListItem.html
+eXist/webapp/api/org/exist/util/LongLinkedList.html
+eXist/webapp/api/org/exist/util/MultiReadReentrantLock.html
+eXist/webapp/api/org/exist/util/MutableStringTokenizer.html
+eXist/webapp/api/org/exist/util/Occurrences.html
+eXist/webapp/api/org/exist/util/OrderedLinkedList.Node.html
+eXist/webapp/api/org/exist/util/OrderedLinkedList.SimpleNode.html
+eXist/webapp/api/org/exist/util/OrderedLinkedList.html
+eXist/webapp/api/org/exist/util/OrderedLongLinkedList.html
+eXist/webapp/api/org/exist/util/PorterStemmer.html
+eXist/webapp/api/org/exist/util/ProgressBar.html
+eXist/webapp/api/org/exist/util/ProgressIndicator.html
+eXist/webapp/api/org/exist/util/ProgressListener.html
+eXist/webapp/api/org/exist/util/Range.html
+eXist/webapp/api/org/exist/util/ReadOnlyException.html
+eXist/webapp/api/org/exist/util/ReentrantReadWriteLock.html
+eXist/webapp/api/org/exist/util/SelectorUtils.html
+eXist/webapp/api/org/exist/util/SyntaxException.html
+eXist/webapp/api/org/exist/util/UTF8.html
+eXist/webapp/api/org/exist/util/XMLChar.html
+eXist/webapp/api/org/exist/util/XMLFilenameFilter.html
+eXist/webapp/api/org/exist/util/XMLReaderObjectFactory.html
+eXist/webapp/api/org/exist/util/XMLReaderPool.html
+eXist/webapp/api/org/exist/util/XMLString.html
+eXist/webapp/api/org/exist/util/hashtable/AbstractHashtable.html
+eXist/webapp/api/org/exist/util/hashtable/Int2ObjectHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/Long2ObjectHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/NamePool.html
+eXist/webapp/api/org/exist/util/hashtable/Object2IntHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/Object2LongHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/Object2LongIdentityHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/Object2ObjectHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/ObjectHashSet.html
+eXist/webapp/api/org/exist/util/hashtable/SequencedLongHashMap.Entry.html
+eXist/webapp/api/org/exist/util/hashtable/SequencedLongHashMap.html
+eXist/webapp/api/org/exist/util/hashtable/package-frame.html
+eXist/webapp/api/org/exist/util/hashtable/package-summary.html
+eXist/webapp/api/org/exist/util/hashtable/test/HashtableTest.html
+eXist/webapp/api/org/exist/util/hashtable/test/package-frame.html
+eXist/webapp/api/org/exist/util/hashtable/test/package-summary.html
+eXist/webapp/api/org/exist/util/package-frame.html
+eXist/webapp/api/org/exist/util/package-summary.html
+eXist/webapp/api/org/exist/util/serializer/AttrList.html
+eXist/webapp/api/org/exist/util/serializer/DOMSerializer.html
+eXist/webapp/api/org/exist/util/serializer/DOMSerializerObjectFactory.html
+eXist/webapp/api/org/exist/util/serializer/DOMSerializerPool.html
+eXist/webapp/api/org/exist/util/serializer/DOMStreamer.html
+eXist/webapp/api/org/exist/util/serializer/DOMStreamerObjectFactory.html
+eXist/webapp/api/org/exist/util/serializer/DOMStreamerPool.html
+eXist/webapp/api/org/exist/util/serializer/ExtendedDOMSerializer.html
+eXist/webapp/api/org/exist/util/serializer/ExtendedDOMStreamer.html
+eXist/webapp/api/org/exist/util/serializer/Receiver.html
+eXist/webapp/api/org/exist/util/serializer/ReceiverToSAX.html
+eXist/webapp/api/org/exist/util/serializer/SAXSerializer.html
+eXist/webapp/api/org/exist/util/serializer/SAXSerializerObjectFactory.html
+eXist/webapp/api/org/exist/util/serializer/SAXSerializerPool.html
+eXist/webapp/api/org/exist/util/serializer/XMLIndenter.html
+eXist/webapp/api/org/exist/util/serializer/XMLWriter.html
+eXist/webapp/api/org/exist/util/serializer/encodings/ASCIICharSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/CharacterSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/KOI8RCharSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/Latin1CharSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/Latin2CharSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/UnicodeCharSet.html
+eXist/webapp/api/org/exist/util/serializer/encodings/package-frame.html
+eXist/webapp/api/org/exist/util/serializer/encodings/package-summary.html
+eXist/webapp/api/org/exist/util/serializer/package-frame.html
+eXist/webapp/api/org/exist/util/serializer/package-summary.html
+eXist/webapp/api/org/exist/util/test/DOMSerializerTest.html
+eXist/webapp/api/org/exist/util/test/XMLStringTest.html
+eXist/webapp/api/org/exist/util/test/package-frame.html
+eXist/webapp/api/org/exist/util/test/package-summary.html
+eXist/webapp/api/org/exist/xmldb/AbstractEXistResource.html
+eXist/webapp/api/org/exist/xmldb/CollectionImpl.html
+eXist/webapp/api/org/exist/xmldb/CollectionManagementServiceImpl.html
+eXist/webapp/api/org/exist/xmldb/CompiledExpression.html
+eXist/webapp/api/org/exist/xmldb/DatabaseImpl.html
+eXist/webapp/api/org/exist/xmldb/DatabaseInstanceManager.html
+eXist/webapp/api/org/exist/xmldb/DatabaseStatus.html
+eXist/webapp/api/org/exist/xmldb/EXistResource.html
+eXist/webapp/api/org/exist/xmldb/IndexQueryService.html
+eXist/webapp/api/org/exist/xmldb/LocalBinaryResource.html
+eXist/webapp/api/org/exist/xmldb/LocalCollection.html
+eXist/webapp/api/org/exist/xmldb/LocalCollectionManagementService.html
+eXist/webapp/api/org/exist/xmldb/LocalDatabaseInstanceManager.html
+eXist/webapp/api/org/exist/xmldb/LocalIndexQueryService.html
+eXist/webapp/api/org/exist/xmldb/LocalResourceSet.html
+eXist/webapp/api/org/exist/xmldb/LocalUserManagementService.html
+eXist/webapp/api/org/exist/xmldb/LocalXMLResource.html
+eXist/webapp/api/org/exist/xmldb/LocalXPathQueryService.html
+eXist/webapp/api/org/exist/xmldb/LocalXUpdateQueryService.html
+eXist/webapp/api/org/exist/xmldb/MapResourceSet.html
+eXist/webapp/api/org/exist/xmldb/RemoteBinaryResource.html
+eXist/webapp/api/org/exist/xmldb/RemoteCollection.html
+eXist/webapp/api/org/exist/xmldb/RemoteCollectionManagementService.html
+eXist/webapp/api/org/exist/xmldb/RemoteCompiledExpression.html
+eXist/webapp/api/org/exist/xmldb/RemoteDatabaseInstanceManager.html
+eXist/webapp/api/org/exist/xmldb/RemoteIndexQueryService.html
+eXist/webapp/api/org/exist/xmldb/RemoteResourceIterator.html
+eXist/webapp/api/org/exist/xmldb/RemoteResourceSet.html
+eXist/webapp/api/org/exist/xmldb/RemoteUserManagementService.html
+eXist/webapp/api/org/exist/xmldb/RemoteXMLResource.html
+eXist/webapp/api/org/exist/xmldb/RemoteXPathQueryService.html
+eXist/webapp/api/org/exist/xmldb/RemoteXUpdateQueryService.html
+eXist/webapp/api/org/exist/xmldb/ResourceSetHelper.html
+eXist/webapp/api/org/exist/xmldb/ShutdownListener.html
+eXist/webapp/api/org/exist/xmldb/UserManagementService.html
+eXist/webapp/api/org/exist/xmldb/XPathQueryServiceImpl.html
+eXist/webapp/api/org/exist/xmldb/XQueryService.html
+eXist/webapp/api/org/exist/xmldb/package-frame.html
+eXist/webapp/api/org/exist/xmldb/package-summary.html
+eXist/webapp/api/org/exist/xmldb/test/CopyMoveTest.html
+eXist/webapp/api/org/exist/xmldb/test/CreateCollectionsTest.html
+eXist/webapp/api/org/exist/xmldb/test/DOMTest.html
+eXist/webapp/api/org/exist/xmldb/test/DOMTestJUnit.html
+eXist/webapp/api/org/exist/xmldb/test/IndexingTest.html
+eXist/webapp/api/org/exist/xmldb/test/LocalTests.html
+eXist/webapp/api/org/exist/xmldb/test/RemoteCollectionTest.html
+eXist/webapp/api/org/exist/xmldb/test/RemoteDBTest.html
+eXist/webapp/api/org/exist/xmldb/test/RemoteDatabaseImplTest.html
+eXist/webapp/api/org/exist/xmldb/test/RemoteTests.html
+eXist/webapp/api/org/exist/xmldb/test/ResourceSetTest.html
+eXist/webapp/api/org/exist/xmldb/test/ResourceTest.html
+eXist/webapp/api/org/exist/xmldb/test/ShutdownTest.html
+eXist/webapp/api/org/exist/xmldb/test/TestEXistXMLSerialize.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/Action.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/AllTests.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/AttributeUpdateAction.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ComplexUpdateAction.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ComplexUpdateTest.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ConcurrentAttrUpdateTest.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ConcurrentQueryTest.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ConcurrentResourceTest.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ConcurrentTestBase.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ConcurrentXUpdateTest.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/DBUtils.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/ReplaceResourceAction.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/XMLGenerator.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/XQueryAction.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/package-frame.html
+eXist/webapp/api/org/exist/xmldb/test/concurrent/package-summary.html
+eXist/webapp/api/org/exist/xmldb/test/package-frame.html
+eXist/webapp/api/org/exist/xmldb/test/package-summary.html
+eXist/webapp/api/org/exist/xmlrpc/AuthenticatedHandler.html
+eXist/webapp/api/org/exist/xmlrpc/QueryResult.html
+eXist/webapp/api/org/exist/xmlrpc/RpcAPI.html
+eXist/webapp/api/org/exist/xmlrpc/RpcConnection.html
+eXist/webapp/api/org/exist/xmlrpc/RpcServer.html
+eXist/webapp/api/org/exist/xmlrpc/RpcServlet.html
+eXist/webapp/api/org/exist/xmlrpc/package-frame.html
+eXist/webapp/api/org/exist/xmlrpc/package-summary.html
+eXist/webapp/api/org/exist/xmlrpc/test/XmlRpcTest.html
+eXist/webapp/api/org/exist/xmlrpc/test/package-frame.html
+eXist/webapp/api/org/exist/xmlrpc/test/package-summary.html
+eXist/webapp/api/org/exist/xquery/AbstractExpression.html
+eXist/webapp/api/org/exist/xquery/AbstractInternalModule.html
+eXist/webapp/api/org/exist/xquery/AnyNodeTest.html
+eXist/webapp/api/org/exist/xquery/AtomicToString.html
+eXist/webapp/api/org/exist/xquery/Atomize.html
+eXist/webapp/api/org/exist/xquery/AttributeConstructor.html
+eXist/webapp/api/org/exist/xquery/BasicFunction.html
+eXist/webapp/api/org/exist/xquery/BinaryOp.html
+eXist/webapp/api/org/exist/xquery/BindingExpression.html
+eXist/webapp/api/org/exist/xquery/CachedResult.html
+eXist/webapp/api/org/exist/xquery/Cardinality.html
+eXist/webapp/api/org/exist/xquery/CastExpression.html
+eXist/webapp/api/org/exist/xquery/CastableExpression.html
+eXist/webapp/api/org/exist/xquery/ChildSelector.html
+eXist/webapp/api/org/exist/xquery/CombiningExpression.html
+eXist/webapp/api/org/exist/xquery/CommentConstructor.html
+eXist/webapp/api/org/exist/xquery/CompiledXQuery.html
+eXist/webapp/api/org/exist/xquery/ConditionalExpression.html
+eXist/webapp/api/org/exist/xquery/Constants.html
+eXist/webapp/api/org/exist/xquery/Dependency.html
+eXist/webapp/api/org/exist/xquery/DescendantOrSelfSelector.html
+eXist/webapp/api/org/exist/xquery/DescendantSelector.html
+eXist/webapp/api/org/exist/xquery/DocumentConstructor.html
+eXist/webapp/api/org/exist/xquery/DynamicAttributeConstructor.html
+eXist/webapp/api/org/exist/xquery/DynamicCardinalityCheck.html
+eXist/webapp/api/org/exist/xquery/DynamicCommentConstructor.html
+eXist/webapp/api/org/exist/xquery/DynamicPIConstructor.html
+eXist/webapp/api/org/exist/xquery/DynamicTextConstructor.html
+eXist/webapp/api/org/exist/xquery/DynamicTypeCheck.html
+eXist/webapp/api/org/exist/xquery/ElementConstructor.html
+eXist/webapp/api/org/exist/xquery/EnclosedExpr.html
+eXist/webapp/api/org/exist/xquery/Except.html
+eXist/webapp/api/org/exist/xquery/Expression.html
+eXist/webapp/api/org/exist/xquery/ExternalModule.html
+eXist/webapp/api/org/exist/xquery/ExternalModuleImpl.html
+eXist/webapp/api/org/exist/xquery/FilteredExpression.html
+eXist/webapp/api/org/exist/xquery/ForExpr.html
+eXist/webapp/api/org/exist/xquery/Function.html
+eXist/webapp/api/org/exist/xquery/FunctionCall.html
+eXist/webapp/api/org/exist/xquery/FunctionDef.html
+eXist/webapp/api/org/exist/xquery/FunctionFactory.html
+eXist/webapp/api/org/exist/xquery/FunctionId.html
+eXist/webapp/api/org/exist/xquery/FunctionSignature.html
+eXist/webapp/api/org/exist/xquery/GeneralComparison.html
+eXist/webapp/api/org/exist/xquery/InstanceOfExpression.html
+eXist/webapp/api/org/exist/xquery/InternalModule.html
+eXist/webapp/api/org/exist/xquery/Intersection.html
+eXist/webapp/api/org/exist/xquery/JavaCall.html
+eXist/webapp/api/org/exist/xquery/LetExpr.html
+eXist/webapp/api/org/exist/xquery/LiteralValue.html
+eXist/webapp/api/org/exist/xquery/LocalVariable.html
+eXist/webapp/api/org/exist/xquery/LocationStep.html
+eXist/webapp/api/org/exist/xquery/LogicalOp.html
+eXist/webapp/api/org/exist/xquery/Module.html
+eXist/webapp/api/org/exist/xquery/ModuleContext.html
+eXist/webapp/api/org/exist/xquery/NameTest.html
+eXist/webapp/api/org/exist/xquery/NamespaceConstructor.html
+eXist/webapp/api/org/exist/xquery/NodeComparison.html
+eXist/webapp/api/org/exist/xquery/NodeConstructor.html
+eXist/webapp/api/org/exist/xquery/NodeSelector.html
+eXist/webapp/api/org/exist/xquery/NodeTest.html
+eXist/webapp/api/org/exist/xquery/OpAnd.html
+eXist/webapp/api/org/exist/xquery/OpNumeric.html
+eXist/webapp/api/org/exist/xquery/OpOr.html
+eXist/webapp/api/org/exist/xquery/OrderSpec.html
+eXist/webapp/api/org/exist/xquery/PIConstructor.html
+eXist/webapp/api/org/exist/xquery/ParentSelector.html
+eXist/webapp/api/org/exist/xquery/PathExpr.html
+eXist/webapp/api/org/exist/xquery/Pragma.html
+eXist/webapp/api/org/exist/xquery/Predicate.html
+eXist/webapp/api/org/exist/xquery/QuantifiedExpression.html
+eXist/webapp/api/org/exist/xquery/RangeExpression.html
+eXist/webapp/api/org/exist/xquery/RootNode.html
+eXist/webapp/api/org/exist/xquery/SelfSelector.html
+eXist/webapp/api/org/exist/xquery/SequenceConstructor.html
+eXist/webapp/api/org/exist/xquery/SimpleStep.html
+eXist/webapp/api/org/exist/xquery/Step.html
+eXist/webapp/api/org/exist/xquery/TerminatedException.SizeLimitException.html
+eXist/webapp/api/org/exist/xquery/TerminatedException.TimeoutException.html
+eXist/webapp/api/org/exist/xquery/TerminatedException.html
+eXist/webapp/api/org/exist/xquery/TextConstructor.html
+eXist/webapp/api/org/exist/xquery/TypeTest.html
+eXist/webapp/api/org/exist/xquery/UnaryExpr.html
+eXist/webapp/api/org/exist/xquery/Union.html
+eXist/webapp/api/org/exist/xquery/UntypedValueCheck.html
+eXist/webapp/api/org/exist/xquery/UserDefinedFunction.html
+eXist/webapp/api/org/exist/xquery/ValueComparison.html
+eXist/webapp/api/org/exist/xquery/Variable.html
+eXist/webapp/api/org/exist/xquery/VariableDeclaration.html
+eXist/webapp/api/org/exist/xquery/VariableReference.html
+eXist/webapp/api/org/exist/xquery/XPathException.html
+eXist/webapp/api/org/exist/xquery/XPathUtil.html
+eXist/webapp/api/org/exist/xquery/XQuery.html
+eXist/webapp/api/org/exist/xquery/XQueryContext.html
+eXist/webapp/api/org/exist/xquery/XQueryWatchDog.html
+eXist/webapp/api/org/exist/xquery/functions/CollatingFunction.html
+eXist/webapp/api/org/exist/xquery/functions/ExtCollection.html
+eXist/webapp/api/org/exist/xquery/functions/ExtDoctype.html
+eXist/webapp/api/org/exist/xquery/functions/ExtDocument.html
+eXist/webapp/api/org/exist/xquery/functions/ExtFulltext.html
+eXist/webapp/api/org/exist/xquery/functions/ExtNear.html
+eXist/webapp/api/org/exist/xquery/functions/ExtRegexp.html
+eXist/webapp/api/org/exist/xquery/functions/ExtRegexpOr.html
+eXist/webapp/api/org/exist/xquery/functions/ExtXCollection.html
+eXist/webapp/api/org/exist/xquery/functions/FunAbs.html
+eXist/webapp/api/org/exist/xquery/functions/FunAdjustDateTimeToTimezone.html
+eXist/webapp/api/org/exist/xquery/functions/FunAdjustDateToTimezone.html
+eXist/webapp/api/org/exist/xquery/functions/FunAdjustTimeToTimezone.html
+eXist/webapp/api/org/exist/xquery/functions/FunAvg.html
+eXist/webapp/api/org/exist/xquery/functions/FunBaseURI.html
+eXist/webapp/api/org/exist/xquery/functions/FunBoolean.html
+eXist/webapp/api/org/exist/xquery/functions/FunCeiling.html
+eXist/webapp/api/org/exist/xquery/functions/FunConcat.html
+eXist/webapp/api/org/exist/xquery/functions/FunContains.html
+eXist/webapp/api/org/exist/xquery/functions/FunCount.html
+eXist/webapp/api/org/exist/xquery/functions/FunCurrentDate.html
+eXist/webapp/api/org/exist/xquery/functions/FunCurrentDateTime.html
+eXist/webapp/api/org/exist/xquery/functions/FunCurrentTime.html
+eXist/webapp/api/org/exist/xquery/functions/FunData.html
+eXist/webapp/api/org/exist/xquery/functions/FunDeepEqual.html
+eXist/webapp/api/org/exist/xquery/functions/FunDistinctValues.html
+eXist/webapp/api/org/exist/xquery/functions/FunDoc.html
+eXist/webapp/api/org/exist/xquery/functions/FunDocumentURI.html
+eXist/webapp/api/org/exist/xquery/functions/FunEmpty.html
+eXist/webapp/api/org/exist/xquery/functions/FunEndsWith.html
+eXist/webapp/api/org/exist/xquery/functions/FunError.html
+eXist/webapp/api/org/exist/xquery/functions/FunExactlyOne.html
+eXist/webapp/api/org/exist/xquery/functions/FunExists.html
+eXist/webapp/api/org/exist/xquery/functions/FunFalse.html
+eXist/webapp/api/org/exist/xquery/functions/FunFloor.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetDateComponent.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetDateTimeComponent.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetDaysFromDayTimeDuration.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetHoursFromDayTimeDuration.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetMinutesFromDayTimeDuration.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetSecondsFromDayTimeDuration.html
+eXist/webapp/api/org/exist/xquery/functions/FunGetTimeComponent.html
+eXist/webapp/api/org/exist/xquery/functions/FunId.html
+eXist/webapp/api/org/exist/xquery/functions/FunIndexOf.html
+eXist/webapp/api/org/exist/xquery/functions/FunInsertBefore.html
+eXist/webapp/api/org/exist/xquery/functions/FunItemAt.html
+eXist/webapp/api/org/exist/xquery/functions/FunLang.html
+eXist/webapp/api/org/exist/xquery/functions/FunLast.html
+eXist/webapp/api/org/exist/xquery/functions/FunLocalName.html
+eXist/webapp/api/org/exist/xquery/functions/FunMatches.html
+eXist/webapp/api/org/exist/xquery/functions/FunMax.html
+eXist/webapp/api/org/exist/xquery/functions/FunMin.html
+eXist/webapp/api/org/exist/xquery/functions/FunName.html
+eXist/webapp/api/org/exist/xquery/functions/FunNamespaceURI.html
+eXist/webapp/api/org/exist/xquery/functions/FunNodeName.html
+eXist/webapp/api/org/exist/xquery/functions/FunNormalizeSpace.html
+eXist/webapp/api/org/exist/xquery/functions/FunNot.html
+eXist/webapp/api/org/exist/xquery/functions/FunNumber.html
+eXist/webapp/api/org/exist/xquery/functions/FunOneOrMore.html
+eXist/webapp/api/org/exist/xquery/functions/FunPosition.html
+eXist/webapp/api/org/exist/xquery/functions/FunRemove.html
+eXist/webapp/api/org/exist/xquery/functions/FunReplace.html
+eXist/webapp/api/org/exist/xquery/functions/FunReverse.html
+eXist/webapp/api/org/exist/xquery/functions/FunRoot.html
+eXist/webapp/api/org/exist/xquery/functions/FunRound.html
+eXist/webapp/api/org/exist/xquery/functions/FunStartsWith.html
+eXist/webapp/api/org/exist/xquery/functions/FunStrLength.html
+eXist/webapp/api/org/exist/xquery/functions/FunString.html
+eXist/webapp/api/org/exist/xquery/functions/FunStringJoin.html
+eXist/webapp/api/org/exist/xquery/functions/FunStringPad.html
+eXist/webapp/api/org/exist/xquery/functions/FunSubSequence.html
+eXist/webapp/api/org/exist/xquery/functions/FunSubstring.html
+eXist/webapp/api/org/exist/xquery/functions/FunSubstringAfter.html
+eXist/webapp/api/org/exist/xquery/functions/FunSubstringBefore.html
+eXist/webapp/api/org/exist/xquery/functions/FunSum.html
+eXist/webapp/api/org/exist/xquery/functions/FunTokenize.html
+eXist/webapp/api/org/exist/xquery/functions/FunTranslate.html
+eXist/webapp/api/org/exist/xquery/functions/FunTrueOrFalse.html
+eXist/webapp/api/org/exist/xquery/functions/FunUnordered.html
+eXist/webapp/api/org/exist/xquery/functions/FunUpperOrLowerCase.html
+eXist/webapp/api/org/exist/xquery/functions/FunZeroOrOne.html
+eXist/webapp/api/org/exist/xquery/functions/ModuleImpl.html
+eXist/webapp/api/org/exist/xquery/functions/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/package-summary.html
+eXist/webapp/api/org/exist/xquery/functions/request/CreateSession.html
+eXist/webapp/api/org/exist/xquery/functions/request/EncodeURL.html
+eXist/webapp/api/org/exist/xquery/functions/request/GetRequestData.html
+eXist/webapp/api/org/exist/xquery/functions/request/GetSessionAttribute.html
+eXist/webapp/api/org/exist/xquery/functions/request/GetUploadedFile.html
+eXist/webapp/api/org/exist/xquery/functions/request/GetUploadedFileName.html
+eXist/webapp/api/org/exist/xquery/functions/request/InvalidateSession.html
+eXist/webapp/api/org/exist/xquery/functions/request/RedirectTo.html
+eXist/webapp/api/org/exist/xquery/functions/request/RequestModule.html
+eXist/webapp/api/org/exist/xquery/functions/request/RequestParameter.html
+eXist/webapp/api/org/exist/xquery/functions/request/RequestParameterNames.html
+eXist/webapp/api/org/exist/xquery/functions/request/RequestURI.html
+eXist/webapp/api/org/exist/xquery/functions/request/SessionAttributes.html
+eXist/webapp/api/org/exist/xquery/functions/request/SetCurrentUser.html
+eXist/webapp/api/org/exist/xquery/functions/request/SetSessionAttribute.html
+eXist/webapp/api/org/exist/xquery/functions/request/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/request/package-summary.html
+eXist/webapp/api/org/exist/xquery/functions/text/AbstractMatchFunction.html
+eXist/webapp/api/org/exist/xquery/functions/text/FuzzyIndexTerms.html
+eXist/webapp/api/org/exist/xquery/functions/text/FuzzyMatchAll.html
+eXist/webapp/api/org/exist/xquery/functions/text/FuzzyMatchAny.html
+eXist/webapp/api/org/exist/xquery/functions/text/FuzzyMatcher.html
+eXist/webapp/api/org/exist/xquery/functions/text/MatchCount.html
+eXist/webapp/api/org/exist/xquery/functions/text/TextModule.html
+eXist/webapp/api/org/exist/xquery/functions/text/TextRank.html
+eXist/webapp/api/org/exist/xquery/functions/text/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/text/package-summary.html
+eXist/webapp/api/org/exist/xquery/functions/transform/Transform.html
+eXist/webapp/api/org/exist/xquery/functions/transform/TransformModule.html
+eXist/webapp/api/org/exist/xquery/functions/transform/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/transform/package-summary.html
+eXist/webapp/api/org/exist/xquery/functions/util/BuiltinFunctions.html
+eXist/webapp/api/org/exist/xquery/functions/util/CatchFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/Collations.html
+eXist/webapp/api/org/exist/xquery/functions/util/CollectionName.html
+eXist/webapp/api/org/exist/xquery/functions/util/DescribeFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/DocumentNameOrId.html
+eXist/webapp/api/org/exist/xquery/functions/util/EvalFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/ExclusiveLockFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/ExistVersion.html
+eXist/webapp/api/org/exist/xquery/functions/util/LockFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/LogFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/MD5.html
+eXist/webapp/api/org/exist/xquery/functions/util/ModuleInfo.html
+eXist/webapp/api/org/exist/xquery/functions/util/SharedLockFunction.html
+eXist/webapp/api/org/exist/xquery/functions/util/SystemProperty.html
+eXist/webapp/api/org/exist/xquery/functions/util/UtilModule.html
+eXist/webapp/api/org/exist/xquery/functions/util/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/util/package-summary.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBAbstractCollectionManipulator.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBAuthenticate.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBChangeUser.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBChmodCollection.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBChmodResource.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBCollection.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBCollectionExists.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBCreateCollection.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBCreateUser.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBCreated.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBDeleteUser.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBGetChildCollections.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBGetChildResources.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBGetUserOrGroup.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBHasLock.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBIsAdmin.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBLoadFromPattern.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBModule.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBPermissions.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBPermissionsToString.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBRegisterDatabase.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBRemove.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBSetCollectionPermissions.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBSetResourcePermissions.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBSize.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBStore.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBUserAccess.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/XMLDBXUpdate.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/package-frame.html
+eXist/webapp/api/org/exist/xquery/functions/xmldb/package-summary.html
+eXist/webapp/api/org/exist/xquery/package-frame.html
+eXist/webapp/api/org/exist/xquery/package-summary.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryAST.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryLexer.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryParser.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryParserTokenTypes.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryTokenTypes.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryTreeParser.html
+eXist/webapp/api/org/exist/xquery/parser/XQueryTreeParserTokenTypes.html
+eXist/webapp/api/org/exist/xquery/parser/package-frame.html
+eXist/webapp/api/org/exist/xquery/parser/package-summary.html
+eXist/webapp/api/org/exist/xquery/test/AllTests.html
+eXist/webapp/api/org/exist/xquery/test/DeepEqualTest.html
+eXist/webapp/api/org/exist/xquery/test/JavaMethodsTest.html
+eXist/webapp/api/org/exist/xquery/test/LexerTest.html
+eXist/webapp/api/org/exist/xquery/test/SAXStorageTest.html
+eXist/webapp/api/org/exist/xquery/test/SeqOpTest.html
+eXist/webapp/api/org/exist/xquery/test/XPathQueryTest.html
+eXist/webapp/api/org/exist/xquery/test/XQueryTest.html
+eXist/webapp/api/org/exist/xquery/test/XQueryUseCase.html
+eXist/webapp/api/org/exist/xquery/test/XQueryUseCasesTest.html
+eXist/webapp/api/org/exist/xquery/test/package-frame.html
+eXist/webapp/api/org/exist/xquery/test/package-summary.html
+eXist/webapp/api/org/exist/xquery/value/AbstractDateTimeValue.html
+eXist/webapp/api/org/exist/xquery/value/AbstractSequence.html
+eXist/webapp/api/org/exist/xquery/value/AnyURIValue.html
+eXist/webapp/api/org/exist/xquery/value/AtomicValue.html
+eXist/webapp/api/org/exist/xquery/value/BooleanValue.html
+eXist/webapp/api/org/exist/xquery/value/ComputableValue.html
+eXist/webapp/api/org/exist/xquery/value/DateTimeValue.html
+eXist/webapp/api/org/exist/xquery/value/DateValue.html
+eXist/webapp/api/org/exist/xquery/value/DayTimeDurationValue.html
+eXist/webapp/api/org/exist/xquery/value/DecimalValue.html
+eXist/webapp/api/org/exist/xquery/value/DoubleValue.html
+eXist/webapp/api/org/exist/xquery/value/DurationValue.html
+eXist/webapp/api/org/exist/xquery/value/EmptySequence.html
+eXist/webapp/api/org/exist/xquery/value/EmptySequenceIterator.html
+eXist/webapp/api/org/exist/xquery/value/FloatValue.html
+eXist/webapp/api/org/exist/xquery/value/IntegerValue.html
+eXist/webapp/api/org/exist/xquery/value/Item.html
+eXist/webapp/api/org/exist/xquery/value/JavaObjectValue.html
+eXist/webapp/api/org/exist/xquery/value/NodeValue.html
+eXist/webapp/api/org/exist/xquery/value/NumericValue.html
+eXist/webapp/api/org/exist/xquery/value/OrderedValueSequence.html
+eXist/webapp/api/org/exist/xquery/value/PreorderedValueSequence.html
+eXist/webapp/api/org/exist/xquery/value/QNameValue.html
+eXist/webapp/api/org/exist/xquery/value/Sequence.html
+eXist/webapp/api/org/exist/xquery/value/SequenceIterator.html
+eXist/webapp/api/org/exist/xquery/value/SequenceType.html
+eXist/webapp/api/org/exist/xquery/value/SingleItemIterator.html
+eXist/webapp/api/org/exist/xquery/value/StringValue.html
+eXist/webapp/api/org/exist/xquery/value/TimeValue.html
+eXist/webapp/api/org/exist/xquery/value/Type.html
+eXist/webapp/api/org/exist/xquery/value/UntypedAtomicValue.html
+eXist/webapp/api/org/exist/xquery/value/ValueSequence.html
+eXist/webapp/api/org/exist/xquery/value/YearMonthDurationValue.html
+eXist/webapp/api/org/exist/xquery/value/package-frame.html
+eXist/webapp/api/org/exist/xquery/value/package-summary.html
+eXist/webapp/api/org/exist/xupdate/Append.html
+eXist/webapp/api/org/exist/xupdate/Conditional.html
+eXist/webapp/api/org/exist/xupdate/Insert.html
+eXist/webapp/api/org/exist/xupdate/Modification.html
+eXist/webapp/api/org/exist/xupdate/Remove.html
+eXist/webapp/api/org/exist/xupdate/Rename.html
+eXist/webapp/api/org/exist/xupdate/Replace.html
+eXist/webapp/api/org/exist/xupdate/Update.html
+eXist/webapp/api/org/exist/xupdate/XUpdateProcessor.html
+eXist/webapp/api/org/exist/xupdate/package-frame.html
+eXist/webapp/api/org/exist/xupdate/package-summary.html
+eXist/webapp/api/org/exist/xupdate/test/AllTests.html
+eXist/webapp/api/org/exist/xupdate/test/CompareDocuments.html
+eXist/webapp/api/org/exist/xupdate/test/XUpdateTest.html
+eXist/webapp/api/org/exist/xupdate/test/XUpdateTestCases.html
+eXist/webapp/api/org/exist/xupdate/test/package-frame.html
+eXist/webapp/api/org/exist/xupdate/test/package-summary.html
+eXist/webapp/api/org/xmldb/api/DatabaseManager.html
+eXist/webapp/api/org/xmldb/api/base/Collection.html
+eXist/webapp/api/org/xmldb/api/base/CompiledExpression.html
+eXist/webapp/api/org/xmldb/api/base/Configurable.html
+eXist/webapp/api/org/xmldb/api/base/Database.html
+eXist/webapp/api/org/xmldb/api/base/ErrorCodes.html
+eXist/webapp/api/org/xmldb/api/base/Resource.html
+eXist/webapp/api/org/xmldb/api/base/ResourceIterator.html
+eXist/webapp/api/org/xmldb/api/base/ResourceSet.html
+eXist/webapp/api/org/xmldb/api/base/Service.html
+eXist/webapp/api/org/xmldb/api/base/XMLDBException.html
+eXist/webapp/api/org/xmldb/api/base/package-frame.html
+eXist/webapp/api/org/xmldb/api/base/package-summary.html
+eXist/webapp/api/org/xmldb/api/modules/BinaryResource.html
+eXist/webapp/api/org/xmldb/api/modules/CollectionManagementService.html
+eXist/webapp/api/org/xmldb/api/modules/TransactionService.html
+eXist/webapp/api/org/xmldb/api/modules/XMLResource.html
+eXist/webapp/api/org/xmldb/api/modules/XPathQueryService.html
+eXist/webapp/api/org/xmldb/api/modules/XQueryService.html
+eXist/webapp/api/org/xmldb/api/modules/XUpdateQueryService.html
+eXist/webapp/api/org/xmldb/api/modules/package-frame.html
+eXist/webapp/api/org/xmldb/api/modules/package-summary.html
+eXist/webapp/api/org/xmldb/api/package-frame.html
+eXist/webapp/api/org/xmldb/api/package-summary.html
+eXist/webapp/api/org/xmldb/api/reference/CollectionImpl.html
+eXist/webapp/api/org/xmldb/api/reference/DatabaseImpl.html
+eXist/webapp/api/org/xmldb/api/reference/ResourceSetImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/BinaryResourceImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/CollectionManagementServiceImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/TransactionServiceImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/XMLResourceImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/XPathQueryServiceImpl.html
+eXist/webapp/api/org/xmldb/api/reference/modules/package-frame.html
+eXist/webapp/api/org/xmldb/api/reference/modules/package-summary.html
+eXist/webapp/api/org/xmldb/api/reference/package-frame.html
+eXist/webapp/api/org/xmldb/api/reference/package-summary.html
+eXist/webapp/api/org/xmldb/api/sdk/SimpleCollection.html
+eXist/webapp/api/org/xmldb/api/sdk/SimpleConfigurable.html
+eXist/webapp/api/org/xmldb/api/sdk/SimpleDatabase.html
+eXist/webapp/api/org/xmldb/api/sdk/SimpleResourceIterator.html
+eXist/webapp/api/org/xmldb/api/sdk/SimpleResourceSet.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/BaseResource.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/SetContentHandler.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/SimpleBinaryResource.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/SimpleTransactionService.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/SimpleXMLResource.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/SimpleXPathQueryService.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/package-frame.html
+eXist/webapp/api/org/xmldb/api/sdk/modules/package-summary.html
+eXist/webapp/api/org/xmldb/api/sdk/package-frame.html
+eXist/webapp/api/org/xmldb/api/sdk/package-summary.html
+eXist/webapp/api/org/xmldb/api/tests/AllTests.html
+eXist/webapp/api/org/xmldb/api/tests/CollectionTest.html
+eXist/webapp/api/org/xmldb/api/tests/ResourceTest.html
+eXist/webapp/api/org/xmldb/api/tests/XMLDBTestCase.html
+eXist/webapp/api/org/xmldb/api/tests/XMLDBTestSuite.html
+eXist/webapp/api/org/xmldb/api/tests/package-frame.html
+eXist/webapp/api/org/xmldb/api/tests/package-summary.html
+eXist/webapp/api/overview-frame.html
+eXist/webapp/api/overview-summary.html
+eXist/webapp/api/package-list
+eXist/webapp/api/packages.html
+eXist/webapp/api/resources/inherit.gif
+eXist/webapp/api/serialized-form.html
+eXist/webapp/api/stylesheet.css
+eXist/webapp/apps/applications.xml
+eXist/webapp/apps/applications.xsd
+eXist/webapp/apps/applications.xsd.html
+eXist/webapp/apps/applications.xsl
+eXist/webapp/apps/logo.jpg
+eXist/webapp/apps/sidebar.xml
+eXist/webapp/apps/sitemap.xmap
+eXist/webapp/apps/styles/default-style.css
+eXist/webapp/apps/styles/display.css
+eXist/webapp/apps/template.xml
+eXist/webapp/bin/client.bat
+eXist/webapp/bin/client.sh
+eXist/webapp/bin/server.bat
+eXist/webapp/bin/server.sh
+eXist/webapp/changes.xml
+eXist/webapp/client-1.png
+eXist/webapp/client-2.png
+eXist/webapp/client-3.png
+eXist/webapp/client-4.png
+eXist/webapp/client-5.png
+eXist/webapp/client-6.png
+eXist/webapp/client-7.png
+eXist/webapp/client-8.png
+eXist/webapp/client.xml
+eXist/webapp/configuration.xml
+eXist/webapp/credits.xml
+eXist/webapp/deployment.xml
+eXist/webapp/design.xml
+eXist/webapp/devguide.xml
+eXist/webapp/documentation.xml
+eXist/webapp/donations.xml
+eXist/webapp/examples/left_arrow.png
+eXist/webapp/examples/logo.jpg
+eXist/webapp/examples/process.xml
+eXist/webapp/examples/right_arrow.png
+eXist/webapp/examples/shakespeare.xml
+eXist/webapp/examples/sidebar.xml
+eXist/webapp/examples/simple1.xsp
+eXist/webapp/examples/simple2.xml
+eXist/webapp/examples/simplequery.xml
+eXist/webapp/examples/sitemap.xmap
+eXist/webapp/examples/storelocal.xsp
+eXist/webapp/examples/style.css
+eXist/webapp/examples/stylesheets/display.xsl
+eXist/webapp/examples/stylesheets/process.xsl
+eXist/webapp/examples/up_arrow.png
+eXist/webapp/examples.xml
+eXist/webapp/facts.xml
+eXist/webapp/header.xml
+eXist/webapp/header.xml.tmpl
+eXist/webapp/howtos-2.xml
+eXist/webapp/howtos.xml
+eXist/webapp/index.xml
+eXist/webapp/library/biblio.xml
+eXist/webapp/library/bibquery.xml
+eXist/webapp/library/default.css
+eXist/webapp/library/logo.jpg
+eXist/webapp/library/new.gif
+eXist/webapp/library/resources/powered.gif
+eXist/webapp/library/sidebar.xml
+eXist/webapp/library/sitemap.xmap
+eXist/webapp/library/style.css
+eXist/webapp/library/styles/default-style.css
+eXist/webapp/library/stylesheets/biblio_rdf.xsl
+eXist/webapp/library/stylesheets/bibquery.xsl
+eXist/webapp/login.xml
+eXist/webapp/logo.jpg
+eXist/webapp/mods/config.xqm
+eXist/webapp/mods/images/delete.gif
+eXist/webapp/mods/images/shadow-2.png
+eXist/webapp/mods/images/xml_rss.gif
+eXist/webapp/mods/login.xhtml
+eXist/webapp/mods/logo.jpg
+eXist/webapp/mods/mods.xq
+eXist/webapp/mods/sitemap.xmap
+eXist/webapp/mods/styles/default-style.css
+eXist/webapp/mods/styles/display.css
+eXist/webapp/mods/styles/mods-common.xsl
+eXist/webapp/mods/styles/mods-overview.xsl
+eXist/webapp/performance.xml
+eXist/webapp/quickstart.xml
+eXist/webapp/resources/download.gif
+eXist/webapp/resources/exist.png
+eXist/webapp/resources/javanet_button_90.gif
+eXist/webapp/resources/lc1.gif
+eXist/webapp/resources/lc2.gif
+eXist/webapp/resources/new.gif
+eXist/webapp/resources/powered.gif
+eXist/webapp/resources/styles/style.css
+eXist/webapp/resources/xml.gif
+eXist/webapp/security.xml
+eXist/webapp/sidebar.xml
+eXist/webapp/sitemap.xmap
+eXist/webapp/style.css
+eXist/webapp/styles/default-style.css
+eXist/webapp/stylesheets/changes.xsl
+eXist/webapp/stylesheets/db2html.xsl
+eXist/webapp/stylesheets/doc2html-2.xsl
+eXist/webapp/stylesheets/facts.xsl
+eXist/webapp/stylesheets/fragment-extractor.xsl
+eXist/webapp/stylesheets/query.xsl
+eXist/webapp/stylesheets/shakes.xsl
+eXist/webapp/stylesheets/sidebar.xsl
+eXist/webapp/stylesheets/simple-samples2html.xsl
+eXist/webapp/stylesheets/simple-sql2html.xsl
+eXist/webapp/stylesheets/simple-xml2html.xsl
+eXist/webapp/stylesheets/sitemap/simple-sitemap2html.xsl
+eXist/webapp/stylesheets/status.xsl
+eXist/webapp/stylesheets/system/directory2html.xslt
+eXist/webapp/stylesheets/system/error2html.xslt
+eXist/webapp/stylesheets/system/linkstatus2html.xslt
+eXist/webapp/stylesheets/system/main.css
+eXist/webapp/stylesheets/system/scripts/main.js
+eXist/webapp/stylesheets/system/sitemap2html.xslt
+eXist/webapp/stylesheets/system/status2html.xslt
+eXist/webapp/stylesheets/system/xml2html.xslt
+eXist/webapp/stylesheets/system/xmlform2html.xslt
+eXist/webapp/stylesheets/xml2html.xsl
+eXist/webapp/stylesheets/xmldb-collection.xsl
+eXist/webapp/stylesheets/xmldb-query.xsl
+eXist/webapp/stylesheets/xmlsource.xsl
+eXist/webapp/test.jsp
+eXist/webapp/updating.xml
+eXist/webapp/webdav1.png
+eXist/webapp/xadmin.xsp
+eXist/webapp/xinclude.xml
+eXist/webapp/xmldb.xsl.html
+eXist/webapp/xquery/acronyms.xq
+eXist/webapp/xquery/biblio.xml
+eXist/webapp/xquery/biblio.xq
+eXist/webapp/xquery/collections.xqm
+eXist/webapp/xquery/dblp.xq
+eXist/webapp/xquery/error.css
+eXist/webapp/xquery/fibo.xq
+eXist/webapp/xquery/functions.xq
+eXist/webapp/xquery/functions.xsl
+eXist/webapp/xquery/guess.xql
+eXist/webapp/xquery/header.xml
+eXist/webapp/xquery/hello-plural-db.xq
+eXist/webapp/xquery/hello-plural.xq
+eXist/webapp/xquery/hello.xq
+eXist/webapp/xquery/login.css
+eXist/webapp/xquery/login.xql
+eXist/webapp/xquery/logo.jpg
+eXist/webapp/xquery/mods.css
+eXist/webapp/xquery/mods.xml
+eXist/webapp/xquery/mods.xq
+eXist/webapp/xquery/new.gif
+eXist/webapp/xquery/parameters.xq
+eXist/webapp/xquery/process.xq
+eXist/webapp/xquery/resources/powered.gif
+eXist/webapp/xquery/session.xql
+eXist/webapp/xquery/sidebar.xml
+eXist/webapp/xquery/sitemap.xmap
+eXist/webapp/xquery/style.css
+eXist/webapp/xquery/styles/acronyms.css
+eXist/webapp/xquery/styles/default-style.css
+eXist/webapp/xquery/styles/functions.css
+eXist/webapp/xquery/styles/xquery.css
+eXist/webapp/xquery/stylesheets/acronyms.xsl
+eXist/webapp/xquery/stylesheets/dblp.xsl
+eXist/webapp/xquery/stylesheets/detailed.xsl
+eXist/webapp/xquery/stylesheets/functions.xsl
+eXist/webapp/xquery/stylesheets/mods-detailed.xsl
+eXist/webapp/xquery/stylesheets/mods-overview.xsl
+eXist/webapp/xquery/stylesheets/overview.xsl
+eXist/webapp/xquery/table.xq
+eXist/webapp/xquery/transform.xql
+eXist/webapp/xquery/watchdog.gif
+eXist/webapp/xquery/xquery.css
+eXist/webapp/xquery/xquery.xq
+eXist/webapp/xquery.xml
+eXist/webapp/xse/XPath-helper.js
+eXist/webapp/xse/foc-header.xml
+eXist/webapp/xse/foc-sidebar.xml
+eXist/webapp/xse/hints-foc.html
+eXist/webapp/xse/logo.jpg
+eXist/webapp/xse/sitemap.xmap
+eXist/webapp/xse/sprocess-foc.xsp
+eXist/webapp/xse/squery-foc.xsp
+eXist/webapp/xse/style.css
+eXist/webapp/xse/stylesheets/all documents/display.xslt
+eXist/webapp/xse/stylesheets/db/foc/display.xslt
+eXist/webapp/xse/stylesheets/doc2html-3.xsl
+eXist/webapp/xse/stylesheets/highlight.xslt
+@dirrm eXist/bin
+@dirrm eXist/lib/core
+@dirrm eXist/lib/endorsed
+@dirrm eXist/lib/optional
+@dirrm eXist/lib
+@dirrm eXist/log
+@dirrm eXist/samples/http
+@dirrm eXist/samples/mods
+@dirrm eXist/samples/org/exist/examples/http
+@dirrm eXist/samples/org/exist/examples/soap
+@dirrm eXist/samples/org/exist/examples/triggers/stx
+@dirrm eXist/samples/org/exist/examples/triggers
+@dirrm eXist/samples/org/exist/examples/xmldb
+@dirrm eXist/samples/org/exist/examples/xmlrpc
+@dirrm eXist/samples/org/exist/examples/xquery
+@dirrm eXist/samples/org/exist/examples
+@dirrm eXist/samples/org/exist
+@dirrm eXist/samples/org
+@dirrm eXist/samples/shakespeare
+@dirrm eXist/samples/soap
+@dirrm eXist/samples/xinclude
+@dirrm eXist/samples/xmlrpc
+@dirrm eXist/samples/xquery
+@dirrm eXist/samples
+@dirrm eXist/src/org/dbxml/core/data
+@dirrm eXist/src/org/dbxml/core/filer
+@dirrm eXist/src/org/dbxml/core/indexer
+@dirrm eXist/src/org/dbxml/core
+@dirrm eXist/src/org/dbxml/xml
+@dirrm eXist/src/org/dbxml
+@dirrm eXist/src/org/exist/ant
+@dirrm eXist/src/org/exist/backup
+@dirrm eXist/src/org/exist/client/icons
+@dirrm eXist/src/org/exist/client
+@dirrm eXist/src/org/exist/cocoon
+@dirrm eXist/src/org/exist/collections/triggers
+@dirrm eXist/src/org/exist/collections
+@dirrm eXist/src/org/exist/dom
+@dirrm eXist/src/org/exist/http/realm
+@dirrm eXist/src/org/exist/http/servlets
+@dirrm eXist/src/org/exist/http/test
+@dirrm eXist/src/org/exist/http/webdav/methods
+@dirrm eXist/src/org/exist/http/webdav
+@dirrm eXist/src/org/exist/http
+@dirrm eXist/src/org/exist/jsp
+@dirrm eXist/src/org/exist/memtree/test
+@dirrm eXist/src/org/exist/memtree
+@dirrm eXist/src/org/exist/schema/internalaccess
+@dirrm eXist/src/org/exist/schema/test
+@dirrm eXist/src/org/exist/schema
+@dirrm eXist/src/org/exist/security
+@dirrm eXist/src/org/exist/soap
+@dirrm eXist/src/org/exist/source
+@dirrm eXist/src/org/exist/start
+@dirrm eXist/src/org/exist/storage/analysis
+@dirrm eXist/src/org/exist/storage/cache
+@dirrm eXist/src/org/exist/storage/io/test
+@dirrm eXist/src/org/exist/storage/io
+@dirrm eXist/src/org/exist/storage/report
+@dirrm eXist/src/org/exist/storage/serializers
+@dirrm eXist/src/org/exist/storage/store
+@dirrm eXist/src/org/exist/storage/sync
+@dirrm eXist/src/org/exist/storage
+@dirrm eXist/src/org/exist/util/hashtable/test
+@dirrm eXist/src/org/exist/util/hashtable
+@dirrm eXist/src/org/exist/util/serializer/encodings
+@dirrm eXist/src/org/exist/util/serializer
+@dirrm eXist/src/org/exist/util/test
+@dirrm eXist/src/org/exist/util
+@dirrm eXist/src/org/exist/xmldb/test/concurrent
+@dirrm eXist/src/org/exist/xmldb/test
+@dirrm eXist/src/org/exist/xmldb
+@dirrm eXist/src/org/exist/xmlrpc/test
+@dirrm eXist/src/org/exist/xmlrpc
+@dirrm eXist/src/org/exist/xquery/functions/request
+@dirrm eXist/src/org/exist/xquery/functions/text
+@dirrm eXist/src/org/exist/xquery/functions/transform
+@dirrm eXist/src/org/exist/xquery/functions/util
+@dirrm eXist/src/org/exist/xquery/functions/xmldb
+@dirrm eXist/src/org/exist/xquery/functions
+@dirrm eXist/src/org/exist/xquery/parser
+@dirrm eXist/src/org/exist/xquery/test
+@dirrm eXist/src/org/exist/xquery/value
+@dirrm eXist/src/org/exist/xquery
+@dirrm eXist/src/org/exist/xupdate/test/input
+@dirrm eXist/src/org/exist/xupdate/test/modifications
+@dirrm eXist/src/org/exist/xupdate/test/results
+@dirrm eXist/src/org/exist/xupdate/test
+@dirrm eXist/src/org/exist/xupdate
+@dirrm eXist/src/org/exist
+@dirrm eXist/src/org
+@dirrm eXist/src
+@dirrm eXist/thirdparty/jboss/conf/eXist
+@dirrm eXist/thirdparty/jboss/conf/samples
+@dirrm eXist/thirdparty/jboss/conf
+@dirrm eXist/thirdparty/jboss/lib
+@dirrm eXist/thirdparty/jboss/src/org/exist/jboss/exist
+@dirrm eXist/thirdparty/jboss/src/org/exist/jboss
+@dirrm eXist/thirdparty/jboss/src/org/exist
+@dirrm eXist/thirdparty/jboss/src/org
+@dirrm eXist/thirdparty/jboss/src/samples
+@dirrm eXist/thirdparty/jboss/src
+@dirrm eXist/thirdparty/jboss
+@dirrm eXist/thirdparty/tomcat5/bin
+@dirrm eXist/thirdparty/tomcat5/server/lib
+@dirrm eXist/thirdparty/tomcat5/server
+@dirrm eXist/thirdparty/tomcat5
+@dirrm eXist/thirdparty
+@dirrm eXist/tools/jetty/etc
+@dirrm eXist/tools/jetty/lib
+@dirrm eXist/tools/jetty/logs
+@dirrm eXist/tools/jetty/work
+@dirrm eXist/tools/jetty
+@dirrm eXist/tools/lib
+@dirrm eXist/tools/wrapper/bin
+@dirrm eXist/tools/wrapper/classes/org/exist/wrapper
+@dirrm eXist/tools/wrapper/classes/org/exist
+@dirrm eXist/tools/wrapper/classes/org
+@dirrm eXist/tools/wrapper/classes
+@dirrm eXist/tools/wrapper/conf
+@dirrm eXist/tools/wrapper/lib
+@dirrm eXist/tools/wrapper/logs
+@dirrm eXist/tools/wrapper/src/org/exist/wrapper
+@dirrm eXist/tools/wrapper/src/org/exist
+@dirrm eXist/tools/wrapper/src/org
+@dirrm eXist/tools/wrapper/src
+@dirrm eXist/tools/wrapper/work
+@dirrm eXist/tools/wrapper
+@dirrm eXist/tools
+@dirrm eXist/webapp/WEB-INF/classes
+@dirrm eXist/webapp/WEB-INF/data
+@dirrm eXist/webapp/WEB-INF/entities
+@dirrm eXist/webapp/WEB-INF/logs
+@dirrm eXist/webapp/WEB-INF
+@dirrm eXist/webapp/acronyms/resources
+@dirrm eXist/webapp/acronyms/styles
+@dirrm eXist/webapp/acronyms/stylesheets
+@dirrm eXist/webapp/acronyms
+@dirrm eXist/webapp/admin
+@dirrm eXist/webapp/api/org/dbxml/core/data
+@dirrm eXist/webapp/api/org/dbxml/core/filer
+@dirrm eXist/webapp/api/org/dbxml/core/indexer
+@dirrm eXist/webapp/api/org/dbxml/core
+@dirrm eXist/webapp/api/org/dbxml/xml
+@dirrm eXist/webapp/api/org/dbxml
+@dirrm eXist/webapp/api/org/exist/ant
+@dirrm eXist/webapp/api/org/exist/backup
+@dirrm eXist/webapp/api/org/exist/client
+@dirrm eXist/webapp/api/org/exist/cocoon
+@dirrm eXist/webapp/api/org/exist/collections/triggers
+@dirrm eXist/webapp/api/org/exist/collections
+@dirrm eXist/webapp/api/org/exist/dom
+@dirrm eXist/webapp/api/org/exist/http/realm
+@dirrm eXist/webapp/api/org/exist/http/servlets
+@dirrm eXist/webapp/api/org/exist/http/test
+@dirrm eXist/webapp/api/org/exist/http/webdav/methods
+@dirrm eXist/webapp/api/org/exist/http/webdav
+@dirrm eXist/webapp/api/org/exist/http
+@dirrm eXist/webapp/api/org/exist/jsp
+@dirrm eXist/webapp/api/org/exist/memtree/test
+@dirrm eXist/webapp/api/org/exist/memtree
+@dirrm eXist/webapp/api/org/exist/schema/internalaccess
+@dirrm eXist/webapp/api/org/exist/schema/test
+@dirrm eXist/webapp/api/org/exist/schema
+@dirrm eXist/webapp/api/org/exist/security
+@dirrm eXist/webapp/api/org/exist/soap
+@dirrm eXist/webapp/api/org/exist/source
+@dirrm eXist/webapp/api/org/exist/start
+@dirrm eXist/webapp/api/org/exist/storage/analysis
+@dirrm eXist/webapp/api/org/exist/storage/cache
+@dirrm eXist/webapp/api/org/exist/storage/io/test
+@dirrm eXist/webapp/api/org/exist/storage/io
+@dirrm eXist/webapp/api/org/exist/storage/report
+@dirrm eXist/webapp/api/org/exist/storage/serializers
+@dirrm eXist/webapp/api/org/exist/storage/store
+@dirrm eXist/webapp/api/org/exist/storage/sync
+@dirrm eXist/webapp/api/org/exist/storage
+@dirrm eXist/webapp/api/org/exist/util/hashtable/test
+@dirrm eXist/webapp/api/org/exist/util/hashtable
+@dirrm eXist/webapp/api/org/exist/util/serializer/encodings
+@dirrm eXist/webapp/api/org/exist/util/serializer
+@dirrm eXist/webapp/api/org/exist/util/test
+@dirrm eXist/webapp/api/org/exist/util
+@dirrm eXist/webapp/api/org/exist/xmldb/test/concurrent
+@dirrm eXist/webapp/api/org/exist/xmldb/test
+@dirrm eXist/webapp/api/org/exist/xmldb
+@dirrm eXist/webapp/api/org/exist/xmlrpc/test
+@dirrm eXist/webapp/api/org/exist/xmlrpc
+@dirrm eXist/webapp/api/org/exist/xquery/functions/request
+@dirrm eXist/webapp/api/org/exist/xquery/functions/text
+@dirrm eXist/webapp/api/org/exist/xquery/functions/transform
+@dirrm eXist/webapp/api/org/exist/xquery/functions/util
+@dirrm eXist/webapp/api/org/exist/xquery/functions/xmldb
+@dirrm eXist/webapp/api/org/exist/xquery/functions
+@dirrm eXist/webapp/api/org/exist/xquery/parser
+@dirrm eXist/webapp/api/org/exist/xquery/test
+@dirrm eXist/webapp/api/org/exist/xquery/value
+@dirrm eXist/webapp/api/org/exist/xquery
+@dirrm eXist/webapp/api/org/exist/xupdate/test
+@dirrm eXist/webapp/api/org/exist/xupdate
+@dirrm eXist/webapp/api/org/exist
+@dirrm eXist/webapp/api/org/xmldb/api/base
+@dirrm eXist/webapp/api/org/xmldb/api/modules
+@dirrm eXist/webapp/api/org/xmldb/api/reference/modules
+@dirrm eXist/webapp/api/org/xmldb/api/reference
+@dirrm eXist/webapp/api/org/xmldb/api/sdk/modules
+@dirrm eXist/webapp/api/org/xmldb/api/sdk
+@dirrm eXist/webapp/api/org/xmldb/api/tests
+@dirrm eXist/webapp/api/org/xmldb/api
+@dirrm eXist/webapp/api/org/xmldb
+@dirrm eXist/webapp/api/org
+@dirrm eXist/webapp/api/resources
+@dirrm eXist/webapp/api
+@dirrm eXist/webapp/apps/styles
+@dirrm eXist/webapp/apps
+@dirrm eXist/webapp/bin
+@dirrm eXist/webapp/examples/stylesheets
+@dirrm eXist/webapp/examples
+@dirrm eXist/webapp/library/resources
+@dirrm eXist/webapp/library/styles
+@dirrm eXist/webapp/library/stylesheets
+@dirrm eXist/webapp/library
+@dirrm eXist/webapp/mods/images
+@dirrm eXist/webapp/mods/styles
+@dirrm eXist/webapp/mods
+@dirrm eXist/webapp/resources/styles
+@dirrm eXist/webapp/resources
+@dirrm eXist/webapp/styles
+@dirrm eXist/webapp/stylesheets/sitemap
+@dirrm eXist/webapp/stylesheets/system/scripts
+@dirrm eXist/webapp/stylesheets/system
+@dirrm eXist/webapp/stylesheets
+@dirrm eXist/webapp/xquery/resources
+@dirrm eXist/webapp/xquery/styles
+@dirrm eXist/webapp/xquery/stylesheets
+@dirrm eXist/webapp/xquery
+@dirrm eXist/webapp/xse/stylesheets/all documents
+@dirrm eXist/webapp/xse/stylesheets/db/foc
+@dirrm eXist/webapp/xse/stylesheets/db
+@dirrm eXist/webapp/xse/stylesheets
+@dirrm eXist/webapp/xse
+@dirrm eXist/webapp
+@dirrm eXist
+sbin/eXist.sh
+sbin/eXistctl
+etc/rc.d/eXist.sh
+@dirrm eXist

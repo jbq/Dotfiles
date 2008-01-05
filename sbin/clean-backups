@@ -1,0 +1,178 @@
+#! /usr/bin/env python
+
+################################################################################
+# File:          clean-backups
+# Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+# Purpose:       Clean backups
+# Date Created:  2003-09-21 11:35:36
+# Revision:      $Id$
+################################################################################
+
+import caraldi, os.path, re, sys, stat, getopt, logging, filecmp
+from caraldi import DirStat
+
+class RegexpFilterDirStat(DirStat):
+    filter = '^.*$'
+    def __init__(self, regexp, dir):
+        self.filter = regexp
+        DirStat.__init__(self)
+        self.walk(dir)
+    def visitDirectory(self, file, stat):
+        pass
+    def visitFile(self, file, stat):
+        if (re.match(self.filter, file)):
+            self.matches.append(file)
+
+class BackupDirStat(DirStat):
+    def visitDirectory(self, file, stat):
+        pass
+    def visitFile(self, file, stat):
+        basename = os.path.basename(file)
+        dirname = os.path.dirname(file)
+        pattern = re.sub("-[0-9]{8}\..*$", "", basename)
+        self.matches.append(dirname + '/' + pattern)
+
+class UnlinkDirStat(DirStat):
+    def visitDirectory(self, file, stat):
+        pass
+    def visitLink(self, file, stat):
+        logger.info('unlink %s' % file)
+        if not prefs['dryrun']:
+            os.unlink(file)
+    def visitDanglingLink(self, file, stat):
+        self.visitLink(file, stat)
+
+class BackupManager:
+    prefs = {}
+    def __init__(self, prefs):
+        self.prefs = prefs
+
+        # Walk into backups and find patterns
+        bds = BackupDirStat(self.prefs['backupsdir'])
+        # Remove duplicates
+        patterns = caraldi.uniq(bds.matches)
+        # Sort patterns
+        patterns.sort()
+        logger.debug("patterns = %s" % patterns)
+
+        print 'Phase 1.  Remove duplicate backups'
+        for pattern in patterns:
+            # Keep only first of identical files
+            self.keepFirstOfIdenticalFiles(pattern)
+
+        print 'Phase 2.  Remove oldest backups'
+        for pattern in patterns:
+            # Remove oldest files
+            self.maxcount(pattern)
+
+        if self.prefs['lastbackupsdir']:
+            print 'Phase 3.  Create symlinks to newest backups'
+            # Walk into last-backups and remove every link
+            uds = UnlinkDirStat(self.prefs['lastbackupsdir'])
+
+            for pattern in patterns:
+                # Create a link to last file
+                logger.debug("Last for " + pattern)
+                self.last(pattern)
+
+    def findpatterns(self, pattern):
+        # Filter must include the pattern for date to restrict search to exact
+        # pattern
+        rgds = RegexpFilterDirStat("^" + pattern + "-[0-9]{8}", self.prefs['backupsdir'])
+        matches = rgds.matches
+        # Sort in alphabetical order to have latest files first
+        matches.sort()
+        logger.debug("matches = %s" % matches)
+        return matches
+
+
+    def keepFirstOfIdenticalFiles(self, pattern):
+        if prefs['skipIdentical']:
+            return
+
+        lastmatch=None
+
+        matches = self.findpatterns(pattern)
+
+        for match in matches:
+            # Delete file if same as previous
+            if lastmatch and filecmp.cmp(match, lastmatch):
+                logger.info('unlink %s' % match)
+                if not prefs['dryrun']:
+                    os.unlink(match)
+            else:
+                lastmatch = match
+
+    def maxcount(self, pattern):
+        matches = self.findpatterns(pattern)
+        count = len(matches)
+        logger.debug("Found %u items" % count)
+
+        if count > prefs['maxcount']:
+            # Delete first (count-max) files
+            matchesToDelete = matches[:(count-prefs['maxcount'])]
+            logger.debug("matchesToDelete = %s" % matchesToDelete)
+            for d in matchesToDelete:
+                logger.info('unlink %s' % d)
+                if not prefs['dryrun']:
+                    os.unlink(d)
+
+    def last(self, pattern):
+        matches = self.findpatterns(pattern)
+        logger.debug("Matches for last of " + pattern + ": " + str(matches))
+
+        # Create a symlink to latest backup
+        src = matches[-1]
+        lastsrc = re.sub("^" + self.prefs['backupsdir'], self.prefs['lastbackupsdir'], src)
+        logger.info('symlink %s %s' % (src, lastsrc))
+        if not prefs['dryrun']:
+            dir = os.path.dirname(lastsrc)
+            if not(os.path.exists(dir)):
+                os.makedirs(dir)
+            os.symlink(src, lastsrc)
+
+if __name__ == "__main__":
+    # TODO cmd-line options
+    prefs = {}
+    prefs['maxcount'] = 28
+    prefs['dryrun'] = 0
+    prefs['debug'] = 0
+    prefs['skipIdentical'] = 0
+
+    prefs['backupsdir'] = ''
+    prefs['lastbackupsdir'] = ''
+
+    # Get options
+    opts, args = getopt.getopt (sys.argv[1:], 'dc:', ['debug', 'count=', 'dry-run'])
+
+    # Copy options
+    for o, a in opts:
+        if o in ("-c", "--count"):
+            prefs['maxcount'] = int(a)
+        elif o in ("-d", "--debug"):
+            prefs['debug'] = 1
+        elif o in ("--dry-run"):
+            prefs['dryrun'] = 1
+
+    if (len(args) == 2):
+        prefs['backupsdir'] = args[0]
+        prefs['lastbackupsdir'] = args[1]
+    elif (len(args) == 1):
+        # lastbackupsdir is optional
+        prefs['backupsdir'] = args[0]
+    else:
+        print 'Usage:', os.path.basename(sys.argv[0]), 'backups-dir [last-backups-dir]'
+        print
+        print 'Options:'
+        print ' --count NUM    -c NUM    where NUM is the maximal backups count'
+        print ' --debug        -d        for debug-level logging'
+        sys.exit(1)
+
+    logger = caraldi.getLogger(sys.argv[0])
+
+    if prefs['debug']:
+        logger.setLevel(logging.DEBUG)
+
+    logger.debug("prefs = %s" % prefs)
+
+    BackupManager(prefs)

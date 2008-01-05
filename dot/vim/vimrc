@@ -1,0 +1,134 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
+" Purpose:       Define behaviour of ViM (versions 5 and 6 on Win32 and Unix)
+" Revision:      $Id: vimrc 1001 2004-10-15 20:04:56Z jbq $
+" Date Created:  2000-07-01 00:00:00
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Don't try to be Vi-compliant
+set nocompatible
+
+" Make the backspace key wrap lines
+set backspace=indent,eol,start
+
+" Show current mode at the bottom left corner
+set showmode
+
+" Show size of visual selection
+set showcmd
+
+" Make selections behave like a WYSIWYG editor
+" set selectmode=mouse,key,cmd
+
+" Don't beep... please!
+set visualbell
+
+" Ignore case when searching 
+set ignorecase
+
+" If pattern contains upper case characters, don't ignore case
+set smartcase
+
+" If we have colors
+if &t_Co > 2 || has("gui_running")
+    " Turn on syntax highlighting
+    syntax on
+
+    " Highlight search pattern
+    set hlsearch
+endif
+
+" Incremental search
+set incsearch
+
+" When switching buffers, do not warn if file is modified
+set hidden
+
+" show the line and column number of the cursor position
+set ruler
+
+" Show matching ()'s []'s {}'s
+set showmatch
+
+if version >= 600
+	" Load folding rules
+	runtime folding.vim
+endif
+
+" Load filetype-dependent auto commands
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    runtime autocommands.vim
+endif
+
+" Load CVS and SVN integration plugins
+let CVSCommandDiffOpt="wbBu"
+
+" ~/.vim/doc/ (if found) contains documentation
+" TODO how to get the location if this very file???
+" % refers to the file edited by the user, <sfile> does not work
+"exe "helptags " . "/home/jbq/usr/dot/vim/doc"
+
+" Ignore those files when performing file name completion on command line
+"set wildignore=*.class,*.java.html
+
+if version >= 600
+	" crontab -e does not work without that:
+	set backupcopy=yes
+endif
+
+" Do not backup files (Some Linux distros use vimrc_example.vim)
+set nobackup
+
+" save buffer list (% option) does not work
+" hilite search pattern on startup (h option removed)
+" save all lines in registers to avoid data loss ("50 option removed)
+set viminfo='20
+
+iab JBQ Jean-Baptiste Quenot
+iab jbqc jbq@caraldi.com
+iab jbqat jbq@anyware-tech.com
+iab jbqap jbq@apache.org
+"iab OSC Open Source Consulting
+"iab OSCi OpenSourceConsulting.info
+"iab ID Informatique Durable
+"iab IDi InformatiqueDurable.info
+iab Sop System.out.print
+iab Sopl System.out.println
+iab Sep System.err.print
+iab Sepl System.err.println
+iab Hreq HttpServletRequest
+iab Sreq ServletRequest
+iab Hres HttpServletResponse
+iab Sres ServletResponse
+iab ph priority="high"
+
+set history=200
+
+set nowrap
+set sidescroll=5
+
+if version >= 600
+	set listchars+=precedes:<,extends:>
+else
+	set listchars+=extends:>
+endif
+
+" Restore default number of lines checked for mode settings
+" Debian sets that option to zero for security
+set modelines=5
+
+dig Eu 8364
+
+" Used with gf (open file under cursor)
+set suffixesadd=.xml
+
+" Set background to dark to have nicer syntax highlighting
+set background=dark
+
+" Since 6.3, xml foldmethod syntax is disabled
+let g:xml_syntax_folding = 1
+
+" Use this rather than plain environment variable because of launching mutt-ng
+" in a terminal without real user login
+let $PARINIT = 'rTbgqR B=.?_A_a Q=_s>|'

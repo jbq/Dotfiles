@@ -1,0 +1,19 @@
+#! /bin/sh -e
+
+DEST=$HOME/usr
+
+test -z "$DEST" && exit 1
+
+export SVNROOT=svn+ssh://jbq@caraldi.com/usr/local/var/svn/public
+
+if test -d "$DEST" ; then
+    echo svn update "$DEST"
+    svn update "$DEST"
+else
+    echo svn co $SVNROOT/trunk "$DEST"
+    svn co $SVNROOT/trunk "$DEST"
+fi
+
+echo export PATH=$PATH:$DEST/bin
+echo "cd ~/var/files ; svn co -N svn+ssh://jbq@cottages.caraldi.com/usr/local/var/svn/private/trunk private ; svn up dot ; cd ~/usr/dot ; ln -sf ~/var/files/private/dot private"
+echo dotfiles

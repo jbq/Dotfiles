@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+
+import caraldi
+import re, os, sys
+
+class mp32pcm(caraldi.DirStat):
+    def visitFile(self, path, stat):
+        if re.search("\.mp3$", path):
+            print "Processing %s" % path
+            basename = re.sub("\.mp3$", "", path)
+            raw = basename + ".pcm"
+            caraldi.execute(["mpg321", "--cdr", raw, path])
+
+mp32pcm(".")

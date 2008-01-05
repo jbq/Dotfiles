@@ -1,0 +1,29 @@
+require 'rake'
+require 'rake/clean'
+
+CLEAN.include(['ebin/*.beam', '*.dump'])
+SRC = FileList['src/**/*.erl']
+BEAM = []
+
+SRC.each do |fn|
+  BEAM << dest = File.join('ebin', File.basename(fn).ext('beam'))
+  file dest do
+    sh "erlc -o ebin #{fn}" 
+  end
+end
+
+namespace :erlang do
+  desc "staring ermail" 
+    task :run => [:compile] do
+      sh("erl -noshell -pa ebin -s my_mod start")
+    end
+
+  desc "run tests" 
+  task :test => BEAM do
+    sh("erl -noshell -s test_my_mod test -s init stop")
+  end
+end
+
+task :default => [:compile]
+task :start => ['erlang:run']
+task :compile => BEAM

@@ -1,0 +1,24 @@
+#! /bin/sh -e
+
+DEST=$1
+LOGFILE="/tmp/`basename $0`.$$"
+
+cd "$DEST"
+
+if ! cvs -q update >$LOGFILE 2>&1 ; then
+    echo "Failed to cvs update '$DEST'"
+    echo
+    cat $LOGFILE
+    rm -f $LOGFILE
+    exit 1
+fi
+
+if ! cvs -q commit -m "Updated" >$LOGFILE 2>&1 ; then
+    echo "Failed to cvs commit '$DEST'"
+    echo
+    cat $LOGFILE
+    rm -f $LOGFILE
+    exit 1
+fi
+
+#rchmod ug

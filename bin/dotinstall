@@ -1,0 +1,40 @@
+#! /usr/bin/env python
+
+# TODO update link if it doesn't point to the right location
+
+import sys, os, os.path, shutil
+
+if (len(sys.argv) < 3):
+    print 'Usage:', os.path.basename(sys.argv[0]), 'fake', 'real', '[copy]'
+    sys.exit(1)
+
+fake = sys.argv[1]
+real = sys.argv[2]
+
+real = os.environ['HOME'] + '/usr/dot/' + real
+#print 'real =', real
+#print 'fake =', fake
+
+if os.path.exists(fake):
+    if len(sys.argv) < 4 and not os.path.islink(fake):
+        print 'Target', fake, 'exists, please remove it.'
+else:
+    if os.path.islink(fake):
+        print 'Target', fake, 'was a dangling link: automatically removed'
+        os.unlink(fake)
+    if (os.path.exists(real)):
+        if len(sys.argv) == 4:
+            print 'Copying', real, 'to', fake
+            shutil.copyfile(real, fake)
+        else:
+            print 'Linking', real, 'to', fake
+            dir = os.path.dirname(fake)
+            if (dir and not(os.path.exists(dir))):
+                print os.path.dirname(fake) + " does no exist: automatically created"
+                try:
+                    os.makedirs(os.path.dirname(fake))
+                except StandardError:
+                    print "Cannot create " + os.path.dirname(fake)
+	    os.symlink(real, fake)
+    else:
+        print 'Source', real, 'does not exist, skipping.'

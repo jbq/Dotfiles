@@ -1,0 +1,40 @@
+<fax lang='fr'>
+  <info>
+    <from>
+      <honorific>Monsieur</honorific>
+      <surname>Quenot</surname>
+      <firstname>Jean-Baptiste</firstname>
+
+      <location>
+        <address>Ombralh</address>
+        <postcode>31590</postcode>
+        <city>Gauré</city>
+      </location>
+
+      <phone>+33.561005290</phone>
+      <homePhone>+33.562183386</homePhone>
+      <email>jb.quenot@caraldi.com</email>
+    </from>
+
+    <to>
+      <honorific></honorific>
+      <firstname></firstname>
+      <surname></surname>
+      <orgname></orgname>
+      <faxNumber></faxNumber>
+    </to>
+
+    <subject></subject>
+    <pubdate></pubdate>
+    <pages>1</pages>
+  </info>
+
+  <greeting>Monsieur,</greeting>
+
+  <para></para>
+
+  <greeting>En vous remerciant par avance, je vous prie d'agréer, Monsieur,
+    l'expression de mes sentiments les meilleurs,</greeting>
+
+  <signature image='url(file:///local-home/jbq/usr/dot/secret/signature-bw.png)'>Jean-Baptiste Quenot</signature>
+</fax>

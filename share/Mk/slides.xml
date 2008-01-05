@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE slides PUBLIC "-//Norman Walsh//DTD Slides XML V3.3.0//EN"
+  "http://docbook.sourceforge.net/release/slides/3.3.1/schema/dtd/slides-full.dtd">
+
+<!--+
+    | Date Created:   ///
+    | Revision:       $Id$
+    +-->
+
+<slides lang='fr'>
+  <slidesinfo>
+    <title></title>
+
+    <author>
+      <surname>Quenot</surname>
+      <firstname>Jean-Baptiste</firstname>
+      <email>jbq@caraldi.com</email>
+    </author>
+
+    <copyright>
+      <year>2006</year>
+      <holder>Jean-Baptiste Quenot</holder>
+    </copyright>
+
+    <pubdate></pubdate>
+
+    <!--mediaobject>
+      <imageobject>
+        <imagedata fileref='mysza.gif'/>
+      </imageobject>
+    </mediaobject-->
+  </slidesinfo>
+
+  <foil>
+    <title></title>
+
+    <para/>
+  </foil>
+
+  <foilgroup>
+    <title></title>
+
+    <foil>
+      <title></title>
+
+      <para/>
+    </foil>
+  </foilgroup>
+</slides>

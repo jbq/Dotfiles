@@ -1,0 +1,1 @@
+cvs log $* | egrep "^revision " | head -2 | tail -1 | cut -d' ' -f2
