@@ -10,13 +10,13 @@ class ogg2mp3(caraldi.DirStat):
     def visitFile(self, path, stat):
         if re.search("\.ogg$", path):
             print "Processing %s" % path
-            basename = re.sub("\.mp3$", "", path)
+            basename = re.sub("\.ogg$", "", path)
             wav = "%s.wav" % basename
             dest = "%s.mp3" % basename
 
             args=["oggdec", "-o", wav, path]
             assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
-            args=["lame", "-r", wav, dest]
+            args=["lame", wav, dest]
             assertSuccess(os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args))
             os.unlink(wav)
             #args=["id3ren", "-copytagfrom=%s" % path, "-copyall", dest]
