@@ -66,7 +66,7 @@ export PYTHONPATH
 # Tell [Open]Jade to read the encoding of the XML document
 export SP_ENCODING=XML
 
-which gpg >& /dev/null && export GNUPGHOME="$HOME/usr/dot/secret/gnupg"
+which gpg >& /dev/null && export GNUPGHOME="$HOME/usr/dot/private/gnupg"
 
 if test -e /usr/local/share/xml/catalog ; then
     export XML_CATALOG_FILES=/usr/local/share/xml/catalog
