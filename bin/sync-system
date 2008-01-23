@@ -1,9 +1,8 @@
 #! /usr/bin/env python
 
 ################################################################################
-# File:          sync.hosts
 # Author:        Jean-Baptiste Quenot <jb.quenot@caraldi.com>
-# Purpose:       Backup a set of files
+# Purpose:       Copy a set of files preserving directory tree
 # Date Created:  2004-08-06 09:06:31
 # Revision:      $Id$
 ################################################################################
