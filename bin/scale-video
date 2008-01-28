@@ -7,6 +7,8 @@ ffmpeg = "ffmpeg"
 for video in sys.argv[1:]:
     basename = video[:-4]
     flv = "%s.flv" % basename
-    os.system("%s -y -i %s -ar 11025 -ab 32k %s" % (ffmpeg, video, flv))
+    cmd = "%s -y -i %s -ar 11025 -ab 32k -acodec pcm_s16le %s" % (ffmpeg, video, flv)
+    print cmd
+    os.system(cmd)
     avi = "%s.avi" % basename
     os.system("%s -y -i %s -sameq -ar 22050 %s" % (ffmpeg, video, avi))
