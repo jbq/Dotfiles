@@ -114,9 +114,9 @@ else
 	set listchars+=extends:>
 endif
 
-" Restore default number of lines checked for mode settings
-" Debian sets that option to zero for security
-set modelines=5
+" Restore modeline support
+" By default disabled on Debian/Ubuntu for security
+set modeline
 
 dig Eu 8364
 
