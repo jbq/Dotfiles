@@ -1,0 +1,62 @@
+Index: debian/changelog
+===================================================================
+--- debian/changelog	(revision 1334)
++++ debian/changelog	(working copy)
+@@ -1,3 +1,11 @@
++puppet (0.24.1-2) unstable; urgency=low
++
++  * Do not start puppet when installing, as the puppet master may not be
++    already configured.  Failure to start puppet breaks the installation.
++  * Fix puppetmaster 'run' directory to /var/lib/puppet/run
++
++ -- Jean-Baptiste Quenot <jbq@caraldi.com>  Wed,  9 Jan 2008 11:33:52 +0100
++
+ puppet (0.24.1-1) unstable; urgency=low
+ 
+   * New upstream release (Closes: #445626)
+Index: debian/rules
+===================================================================
+--- debian/rules	(revision 1334)
++++ debian/rules	(working copy)
+@@ -101,7 +101,7 @@
+ 	dh_installchangelogs -i CHANGELOG
+ 	dh_installdocs -i
+ 	dh_installinit -ppuppetmaster
+-	dh_installinit -ppuppet -- defaults 21
++	dh_installinit --no-start -ppuppet -- defaults 21
+ 	dh_installlogrotate -i
+ 	dh_compress -i
+ 	dh_fixperms -i
+Index: debian/puppetmaster.init
+===================================================================
+--- debian/puppetmaster.init	(revision 1334)
++++ debian/puppetmaster.init	(working copy)
+@@ -12,20 +12,22 @@
+ 
+ . /lib/lsb/init-functions
+ 
+-if [ ! -d /var/run/puppet ]; then
+-	rm -rf /var/run/puppet
+-	mkdir -p /var/run/puppet
++RUNDIR=/var/lib/puppet/run
++
++if [ ! -d $RUNDIR ]; then
++	rm -rf $RUNDIR
++	mkdir -p $RUNDIR
+ fi
+ 
+-chown puppet:puppet /var/run/puppet
++chown puppet:puppet $RUNDIR
+ 
+ start_puppetmaster() {
+-	start-stop-daemon --start --quiet --pidfile /var/run/puppet/$NAME.pid \
++	start-stop-daemon --start --quiet --pidfile $RUNDIR/$NAME.pid \
+ 		--startas $DAEMON -- $DAEMON_OPTS
+ }
+ 
+ stop_puppetmaster() {
+-	start-stop-daemon --stop --quiet --pidfile /var/run/puppet/$NAME.pid
++	start-stop-daemon --stop --quiet --pidfile $RUNDIR/$NAME.pid
+ }
+ 
+ case "$1" in

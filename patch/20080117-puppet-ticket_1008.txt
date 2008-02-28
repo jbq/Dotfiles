@@ -1,0 +1,15 @@
+diff --git a/lib/puppet/type/pfile/source.rb b/lib/puppet/type/pfile/source.rb
+index 1849d5a..296a254 100755
+--- a/lib/puppet/type/pfile/source.rb
++++ b/lib/puppet/type/pfile/source.rb
+@@ -247,6 +247,10 @@ module Puppet
+         end
+ 
+         def sync
++            unless described?
++                raise Puppet::Error, "No valid source found"
++            end
++
+             contents = @stats[:_remote_content] || get_remote_content()
+ 
+             exists = File.exists?(@resource[:path])

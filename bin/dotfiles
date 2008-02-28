@@ -46,6 +46,7 @@ if confirm "Setup standard dotfiles?" "n" ; then
     #dotinstall .slrn slrn
     #dotinstall .m2/settings.xml mvn-settings.xml
     dotinstall .devilspie devilspie
+    dotinstall .gitconfig gitconfig
 fi
 
 if confirm "Setup dotfiles for use with an X server?" "n" ; then

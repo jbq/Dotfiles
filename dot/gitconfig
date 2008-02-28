@@ -1,0 +1,10 @@
+[user]
+	email = jbq@nomao.com
+	name = Jean-Baptiste Quenot
+[rerere]
+	enabled = 1
+[giggle]
+	compact-mode = false
+	main-window-geometry = 1680x1025+0+0
+[branch]
+	autosetupmerge = 1

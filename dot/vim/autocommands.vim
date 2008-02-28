@@ -387,22 +387,12 @@ function UpdateDateCreated()
     normal `s
 endfunction
 
-if version >= 600
-    au BufWritePre * silent! call UpdateDateCreated()
-"   TODO Do not call that function because it fails in diff mode, and changes history
-"    au BufWritePre * silent! call UpdateFileName()
-    au BufWritePre * silent! call UpdateLastModified()
-    " Call first UpdateDocbookPubdate because it sets the language
-    au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
-    au BufWritePre *.xml silent! call UpdateDateTime()
-else
-"    au BufWritePre * call UpdateDateCreated()
-"    au BufWritePre * call UpdateFileName()
-    au BufWritePre * call UpdateLastModified()
-    " Call first UpdateDocbookPubdate because it sets the language
-    au BufWritePre *.xml,*.xmap call UpdateDocbookPubdate()
-    au BufWritePre *.xml call UpdateDateTime()
-endif
+au BufWritePre * silent! call UpdateDateCreated()
+au BufWritePre * silent! call UpdateLastModified()
+au BufWritePre * silent! call UpdateDateTimeText()
+" Call first UpdateDocbookPubdate because it sets the language
+au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
+au BufWritePre *.xml silent! call UpdateDateTime()
 
 function ContextDependentEditing()
     if match(expand("%:p"), "repos/wicket") != -1
