@@ -1,7 +1,8 @@
 #! /bin/sh -e
 
-# List all commits with git-cherry and exclude all the ones that are specified
-# in .gitcherry.  For each commit, invoke 'git show' to print the commit message
+# List all commits with git-cherry and exclude all the ones that are already
+# part of the change log of the current branch.  For each available commit,
+# invoke 'git show' to print the commit message.
 
 tempfile=$(tempfile -p $(basename $0))
 git log --pretty=format:%s | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
