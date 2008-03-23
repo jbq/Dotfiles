@@ -1,0 +1,21 @@
+#! /bin/sh -e
+
+# Write the commit in .gitcherry, stage .gitcherry for commit and call
+# git-cherry-pick.  If a conflict occurs, resolve it and call cherry-pick
+# --continue, in order to commit with the original author and commit message
+
+if test "$1" = "--continue" ; then
+    cont=1
+    commit=$(tail -1 .gitcherry)
+else
+    cont=0
+    commit=$1
+fi
+
+if test $cont = 0 ; then
+    echo $commit >> .gitcherry
+    git add .gitcherry
+    git cherry-pick -n $commit
+fi
+
+git log -1 $commit | git commit -F -

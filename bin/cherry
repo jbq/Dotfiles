@@ -1,0 +1,13 @@
+#! /bin/sh -e
+
+# List all commits with git-cherry and exclude all the ones that are specified
+# in .gitcherry.  For each commit, invoke 'git show' to print the commit message
+
+tempfile=$(tempfile -p $(basename $0))
+git log --pretty=format:%s | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
+
+for commit in $(git-cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile) ; do
+    git show -s --pretty=format:"%H %s" $commit
+done
+
+rm -f $tempfile
