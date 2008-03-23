@@ -1,5 +1,6 @@
 (debug)
 (if (is (window_class) "Kopete") (pin "TRUE"))
+(if (is (window_class) "Rhythmbox") (pin "TRUE"))
 (if (is (window_class) "Pidgin") (pin "TRUE"))
 (if (begin (is (application_name) "Galeon") (matches (window_role) "galeon-window-.*")) (begin (set_workspace 3) (geometry "+1280+0")))
 (if (is (window_class) "Skype") (pin "TRUE"))
