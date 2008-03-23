@@ -6,18 +6,20 @@
 #
 # FIXME find the root repository directory
 
+cherry_commit=$(git rev-parse --git-dir)/CHERRY_COMMIT
+
 if test "$1" = "--continue" ; then
     cont=1
-    commit=$(cat .git/CHERRY_COMMIT)
+    commit=$(cat $cherry_commit)
 else
     cont=0
     commit=$1
 fi
 
 if test $cont = 0 ; then
-    echo $commit > .git/CHERRY_COMMIT
+    echo $commit > $cherry_commit
     git cherry-pick -n $commit
 fi
 
 git log -1 $commit | git commit -F -
-rm -f .git/CHERRY_COMMIT
+rm -f $cherry_commit
