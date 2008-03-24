@@ -1,25 +1,21 @@
 #! /bin/sh -e
 
-# Record the commit id in .git/CHERRY_COMMIT, and call git-cherry-pick without
-# actually committing.  If a conflict occurs, resolve it and invoke this script
-# with --continue.  The commit log is then fed to git commit.
-#
-# FIXME find the root repository directory
+# Call git-cherry-pick without actually committing.  The commit log is written
+# to .git/MERGE_MSG in case of conflict, and fed to git commit otherwise.
 
-cherry_commit=$(git rev-parse --git-dir)/CHERRY_COMMIT
+merge_msg=$(git rev-parse --git-dir)/MERGE_MSG
 
-if test "$1" = "--continue" ; then
-    cont=1
-    commit=$(cat $cherry_commit)
+commit=$1
+
+if ! git cherry-pick -n $commit ; then
+    conflict=1
 else
-    cont=0
-    commit=$1
+    conflict=0
 fi
 
-if test $cont = 0 ; then
-    echo $commit > $cherry_commit
-    git cherry-pick -n $commit
-fi
+# Override merge message written git-cherry-pick
+git log -1 $commit > $merge_msg
 
-git log -1 $commit | git commit -F -
-rm -f $cherry_commit
+if test $conflict = 0 ; then
+    git commit -F $merge_msg
+fi
