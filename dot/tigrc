@@ -1,0 +1,2 @@
+bind main C !cherry-pick %(commit)
+bind main B !cherry-block %(commit)

@@ -34,6 +34,7 @@ if confirm "Setup standard dotfiles?" "n" ; then
     dotinstall .vimrc vim/vimrc
     dotinstall .inputrc inputrc
     dotinstall .screenrc screenrc
+    dotinstall .tigrc tigrc
 # TODO if multiple arguments, interactively offer a choice
 #    dotinstall .ssh/id_dsa.pub ssh/id_dsa.pub
 #    dotinstall .ssh/id_rsa.pub ssh/id_rsa.pub

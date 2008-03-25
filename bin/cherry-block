@@ -1,0 +1,9 @@
+#! /bin/sh -e
+
+block_file=$(git rev-parse --show-cdup).gitcherryblock
+
+commit=$1
+
+echo $commit >> $block_file
+git add $block_file
+( echo "Block commit $commit" ; git log -1 $commit ) | git commit -F -
