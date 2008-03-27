@@ -1,2 +1,2 @@
-bind main C !cherry-pick %(commit)
+bind main M !cherry-merge %(commit)
 bind main B !cherry-block %(commit)
