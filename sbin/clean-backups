@@ -11,6 +11,9 @@
 import caraldi, os.path, re, sys, stat, getopt, logging, filecmp
 from caraldi import DirStat
 
+file_extension_re="-[0-9]{8,}\..+$"
+
+# Find all files mathing the specified RE
 class RegexpFilterDirStat(DirStat):
     filter = '^.*$'
     def __init__(self, regexp, dir):
@@ -23,13 +26,15 @@ class RegexpFilterDirStat(DirStat):
         if (re.match(self.filter, file)):
             self.matches.append(file)
 
+# Walks the directory and for each file matching the RE "-[0-9]{8,}\..+$", add
+# the prefix the list of patterns
 class BackupDirStat(DirStat):
     def visitDirectory(self, file, stat):
         pass
     def visitFile(self, file, stat):
         basename = os.path.basename(file)
         dirname = os.path.dirname(file)
-        pattern = re.sub("-[0-9]{8}\..*$", "", basename)
+        pattern = re.sub(file_extension_re, "", basename)
         self.matches.append(dirname + '/' + pattern)
 
 class UnlinkDirStat(DirStat):
@@ -78,7 +83,7 @@ class BackupManager:
     def findpatterns(self, pattern):
         # Filter must include the pattern for date to restrict search to exact
         # pattern
-        rgds = RegexpFilterDirStat("^" + pattern + "-[0-9]{8}", self.prefs['backupsdir'])
+        rgds = RegexpFilterDirStat("^" + pattern + file_extension_re, self.prefs['backupsdir'])
         matches = rgds.matches
         # Sort in alphabetical order to have latest files first
         matches.sort()
