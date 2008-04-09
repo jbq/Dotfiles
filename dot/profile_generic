@@ -12,6 +12,7 @@ export HOSTNAME=$(hostname)
 # Remove extra info (Cygwin)
 UNAME=${UNAME%%_*}
 
+if test "$RECOMPUTE_PATH" != "0" ; then
 # /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
 # and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
 unset PATH
@@ -54,6 +55,7 @@ for dir in $DIRS ; do
     echo $dir | egrep 'jdk|jre|j2sdk|mingw32' > /dev/null && continue
     test -d $dir/bin && export PATH="$PATH:$dir/bin"
 done
+fi
 
 # If user belongs to group id 0 (wheel on FreeBSD, root on Linux), add superuser
 # directories to PATH.
