@@ -12,7 +12,7 @@
 
 HI='\033[1;31m'
 NOHI='\033[0;m'
-HIWORD=$(echo -e $HI'\\1'$NOHI)
+HIWORD=$(echo $HI'\\1'$NOHI)
 #sed -E -e "s/($1)/$HIWORD/g"
 
 # Check if first arg is an option
