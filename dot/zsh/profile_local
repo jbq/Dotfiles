@@ -33,32 +33,34 @@ if ! pgrep gdm > /dev/null ; then
     fi
 fi
 
-if ! type java >/dev/null 2>&1 ; then
-if ! test "$UNAME" = "FreeBSD" ; then
-    if test -z $JAVA_HOME ; then
-        JDK_LIST=(
-            /usr/local/linux-sun-jdk*(/N)
-            /usr/local/jdk*(/N)
-            /usr/java/jdk*(/N)
-            /usr/java/j2sdk*(/N)
-            /opt/sun-jdk*(/N)
-            /opt/blackdown-jdk*(/N)
-            /usr/local/j2sdk*(/N)
-        )
+if test "$NO_JAVA" != "1" ; then
+    if ! type java >/dev/null 2>&1 ; then
+        if ! test "$UNAME" = "FreeBSD" ; then
+            if test -z $JAVA_HOME ; then
+                JDK_LIST=(
+                /usr/local/linux-sun-jdk*(/N)
+                /usr/local/jdk*(/N)
+                /usr/java/jdk*(/N)
+                /usr/java/j2sdk*(/N)
+                /opt/sun-jdk*(/N)
+                /opt/blackdown-jdk*(/N)
+                /usr/local/j2sdk*(/N)
+                )
 
-        for JDK in $JDK_LIST ; do
-            if test -x $JDK/bin/java; then
-                export JAVA_HOME="$JDK"
+                for JDK in $JDK_LIST ; do
+                    if test -x $JDK/bin/java; then
+                        export JAVA_HOME="$JDK"
+                    fi
+                done
+
+                # Put that JDK first in path so that it overrides /usr/bin/java on
+                # Debian (alternatives system)
+                export PATH="$JAVA_HOME/bin:$PATH"
+            else
+                export PATH="$JAVA_HOME/bin:$PATH"
             fi
-        done
-
-        # Put that JDK first in path so that it overrides /usr/bin/java on
-        # Debian (alternatives system)
-        export PATH="$JAVA_HOME/bin:$PATH"
-    else
-        export PATH="$JAVA_HOME/bin:$PATH"
+        fi
     fi
-fi
 fi
 
 test "$UNAME" = "FreeBSD" && export LSCOLORS="gxfxcxdxbxegedabagacad"
