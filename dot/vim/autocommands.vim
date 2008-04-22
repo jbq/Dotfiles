@@ -34,7 +34,7 @@ au FileType mail set spell
 " - send-pr because Unicode PR shows a latin 1
 au FileType cvs,jproperties,sendpr set fileencoding=latin1
 
-au FileType apache,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,python,erlang call SetProgramEditing()
+au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,python,erlang call SetProgramEditing()
 
 " Properly format XML comments
 au FileType xml,docbk,ant,xslt,xsd setlocal comments=sr:<!--+,mb:\|,ex:+-->
