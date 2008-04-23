@@ -195,6 +195,15 @@ fi
 have man && alias man='PAGER=view-manpage man'
 have svn && alias svncommit='svn commit -m Updated'
 have cvs && alias cvscommit='cvs commit -m Updated'
+if have git ; then
+	alias gg='git gui'
+	alias gpr='git pull --rebase'
+	alias gps='git push'
+	alias gitcommit='git commit'
+fi
+have tig && alias ts='tig status'
+alias tf='tail -f'
+alias bubbrosc='python /usr/local/share/bubbros/display/Client.py -d pygame --fullscreen=yes'
 
 #files=( /mnt/usbkey/inbox/info-*(.N) )
 #if (( $#files )) ; then
@@ -273,21 +282,8 @@ source ~/.zkbd/$TERM-$VENDOR-$OSTYPE
 [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
 [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-history
 
-alias c21="cd $HOME/var/repos/cocoon/branches/BRANCH_2_1_X"
-alias c22="cd $HOME/var/repos/cocoon/trunk"
-alias w="cd $HOME/var/repos/wicket/trunk"
-alias ws="cd $HOME/var/repos/wicket-stuff/trunk"
-
-alias tf='tail -f'
-
 # cd completion will never select the parent directory
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
-
-# Ogg Vorbis
-alias ripit="ripit --noconfig -d /dev/acd0 -o . -c 1"
-alias pr="vim ~/var/files/private/www/webhome.caraldi.com/xml/projectinfo.xml"
-
-alias bubbrosc='python /usr/local/share/bubbros/display/Client.py -d pygame --fullscreen=yes'
 
 # Enable zsh completion cache
 zstyle ':completion:*' use-cache 
