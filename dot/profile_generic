@@ -12,7 +12,7 @@ export HOSTNAME=$(hostname)
 # Remove extra info (Cygwin)
 UNAME=${UNAME%%_*}
 
-if test "$RECOMPUTE_PATH" != "0" ; then
+if ! test "$RECOMPUTE_PATH" = "0" ; then
 # /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
 # and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
 unset PATH
@@ -32,6 +32,14 @@ for dir in \
         #echo Added $dir to PATH
     fi
 done
+
+#	if groups | cut -d: -f3,4 | egrep "0:[^:]*$(id -un)[^:]*" >& /dev/null; then
+    test -d /sbin			&& export PATH="/sbin:$PATH"
+    test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
+    test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
+    test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
+    test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
+#	fi
 
 # Daemons should be started with an empty environment for secure and sane
 # operation.  Do not include rc.d dirs here!
@@ -79,14 +87,6 @@ passwords() {
         /usr/sbin/pw usershow -a
     fi
 }
-
-#	if groups | cut -d: -f3,4 | egrep "0:[^:]*$(id -un)[^:]*" >& /dev/null; then
-    test -d /sbin			&& export PATH="/sbin:$PATH"
-    test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
-    test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
-    test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
-    test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
-#	fi
 
 # with zsh:
 # $ which nonexistent 2>/dev/null

@@ -10,6 +10,6 @@ export USER_DOTFILES=$HOME/usr/dot
 . $USER_DOTFILES/zsh/rc_generic
 . $USER_DOTFILES/zsh/rc_local
 
-for file in $USER_DOTFILES/private/*.profile ; do
+for file in $USER_DOTFILES/private/*.rc(N) ; do
 	test -f $file && . $file
 done
