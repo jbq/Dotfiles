@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name="cleanbackups",
-        version="1.0.1",
+        version="1.0.2",
         description="Clean backups",
         license = 'BSD',
         author="Jean-Baptiste Quenot",

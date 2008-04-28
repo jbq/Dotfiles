@@ -1,4 +1,11 @@
-cleanbackups (1.0.1) gutsy; urgency=low
+cleanbackups (1.0.2) stable; urgency=low
+
+  * Allow more than 8 digits in file extension, and put the RE definition in a
+    central place
+
+ -- Jean-Baptiste Quenot <jbq@caraldi.com>  Mon, 28 Apr 2008 14:58:07 +0200
+
+cleanbackups (1.0.1) stable; urgency=low
 
   * Handle dangling links when cleaning last backups
 
