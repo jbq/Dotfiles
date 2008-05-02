@@ -1,2 +1,3 @@
+bind main N !git cherry-pick -n %(commit)
 bind main M !cherry-merge %(commit)
 bind main B !cherry-block %(commit)
