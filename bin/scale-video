@@ -6,9 +6,22 @@ ffmpeg = "ffmpeg"
 
 for video in sys.argv[1:]:
     basename = video[:-4]
+
+    thumbnail = "%s.JPG" % basename
+    if not(os.path.exists(thumbnail)):
+        cmd = "%s -y -i %s -vcodec mjpeg -vframes 1 -an -f rawvideo -s 640x480 -ss 10 %s" % (ffmpeg, video, thumbnail)
+        print cmd
+        os.system(cmd)
+
     flv = "%s.flv" % basename
     cmd = "%s -y -i %s -ar 11025 -ab 32k -acodec pcm_s16le %s" % (ffmpeg, video, flv)
     print cmd
     os.system(cmd)
-    avi = "%s.avi" % basename
-    os.system("%s -y -i %s -sameq -ar 22050 %s" % (ffmpeg, video, avi))
+
+    video_extension = video[-3:]
+    print video_extension
+    if not(video_extension == "avi"):
+        avi = "%s.avi" % basename
+        cmd = "%s -y -i %s -sameq -ar 22050 %s" % (ffmpeg, video, avi)
+        print cmd
+        os.system(cmd)
