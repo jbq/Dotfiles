@@ -16,6 +16,8 @@ def auto_rotate(dir):
         if not(file.endswith(".jpg") or file.endswith(".JPG")):
             continue
         info = get_info(file)
+        if not(len(info) >= 3):
+            continue
 
         width = info[0]
         height = info[1]
