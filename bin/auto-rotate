@@ -3,37 +3,52 @@
 import os, sys, re
 
 def get_info(file):
-    identify = os.popen("""identify -format "%%w %%h %%[EXIF:Orientation]" %s""" % file)
+    # FIXME escape file name apostrophes
+    cmd = """identify -format "%%w %%h %%[EXIF:Orientation]" '%s'""" % file
+    #print cmd
+    identify = os.popen(cmd)
     info = identify.read().rstrip().split(" ")
-    #os.spawnv(os.P_WAIT, "/usr/bin/env", ["env", "identify", "-format", "%[EXIF:Orientation]", file])
     identify.close()
     return info
 
-def auto_rotate(dir):
-    dirs = os.listdir(dir)
-    dirs.sort()
-    for file in dirs:
-        if not(file.endswith(".jpg") or file.endswith(".JPG")):
-            continue
-        info = get_info(file)
-        if not(len(info) >= 3):
-            continue
+def auto_rotate(entry):
+    if os.path.isdir(entry):
+        dirs = os.listdir(entry)
+        dirs.sort()
+        for file in dirs:
+            auto_rotate(file)
+    else:
+        auto_rotate_file(entry)
 
-        width = info[0]
-        height = info[1]
-        orientation = info[2]
+def auto_rotate_file(file):
+    if not(file.endswith(".jpg") or file.endswith(".JPG")):
+        return
+    info = get_info(file)
+    if not(len(info) >= 3):
+        return
 
-        # check image dimensions to verify if rotate is needed
-        if (width < height) or orientation == "1":
-            continue
+    width = info[0]
+    height = info[1]
+    orientation = info[2]
 
-        if orientation == "8":
-            os.system("mogrify -rotate -90 %s" % file)
-            print "%s -90" % file
-        elif orientation == "6":
-            os.system("mogrify -rotate +90 %s" % file)
-            print "%s +90" % file
-        else:
-            print >> sys.stderr, "Unknown orientation: '%s'" % orientation
+    # check image dimensions to verify if rotate is needed
+    if (width < height) or orientation == "1":
+        return
 
-auto_rotate(os.getcwd())
+    if orientation == "8":
+        # FIXME escape file name apostrophes
+        os.system("mogrify -rotate -90 '%s'" % file)
+        print "%s -90" % file
+    elif orientation == "6":
+        # FIXME escape file name apostrophes
+        os.system("mogrify -rotate +90 '%s'" % file)
+        print "%s +90" % file
+    else:
+        print >> sys.stderr, "Unknown orientation: '%s'" % orientation
+
+if len(sys.argv) == 0:
+    dir = os.getcwd()
+    auto_rotate(dir)
+else:
+    for dir in sys.argv:
+        auto_rotate(dir)
