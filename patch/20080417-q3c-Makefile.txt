@@ -1,0 +1,28 @@
+--- q3c/Makefile	2007-12-21 14:10:53.000000000 +0100
++++ ../../postgresql-8.3-8.3.0-1~bpo40+1/build-tree/postgresql-8.3.0/contrib/q3c/Makefile	2008-03-17 17:08:14.000000000 +0100
+@@ -12,20 +12,15 @@
+ 			tests/join.out tests/cone.out tests/ellipse.out \
+ 			gen_data
+ 
+-ifdef NO_PGXS
++ifdef USE_PGXS
++PG_CONFIG = pg_config
++PGXS := $(shell $(PG_CONFIG) --pgxs)
++include $(PGXS)
++else
+ subdir = contrib/q3c
+ top_builddir = ../..
+ include $(top_builddir)/src/Makefile.global
+ include $(top_srcdir)/contrib/contrib-global.mk
+-else
+-PGXS := $(shell pg_config --pgxs)
+-ifndef PGXS
+-$(error You should have `pg_config` program in your PATH or compile Q3C with\
+-'make NO_PGXS=1' \
+-after putting it in the contrib subdirectory of Postgres sources)
+-endif
+-include $(PGXS)
+-
+ endif
+ 
+ prepare: prepare.o q3cube.o q3c_poly.o

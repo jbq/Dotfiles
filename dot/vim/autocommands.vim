@@ -23,7 +23,7 @@ function SetCustomFileType()
     endif
 endf
 
-au BufNewFile,BufRead *.xml,*.html,*.js call SetCustomFileType()
+au BufNewFile,BufRead *.xml,*.html,*.js,*.kml,*.rss call SetCustomFileType()
 
 au FileType xml,docbk,ant,xslt,xsd,html,tex,jsp,xquery call SetMarkupEditing()
 au FileType cvs,svn,mail,sendpr call SetTextEditing()

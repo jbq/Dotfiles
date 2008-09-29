@@ -12,7 +12,12 @@
 if pgrep -u $USER vim >/dev/null ; then
     # Change directory
     gvim --remote-send "<C-\><C-N>:cd $PWD<CR>"
-    exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
+    #exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
+    if test `echo $* | wc -w` = 1 ; then
+        exec gvim --remote-send "<C-\><C-N>:tabnew $*<CR>"
+    else
+        exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
+    fi
 else
     exec gvim $*
 fi

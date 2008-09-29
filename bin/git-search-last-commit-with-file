@@ -1,0 +1,2 @@
+#! /bin/sh
+git log --pretty=format:%H | xargs -i% echo "git ls-tree % $1 | grep blob && exit 1" | sh
