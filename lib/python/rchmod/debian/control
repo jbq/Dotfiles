@@ -6,6 +6,6 @@ Build-Depends: debhelper (>= 5.0.37.2), cdbs (>= 0.4.43), python-support (>= 0.6
 Standards-Version: 3.7.2
 
 Package: python-rchmod
-Architecture: any
+Architecture: all
 Depends: ${python:Depends}
 Description: rchmod is a program that allows resetting file permissions recursively, taking care of setting different modes for files and directories.

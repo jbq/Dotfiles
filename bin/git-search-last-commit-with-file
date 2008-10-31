@@ -1,2 +1,24 @@
-#! /bin/sh
-git log --pretty=format:%H | xargs -i% echo "git ls-tree % $1 | grep blob && exit 1" | sh
+#! /usr/bin/env python
+
+import sys, os, subprocess
+
+filename = sys.argv[1]
+# class Popen(args, bufsize=0, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=False, shell=False, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0)
+git_log = subprocess.Popen(["git", "log", "--pretty=format:%H"], 0, None, None, subprocess.PIPE)
+
+while 1:
+    line = git_log.stdout.readline()
+
+    if line == None:
+        break
+
+    commit = line.rstrip()
+    git_ls_tree = subprocess.Popen(["git", "ls-tree", commit, filename], 0, None, None, subprocess.PIPE)
+    git_ls_tree.wait()
+    git_ls_tree_output = git_ls_tree.stdout.read()
+
+    if git_ls_tree_output.find("blob") != -1:
+        print commit
+        sys.exit(0)
+
+sys.exit(1)
