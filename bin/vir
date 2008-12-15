@@ -9,7 +9,7 @@
 # annoying, happily --remote-send does not clear error messages.
 #
 
-if pgrep -u $USER vim >/dev/null ; then
+if test "$DISPLAY" != ":0.0" || pgrep -u $USER vim >/dev/null ; then
     # Change directory
     gvim --remote-send "<C-\><C-N>:cd $PWD<CR>"
     #exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
