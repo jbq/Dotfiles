@@ -389,7 +389,7 @@ endfunction
 
 au BufWritePre * silent! call UpdateDateCreated()
 au BufWritePre * silent! call UpdateLastModified()
-au BufWritePre * silent! call UpdateDateTimeText()
+au BufWritePre *.txt silent! call UpdateDateTimeText()
 " Call first UpdateDocbookPubdate because it sets the language
 au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
 au BufWritePre *.xml silent! call UpdateDateTime()
