@@ -272,7 +272,7 @@ bindkey "^R" history-incremental-search-backward
 
 autoload -U zkbd
 
-[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
+#[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
 source ~/.zkbd/$TERM-$VENDOR-$OSTYPE
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
