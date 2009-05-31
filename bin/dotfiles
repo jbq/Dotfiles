@@ -22,6 +22,8 @@ confirm() {
     fi
 }
 
+export PATH="$PATH:$HOME/usr/bin"
+
 if confirm "Setup standard dotfiles?" "n" ; then
 #    dotinstall .bash_profile bash/profile
 #    dotinstall .bashrc bash/rc
