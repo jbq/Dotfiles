@@ -34,7 +34,7 @@ au FileType mail set spell
 " - send-pr because Unicode PR shows a latin 1
 au FileType cvs,jproperties,sendpr set fileencoding=latin1
 
-au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,python,erlang call SetProgramEditing()
+au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang call SetProgramEditing()
 
 " Properly format XML comments
 au FileType xml,docbk,ant,xslt,xsd setlocal comments=sr:<!--+,mb:\|,ex:+-->
@@ -387,12 +387,12 @@ function UpdateDateCreated()
     normal `s
 endfunction
 
-au BufWritePre * silent! call UpdateDateCreated()
-au BufWritePre * silent! call UpdateLastModified()
-au BufWritePre *.txt silent! call UpdateDateTimeText()
+"au BufWritePre * silent! call UpdateDateCreated()
+"au BufWritePre * silent! call UpdateLastModified()
+"au BufWritePre *.txt silent! call UpdateDateTimeText()
 " Call first UpdateDocbookPubdate because it sets the language
-au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
-au BufWritePre *.xml silent! call UpdateDateTime()
+"au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
+"au BufWritePre *.xml silent! call UpdateDateTime()
 
 function ContextDependentEditing()
     if match(expand("%:p"), "repos/wicket") != -1

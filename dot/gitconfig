@@ -1,6 +1,6 @@
 [user]
 	email = jbq@nomao.com
-	name = Jean-Baptiste Quenot
+#	name = Jean-Baptiste Quenot
 [rerere]
 	enabled = 1
 [giggle]
@@ -9,3 +9,6 @@
 	main-window-maximized = false
 [core]
 	whitespace = nowarn
+	excludesfile = /home/jbq/.gitignore
+[push]
+	default = tracking
