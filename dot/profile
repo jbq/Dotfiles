@@ -27,7 +27,7 @@
 
 # Apple's Terminal does not set DISPLAY when X is running
 # Set it to :0.0 if X is running
-test "$TERM_PROGRAM" = "Apple_Terminal" && psgrep xinit >/dev/null && export DISPLAY=:0.0
+#test "$TERM_PROGRAM" = "Apple_Terminal" && psgrep xinit >/dev/null && export DISPLAY=:0.0
 
 # Setting for applications linked against S-Lang Terminal Library
 export COLORFGBG="default;default;0"
