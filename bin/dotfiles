@@ -55,7 +55,7 @@ fi
 if confirm "Setup dotfiles for use with an X server?" "n" ; then
     dotinstall .gvimrc vim/gvimrc
     dotinstall .urlview urlview
-    dotinstall .xinitrc xinitrc
+#    dotinstall .xinitrc xinitrc
     dotinstall .mplayer/config mplayer.conf
 #    dotinstall .gnome2/nautilus-scripts nautilus-scripts
     dotinstall .dia/sheets dia/sheets
