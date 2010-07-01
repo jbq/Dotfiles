@@ -18,20 +18,20 @@ test -f $USER_DOTFILES/profile.$HOSTNAME && source $USER_DOTFILES/profile.$HOSTN
 # hang
 
 # If gdm is running, don't set the locale
-if ! pgrep gdm > /dev/null ; then
-    if test "$UNAME" = "FreeBSD" ; then
-        # Mutt-NG requires ncurses with wide-character support to work properly in utf-8
-        LOCALE="fr_FR.UTF-8"
-        #LOCALE="fr_FR.ISO8859-1"
-    elif test "$UNAME" = "Linux" ; then
-        LOCALE="fr_FR.UTF-8"
-    fi
-
-    if test -n "$LOCALE" ; then
-        export LC_CTYPE=$LOCALE
-        export LC_TIME=$LOCALE
-    fi
-fi
+#if ! pgrep gdm > /dev/null ; then
+#    if test "$UNAME" = "FreeBSD" ; then
+#        # Mutt-NG requires ncurses with wide-character support to work properly in utf-8
+#        LOCALE="fr_FR.UTF-8"
+#        #LOCALE="fr_FR.ISO8859-1"
+#    elif test "$UNAME" = "Linux" ; then
+#        LOCALE="fr_FR.UTF-8"
+#    fi
+#
+#    if test -n "$LOCALE" ; then
+#        export LC_CTYPE=$LOCALE
+#        export LC_TIME=$LOCALE
+#    fi
+#fi
 
 if test "$NO_JAVA" != "1" ; then
     if ! type java >/dev/null 2>&1 ; then

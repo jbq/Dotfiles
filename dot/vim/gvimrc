@@ -50,7 +50,7 @@ elseif v:lang == "fr_FR"
     unmenu! Syntaxe
 endif
 
-source $HOME/usr/dot/private/gvimrc
+silent! source $HOME/usr/dot/private/gvimrc
 
 inoremenu &Insert.DocBook.Application.DocBook <application>DocBook</application>
 inoremenu &Insert.DocBook.Application.Cron <application>cron</application>
