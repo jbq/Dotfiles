@@ -179,12 +179,12 @@ have screen && alias screen='TERM=vt220 screen'
 #have screen && complete -F _screen -o default s
 
 # On Linux, disable bitmapped fonts for onscreen rendering
-have xset && (
-    if test -n "$DISPLAY" -a "$UNAME" = "Linux" ; then
-        xset -fp "/usr/lib/X11/fonts/Type1" 2>/dev/null
-        xset fp rehash
-    fi
-)
+#have xset && (
+#    if test -n "$DISPLAY" -a "$UNAME" = "Linux" ; then
+#        xset -fp "/usr/lib/X11/fonts/Type1" 2>/dev/null
+#        xset fp rehash
+#    fi
+#)
 
 if have mixer ; then
     test -f /dev/dsp1.0 && alias mixer='mixer -f /dev/dsp1.0'
