@@ -64,7 +64,6 @@ have screen	&& alias s=screen
 have cvs	&& alias cvs='cvs -q'
 have BitchX	&& alias bx='BitchX'
 have cvs2cl	&& alias cvs2cl="cvs2cl -t -b"
-have pgrep	&& alias pgrep="pgrep -l"
 have git	&& alias gg="git gui&; disown %git"
 
 # Custom commands
