@@ -4,11 +4,18 @@
 # part of the change log of the current branch.  For each available commit,
 # invoke 'git show' to print the commit message.
 
-block_file=$(git rev-parse --show-cdup).gitcherryblock
-tempfile=$(tempfile -p $(basename $0))
-git log --pretty=format:%s | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
+export PAGER=""
 
-for commit in $(git-cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile -f $block_file) ; do
+block_file=$(git rev-parse --show-cdup).gitcherryblock
+
+if ! test -f $block_file ; then
+    touch $block_file
+fi
+
+tempfile=$(tempfile -p $(basename $0))
+git log --pretty=format:%b $1 | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
+
+for commit in $(git cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile -f $block_file) ; do
     git show -s --pretty=format:"%H %s%n" $commit
 done
 
