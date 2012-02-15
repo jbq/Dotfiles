@@ -1,6 +1,0 @@
-cd /usr/local/resin3
-rm -rf $(find . -path '*/WEB-INF/work')
-rm -rf $(find . -path '*/WEB-INF/classes')
-find . -type d -empty -delete
-
-remove installed webapps (%.war from dist)

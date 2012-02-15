@@ -1,5 +1,0 @@
-@comment $FreeBSD: ports/www/cocoon/pkg-plist,v 1.13 2006/05/05 16:35:04 hq Exp $
-sbin/cocoonctl
-cocoon/cocoon.sh
-@dirrm cocoon/tools
-@dirrm cocoon

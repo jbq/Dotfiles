@@ -1,5 +1,0 @@
-* ant build failed: return non-null error code
-* some cocoonctl functionalities overlap with rc-ng?
-* build phrase for options like: (implies BATIK, FOP)
-* Oliver Eikemeier <eikemeier@fillmore-labs.com>: use USE_RC_SUBR=yes and $SED -s,%%RC_SUBR%%,${RC_SUBR},g for your script
-* patch for allowing custom ${PORT}

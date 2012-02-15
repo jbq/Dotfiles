@@ -1,5 +1,0 @@
-* /usr/local/share/xsl/slides: only xsl subdir
-* /usr/local/share/xml/slides: the rest
-* html/slides-common.xsl: patch remove VERSION
-* include catalog.xml?
-* examples: fix all doctypes

@@ -1,5 +1,0 @@
-share/xsl/website/VERSION
-@unexec rm -f %D/share/xsl/website/catalog 2>&1 >/dev/null || true
-@dirrm share/xsl/website
-@unexec test -d %B/share/xsl
-%%PORTDOCS%%@dirrm %%EXAMPLESDIR%%
