@@ -15,16 +15,6 @@ let g:PHP_autoformatcomment = 0
 " Load plugin detection scripts and smart indentation scripts
 filetype plugin indent on
 
-function SetCustomFileType()
-    if match(expand("%:p"), "/home/jbq/var/files/nomao") != -1 || match(expand("%:p"), "/home/jbq/nomao") != -1
-        filetype off
-        set ft=php
-        filetype on
-    endif
-endf
-
-au BufNewFile,BufRead *.xml,*.html,*.js,*.kml,*.rss call SetCustomFileType()
-
 au FileType xml,docbk,ant,xslt,xsd,html,tex,jsp,xquery call SetMarkupEditing()
 au FileType cvs,svn,mail,sendpr call SetTextEditing()
 au FileType mail set spell
