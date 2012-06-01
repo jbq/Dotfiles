@@ -25,16 +25,10 @@ highlight Normal guifg=lightgray
 if has ("gui_win32")
     "set guifont=Courier_New:h9
 	set guifont=Lucida_Console:h10:cANSI
+elseif has ("gui_mac")
+    "set guifont=Courier_New:h9
+	set guifont=Monaco:h13
 else
-    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso8859-1
-    " same font with euro sign (latin 9 character set)
-    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso8859-15
-    "set guifont=-adobe-courier-medium-r-normal-*-*-100-*-*-m-*-iso10646-1
-    "au EncodingChanged * set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso10646-1
-
-    " GTK
-    "set guifont=-misc-fixed-medium-r-semicondensed-*-*-120-*-*-c-*-iso10646-1
-    " GTK2
     set guifont=Monospace\ 10
 endif
 
