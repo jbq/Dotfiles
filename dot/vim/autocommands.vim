@@ -24,7 +24,7 @@ au FileType mail set spell
 " - send-pr because Unicode PR shows a latin 1
 au FileType cvs,jproperties,sendpr set fileencoding=latin1
 
-au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang call SetProgramEditing()
+au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe call SetProgramEditing()
 
 " Properly format XML comments
 au FileType xml,docbk,ant,xslt,xsd setlocal comments=sr:<!--+,mb:\|,ex:+-->
@@ -35,6 +35,7 @@ au FileType xml,docbk,ant,xslt,xsd setlocal foldmethod=syntax
 au FileType xml runtime dbhelper.vim
 au BufRead *.txt call SetTextEditing()
 au BufRead *.jad setlocal ft=java
+au BufRead *.hx setlocal ft=haxe
 
 function NormalizeQuotes()
     execute('%s:>>:> >:g')
