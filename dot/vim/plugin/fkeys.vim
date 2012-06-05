@@ -27,13 +27,7 @@ function Make()
     endif
 
     if file_readable("Makefile")
-        " My Makefiles are always BSD Makefiles, so use plain make on BSD, and
-        " pmake on Linux
-        if uname =~ "Linux"
-            set makeprg=pmake
-        else
-            set makeprg=make
-        endif
+        set makeprg=make
 
         make
     endif
