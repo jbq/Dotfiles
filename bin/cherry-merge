@@ -14,7 +14,7 @@ else
 fi
 
 # Override merge message written git-cherry-pick
-git show -s --pretty=format:"Merge commit %h: %s%n%ncommit %H%nAuthor: %an%nDate:   %ad%n" $commit > $merge_msg
+git show -s --pretty=format:"Merge commit %h: [%an] %s%n%n%b%n%ncommit %H%nAuthor: %an%nDate:   %ad%n" $commit > $merge_msg
 
 if test $conflict = 0 ; then
     git commit -F $merge_msg
