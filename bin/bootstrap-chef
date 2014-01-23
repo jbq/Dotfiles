@@ -1,0 +1,10 @@
+#! /bin/sh -e
+
+apt-get update
+apt-get install curl
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
+mkdir /etc/chef
+
+cat > /etc/chef/solo.rb << EOF
+cookbook_path "/home/jbq/Dropbox/Ops/cookbooks"
+EOF

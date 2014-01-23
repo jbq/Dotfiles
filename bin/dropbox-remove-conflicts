@@ -1,0 +1,11 @@
+#! /usr/bin/python
+import sys, shutil
+
+while True:
+    line = sys.stdin.readline()
+    if line == '':
+        break
+    line = line.rstrip()
+    old_file = line
+    new_file = line.replace(' (Copie en conflit de Jean-Baptiste Quenot 2013-12-20)', '')
+    shutil.move(old_file, new_file)
