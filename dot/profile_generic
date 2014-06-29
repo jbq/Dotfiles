@@ -39,6 +39,7 @@ done
     test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
     test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
     test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
+    export PATH=$(cd $(which gem)/..; pwd):$PATH
 #	fi
 
 # Daemons should be started with an empty environment for secure and sane
