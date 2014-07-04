@@ -33,24 +33,11 @@ for dir in \
     fi
 done
 
-#	if groups | cut -d: -f3,4 | egrep "0:[^:]*$(id -un)[^:]*" >& /dev/null; then
-    test -d /sbin			&& export PATH="/sbin:$PATH"
-    test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
-    test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
-    test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
-    test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
-    export PATH=$(cd $(which gem)/..; pwd):$PATH
-#	fi
-
-# Daemons should be started with an empty environment for secure and sane
-# operation.  Do not include rc.d dirs here!
-#test -d /etc/rc.d && export PATH="/etc/rc.d:$PATH"
-#test -d /usr/local/etc/rc.d && export PATH="/usr/local/etc/rc.d:$PATH"
-test -d /home/vpopmail && export PATH="/home/vpopmail/bin:$PATH"
-
-# Test for Fink
-# Changes PATH CLASSPATH PERL5LIB and other variables
-test -d /sw/bin && . /sw/bin/init.sh
+test -d /sbin			&& export PATH="/sbin:$PATH"
+test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
+test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
+test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
+test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
 
 # Add path to applications installed in /usr/local
 # For Linux especially ;-)
