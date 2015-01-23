@@ -79,7 +79,7 @@ function MyReformatMail(cols)
 endfunction
 
 function SetEditing()
-    call SetFileFormat()
+    "call SetFileFormat()
     setlocal expandtab
     setlocal autoindent
     if ((! exists("&tw")) || (&tw == 0))
