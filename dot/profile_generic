@@ -39,6 +39,9 @@ test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
 test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
 test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
 
+GEMDIR=$(which gem)/..
+test -d $GEMDIR && export PATH=$(cd $GEMDIR; pwd):$PATH
+
 # Add path to applications installed in /usr/local
 # For Linux especially ;-)
 # Note: Darwin find does not understand maxdepth so use ls

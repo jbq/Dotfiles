@@ -118,3 +118,5 @@ let g:xml_syntax_folding = 1
 " Use this rather than plain environment variable because of launching mutt-ng
 " in a terminal without real user login
 let $PARINIT = 'rTbgqR B=.?_A_a Q=_s>|'
+
+execute pathogen#infect()

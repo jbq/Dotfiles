@@ -9,4 +9,5 @@ augroup filetypedetect
 au! BufNewFile,BufRead *.xq setf xquery
 au BufNewFile,BufRead muttng-*-\w\+ setf mail
 au BufNewFile,BufRead *.xmap setf xml
+au BufNewFile,BufRead *.thrift setf thrift
 augroup END
