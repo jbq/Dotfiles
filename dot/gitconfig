@@ -1,14 +1,15 @@
-[user]
-	email = jbq@caraldi.com
-	name = Jean-Baptiste Quenot
 [rerere]
-	enabled = 1
-[giggle]
-	compact-mode = false
-	main-window-geometry = 1670x996+0+25
-	main-window-maximized = false
-[core]
-	whitespace = nowarn
-	excludesfile = /home/jbq/.gitignore
+        enabled = 1
+[apply]
+        whitespace = nowarn
+[alias]
+        tignowalk-helper = !git rev-list --pretty=raw --no-walk --stdin<
 [push]
-	default = tracking
+        default = tracking
+[user]
+	email = jbq@cmlid.fr
+	name = Jean-Baptiste Quenot
+
+[color]
+    grep = true
+    diff = true

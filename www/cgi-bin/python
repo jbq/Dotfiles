@@ -1,9 +1,0 @@
-#! /bin/sh
-
-if [ -f $PATH_TRANSLATED ] && [ -r $PATH_TRANSLATED ]; then
-		cd $(dirname $PATH_TRANSLATED)
-        exec /usr/local/bin/python $PATH_TRANSLATED
-else
-        test -f $PATH_TRANSLATED && echo "Location: /erreurs/403/" || echo "Location: /erreurs/404/"
-        echo ""
-fi

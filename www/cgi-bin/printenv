@@ -1,9 +1,0 @@
-#! /bin/sh
-
-echo "Content-Type: text/plain"
-echo
-
-echo -n "umask="
-umask
-echo -n "PYTHONPATH="
-echo $PYTHONPATH
