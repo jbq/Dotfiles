@@ -222,7 +222,7 @@ alias bubbrosc='python /usr/local/share/bubbros/display/Client.py -d pygame --fu
 
 # Thanks to Phil! Gregory
 # http://aperiodic.net/phil/prompt/
-. $USER_DOTFILES/zsh/prompt.txt
+. $USER_DOTFILES/zsh/prompt.sh
 
 # The following lines were added by compinstall
 
