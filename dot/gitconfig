@@ -7,7 +7,6 @@
 [push]
         default = tracking
 [user]
-	email = jbq@cmlid.fr
 	name = Jean-Baptiste Quenot
 
 [color]

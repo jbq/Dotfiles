@@ -35,6 +35,8 @@ au FileType xml,docbk,ant,xslt,xsd setlocal foldmethod=syntax
 " Load docbook macros for Docbook, Website and Slides
 au FileType xml runtime dbhelper.vim
 au BufRead *.txt call SetTextEditing()
+au BufRead *.json* call SetTextEditing()
+au BufRead *.json5 setlocal ft=javascript
 au BufRead *.jad setlocal ft=java
 au BufRead *.hx setlocal ft=haxe
 
