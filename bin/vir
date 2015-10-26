@@ -7,17 +7,16 @@
 #
 # In --remote-silent mode, our custom error messages are cleared, this is
 # annoying, happily --remote-send does not clear error messages.
-#
 
-if test "$DISPLAY" != ":0.0" || pgrep -u $USER vim >/dev/null ; then
-    # Change directory
-    gvim --remote-send "<C-\><C-N>:cd $PWD<CR>"
-    #exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
-    if test `echo $* | wc -w` = 1 ; then
-        exec gvim --remote-send "<C-\><C-N>:tabnew $*<CR>"
-    else
-        exec gvim --remote-send "<C-\><C-N>:n $*<CR>"
-    fi
-else
-    exec gvim $*
-fi
+have() {
+    type $* >&/dev/null
+}
+
+have gvim && CMD=gvim
+have mvim && CMD=mvim
+
+# Change directory
+$CMD --remote-send "<C-\><C-N>:cd $PWD<CR>"
+
+# Open files
+exec $CMD --remote-send "<C-\><C-N>:n $*<CR>"
