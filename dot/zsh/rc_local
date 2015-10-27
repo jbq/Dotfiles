@@ -204,22 +204,6 @@ have tig && alias ts='tig status'
 alias tf='tail -f'
 alias bubbrosc='python /usr/local/share/bubbros/display/Client.py -d pygame --fullscreen=yes'
 
-#files=( /mnt/usbkey/inbox/info-*(.N) )
-#if (( $#files )) ; then
-#    if test -n "$DISPLAY" ; then
-#        for file in $(ls /mnt/usbkey/inbox/info-* 2>/dev/null) ; do
-#            basefile=${file##*/}
-#            zenity --text-info --filename $file --title ${basefile#info-} --width 560 --height 200 &
-#        done
-#    fi
-#fi
-
-#if test $(id -u) = 0 ; then
-#	export PS1=$'%{\e[1;31m%}[%N:%y:%{\e[1;34m%}%n@%m%{\e[1;31m%}:%3~] %{\e[0;m%}'
-#else
-#	export PS1=$'%{\e[1;32m%}[%N:%y:%{\e[1;34m%}%n@%m%{\e[1;32m%}:%3~] %{\e[0;m%}'
-#fi
-
 # Thanks to Phil! Gregory
 # http://aperiodic.net/phil/prompt/
 . $USER_DOTFILES/zsh/prompt.sh
