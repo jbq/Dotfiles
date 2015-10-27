@@ -1,0 +1,3 @@
+[submodule "dot/vim/bundle/salt-vim"]
+	path = dot/vim/bundle/salt-vim
+	url = https://github.com/saltstack/salt-vim.git
