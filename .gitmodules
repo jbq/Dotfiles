@@ -1,3 +1,6 @@
 [submodule "dot/vim/bundle/salt-vim"]
 	path = dot/vim/bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim.git
+[submodule "dot/vim/bundle/nerdtree"]
+	path = dot/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
