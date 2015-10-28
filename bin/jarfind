@@ -27,7 +27,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# TODO do not depend on logging, redefine constants
 # TODO usage()
 # TODO KeyboardInterrupt hangs the "jar" command, eating CPU indefinitely
 # TODO use python zip module instead of jar command (suggested by Philippe Gassmann)
@@ -36,15 +35,176 @@
 # http://www.red-dove.com/python_logging.html or bundled with Python starting
 # from version 2.3
 
-import os, sys, caraldi, re, getopt, select, logging
+import os, sys, re, getopt, logging, glob, stat
+from os.path import join
 
-class JarStat(caraldi.DirStat):
-    def visitDirectory(self, file, stat):
+class DirStat:
+    def __init__ (self, dir=None):
+        self.__total_bytes = 0
+        self.__total_files = 0
+        self.matches = []
+        self.patterns = []
+        self.fullPathPatterns = []
+        self.depthFirstSearch = 0
+        self.nonRecursive = 0
+
+        if (dir):
+            self.walk (dir)
+
+    def compilePattern(self, rawpattern):
+        logger.debug("rawpattern = %s" % rawpattern)
+        if rawpattern[0] == '-':
+            excludePattern = True
+        elif rawpattern[0] == '+':
+            excludePattern = False
+        else:
+            raise "Pattern '%s' is not an exclusion nor an inclusion, please use - or + as first character" % rawpattern
+        modifiersPos = rawpattern.find("(")
+        if modifiersPos != -1:
+            modifiers = rawpattern[modifiersPos+1:-1]
+            pattern = rawpattern[1:modifiersPos]
+        else:
+            modifiers = None
+            pattern = rawpattern[1:]
+        logger.debug("pattern = %s" % pattern)
+        logger.debug("modifiers = %s" % modifiers)
+        return (excludePattern, pattern, modifiers)
+
+    def modifiersMatch(self, modifiers, info):
+        mode = info[stat.ST_MODE]
+        if modifiers and modifiers.find(".") != -1 and not(stat.S_ISREG(mode)):
+            return False
+        return True
+
+    def isExcluded(self, dir, file, info):
+        exclude = False
+        for rawpattern in self.patterns:
+            (excludePattern, pattern, modifiers) = self.compilePattern(rawpattern)
+
+            if file == ".":
+                continue
+            globlist = glob.glob(join(dir, pattern))
+            path = join(dir, file)
+            logger.debug("Testing whether %s belongs to %s" % (path, globlist))
+
+            if path in globlist and self.modifiersMatch(modifiers, info):
+                logger.debug("Ignoring %s" % path)
+                exclude = excludePattern
+                logger.debug("exclude = %s" % exclude)
+                continue
+
+        for rawpattern in self.fullPathPatterns:
+            (excludePattern, pattern, modifiers) = self.compilePattern(rawpattern)
+            excludePath = join(self.rootDir, pattern)
+            logger.debug("excludePath = %s" % (excludePath))
+            globlist = glob.glob(excludePath)
+            path = join(dir, file)
+            logger.debug("Testing whether %s belongs to %s" % (path, globlist))
+            if path in globlist and self.modifiersMatch(modifiers, info):
+                logger.debug("Ignoring %s" % path)
+                exclude = excludePattern
+                logger.debug("exclude = %s" % exclude)
+                continue
+
+        return exclude
+
+    #
+    # Directory traversal function
+    #
+    def walk (self, dir):
+        '''recursively descend the directory rooted at dir, calling the callback
+        function visitFile for each regular file, visitDirectory for each
+        directory, and visitLink for each link'''
+
+        if self.rootDir == None:
+            self.rootDir = dir
+
+        info = os.lstat(dir)
+        if (stat.S_ISREG(info[stat.ST_MODE])):
+            self.visitFile(dir, info)
+        else:
+            if not(self.depthFirstSearch):
+                self.visitDirectory(dir, info)
+            list = os.listdir(dir)
+            list.sort()
+            for f in list:
+                pathname = join(dir, f)
+
+                if not(os.path.exists(pathname)) and not(os.path.islink(pathname)):
+                    # The current program may be deleting files
+                    print >>sys.stderr, '%s has been deleted, skipping' % pathname
+                    continue
+
+                info = os.lstat(pathname)
+
+                if self.isExcluded(dir, f, info):
+                    #print "Ignoring", f
+                    continue
+                mode = info[stat.ST_MODE]
+
+                if stat.S_ISDIR(mode):
+                    # It's a directory, recurse into it
+                    if not(self.nonRecursive):
+                        self.walk (pathname)
+                elif stat.S_ISREG(mode):
+                    # It's a file, call the callback function
+                    self.visitFile(pathname, info)
+                elif stat.S_ISLNK(mode):
+                    if (os.path.exists(pathname)):
+                        # It's a link, call the callback function
+                        self.visitLink(pathname, info)
+                    else:
+                        # Dangling link
+                        self.visitDanglingLink(pathname, info)
+                else:
+                    # Unknown file type, print a message
+                    print >>sys.stderr, 'Skipping %s with mode %s' % (pathname, mode)
+
+            if self.depthFirstSearch:
+                self.visitDirectory(dir, info)
+
+    #
+    # Actions to perform when encountering a file.  Override that function to
+    # modify behaviour.
+    #
+    def visitFile (self, file, info):
+        print >>sys.stderr, 'Visited file', file
+        self.__total_bytes = self.__total_bytes + info[stat.ST_SIZE]
+        self.__total_files = self.__total_files + 1
+
+    #
+    # Actions to perform when encountering a link.  Override that function to
+    # modify behaviour.
+    #
+    def visitLink (self, file, info):
+        print >>sys.stderr, 'Visited link', file
+
+    def visitDanglingLink (self, file, info):
+        print >>sys.stderr, 'Visited dangling link', file
+
+    #
+    # Actions to perform when encountering a directory.  Override that function to
+    # modify behaviour.
+    #
+    def visitDirectory (self, file, info):
+        print >>sys.stderr, 'Visited directory', file
+
+    def __getattr__ (self, attr):
+        if (attr == 'total_bytes'):
+            return self.__total_bytes
+        elif (attr == 'total_files'):
+            return self.__total_files
+
+class JarStat(DirStat):
+    def visitDirectory(self, file, info):
         pass
 
-    def visitFile(self, file, stat):
+    def visitFile(self, file, info):
         if (re.search("\.[jw]ar$", file)):
             self.grepJarContents(file, classNames)
+
+    def visitLink (self, file, info):
+        pass
 
     def grepJarContents(self, file, classNames):
         if verboseFiles:
@@ -84,7 +244,8 @@ if __name__ == "__main__":
     classNames = []
     verboseFiles=0
 
-    logger = caraldi.getLogger(sys.argv[0])
+    logging.basicConfig()
+    logger = logging.getLogger()
 
     # Fetch options
     for o, a in opts:
