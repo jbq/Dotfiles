@@ -13,6 +13,7 @@
 set keymap=accents
 
 " background and foreground colors
+colorscheme default
 highlight Normal guibg=black
 highlight Normal guifg=lightgray
 
