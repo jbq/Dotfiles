@@ -12,26 +12,7 @@ HOSTNAME="$(hostname)"
 test -f $USER_DOTFILES/private/profile.$HOSTNAME && source $USER_DOTFILES/private/profile.$HOSTNAME
 test -f $USER_DOTFILES/profile.$HOSTNAME && source $USER_DOTFILES/profile.$HOSTNAME
 
-# Don't use fr_FR.ISO8859-15 on FreeBSD (causes problems with JDK)
-# Don't use UTF-8, even with uxterm (Unicode XTerm): Problems with irc, par,
-# dead keys, Eterm.  Revert to latin1 but not fr_FR@euro that causes Eterm to
-# hang
-
-# If gdm is running, don't set the locale
-#if ! pgrep gdm > /dev/null ; then
-#    if test "$UNAME" = "FreeBSD" ; then
-#        # Mutt-NG requires ncurses with wide-character support to work properly in utf-8
-#        LOCALE="fr_FR.UTF-8"
-#        #LOCALE="fr_FR.ISO8859-1"
-#    elif test "$UNAME" = "Linux" ; then
-#        LOCALE="fr_FR.UTF-8"
-#    fi
-#
-#    if test -n "$LOCALE" ; then
-#        export LC_CTYPE=$LOCALE
-#        export LC_TIME=$LOCALE
-#    fi
-#fi
+export LC_ALL="en_US.UTF-8"
 
 if test "$NO_JAVA" != "1" ; then
     if ! type java >/dev/null 2>&1 ; then

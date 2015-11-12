@@ -6,7 +6,7 @@
 ################################################################################
 
 export USER_DOTFILES=$HOME/usr/dot
-#. $USER_DOTFILES/zsh/profile
+. $USER_DOTFILES/zsh/profile
 . $USER_DOTFILES/zsh/rc_generic
 . $USER_DOTFILES/zsh/rc_local
 
