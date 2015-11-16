@@ -2,4 +2,4 @@
 
 set -o pipefail
 
-cherry $* | tig --stdin --no-walk
+cherry HEAD $* | tig --stdin --no-walk
