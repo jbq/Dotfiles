@@ -4,8 +4,6 @@
         enabled = 1
 [apply]
         whitespace = nowarn
-[alias]
-        tignowalk-helper = !git rev-list --pretty=raw --no-walk --stdin<
 [push]
         default = tracking
 [user]

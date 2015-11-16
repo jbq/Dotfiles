@@ -1,4 +1,6 @@
-#! /bin/sh -e
+#! /bin/bash -e
+
+set -o pipefail
 
 # List all commits with git-cherry and exclude all the ones that are already
 # part of the change log of the current branch.  For each available commit,
