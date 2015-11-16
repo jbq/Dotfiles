@@ -1,0 +1,5 @@
+#! /bin/bash -e
+
+set -o pipefail
+
+cherry $* | tig --stdin --no-walk
