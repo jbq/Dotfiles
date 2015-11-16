@@ -24,9 +24,8 @@ au FileType mail setlocal spell
 " - send-pr because Unicode PR shows a latin 1
 au FileType cvs,jproperties,sendpr set fileencoding=latin1
 
-au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash call SetProgramEditing()
+au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy call SetProgramEditing()
 au FileType haxe setlocal smartindent
-au FileType logstash setlocal ts=2 sw=2
 
 " Properly format XML comments
 au FileType xml,docbk,ant,xslt,xsd setlocal comments=sr:<!--+,mb:\|,ex:+-->
@@ -105,15 +104,11 @@ endfunction
 
 function SetProgramEditing()
     call SetEditing()
-    setlocal ts=4
-    setlocal sw=4
     setlocal formatoptions=croql
 endfunction
 
 function SetMarkupEditing()
     call SetEditing()
-    setlocal ts=2
-    setlocal sw=2
     setlocal tw=120
     setlocal formatoptions=tcroql
 endfunction
