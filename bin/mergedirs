@@ -436,7 +436,7 @@ class DiffStat(DirStat):
 
 class ReverseDiffStat(DiffStat):
     def __init__(self, master, slave, patterns, fullPathPatterns):
-        caraldi.DirStat.__init__(self)
+        DirStat.__init__(self)
         if prefs['nonRecursive']:
             self.nonRecursive = 1
         self.master = master
