@@ -1,3 +1,8 @@
-bind main N !git cherry-pick -n %(commit)
-bind main M !cherry-merge %(commit)
-bind main B !cherry-block %(commit)
+bind generic N !git cherry-pick -n %(commit)
+bind generic M !cherry-merge %(commit)
+bind generic B !cherry-block %(commit)
+bind generic + !git commit --amend
+bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
+bind generic T !git notes edit %(commit)
+bind generic I !git add -i %(file)
+bind refs 3 !git rebase -i %(branch)
