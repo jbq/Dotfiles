@@ -26,6 +26,7 @@ au FileType cvs,jproperties,sendpr set fileencoding=latin1
 
 au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy call SetProgramEditing()
 au FileType haxe setlocal smartindent
+let g:jsx_ext_required = 0
 
 " Properly format XML comments
 au FileType xml,docbk,ant,xslt,xsd setlocal comments=sr:<!--+,mb:\|,ex:+-->
