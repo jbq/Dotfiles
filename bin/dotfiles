@@ -25,11 +25,8 @@ confirm() {
 export PATH="$PATH:$HOME/usr/bin"
 
 if confirm "Setup standard dotfiles?" "n" ; then
-#    dotinstall .bash_profile bash/profile
-#    dotinstall .bashrc bash/rc
-#    dotinstall .bash_logout bash/logout
     dotinstall .mailcap mailcap
-    dotinstall .zprofile zsh/profile
+    #dotinstall .zprofile zsh/profile
     dotinstall .zshrc zsh/rc
     dotinstall .zlogout zsh/logout
     dotinstall .vim vim
@@ -37,18 +34,6 @@ if confirm "Setup standard dotfiles?" "n" ; then
     dotinstall .inputrc inputrc
     dotinstall .screenrc screenrc
     dotinstall .tigrc tigrc
-# TODO if multiple arguments, interactively offer a choice
-#    dotinstall .ssh/id_dsa.pub ssh/id_dsa.pub
-#    dotinstall .ssh/id_rsa.pub ssh/id_rsa.pub
-    dotinstall .muttrc mutt/muttrc.imap
-    dotinstall .muttngrc mutt/muttngrc
-    dotinstall .muttprintrc muttprintrc
-# TODO if multiple arguments, interactively offer a choice
-#    dotinstall .muttrc mutt/muttrc.local
-    #dotinstall .slrnrc slrn/slrnrc
-    #dotinstall .slrn slrn
-    #dotinstall .m2/settings.xml mvn-settings.xml
-    dotinstall .devilspie devilspie
     dotinstall .gitconfig gitconfig
     dotinstall .gitignore gitignore
 fi
@@ -56,12 +41,6 @@ fi
 if confirm "Setup dotfiles for use with an X server?" "n" ; then
     dotinstall .gvimrc vim/gvimrc
     dotinstall .urlview urlview
-#    dotinstall .xinitrc xinitrc
-    dotinstall .mplayer/config mplayer.conf
-#    dotinstall .gnome2/nautilus-scripts nautilus-scripts
-    dotinstall .dia/sheets dia/sheets
-    dotinstall .dia/shapes dia/shapes
-    dotinstall .fluxbox fluxbox
     dotinstall .Xdefaults Xdefaults
 fi
 
