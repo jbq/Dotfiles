@@ -1,5 +1,13 @@
 export __PROMPT_DIR=${0:A:h}
-source "${__PROMPT_DIR}/git-prompt.sh"
+
+# Do not compute Git prompt when running inside Vagrant because folders are
+# typically mounted with NFS and this is too slow with big repos, even with the
+# haskell implementation
+if test $USER != vagrant; then
+    source "${__PROMPT_DIR}/git-prompt.sh"
+else
+    function git_super_status() {}
+fi
 
 function precmd {
 
