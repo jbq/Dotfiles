@@ -255,8 +255,10 @@ bindkey "^R" history-incremental-search-backward
 
 autoload -U zkbd
 
-#[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
-source ~/.zkbd/$TERM-$VENDOR-$OSTYPE
+if test -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE; then
+    source ~/.zkbd/$TERM-$VENDOR-$OSTYPE
+fi
+
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
 [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
