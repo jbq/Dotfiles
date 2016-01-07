@@ -1,8 +1,0 @@
-(debug)
-(if (is (window_class) "Kopete") (pin "TRUE"))
-(if (is (window_class) "Rhythmbox") (pin "TRUE"))
-(if (is (window_class) "Pidgin") (pin "TRUE"))
-(if (is (window_class) "Skype") (pin "TRUE"))
-(if (is (application_name) "Vim") (begin (set_workspace 2) (maximize)))
-(if (is (application_name) "Liferea") (pin "TRUE"))
-(if (is (window_class) "gecko") (set_workspace 3))

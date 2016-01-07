@@ -1,3 +1,0 @@
-#! /bin/sh
-
-gvimdiff ~/var/repos/wicket/branches/wicket-1.x/$1 ~/var/repos/wicket/trunk/$1

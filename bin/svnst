@@ -1,5 +1,0 @@
-#! /bin/sh
-CHAR=$1
-test -z $CHAR && exit 1
-shift
-svn st | sed -ne "s/^$CHAR //p" | xargs $*

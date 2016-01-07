@@ -1,1 +1,0 @@
-./configure --enable-imap --enable-hcache --with-ssl=/usr

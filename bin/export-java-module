@@ -1,9 +1,0 @@
-#! /bin/sh -e
-
-MODULE=$1
-
-rm -rf $MODULE
-svn -q export http://svn.caraldi.com/trunk/java/$MODULE $MODULE
-tar zcf $MODULE.tgz --exclude=doc $MODULE
-md5 $MODULE.tgz > $MODULE-md5.txt
-rm -rf $MODULE

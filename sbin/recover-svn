@@ -1,8 +1,0 @@
-#! /bin/sh -e
-
-SVNREPOS=$1
-OWNER=$2
-svnadmin recover $SVNREPOS
-chown -R $OWNER $SVNREPOS
-rchmod ug $SVNREPOS
-chmod g+s $SVNREPOS/db
