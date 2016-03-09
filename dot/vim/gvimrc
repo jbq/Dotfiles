@@ -6,29 +6,18 @@
 " Date Created:  2000-07-01 00:00:00
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set columns=100
-"set lines=46
+colorscheme mine
 
 " Use Unicode
 set keymap=accents
 
-" background and foreground colors
-colorscheme default
-highlight Normal guibg=black
-highlight Normal guifg=lightgray
-
-"highlight Visual guibg=bg
-
-" I don't want non-text items to be bold
-"highlight NonText gui=NONE
-
 " set text font
 if has ("gui_win32")
     "set guifont=Courier_New:h9
-	set guifont=Lucida_Console:h10:cANSI
+    set guifont=Lucida_Console:h10:cANSI
 elseif has ("gui_mac")
     "set guifont=Courier_New:h9
-	set guifont=Monaco:h13
+    set guifont=Monaco:h13
 else
     set guifont=Monospace\ 10
 endif
@@ -37,13 +26,8 @@ endif
 set guioptions-=T
 
 " Remove the Syntax menu
-if v:lang == "C"
-    unmenu Syntax
-    unmenu! Syntax
-elseif v:lang == "fr_FR"
-    unmenu Syntaxe
-    unmenu! Syntaxe
-endif
+aunmenu Syntax
+aunmenu Syntaxe
 
 silent! source $HOME/usr/dot/private/gvimrc
 
