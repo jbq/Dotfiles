@@ -40,6 +40,7 @@ au BufRead *.json* call SetTextEditing()
 au BufRead *.json5 setlocal ft=javascript
 au BufRead *.jad setlocal ft=java
 au BufRead *.hx setlocal ft=haxe
+au BufNew setlocal ts=4|sw=4|et
 
 function NormalizeQuotes()
     execute('%s:>>:> >:g')
