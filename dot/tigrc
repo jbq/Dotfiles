@@ -5,4 +5,3 @@ bind generic + !git commit --amend
 bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
 bind generic T !git notes edit %(commit)
 bind generic I !git add -i %(file)
-bind refs 3 !git rebase -i %(branch)
