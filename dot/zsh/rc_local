@@ -29,45 +29,13 @@ have() {
     type $* >&/dev/null
 }
 
-# FreeBSD specific aliases
-if [ "$UNAME" = "FreeBSD" ]; then
-	have ncftp3 && alias ncftp='ncftp3'
-	have wish8.3 && alias wish='wish8.3'
-	have tclsh8.3 && alias tclsh='tclsh8.3'
-	have dagrab && alias dagrab='dagrab -d /dev/acd1'
-#	have cdda2wav && alias cdda2wav='cdda2wav -D /dev/acd1'
-#	have cdcontrol && alias cdcontrol='cdcontrol -f /dev/acd1'
-	alias adduser='adduser -silent'
-#	alias mergemaster='mergemaster -c -i'
-elif [ "$UNAME" = "Darwin" ]; then
-	alias startx='startx -- -quartz'
-elif [ "$UNAME" = "Linux" ]; then
-	alias dselect="dselect --expert"
-fi
-
 have gimp-1.3 && alias gimp='gimp-1.3'
 have gimp-remote-1.3 && alias gimp-remote='gimp-remote-1.3'
 have gnome-open && alias open='gnome-open'
-have gpg && alias gpg='gpg --keyserver hkp://pgp.mit.edu --default-recipient-self --lock-never --no-secmem-warning'
-have apg && alias apg="apg -MNC -x8"
-have cvs && alias cvsdiff="cvs diff -u"
-have svn && alias svndiff="svn diff"
 
-# General aliases
-have tiff2ps && alias tiff2ps="tiff2ps -w 8.2 -h 10.94"
-
-have java	&& alias jfor='java org.jfor.jfor.main.CmdLineConverter'
-have wine	&& alias wine='wine --managed --winver win98'
-have w3m	&& alias w3m='w3m -cookie' # Gimme cookies :)
 have bc		&& alias bc='bc -q' # Shut up, bc!
 have screen	&& alias s=screen
-have cvs	&& alias cvs='cvs -q'
-have BitchX	&& alias bx='BitchX'
-have cvs2cl	&& alias cvs2cl="cvs2cl -t -b"
 have git	&& alias gg="git gui&; disown %git"
-
-# Custom commands
-alias mutt-lists="muttng -F $USER_DOTFILES/mutt/lists"
 
 # I often mistype commands :)
 alias amke='make'

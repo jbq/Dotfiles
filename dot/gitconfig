@@ -1,14 +1,13 @@
 [include]
-	path = .gitconfig.local
+    path = .gitconfig.local
 [rerere]
-        enabled = 1
+    enabled = 1
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
 [push]
-        default = tracking
+    default = tracking
 [user]
-	name = Jean-Baptiste Quenot
-
+    name = Jean-Baptiste Quenot
 [color]
     grep = true
     diff = true
