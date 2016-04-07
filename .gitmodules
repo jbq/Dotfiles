@@ -13,3 +13,6 @@
 [submodule "dot/vim/bundle/vim-jsx"]
 	path = dot/vim/bundle/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
+[submodule "lib/git-subrepo"]
+	path = lib/git-subrepo
+	url = https://github.com/ingydotnet/git-subrepo.git

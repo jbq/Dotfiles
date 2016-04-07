@@ -13,3 +13,5 @@ export USER_DOTFILES=$HOME/usr/dot
 for file in $USER_DOTFILES/private/*.rc(N) ; do
 	test -f $file && . $file
 done
+
+source $HOME/usr/lib/git-subrepo/.rc
