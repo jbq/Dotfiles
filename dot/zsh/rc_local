@@ -282,4 +282,16 @@ get_git_prompt_info() {
     echo $__CURRENT_GIT_BRANCH
 }
 
+alias logtail='docker logs --tail=30 -f'
+alias dc='docker-compose'
+
+function logs {
+    docker logs $* 2>&1 | less
+}
+
+function docker-cleanup {
+    docker ps -a | grep Exit | awk '{print $1}' | xargs --no-run-if-empty docker rm
+    docker images --filter 'dangling=true' -q --no-trunc | xargs --no-run-if-empty docker rmi
+}
+
 # vim:ft=zsh
