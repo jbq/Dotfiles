@@ -1,0 +1,163 @@
+#! /usr/bin/env python
+
+import json
+import requests
+import os.path
+import sys
+import getopt
+import itertools
+
+def format_size(size, unit):
+    if unit == 'K':
+        size = float(size) / 1024
+    elif unit == 'M':
+        size = float(size) / 1024 / 1024
+    elif unit == 'G':
+        size = float(size) / 1024 / 1024 / 1024
+    else:
+        assert False, "unknown unit %s" % unit
+
+    return "%.1f%s" % (size, unit)
+
+def find_values(d):
+    if isinstance(d, dict):
+        return find_values(d.values())
+    return d
+
+def agg_array_sum(tags):
+    assert isinstance(tags, dict)
+    items = map(find_values, tags.values())
+    return reduce(lambda x,y: x + sum(y), items, 0)
+
+def agg_sum(tags):
+    assert isinstance(tags, dict)
+    items = map(find_values, tags.values())
+    return reduce(lambda x,y: x + y, items, 0)
+
+class RegistryUsage(object):
+    def get(self, uri):
+        r = self._req(uri, "get")
+        return json.loads(r.content)
+
+    def getContentLength(self, uri):
+        r = self._req(uri, "head")
+        return int(r.headers['Content-Length'])
+
+    def _req(self, uri, method):
+        url = "%s%s" % (self.base_url, uri)
+        r = getattr(requests, method)(url)
+        assert r.status_code == 200, "Got status code %s at %s" % (r.status_code, url)
+        return r
+
+    def __init__(self, base_url, registryRoot, unit, selectedRepo=None):
+        self.base_url = base_url
+        self.data = {}
+        self.registryRoot = registryRoot
+        self.selectedRepo = selectedRepo
+        self.unit = unit
+        self.debug = False
+        self.known_blobs = []
+
+    def run(self):
+        totalSize = 0
+        catalog = self.get("/v2/_catalog")
+
+        if self.selectedRepo is None:
+            repos = catalog['repositories']
+        else:
+            repos = [self.selectedRepo]
+
+        for repo in repos:
+            if self.debug:
+                print "Processing repo %s" % repo
+            self.data[repo] = {}
+            try:
+                tags = self.get("/v2/%s/tags/list" % repo)
+            except AssertionError:
+                continue
+            for tag in tags["tags"]:
+                if self.debug:
+                    print "  Processing tag %s" % tag
+
+                self.data[repo][tag] = {}
+                manifest = self.get("/v2/%s/manifests/%s" % (repo, tag))
+
+                for layer in manifest["fsLayers"]:
+                    blob = layer["blobSum"]
+                    self.known_blobs.append(blob)
+
+                    if self.registryRoot is not None:
+                        csum = blob.split(":")[1]
+                        blobSize = os.path.getsize("%s/v2/blobs/sha256/%s/%s/data" % (self.registryRoot, csum[:2], csum))
+                    else:
+                        blobSize = self.getContentLength("/v2/%s/blobs/%s" % (repo, blob))
+
+                    self.data[repo][tag][blob] = blobSize
+
+                tag_size = agg_sum(self.data[repo][tag])
+                print "%-20s %s/%s" % (format_size(tag_size, self.unit), repo, tag)
+
+            repo_size = agg_array_sum(self.data[repo])
+            print "%-20s %s" % (format_size(repo_size, self.unit), repo)
+            totalSize += repo_size
+
+        print "%-20s TOTAL" % format_size(totalSize, self.unit)
+
+    def report_dangling_blobs(self):
+        root = os.path.join(self.registryRoot, "v2", "blobs", "sha256")
+        stored_blobs = list(itertools.chain.from_iterable([os.listdir(os.path.join(root, x)) for x in os.listdir(root)]))
+        for blob in set(stored_blobs) - set(self.known_blobs):
+            print blob
+
+def usage():
+    print """Usage: %s [OPTIONS] [REPO]
+
+    -h  --help
+              Show this help text
+
+    -r  --registry-root
+              Set registry path on the filesystem to speedup usage computation.  Tested with registry 2.3.1
+
+    -U  --registry-url
+              Set registry URL.  Defaults to http://localhost:5000
+
+    -u  --unit
+              Select unit: K for kilo-bytes, M for mega-bytes or G for giga-bytes
+""" % os.path.basename(sys.argv[0])
+
+
+if __name__ == "__main__":
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hr:U:u:", ["help", "registry-root=", "registry-url=", "unit="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err)  # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+
+    registryRoot = None
+    registryURL = "http://localhost:5000"
+    unit = "M"
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-r", "--registry-root"):
+            registryRoot = a
+        elif o in ("-U", "--registry-url"):
+            registryURL = a
+        elif o in ("-u", "--unit"):
+            unit = a
+        else:
+            assert False, "unhandled option"
+
+repo = None
+if len(args) > 0:
+    repo = args[0]
+
+usage = RegistryUsage(registryURL, registryRoot, unit, repo)
+usage.run()
+
+#if registryRoot is not None:
+#    usage.report_dangling_blobs()
