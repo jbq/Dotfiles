@@ -2,9 +2,14 @@
 
 import sys, subprocess
 sys.path.append(".")
-import conf
-output = conf.title + ".pdf"
+try:
+    import conf
+    output = conf.title + ".pdf"
+except:
+    output = "output.pdf"
+
 args = ["wkhtmltopdf", "--footer-center", "[page]/[toPage]", "--print-media-type", "_build/html/index.html", output.encode('utf-8')]
+print " ".join(args)
 p = subprocess.Popen(args, stdin=subprocess.PIPE)
 p.stdin.close()
 sys.exit(p.wait())
