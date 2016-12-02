@@ -1,5 +1,12 @@
-#! /bin/bash -e
+#! /bin/bash
 
-set -o pipefail
+set -ueo pipefail
 
-cherry HEAD $* | tig --stdin --no-walk
+tempfile=$(tempfile -p $(basename $0))
+cherry HEAD $* > $tempfile
+
+if test -s $tempfile; then
+  tig --stdin --no-walk --reverse < $tempfile
+else
+  echo "All commits merged, good job!"
+fi

@@ -1,6 +1,6 @@
-#! /bin/bash -e
+#! /bin/bash
 
-set -o pipefail
+set -ueo pipefail
 
 # List all commits with git-cherry and exclude all the ones that are already
 # part of the change log of the current branch.  For each available commit,
@@ -8,15 +8,9 @@ set -o pipefail
 
 export PAGER=""
 
-block_file=$(git rev-parse --show-cdup).gitcherryblock
-
-if ! test -f $block_file ; then
-    touch $block_file
-fi
-
 tempfile=$(tempfile -p $(basename $0))
 git log --pretty=format:%b $1 | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
 
-git cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile -f $block_file
+git cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile || true
 
 rm -f $tempfile

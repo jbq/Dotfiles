@@ -1,9 +1,5 @@
 #! /bin/sh -e
 
-block_file=$(git rev-parse --show-cdup).gitcherryblock
-
 commit=$1
 
-echo $commit >> $block_file
-git add $block_file
-git show -s --pretty=format:"Block commit %h: [%an] %s%n%n%b%n%ncommit %H%nAuthor: %an%nDate:   %ad%n" $commit | git commit -F -
+git show -s --pretty=format:"Block commit %h: [%an] %s%n%n%b%n%ncommit %H%nAuthor: %an%nDate:   %ad%n" $commit | git commit --allow-empty -F -
