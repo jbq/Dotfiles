@@ -2,13 +2,27 @@
 
 set -ueo pipefail
 
+have() {
+  type $* >&/dev/null
+}
+
 # List all commits with git-cherry and exclude all the ones that are already
 # part of the change log of the current branch.  For each available commit,
 # invoke 'git show' to print the commit message.
 
 export PAGER=""
 
-tempfile=$(tempfile -p $(basename $0))
+if have tempfile; then
+  make_tempfile() {
+    tempfile -p $*
+  }
+else
+  make_tempfile() {
+    mktemp -t $*
+  }
+fi
+
+tempfile=$(make_tempfile $(basename $0))
 git log --pretty=format:%b $1 | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
 
 git cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile || true

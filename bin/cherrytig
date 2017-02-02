@@ -2,7 +2,21 @@
 
 set -ueo pipefail
 
-tempfile=$(tempfile -p $(basename $0))
+have() {
+  type $* >&/dev/null
+}
+
+if have tempfile; then
+  make_tempfile() {
+    tempfile -p $*
+  }
+else
+  make_tempfile() {
+    mktemp -t $*
+  }
+fi
+
+tempfile=$(make_tempfile $(basename $0))
 cherry HEAD $* > $tempfile
 
 if test -s $tempfile; then
