@@ -19,11 +19,6 @@ au FileType xml,docbk,ant,xslt,xsd,html,tex,jsp,xquery call SetMarkupEditing()
 au FileType cvs,svn,mail,sendpr call SetTextEditing()
 au FileType mail setlocal spell
 
-" Use latin1 for:
-" - Java properties prohibits Unicode
-" - send-pr because Unicode PR shows a latin 1
-au FileType cvs,jproperties,sendpr set fileencoding=latin1
-
 au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy call SetProgramEditing()
 au FileType haxe setlocal smartindent
 
