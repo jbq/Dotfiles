@@ -17,7 +17,7 @@ else
 fi
 
 tempfile=$(make_tempfile $(basename $0))
-cherry HEAD $* > $tempfile
+cherry $* > $tempfile
 
 if test -s $tempfile; then
   tig --stdin --no-walk --reverse < $tempfile

@@ -22,9 +22,21 @@ else
   }
 fi
 
-tempfile=$(make_tempfile $(basename $0))
-git log --pretty=format:%b $1 | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
+if test $# = 2; then
+  SOURCE=$1
+  DESTINATION=$2
+else
+  SOURCE=$1
+  DESTINATION=HEAD
+fi
 
-git cherry $* | sed -ne 's/^+ //p' | grep -v -f $tempfile || true
+tempfile=$(make_tempfile $(basename $0))
+git log --pretty=format:%b $DESTINATION | sed -ne 's/^commit \([a-z0-9]\{40\}\)$/\1/p' > $tempfile
+
+# Grep will not match anything if file is empty, so put a dummy SHA1 that will
+# never match to make sure file is not empty
+echo nonexistent >> $tempfile
+
+git cherry $DESTINATION $SOURCE | sed -ne 's/^+ //p' | grep -v -f $tempfile || true
 
 rm -f $tempfile
