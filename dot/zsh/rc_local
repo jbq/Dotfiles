@@ -294,4 +294,17 @@ function docker-cleanup {
     docker images --filter 'dangling=true' -q --no-trunc | xargs --no-run-if-empty docker rmi
 }
 
+function docker-shell {
+   container=$1
+   shift
+
+   if test -n "$*"; then
+      docker exec -ti $container $*
+   else
+      docker exec -ti $container /bin/bash -c "stty rows $(tput lines) cols $(tput cols) && export TERM=xterm-256color && exec /bin/bash"
+   fi
+}
+
+alias dsh='docker-shell'
+
 # vim:ft=zsh
