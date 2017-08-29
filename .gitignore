@@ -1,3 +1,4 @@
 .sw*
 .*.sw*
 *.pyc
+/dot/vim/doc/tags
