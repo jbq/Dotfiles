@@ -290,19 +290,25 @@ function logs {
 }
 
 function docker-cleanup {
-    docker ps -a | grep Exit | awk '{print $1}' | xargs --no-run-if-empty docker rm
-    docker images --filter 'dangling=true' -q --no-trunc | xargs --no-run-if-empty docker rmi
+    if test "$UNAME" = "Darwin" ; then
+	XARGS="xargs"
+    else
+	XARGS="xargs --no-run-if-empty"
+    fi
+
+    docker ps -a | grep Exit | awk '{print $1}' | $XARGS docker rm
+    docker images --filter 'dangling=true' -q --no-trunc | $XARGS docker rmi
 }
 
 function docker-shell {
-   container=$1
-   shift
+    container=$1
+    shift
 
-   if test -n "$*"; then
-      docker exec -ti $container $*
-   else
-      docker exec -ti $container /bin/bash -c "stty rows $(tput lines) cols $(tput cols) && export TERM=xterm-256color && exec /bin/bash"
-   fi
+    if test -n "$*"; then
+        docker exec -ti $container $*
+    else
+        docker exec -ti $container /bin/bash -c "stty rows $(tput lines) cols $(tput cols) && export TERM=xterm-256color && exec /bin/bash"
+    fi
 }
 
 alias dsh='docker-shell'
