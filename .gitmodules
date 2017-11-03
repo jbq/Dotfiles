@@ -16,3 +16,6 @@
 [submodule "lib/git-subrepo"]
 	path = lib/git-subrepo
 	url = https://github.com/ingydotnet/git-subrepo.git
+[submodule "dot/vim/bundle/vim-javascript"]
+	path = dot/vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
