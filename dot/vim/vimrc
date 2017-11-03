@@ -119,4 +119,6 @@ let g:xml_syntax_folding = 1
 " in a terminal without real user login
 let $PARINIT = 'rTbgqR B=.?_A_a Q=_s>|'
 
+let g:jsx_ext_required = 0
+
 execute pathogen#infect()
