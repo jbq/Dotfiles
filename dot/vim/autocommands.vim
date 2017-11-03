@@ -79,7 +79,6 @@ endfunction
 
 function SetEditing()
     "call SetFileFormat()
-    setlocal expandtab
     setlocal autoindent
     if ((! exists("&tw")) || (&tw == 0))
         setlocal tw=80
