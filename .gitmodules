@@ -19,9 +19,6 @@
 [submodule "dot/vim/bundle/vim-javascript"]
 	path = dot/vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
-[submodule "dot/vim/bundle/vim-flow"]
-	path = dot/vim/bundle/vim-flow
-	url = git://github.com/flowtype/vim-flow.git
 [submodule "dot/vim/bundle/syntastic"]
 	path = dot/vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
