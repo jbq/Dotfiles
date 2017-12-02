@@ -19,6 +19,6 @@
 [submodule "dot/vim/bundle/vim-javascript"]
 	path = dot/vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
-[submodule "dot/vim/bundle/syntastic"]
-	path = dot/vim/bundle/syntastic
-	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "dot/vim/bundle/ale"]
+	path = dot/vim/bundle/ale
+	url = https://github.com/w0rp/ale.git
