@@ -24,6 +24,8 @@ confirm() {
 
 export PATH="$PATH:$HOME/usr/bin"
 
+( cd $HOME/usr ; git submodule update --init )
+
 if confirm "Setup standard dotfiles?" "n" ; then
     dotinstall .mailcap mailcap
     #dotinstall .zprofile zsh/profile
