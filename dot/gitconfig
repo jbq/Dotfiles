@@ -11,3 +11,5 @@
 [color]
     grep = true
     diff = true
+[core]
+    excludesfile = ~/.gitignore_global

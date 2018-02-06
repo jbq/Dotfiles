@@ -37,7 +37,7 @@ if confirm "Setup standard dotfiles?" "n" ; then
     dotinstall .screenrc screenrc
     dotinstall .tigrc tigrc
     dotinstall .gitconfig gitconfig
-    dotinstall .gitignore gitignore
+    dotinstall .gitignore_global gitignore_global
 fi
 
 if confirm "Setup dotfiles for use with an X server?" "n" ; then
