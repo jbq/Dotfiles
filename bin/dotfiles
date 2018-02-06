@@ -40,23 +40,8 @@ if confirm "Setup standard dotfiles?" "n" ; then
     dotinstall .gitignore_global gitignore_global
 fi
 
-if confirm "Setup dotfiles for use with an X server?" "n" ; then
-    dotinstall .gvimrc vim/gvimrc
-    dotinstall .urlview urlview
-    dotinstall .Xdefaults Xdefaults
-fi
-
-if confirm "Setup secret files?" "n" ; then
-# TODO if multiple arguments, interactively offer a choice
-#    dotinstall .ssh/id_rsa secret/ssh/id_rsa
-#    dotinstall .ssh/id_dsa secret/ssh/id_dsa
-    dotinstall .ssh/config private/ssh/config
-#    dotinstall .gq secret/gq
-#    dotinstall .gnome2_private/Evolution secret/Evolution
-#    dotinstall .ncftp/bookmarks secret/ncftp/bookmarks
-#    dotinstall .gnome2/epiphany/mozilla/epiphany/mozilla.s secret/mozilla.s
-#    dotinstall .galeon/mozilla/galeon/mozilla.s secret/mozilla.s
-    dotinstall .subversion private/subversion
-    test -r ~/usr/dot/private/rc.d/subversion.sh && ~/usr/dot/private/rc.d/subversion.sh
-    dotinstall .offlineimaprc private/offlineimaprc
-fi
+#if confirm "Setup dotfiles for use with an X server?" "n" ; then
+#    dotinstall .gvimrc vim/gvimrc
+#    dotinstall .urlview urlview
+#    dotinstall .Xdefaults Xdefaults
+#fi
