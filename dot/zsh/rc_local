@@ -282,52 +282,6 @@ get_git_prompt_info() {
     echo $__CURRENT_GIT_BRANCH
 }
 
-alias dc='docker-compose'
-
-function docker_container_exists {
-  docker container inspect $1 > /dev/null 2>&1
-}
-
-function logtail {
-  if test -z $*; then
-    dc logs --tail=30 -f
-  else
-    docker_container_exists $1 && docker logs --tail=30 -f $1 || dc logs --tail=30 -f $1
-  fi
-}
-
-function logs {
-  if test -z $*; then
-    dc logs --no-color
-  else
-    (docker_container_exists $1 && docker logs $1 || dc logs --no-color $1) 2>&1 | less
-  fi
-}
-
-function docker-cleanup {
-    if test "$UNAME" = "Darwin" ; then
-	XARGS="xargs"
-    else
-	XARGS="xargs --no-run-if-empty"
-    fi
-
-    docker ps -a | grep Exit | awk '{print $1}' | $XARGS docker rm
-    docker images --filter 'dangling=true' -q --no-trunc | $XARGS docker rmi
-}
-
-function docker-shell {
-    container=$1
-    shift
-
-    if test -n "$*"; then
-        docker exec -ti $container $*
-    else
-        docker exec -ti $container /bin/bash -c "stty rows $(tput lines) cols $(tput cols) && export TERM=xterm-256color && exec /bin/bash"
-    fi
-}
-
-alias dsh='docker-shell'
-
 function grisbi() {
     open -a XQuartz
     ip=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
