@@ -10,9 +10,6 @@
 [submodule "dot/vim/bundle/vim-sleuth"]
 	path = dot/vim/bundle/vim-sleuth
 	url = git://github.com/tpope/vim-sleuth.git
-[submodule "dot/vim/bundle/vim-jsx"]
-	path = dot/vim/bundle/vim-jsx
-	url = https://github.com/mxw/vim-jsx.git
 [submodule "lib/git-subrepo"]
 	path = lib/git-subrepo
 	url = https://github.com/ingydotnet/git-subrepo.git
@@ -22,3 +19,6 @@
 [submodule "dot/vim/bundle/ale"]
 	path = dot/vim/bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "dot/vim/bundle/vim-jsx-pretty"]
+	path = dot/vim/bundle/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
