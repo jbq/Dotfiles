@@ -5,7 +5,7 @@
 " CVS Id:        $Id: fkeys.vim 529 2004-02-25 13:41:30Z jbq $
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-imap <F3> <C-O>:call SaveAll()<CR>
+imap <F3> <C-O>:call ISaveAll()<CR>
 vmap <F3> :call SaveAll()<CR>
 nmap <F3> :call SaveAll()<CR>
 imap <F4> <C-O>:call Make()<CR>
@@ -13,8 +13,13 @@ vmap <F4> :call Make()<CR>
 nmap <F4> :call Make()<CR>
 
 " Save all buffers (even if they are read-only)
-function SaveAll()
+function! SaveAll()
     wa!
+endf
+function! ISaveAll()
+    call SaveAll()
+    " echo "All buffers saved"
+    sleep 500m
 endf
 
 " Save all buffers and execute 'make'
