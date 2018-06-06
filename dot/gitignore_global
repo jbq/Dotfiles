@@ -1,2 +1,6 @@
 .sw*
 .*.sw*
+__pycache__/
+.DS_Store
+Thumbs.db
+*.pyc
