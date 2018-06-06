@@ -73,6 +73,8 @@ import glob
 stats = {'copy': 0, 'delete': 0, 'merge': 0}
 
 class DirStat:
+    logger = logging.getLogger("DirStat")
+
     def __init__ (self, dir=None):
         self.__total_bytes = 0
         self.__total_files = 0
@@ -86,7 +88,7 @@ class DirStat:
             self.walk (dir)
 
     def compilePattern(self, rawpattern):
-        logger.debug("rawpattern = %s" % rawpattern)
+        self.logger.debug("rawpattern = %s" % rawpattern)
         if rawpattern[0] == '-':
             excludePattern = True
         elif rawpattern[0] == '+':
@@ -100,8 +102,8 @@ class DirStat:
         else:
             modifiers = None
             pattern = rawpattern[1:]
-        logger.debug("pattern = %s" % pattern)
-        logger.debug("modifiers = %s" % modifiers)
+        self.logger.debug("pattern = %s" % pattern)
+        self.logger.debug("modifiers = %s" % modifiers)
         return (excludePattern, pattern, modifiers)
 
     def modifiersMatch(self, modifiers, info):
@@ -119,25 +121,25 @@ class DirStat:
                 continue
             globlist = glob.glob(join(dir, pattern))
             path = join(dir, file)
-            logger.debug("Testing whether %s belongs to %s" % (path, globlist))
+            self.logger.debug("Testing whether %s belongs to %s" % (path, globlist))
 
             if path in globlist and self.modifiersMatch(modifiers, info):
-                logger.debug("Ignoring %s" % path)
+                self.logger.debug("Ignoring %s" % path)
                 exclude = excludePattern
-                logger.debug("exclude = %s" % exclude)
+                self.logger.debug("exclude = %s" % exclude)
                 continue
 
         for rawpattern in self.fullPathPatterns:
             (excludePattern, pattern, modifiers) = self.compilePattern(rawpattern)
             excludePath = join(self.rootDir, pattern)
-            logger.debug("excludePath = %s" % (excludePath))
+            self.logger.debug("excludePath = %s" % (excludePath))
             globlist = glob.glob(excludePath)
             path = join(dir, file)
-            logger.debug("Testing whether %s belongs to %s" % (path, globlist))
+            self.logger.debug("Testing whether %s belongs to %s" % (path, globlist))
             if path in globlist and self.modifiersMatch(modifiers, info):
-                logger.debug("Ignoring %s" % path)
+                self.logger.debug("Ignoring %s" % path)
                 exclude = excludePattern
-                logger.debug("exclude = %s" % exclude)
+                self.logger.debug("exclude = %s" % exclude)
                 continue
 
         return exclude
@@ -367,9 +369,9 @@ class DiffStat(DirStat):
                     archiveType = "zip"
 
                 if archiveType:
-                    DiffStat.logger.debug("%s is an archive, will look more in depth" % relpath)
+                    self.logger.debug("%s is an archive, will look more in depth" % relpath)
                 elif isBinary:
-                    DiffStat.logger.debug("%s is a binary file" % relpath)
+                    self.logger.debug("%s is a binary file" % relpath)
 
                 if not(isBinary):
                     if indepthfilecmp(masterf, slavef):
@@ -381,7 +383,7 @@ class DiffStat(DirStat):
                                 err = os.system('vimdiff -f ' + masterf + ' ' + slavef)
                             if (err):
                                 os.system('diff ' + masterf + ' ' + slavef)
-				err=0
+                                err=0
                             if (err):
                                 err = os.system('vim -d -f ' + masterf + ' ' + slavef)
                             if (err):
@@ -415,7 +417,7 @@ class DiffStat(DirStat):
                             if prefs['autoOverwriteBinary']:
                                 print "%s overwritten" % slavef
                     elif isBinary:
-                        DiffStat.logger.debug("Files do not really differ after thorough examination")
+                        self.logger.debug("Files do not really differ after thorough examination")
             else:
                 # Files are identical
                 pass
