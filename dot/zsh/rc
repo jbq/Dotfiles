@@ -26,3 +26,4 @@ test -d ~/Library/Python/2.7/bin && export PATH="$PATH:$HOME/Library/Python/2.7/
 if test -f $USER_DOTFILES/zsh/rc_secret; then
     . $USER_DOTFILES/zsh/rc_secret
 fi
+alias xf="xmllint --format"
