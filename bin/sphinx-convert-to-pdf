@@ -6,8 +6,10 @@ import os
 
 if os.path.exists("source"):
     sys.path.append("source")
+    build_dir = "build"
 else:
     sys.path.append(".")
+    build_dir = "_build"
 
 import conf
 
@@ -16,14 +18,18 @@ docname = conf.master_doc
 if len(sys.argv) > 1:
     docname = sys.argv[1]
 
-os.makedirs("build/pdf")
-output = "build/pdf/%s.pdf" % docname
+pdf_dir = "%s/pdf" % build_dir
+if not(os.path.exists(pdf_dir)):
+    os.makedirs(pdf_dir)
+output = "%s/pdf/%s.pdf" % (build_dir, docname)
 
 args = [
             "wkhtmltopdf",
+            #"--disable-smart-shrinking",
+            #"--zoom", "4",
             "--footer-center", "[page]/[toPage]",
             "--print-media-type",
-            "file://%s/build/html/%s.html" % (os.getcwd(), docname),
+            "file://%s/%s/html/%s.html" % (os.getcwd(), build_dir, docname),
             output.encode('utf-8')
         ]
 print " ".join(args)

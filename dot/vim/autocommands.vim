@@ -81,7 +81,7 @@ function SetEditing()
     "call SetFileFormat()
     setlocal autoindent
     if ((! exists("&tw")) || (&tw == 0))
-        setlocal tw=80
+        setlocal tw=120
     endif
     setlocal list
     if version >= 600
@@ -105,7 +105,6 @@ endfunction
 
 function SetMarkupEditing()
     call SetEditing()
-    setlocal tw=120
     setlocal formatoptions=tcroql
 endfunction
 

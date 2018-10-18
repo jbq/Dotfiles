@@ -10,7 +10,7 @@ IO.popen("git rev-list #{head}", 'r') do |rev_list|
   rev_list.each_line do |commit|
     commit.chomp!
     for object in `git ls-tree -zrl #{commit}`.split("\0")
-      bits, type, sha, size, path = object.split(/\s+/, 5)
+      _, _, sha, size, path = object.split(/\s+/, 5)
       size = size.to_i
       big_files[sha] = [path, size, commit] if size >= treshold
     end

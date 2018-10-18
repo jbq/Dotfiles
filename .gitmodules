@@ -22,3 +22,9 @@
 [submodule "dot/vim/bundle/vim-jsx-pretty"]
 	path = dot/vim/bundle/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
+[submodule "dot/vim/bundle/typescript-vim"]
+	path = dot/vim/bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "dot/vim/bundle/nerdtree-git-plugin"]
+	path = dot/vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
