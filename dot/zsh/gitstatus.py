@@ -7,12 +7,14 @@ prehash = ':'
 from subprocess import Popen, PIPE
 
 import sys
+import re
+
 gitsym = Popen(['git', 'symbolic-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
 branch, error = gitsym.communicate()
 
 error_string = error.decode('utf-8')
 
-if 'fatal: Not a git repository' in error_string:
+if re.match('^fatal: [Nn]ot a git repository', error_string):
 	sys.exit(0)
 
 branch = branch.decode("utf-8").strip()[11:]
