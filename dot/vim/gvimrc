@@ -43,9 +43,6 @@ inoremenu &Insert.XML.XML\ Declaration <?xml version='1.0'?><cr>
 inoremenu &Insert.XML.XML\ Declaration\ Latin <?xml version='1.0' encoding='iso-8859-1'?><cr>
 inoremenu &Insert.XML.Stylesheet\ PI <?xml-stylesheet href="" type="text/xsl"?><cr>
 inoremenu &Insert.XML.XSL\ Element <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version='1.0'><cr><cr></xsl:stylesheet><C-O>k
-inoremenu &Insert.XML.Default\ Copy\ Template <C-O>:r ~/usr/dot/vim/header/default-copy-template.xml<CR>
-nnoremenu &Insert.Header.JSP :0r ~/usr/dot/vim/header/jspstyle<cr>
-nnoremenu &Insert.Header.XML :0r ~/usr/dot/vim/header/xmlstyle<cr>
 
 inoremenu &Insert.Script\ Header.sh #! /bin/sh<cr><cr>
 inoremenu &Insert.Script\ Header.bash #! /usr/bin/env bash<cr><cr>
