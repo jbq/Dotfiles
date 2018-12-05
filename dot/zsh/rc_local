@@ -160,8 +160,6 @@ if have mixer ; then
 fi
 #have portupgrade && alias portupgrade='portupgrade -p'
 have man && alias man='PAGER=view-manpage man'
-have svn && alias svncommit='svn commit -m Updated'
-have cvs && alias cvscommit='cvs commit -m Updated'
 if have git ; then
 	alias gg='git gui'
 	alias gpr='git pull --rebase'

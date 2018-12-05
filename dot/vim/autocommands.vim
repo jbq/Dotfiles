@@ -16,7 +16,7 @@ let g:PHP_autoformatcomment = 0
 filetype plugin indent on
 
 au FileType xml,docbk,ant,xslt,xsd,html,tex,jsp,xquery call SetMarkupEditing()
-au FileType cvs,svn,mail,sendpr,rst call SetTextEditing()
+au FileType mail,sendpr,rst call SetTextEditing()
 au FileType mail setlocal spell
 
 au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy call SetProgramEditing()

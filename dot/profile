@@ -48,7 +48,6 @@ test "$UNAME" = "Linux" && export SGML_CATALOG_FILES=/etc/sgml/catalog
 
 # For stupid RedHat and Mandrake
 if test "$UNAME" = "Linux" ; then
-	export CVS_RSH=ssh
 	export RSYNC_RSH=ssh
 fi
 
