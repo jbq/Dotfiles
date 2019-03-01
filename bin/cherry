@@ -38,7 +38,7 @@ if ! git --version | grep -q "^git version $GITVERSION_MAJOR\.$GITVERSION_MINOR"
   exit 1
 fi
 
-git log --pretty=format:%b $DESTINATION | sed -nEe 's/^(Merge|Block) commit ([a-z0-9]{7}):.*$/\2/p' > $tempfile
+git log --pretty=format:%B $DESTINATION | sed -nEe 's/^(Merge|Block) commit ([a-z0-9]{7}):.*$/\2/p' > $tempfile
 
 # Grep will not match anything if file is empty, so put a dummy SHA1 that will
 # never match to make sure file is not empty
