@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 #
-# $Id$
-#
 # Copyright (c) 2004, Jean-Baptiste Quenot <jb.quenot@caraldi.com>
 # All rights reserved.
 #
@@ -66,7 +64,19 @@
 # * replace options autoOverwriteBinary and autoDeclineBinary with
 # binary=overwrite, binary=decline
 
-import caraldi, caraldi.text, re, os, os.path, sys, shutil, filecmp, stat, getopt, time, zipfile, logging
+import caraldi
+import caraldi.text
+import re
+import os
+import os.path
+import sys
+import shutil
+import filecmp
+import stat
+import getopt
+import time
+import zipfile
+import logging
 from os.path import join
 import glob
 
@@ -152,7 +162,7 @@ class DirStat:
         function visitFile for each regular file, visitDirectory for each
         directory, and visitLink for each link'''
 
-        if self.rootDir == None:
+        if self.rootDir is None:
             self.rootDir = dir
 
         info = os.lstat(dir)
@@ -251,9 +261,15 @@ def copy(masterf, slavef, isBinary=0):
             elif hasCVS(slavef):
                 if isBinary:
                     # Add file to CVS with binary option
-                    os.system("cd '%s' ; cvs add -kb '%s'" % (safe(os.path.dirname(slavef)), safe(os.path.basename(slavef))))
+                    os.system("cd '%s' ; cvs add -kb '%s'" % (
+                            safe(os.path.dirname(slavef)),
+                            safe(os.path.basename(slavef)))
+                        )
                 else:
-                    os.system("cd '%s' ; cvs add '%s'" % (safe(os.path.dirname(slavef)), safe(os.path.basename(slavef))))
+                    os.system("cd '%s' ; cvs add '%s'" % (
+                            safe(os.path.dirname(slavef)),
+                            safe(os.path.basename(slavef)))
+                        )
 
     stats['copy'] = stats['copy'] + 1
 
@@ -263,7 +279,10 @@ def delete(file):
             os.system("svn rm %s || rm -f %s" % (file, file))
         elif hasCVS(file) and not(re.search('/?\.#[^/]+$', file)):
             # Remove file from CVS and unlink file
-            os.system("cd '%s' ; cvs rm -f '%s'" % (safe(os.path.dirname(file)), re.sub(" ", "\\ ", safe(os.path.basename(file)))))
+            os.system("cd '%s' ; cvs rm -f '%s'" % (
+                    safe(os.path.dirname(file)),
+                    re.sub(" ", "\\ ", safe(os.path.basename(file))))
+                )
         else:
             os.unlink(file)
 
@@ -375,7 +394,9 @@ class DiffStat(DirStat):
 
                 if not(isBinary):
                     if indepthfilecmp(masterf, slavef):
-                        if not(prefs['autoOverwriteText']) and self.confirm('File %55.55s last modified %s\nFile %55.55s last modified %s\nDiff %s' % (masterf, lastmodifiedformat(masterf), slavef, lastmodifiedformat(slavef), relpath)):
+                        if not(prefs['autoOverwriteText']) and self.confirm(
+                                'File %55.55s last modified %s\nFile %55.55s last modified %s\nDiff %s' %
+                                (masterf, lastmodifiedformat(masterf), slavef, lastmodifiedformat(slavef), relpath)):
                             # Open an interactive editor
                             datebefore = lastmodified(slavef)
                             err = os.system('gvimdiff -f ' + masterf + ' ' + slavef)
@@ -383,7 +404,7 @@ class DiffStat(DirStat):
                                 err = os.system('vimdiff -f ' + masterf + ' ' + slavef)
                             if (err):
                                 os.system('diff ' + masterf + ' ' + slavef)
-                                err=0
+                                err = 0
                             if (err):
                                 err = os.system('vim -d -f ' + masterf + ' ' + slavef)
                             if (err):
@@ -392,19 +413,19 @@ class DiffStat(DirStat):
                             dateafter = lastmodified(slavef)
                             if (dateafter > datebefore):
                                 stats['merge'] = stats['merge'] + 1
-                            else: # File was not modified
+                            else:  # File was not modified
                                 if self.confirm("%s hasn't been modified.  Overwrite with %s" % (slavef, masterf)):
                                     copy(masterf, slavef)
-                        else: # Don't want to diff
+                        else:  # Don't want to diff
                             if prefs['autoOverwriteText'] or self.confirm("Overwrite %s" % slavef):
                                 copy(masterf, slavef)
                                 if prefs['autoOverwriteText']:
-                                    print "%s overwritten" % slavef
+                                    print("%s overwritten" % slavef)
                     else:
                         # Files are not *really* different
                         #print("Not really different: " + relpath)
                         pass
-                else: # Don't want to diff or binary file
+                else:  # Don't want to diff or binary file
                     reallyDiffer = 1
                     if archiveType:
                         reallyDiffer = self.archivesReallyDiffer(archiveType, masterf, slavef)
@@ -415,7 +436,7 @@ class DiffStat(DirStat):
                         elif prefs['autoOverwriteBinary'] or self.confirm("Overwrite %s" % slavef):
                             copy(masterf, slavef, isBinary)
                             if prefs['autoOverwriteBinary']:
-                                print "%s overwritten" % slavef
+                                print("%s overwritten" % slavef)
                     elif isBinary:
                         self.logger.debug("Files do not really differ after thorough examination")
             else:
@@ -434,7 +455,7 @@ class DiffStat(DirStat):
                 copy(masterf, slavef)
 
                 if prefs['autoCopy']:
-                    print "%s created" % slavef
+                    print("%s created" % slavef)
 
 class ReverseDiffStat(DiffStat):
     def __init__(self, master, slave, patterns, fullPathPatterns):
@@ -453,15 +474,16 @@ class ReverseDiffStat(DiffStat):
 
         if not(os.path.isfile(slavef)):
             print
-            if prefs['autoDelete'] or self.confirm('File %55.55s last modified %s\nDelete %s' % (masterf, lastmodifiedformat(masterf), masterf)):
+            if prefs['autoDelete'] or self.confirm('File %55.55s last modified %s\nDelete %s' %
+                    (masterf, lastmodifiedformat(masterf), masterf)):
                 delete(masterf)
                 if prefs['autoDelete']:
-                    print "%s deleted" % masterf
+                    print("%s deleted" % masterf)
 
 def usage():
-    print 'Usage:', os.path.basename(sys.argv[0]), 'master-dir slave-dir'
+    print('Usage:', os.path.basename(sys.argv[0]), 'master-dir slave-dir')
     print
-    print '''Options:
+    print('''Options:
       -h  --help                   Displays this help message.
 
       -e  --exclude                Excludes a single path component anywhere
@@ -500,22 +522,24 @@ def usage():
 
           --no-copy                Do not copy any missing files in the slave
                                    directory.
-      '''
+      ''')
     sys.exit(1)
 
 def doexit():
     print
-    print '%i file(s) merged, %i copied and %i deleted' % (stats['merge'], stats['copy'], stats['delete'])
+    print('%i file(s) merged, %i copied and %i deleted' % (stats['merge'], stats['copy'], stats['delete']))
 
 if __name__ == '__main__':
-    opts, args = getopt.getopt (sys.argv[1:], 'he:E:yn', ['dry-run', 'help', 'exclude=', 'exclude-path=', 'auto', 'auto-copy', 'auto-overwrite', 'auto-overwrite-binary', 'auto-decline-binary', 'yes', 'no-copy', 'non-recursive'])
+    opts, args = getopt.getopt (sys.argv[1:], 'he:E:yn', ['dry-run', 'help', 'exclude=', 'exclude-path=', 'auto',
+        'auto-copy', 'auto-overwrite', 'auto-overwrite-binary', 'auto-decline-binary', 'yes', 'no-copy',
+        'non-recursive'])
     logging.basicConfig()
     logger = logging.getLogger()
 
     # Init options
     #exclude = []
     #exclude = ['.svn', 'work', 'CVS', 'admin', 'README.html']
-    patterns = ['-.svn', '-CVS', '-.*.sw*', '-svn-commit.tmp', '-svn-commit.[0-9].tmp']
+    patterns = ['-.git', '-.svn', '-CVS', '-.*.sw*', '-svn-commit.tmp', '-svn-commit.[0-9].tmp']
     fullPathPatterns = []
     prefs = {}
     prefs['autoOverwriteBinary'] = 0
@@ -568,7 +592,7 @@ if __name__ == '__main__':
 
     for dir in (master, slave):
         if not(os.path.isdir(dir)):
-            print dir, 'is not a directory'
+            print(dir, 'is not a directory')
             usage()
 
     if master == slave:
@@ -582,6 +606,6 @@ if __name__ == '__main__':
         #    print 'No file to delete'
     except KeyboardInterrupt:
         print
-        print 'Giving up.'
+        print('Giving up.')
 
     doexit()
