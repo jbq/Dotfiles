@@ -1,6 +1,7 @@
 .sw*
 .*.sw*
 __pycache__/
+.mypy_cache/
 .DS_Store
 Thumbs.db
 *.pyc
