@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+ignore = E121,E123,E126,E127,E128,E131,E211,E265,E302,E305,E226,E402,E722,E231
+exclude=rupert/*/model,rupert/core/typing.py
