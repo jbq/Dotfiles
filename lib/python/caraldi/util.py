@@ -54,23 +54,23 @@ def execute(args):
 def spawn(args):
     return os.spawnv(os.P_WAIT, "/usr/bin/env", ["env"] + args)
 
-def zipEntriesDiffer(masterf, slavef):
-    return oneWayZipEntriesDiffer(masterf, slavef) or oneWayZipEntriesDiffer(slavef, masterf)
+def zipEntriesDiffer(mainf, subordinatef):
+    return oneWayZipEntriesDiffer(mainf, subordinatef) or oneWayZipEntriesDiffer(subordinatef, mainf)
 
-def oneWayZipEntriesDiffer(masterf, slavef):
+def oneWayZipEntriesDiffer(mainf, subordinatef):
     # Idea from http://www.jlwalkerassociates.com/tools/diffjar/README.html
     # Python implementation using http://docs.python.org/lib/module-zipfile.html
-    masterzipinfo = zipfile.ZipFile(masterf).infolist()
-    slavezip = zipfile.ZipFile(slavef)
-    slave_members = slavezip.namelist()
+    mainzipinfo = zipfile.ZipFile(mainf).infolist()
+    subordinatezip = zipfile.ZipFile(subordinatef)
+    subordinate_members = subordinatezip.namelist()
 
-    for info in masterzipinfo:
-        # entries in master and slave are not necessarily at the same
+    for info in mainzipinfo:
+        # entries in main and subordinate are not necessarily at the same
         # position in the archive
-        if not(info.filename in slave_members):
+        if not(info.filename in subordinate_members):
             return 1
-        slaveinfo = slavezip.getinfo(info.filename)
-        if info.CRC != slaveinfo.CRC:
+        subordinateinfo = subordinatezip.getinfo(info.filename)
+        if info.CRC != subordinateinfo.CRC:
             return 1
     return 0
 
