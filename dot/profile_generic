@@ -12,48 +12,37 @@ export HOSTNAME=$(hostname)
 # Remove extra info (Cygwin)
 UNAME=${UNAME%%_*}
 
+RECOMPUTE_PATH=0
+
 if ! test "$RECOMPUTE_PATH" = "0" ; then
-# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
-# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
-unset PATH
+    # /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+    # and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+    unset PATH
 
-for dir in \
-/bin \
-/usr/bin \
-/usr/local/bin \
-/usr/X11R6/bin \
-/usr/games \
-"$HOME/bin" \
-"$HOME/usr/bin" \
-"$HOME/usr/bin" \
-"$HOME/var/XEP" ; do
-    if test -d "$dir" ; then
-        export PATH="$dir:$PATH"
-        #echo Added $dir to PATH
-    fi
-done
+    for dir in \
+    /bin \
+    /usr/bin \
+    /usr/local/bin \
+    /usr/X11R6/bin \
+    /usr/games \
+    "$HOME/bin" \
+    "$HOME/usr/bin" \
+    "$HOME/usr/bin" \
+    "$HOME/var/XEP" ; do
+        if test -d "$dir" ; then
+            export PATH="$dir:$PATH"
+            #echo Added $dir to PATH
+        fi
+    done
 
-test -d /sbin			&& export PATH="/sbin:$PATH"
-test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
-test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
-test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
-test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
+    test -d /sbin			&& export PATH="/sbin:$PATH"
+    test -d /usr/sbin		&& export PATH="/usr/sbin:$PATH"
+    test -d /usr/local/sbin && export PATH="/usr/local/sbin:$PATH"
+    test -d $HOME/sbin			&& export PATH="$HOME/sbin:$PATH"
+    test -d $HOME/usr/sbin			&& export PATH="$HOME/usr/sbin:$PATH"
 
-GEMDIR=$(which gem)/..
-test -d $GEMDIR && export PATH=$(cd $GEMDIR; pwd):$PATH
-
-# Add path to applications installed in /usr/local
-# For Linux especially ;-)
-# Note: Darwin find does not understand maxdepth so use ls
-#for dir in $(find /usr/local -type d -maxdepth 1); do
-test -d /usr/local && DIRS=(/usr/local/*(/N))
-test -d /opt && DIRS=($DIRS /opt/*(/N))
-for dir in $DIRS ; do
-    # Forget about all JDKs installed (handled differently)
-    # Ignore MinGW32: breaks port builds
-    echo $dir | egrep 'jdk|jre|j2sdk|mingw32' > /dev/null && continue
-    test -d $dir/bin && export PATH="$PATH:$dir/bin"
-done
+    GEMDIR=$(which gem)/..
+    test -d $GEMDIR && export PATH=$(cd $GEMDIR; pwd):$PATH
 fi
 
 # If user belongs to group id 0 (wheel on FreeBSD, root on Linux), add superuser
@@ -90,9 +79,5 @@ export PAGER="$(which less)"
 export SHELL="${SHELL:-${BASH:-/bin/bash}}"
 export PS1='[\u@\h]:\w\$ '
 export PS2='[\#(\!)]:> '
-#export REALNAME="$(passwords | egrep "^${USER}:" | cut -d':' -f8 | cut -d',' -f1)"
-#export IRCNICK="${USER}"
-#export IRCNAME="${REALNAME}"
-# export CDPATH=".:/usr/local:/usr/local/share"
 
 # vi:ft=sh

@@ -9,27 +9,12 @@ export USER_DOTFILES=$HOME/usr/dot
 . $USER_DOTFILES/zsh/profile
 . $USER_DOTFILES/zsh/rc_generic
 . $USER_DOTFILES/zsh/rc_local
+. $USER_DOTFILES/zsh/rc_docker
 
 for file in $USER_DOTFILES/private/*.rc(N) ; do
 	test -f $file && . $file
 done
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-#have yarn && export PATH="$PATH:`yarn global bin`"
-
-# aws cli
-#test -d ~/Library/Python/2.7/bin && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-
 if test -f $USER_DOTFILES/zsh/rc_secret; then
     . $USER_DOTFILES/zsh/rc_secret
 fi
-#alias xf="xmllint --format"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/jbq/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/jbq/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/jbq/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/jbq/google-cloud-sdk/completion.zsh.inc'; fi
-
-export GPG_TTY=`tty`

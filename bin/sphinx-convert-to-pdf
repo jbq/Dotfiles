@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 
 import sys
 import subprocess
@@ -30,9 +30,10 @@ args = [
             "--footer-center", "[page]/[toPage]",
             "--print-media-type",
             "file://%s/%s/html/%s.html" % (os.getcwd(), build_dir, docname),
-            output.encode('utf-8')
+            output
         ]
-print " ".join(args)
+
+print(" ".join(args))
 p = subprocess.Popen(args, stdin=subprocess.PIPE)
 p.stdin.close()
 sys.exit(p.wait())

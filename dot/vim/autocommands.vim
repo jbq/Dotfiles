@@ -19,7 +19,7 @@ au FileType xml,docbk,ant,xslt,xsd,html,tex,jsp,xquery call SetMarkupEditing()
 au FileType mail,sendpr,rst call SetTextEditing()
 au FileType mail setlocal spell
 
-au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy call SetProgramEditing()
+au FileType apache,puppet,sh,vhdl,vim,dsl,java,javascript,c,perl,css,php,sql,ruby,python,erlang,eruby,haxe,thrift,logstash,groovy,hcl call SetProgramEditing()
 au FileType haxe setlocal smartindent
 
 " Properly format XML comments
@@ -88,7 +88,6 @@ function SetEditing()
         " foldmethod 'syntax' ne marche pas pour HTML, Java, JavaScript
         setlocal foldmethod=indent | setlocal foldenable | setlocal foldlevel=1
     endif
-    call ContextDependentEditing()
 
     "
     " justify paragraphs with proper width
@@ -370,21 +369,6 @@ function UpdateDateCreated()
 
     " Move cursor to mark 's'
     normal `s
-endfunction
-
-"au BufWritePre * silent! call UpdateDateCreated()
-"au BufWritePre * silent! call UpdateLastModified()
-"au BufWritePre *.txt silent! call UpdateDateTimeText()
-" Call first UpdateDocbookPubdate because it sets the language
-"au BufWritePre *.xml,*.xmap silent! call UpdateDocbookPubdate()
-"au BufWritePre *.xml silent! call UpdateDateTime()
-
-function ContextDependentEditing()
-    if match(expand("%:p"), "repos/wicket") != -1
-        setlocal noet
-    endif
-    "if match(expand("%:p"), "/home/jbq/var/files/nomao") != -1 || match(expand("%:p"), "/home/jbq/nomao") != -1
-    "endif
 endfunction
 
 au BufRead *.ahtml set ft=html

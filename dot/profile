@@ -2,81 +2,18 @@
 #
 # Common shell initialization used by profile_local
 
-#if which java >& /dev/null; then
-#    export CLASSPATH="."
-#    for dir in \
-#        /usr/local/share/java/classes \
-#        /usr/local/batik/batik-1.5.1 \
-#        /usr/local/share/fop/build \
-#        ~/usr/share/java/classes \
-#        /System/Library/Java/Extensions \
-#        /Library/Java/Extensions \
-#        ~/Library/Java/Extensions \
-#        /usr/share/java ; do
-#        test -d "$dir" && export CLASSPATH="$CLASSPATH:$dir"
-#        ADDTOCLASSPATH=$(find $dir -follow -name '*.jar' 2> /dev/null | tr '\n' ':' | sed -e 's/.$//')
-#        test -n "$ADDTOCLASSPATH" && export CLASSPATH=$CLASSPATH:$ADDTOCLASSPATH
-#    done
-#fi
-
-#export http_proxy=http://proxy.intra.smartcanal.com:8080
-#export ftp_proxy=http://proxy.intra.smartcanal.com:8080
-
-#export IRCNICK='jb'
-#test $HOSTNAME = 'mars.oxyd.fr' && export IRCNICK='mars'
-
-# Apple's Terminal does not set DISPLAY when X is running
-# Set it to :0.0 if X is running
-#test "$TERM_PROGRAM" = "Apple_Terminal" && psgrep xinit >/dev/null && export DISPLAY=:0.0
-
 # Setting for applications linked against S-Lang Terminal Library
 export COLORFGBG="default;default;0"
 
-# Setup SGML for OpenJade
-test "$UNAME" = "FreeBSD" && export SGML_CATALOG_FILES=/usr/local/share/sgml/catalog
-test "$UNAME" = "Linux" && export SGML_CATALOG_FILES=/etc/sgml/catalog
-
-# Why the fuck do I have to specify that !?
-# Commented out 14/11/02 for Deian
-#stty erase 
-
-# Setup ssh agent (useful if you have a non-empty passphrase)
-#eval $(ssh-agent | sed '$d')
-#ssh-add
-
-#test $(hostname) = 
-
-# For stupid RedHat and Mandrake
-if test "$UNAME" = "Linux" ; then
-	export RSYNC_RSH=ssh
-fi
-
 # Python Class Path
-which python >& /dev/null && test -d "$HOME/usr/lib/python" && myPYTHONPATH="$HOME/usr/lib/python"
-test -n "$PYTHONPATH" && PYTHONPATH="$PYTHONPATH:$myPYTHONPATH" || PYTHONPATH="$myPYTHONPATH"
-export PYTHONPATH
-
-# FreeBSD packages database location on machines with a small /var partition
-#if test "$HOSTNAME" = "watt.intra.caraldi.com" ; then
-#    export PKG_DBDIR=/usr/local/var/db/pkg
-#    export PKG_TMPDIR=/tmp
-#fi
-
-# Tell [Open]Jade to read the encoding of the XML document
-export SP_ENCODING=XML
-
-if test -e /usr/local/share/xml/catalog ; then
-    export XML_CATALOG_FILES=/usr/local/share/xml/catalog
-fi
+#which python >& /dev/null && test -d "$HOME/usr/lib/python" && myPYTHONPATH="$HOME/usr/lib/python"
+#test -n "$PYTHONPATH" && PYTHONPATH="$PYTHONPATH:$myPYTHONPATH" || PYTHONPATH="$myPYTHONPATH"
+#export PYTHONPATH
 
 export HISTFILE=~/.zhistory
 # Number of history events to remember in the current shell
 export HISTSIZE=10000
 # Number of history events to save in HISTFILE
 export SAVEHIST=10000
-
-export ECLIPSE_HOME=/usr/local/eclipse
-
-export SVNROOT_CARALDI_PUBLIC_HTTP=http://svn.caraldi.com/
 
 # vim:ft=sh

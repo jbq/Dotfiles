@@ -32,7 +32,7 @@ fi
 
 tempfile=$(make_tempfile $(basename $0))
 GITVERSION_MAJOR=2
-GITVERSION_MINOR=17
+GITVERSION_MINOR=30
 if ! git --version | grep -q "^git version $GITVERSION_MAJOR\.$GITVERSION_MINOR"; then
   echo "Expecting git version $GITVERSION_MAJOR.$GITVERSION_MINOR" >&2
   exit 1

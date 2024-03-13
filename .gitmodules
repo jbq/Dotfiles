@@ -25,3 +25,6 @@
 [submodule "dot/vim/bundle/nerdtree-git-plugin"]
 	path = dot/vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "dot/vim/bundle/bbye"]
+	path = dot/vim/bundle/bbye
+	url = https://github.com/moll/vim-bbye.git

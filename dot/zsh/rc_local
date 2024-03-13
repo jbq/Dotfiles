@@ -292,6 +292,4 @@ function grisbi() {
         grisbi
 }
 
-alias node="echo Node c‘est nul, utiliser Chrome à la place"
-
 # vim:ft=zsh

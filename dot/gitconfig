@@ -8,7 +8,7 @@
     default = tracking
 [user]
     name = Jean-Baptiste Quenot
-    email = jbq@samourai.tech
+    email = jbq@caraldi.com
 [color]
     grep = true
     diff = true
