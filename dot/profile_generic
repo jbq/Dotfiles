@@ -12,6 +12,8 @@ export HOSTNAME=$(hostname)
 # Remove extra info (Cygwin)
 UNAME=${UNAME%%_*}
 
+export PATH="$HOME/usr/bin:$PATH"
+
 RECOMPUTE_PATH=0
 
 if ! test "$RECOMPUTE_PATH" = "0" ; then
