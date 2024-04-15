@@ -14,8 +14,6 @@ for file in $USER_DOTFILES/private/*.rc(N) ; do
 	test -f $file && . $file
 done
 
-source $HOME/usr/lib/git-subrepo/.rc
-
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 #have yarn && export PATH="$PATH:`yarn global bin`"
