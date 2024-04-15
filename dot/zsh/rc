@@ -16,17 +16,17 @@ done
 
 source $HOME/usr/lib/git-subrepo/.rc
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-have yarn && export PATH="$PATH:`yarn global bin`"
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#have yarn && export PATH="$PATH:`yarn global bin`"
 
 # aws cli
-test -d ~/Library/Python/2.7/bin && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+#test -d ~/Library/Python/2.7/bin && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 if test -f $USER_DOTFILES/zsh/rc_secret; then
     . $USER_DOTFILES/zsh/rc_secret
 fi
-alias xf="xmllint --format"
+#alias xf="xmllint --format"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jbq/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/jbq/google-cloud-sdk/path.zsh.inc'; fi
