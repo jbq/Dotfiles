@@ -1,15 +1,9 @@
-[submodule "dot/vim/bundle/salt-vim"]
-	path = dot/vim/bundle/salt-vim
-	url = https://github.com/saltstack/salt-vim.git
 [submodule "dot/vim/bundle/nerdtree"]
 	path = dot/vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "dot/vim/bundle/vim-gradle"]
-	path = dot/vim/bundle/vim-gradle
-	url = https://github.com/tfnico/vim-gradle
 [submodule "dot/vim/bundle/vim-sleuth"]
 	path = dot/vim/bundle/vim-sleuth
-	url = git://github.com/tpope/vim-sleuth.git
+	url = https://github.com/tpope/vim-sleuth.git
 [submodule "dot/vim/bundle/vim-javascript"]
 	path = dot/vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
