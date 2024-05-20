@@ -122,10 +122,12 @@ execute pathogen#infect()
 
 let g:ale_fixers = {'javascript': ['eslint_d'],}
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'javascript': ['eslint_d'], 'typescript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint_d'], 'typescript': ['eslint', 'tsserver']}
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " reformat text
 vmap Q gq<cr>
+
+let g:ctrlp_custom_ignore = 'devWs.*\|node_modules\|.git\|yarn-packages-offline-cache'
